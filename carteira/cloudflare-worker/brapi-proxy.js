@@ -22,7 +22,7 @@
 // Troque pelo endereço real do seu site depois de publicar (ver README).
 // Pode listar mais de uma origem (ex: produção + teste local).
 const ALLOWED_ORIGINS = [
-  "https://SEU-USUARIO.github.io",
+  "https://bagoodrch-debug.github.io",
   "http://localhost:8080",
 ];
 
