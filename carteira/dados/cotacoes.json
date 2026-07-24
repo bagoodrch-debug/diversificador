@@ -1,10 +1,149 @@
 {
-  "updatedAt": null,
-  "stocks": [],
-  "bdrs": [],
-  "fiis": [],
-  "goldEtf": [],
+  "updatedAt": "2026-07-24T23:27:29.215Z",
+  "stocks": [
+    {
+      "symbol": "PETR4",
+      "price": 42.21,
+      "changePct": -1.72,
+      "name": "Petroleo Brasileiro SA Pfd"
+    },
+    {
+      "symbol": "ITUB4",
+      "price": 42.1,
+      "changePct": -1.08,
+      "name": "Itau Unibanco Holding SA Pfd"
+    },
+    {
+      "symbol": "VALE3",
+      "price": 75.24,
+      "changePct": -0.58,
+      "name": "Vale S.A."
+    },
+    {
+      "symbol": "WEGE3",
+      "price": 45.99,
+      "changePct": 0.7,
+      "name": "WEG SA"
+    },
+    {
+      "symbol": "BBAS3",
+      "price": 20.35,
+      "changePct": -2.77,
+      "name": "Banco do Brasil S.A."
+    },
+    {
+      "symbol": "BBDC4",
+      "price": 18.48,
+      "changePct": -1.28,
+      "name": "Banco Bradesco SA Pfd"
+    },
+    {
+      "symbol": "ABEV3",
+      "price": 15.64,
+      "changePct": -1.76,
+      "name": "Ambev SA"
+    }
+  ],
+  "bdrs": [
+    {
+      "symbol": "IVVB11",
+      "price": 425.05,
+      "changePct": -0.11,
+      "name": "iShares S&P 500 Fundo de Investimento em Cotas de Fundo de Indice - Investimento no Exterior"
+    },
+    {
+      "symbol": "AAPL34",
+      "price": 84.75,
+      "changePct": 4.14,
+      "name": "Apple Inc. Shs Unsponsored Brazilian Depository Receipt Repr 0.05 Sh"
+    },
+    {
+      "symbol": "MSFT34",
+      "price": 80.91,
+      "changePct": 0.33,
+      "name": "Microsoft Corp Shs Unsponsored Brazilian Depository Receipt Repr 0.04167 Sh"
+    },
+    {
+      "symbol": "GOGL34",
+      "price": 135.6,
+      "changePct": 0.59,
+      "name": "Alphabet Inc Shs A Unsponsored Brazilian Depository Receipt Repr 0.08333 Sh -"
+    },
+    {
+      "symbol": "AMZO34",
+      "price": 59.2,
+      "changePct": -0.24,
+      "name": "Amazon.com, Inc. Shs Unsponsored Brazilian Depository Receipt Repr 0.05 Sh"
+    }
+  ],
+  "fiis": [
+    {
+      "symbol": "HGLG11",
+      "price": 147.76,
+      "changePct": 0.01,
+      "name": "Patria Log - Fundo de Investimento Imobiliario - Responsabilidade Limitada Cotas"
+    },
+    {
+      "symbol": "KNRI11",
+      "price": 155.18,
+      "changePct": 0.81,
+      "name": "Kinea Renda Imobiliaria Fundo de Investimento Imobiliario - FII Cotas"
+    },
+    {
+      "symbol": "MXRF11",
+      "price": 9.63,
+      "changePct": -0.31,
+      "name": "Maxi Renda Fundo de Investimento Imobiliario Cotas"
+    },
+    {
+      "symbol": "XPML11",
+      "price": 104.7,
+      "changePct": 0.46,
+      "name": "XP Malls Fundo Investimento Imobiliario Investor"
+    },
+    {
+      "symbol": "VISC11",
+      "price": 105.42,
+      "changePct": 0.7,
+      "name": "Vinci Shopping Centers Fundo de Investimento Imobiliario - FII Cotas"
+    }
+  ],
+  "goldEtf": [
+    {
+      "symbol": "GOLD11",
+      "price": 21.37,
+      "changePct": 0.05,
+      "name": "Gold - Trend ETF LBMA Ouro Fundo Investimento Cotas de Fundo de Indice Investiment Exterior"
+    }
+  ],
   "gold": null,
-  "treasury": [],
-  "errors": ["Este é um arquivo inicial de exemplo. Rode o workflow 'Atualizar cotações' (aba Actions) para gerar os dados reais."]
+  "treasury": [
+    {
+      "name": "Tesouro Selic 2031",
+      "rate": 0.07,
+      "unitPrice": 19431.34,
+      "minAmount": 194.3134,
+      "maturity": "2031-03-01",
+      "type": "Pós-fixado (Selic + spread)"
+    },
+    {
+      "name": "Tesouro Prefixado com Juros Semestrais 2037",
+      "rate": 14.75,
+      "unitPrice": 769.89,
+      "minAmount": 7.6989,
+      "maturity": "2037-01-01",
+      "type": "Prefixado (taxa nominal)"
+    },
+    {
+      "name": "Tesouro IPCA+ com Juros Semestrais 2060",
+      "rate": 7.48,
+      "unitPrice": 4041.74,
+      "minAmount": 40.4174,
+      "maturity": "2060-08-15",
+      "type": "Híbrido (IPCA + taxa real)"
+    }
+  ],
+  "errors": [
+    "gold: gold 429"
+  ]
 }
