@@ -6,11 +6,10 @@
    ========================================================================== */
 
 :root {
-  --bg: #050505;
-  --surface: #131313;
-  --surface-2: #1a1a1a;
-  --fg: #f5f5f5;
-  --muted: #8c8c8c;
+  --bg: #0b0b0c;
+--surface: #161616;
+--surface-2: #1d1d1d;
+--fg: #eae8e3;
 
   /* Cor "âncora" da marca (usada em bordas/CTAs neutros) */
   --gold: #f5b942;
