@@ -254,7 +254,7 @@ button { font: inherit; color: inherit; background: none; border: none; cursor: 
   font-family: var(--font-display);
   text-transform: uppercase;
   font-size: 1.3rem;
-  letter-spacing: 0.049em;
+  letter-spacing: 0.045em;
   margin: 0.9rem 0 0.5rem;
 }
 .project-card p {
