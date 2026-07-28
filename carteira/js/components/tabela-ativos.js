@@ -75,32 +75,32 @@ export function renderSuggestions(container, assetKey, allocatedValue, state, ha
           ]),
           el("div", { class: "suggestion-item__meta" }, s.sector),
           el("div", { class: "suggestion-item__metric" }, s.metric),
-          el("div", { class: "suggestion-item__bottom-row" }, [
-            !excluded && activeCount > 1
-              ? el("span", { class: "suggestion-item__alloc" }, `Alocado: ${brl(itemAllocated)}`)
-              : el("span"),
-            el("button", {
-              type: "button",
-              class: "icon-btn suggestion-item__eye",
-              "aria-label": excluded ? `Mostrar ${s.ticker} de novo` : `Ocultar ${s.ticker}`,
-              title: excluded ? "Mostrar de novo" : "Ocultar (sem apagar)",
-              onClick: () => handlers.onToggleExclude(key),
-              html: excluded ? eyeOffSVG() : eyeSVG(),
-            }),
-          ]),
+          !excluded && activeCount > 1
+            ? el("div", { class: "suggestion-item__alloc" }, `Alocado: ${brl(itemAllocated)}`)
+            : null,
         ]),
         el("div", { class: "suggestion-item__right" }, [
-          el("div", {}, [
-            el("div", { class: "suggestion-item__price" }, brl(s.price)),
-            el("div", { class: "suggestion-item__qty" }, `~${qtyLabel} ${unitLabel}`),
+          el("div", { class: "suggestion-item__right-top" }, [
+            el("div", {}, [
+              el("div", { class: "suggestion-item__price" }, brl(s.price)),
+              el("div", { class: "suggestion-item__qty" }, `~${qtyLabel} ${unitLabel}`),
+            ]),
+            el("button", {
+              type: "button",
+              class: "icon-btn icon-btn--danger",
+              "aria-label": `Apagar ${s.ticker}`,
+              title: "Apagar da lista",
+              onClick: () => (custom ? handlers.onRemoveCustom(custom.id) : handlers.onRemovePermanently(key)),
+              html: closeSVG(),
+            }),
           ]),
           el("button", {
             type: "button",
-            class: "icon-btn icon-btn--danger",
-            "aria-label": `Apagar ${s.ticker}`,
-            title: "Apagar da lista",
-            onClick: () => (custom ? handlers.onRemoveCustom(custom.id) : handlers.onRemovePermanently(key)),
-            html: closeSVG(),
+            class: "icon-btn suggestion-item__eye",
+            "aria-label": excluded ? `Mostrar ${s.ticker} de novo` : `Ocultar ${s.ticker}`,
+            title: excluded ? "Mostrar de novo" : "Ocultar (sem apagar)",
+            onClick: () => handlers.onToggleExclude(key),
+            html: excluded ? eyeOffSVG() : eyeSVG(),
           }),
         ]),
       ]),
