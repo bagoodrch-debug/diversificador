@@ -8,20 +8,25 @@ const SEARCHABLE = new Set(["acoes", "fii", "exterior"]);
 
 /**
  * Renderiza o bloco de sugestões de uma classe de ativo dentro de `container`.
- * `state` = { items, customAssets, excluded, loading, error }
- * `handlers` = { onAddCustom, onRemoveCustom, onToggleExclude }
+ * `state` = { items, customAssets, excluded, removed, loading, error }
+ * `handlers` = { onAddCustom, onRemoveCustom, onToggleExclude, onRemovePermanently }
  */
 export function renderSuggestions(container, assetKey, allocatedValue, state, handlers) {
   clear(container);
   const supportsCustom = true; // Renda Fixa e Ouro também podem receber ativos adicionados manualmente
 
+  const removed = state.removed || [];
   const combined = [
-    ...state.items.map((item) => ({ item, excluded: state.excluded.includes(item.ticker) })),
-    ...state.customAssets.map((c) => ({
-      item: customToSuggestion(c),
-      custom: c,
-      excluded: state.excluded.includes(c.ticker || c.name),
-    })),
+    ...state.items
+      .filter((item) => !removed.includes(item.ticker))
+      .map((item) => ({ item, excluded: state.excluded.includes(item.ticker) })),
+    ...state.customAssets
+      .filter((c) => !removed.includes(c.ticker || c.name))
+      .map((c) => ({
+        item: customToSuggestion(c),
+        custom: c,
+        excluded: state.excluded.includes(c.ticker || c.name),
+      })),
   ];
   const activeCount = combined.filter((c) => !c.excluded).length;
   const perItemAllocated = activeCount > 0 ? allocatedValue / activeCount : 0;
@@ -61,40 +66,45 @@ export function renderSuggestions(container, assetKey, allocatedValue, state, ha
       maximumFractionDigits: decimals,
     });
     const unitLabel = qty === 1 ? unit : unitPlural;
+    const key = s.ticker;
 
     const li = el("li", { class: "suggestion-item", "data-excluded": String(excluded) }, [
-      el("div", { style: "min-width:0" }, [
-        el("div", { style: "display:flex;align-items:baseline;gap:8px" }, [
-          el("span", { class: "suggestion-item__ticker" }, s.ticker),
-          el("span", { class: "suggestion-item__name" }, s.name),
+      el("div", { class: "suggestion-item__top" }, [
+        el("div", { style: "min-width:0" }, [
+          el("div", { style: "display:flex;align-items:baseline;gap:8px" }, [
+            el("span", { class: "suggestion-item__ticker" }, s.ticker),
+            el("span", { class: "suggestion-item__name" }, s.name),
+          ]),
+          el("div", { class: "suggestion-item__meta" }, s.sector),
+          el("div", { class: "suggestion-item__metric" }, s.metric),
+          !excluded && activeCount > 1
+            ? el("div", { class: "suggestion-item__alloc" }, `Alocado: ${brl(itemAllocated)}`)
+            : null,
         ]),
-        el("div", { class: "suggestion-item__meta" }, s.sector),
-        el("div", { class: "suggestion-item__metric" }, s.metric),
-        !excluded && activeCount > 1
-          ? el("div", { class: "suggestion-item__alloc" }, `Alocado: ${brl(itemAllocated)}`)
-          : null,
+        el("div", { class: "suggestion-item__right" }, [
+          el("div", {}, [
+            el("div", { class: "suggestion-item__price" }, brl(s.price)),
+            el("div", { class: "suggestion-item__qty" }, `~${qtyLabel} ${unitLabel}`),
+          ]),
+          el("button", {
+            type: "button",
+            class: "icon-btn icon-btn--danger",
+            "aria-label": `Apagar ${s.ticker}`,
+            title: "Apagar da lista",
+            onClick: () => (custom ? handlers.onRemoveCustom(custom.id) : handlers.onRemovePermanently(key)),
+            html: closeSVG(),
+          }),
+        ]),
       ]),
-      el("div", { class: "suggestion-item__right" }, [
-        el("div", {}, [
-          el("div", { class: "suggestion-item__price" }, brl(s.price)),
-          el("div", { class: "suggestion-item__qty" }, `~${qtyLabel} ${unitLabel}`),
-        ]),
-        custom
-          ? el("button", {
-              type: "button",
-              class: "icon-btn icon-btn--danger",
-              "aria-label": `Remover ${s.ticker}`,
-              onClick: () => handlers.onRemoveCustom(custom.id),
-              html: trashSVG(),
-            })
-          : el("button", {
-              type: "button",
-              class: "icon-btn icon-btn--danger",
-              "aria-label": excluded ? `Reincluir ${s.ticker}` : `Excluir ${s.ticker}`,
-              title: excluded ? "Reincluir" : "Excluir da simulação",
-              onClick: () => handlers.onToggleExclude(s.ticker),
-              html: closeSVG(),
-            }),
+      el("div", { class: "suggestion-item__footer" }, [
+        el("button", {
+          type: "button",
+          class: "icon-btn suggestion-item__eye",
+          "aria-label": excluded ? `Mostrar ${s.ticker} de novo` : `Ocultar ${s.ticker}`,
+          title: excluded ? "Mostrar de novo" : "Ocultar (sem apagar)",
+          onClick: () => handlers.onToggleExclude(key),
+          html: excluded ? eyeOffSVG() : eyeSVG(),
+        }),
       ]),
     ]);
     list.append(li);
@@ -332,6 +342,9 @@ function parseCurrencyLike(raw) {
 function closeSVG() {
   return `<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M18 6 6 18M6 6l12 12"/></svg>`;
 }
-function trashSVG() {
-  return `<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 6h18M8 6V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2m3 0-1 14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2L4 6"/></svg>`;
+function eyeSVG() {
+  return `<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8Z"/><circle cx="12" cy="12" r="3"/></svg>`;
+}
+function eyeOffSVG() {
+  return `<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a13.16 13.16 0 0 1-3.06 3.94M6.61 6.61A13.53 13.53 0 0 0 1 12s4 8 11 8a9.26 9.26 0 0 0 5.39-1.61M14.12 14.12a3 3 0 1 1-4.24-4.24"/><path d="M1 1l22 22"/></svg>`;
 }
