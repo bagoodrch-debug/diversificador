@@ -2,8 +2,11 @@ name: Atualizar cotações
 
 on:
   schedule:
+    # Uma vez por hora, no minuto 0. As fontes de dados (Yahoo Finance,
+    # AwesomeAPI, sandbox da Brapi) não têm token nem cota paga, mas também
+    # não têm garantia contratual — manter isso moderado evita parecer abuso.
     - cron: "0 * * * *"
-  workflow_dispatch: {}
+  workflow_dispatch: {} # permite rodar manualmente pela aba Actions
   push:
     branches: [main]
     paths:
@@ -27,8 +30,6 @@ jobs:
 
       - name: Buscar cotações e gerar dados/cotacoes.json
         working-directory: carteira
-        env:
-          BRAPI_TOKEN: ${{ secrets.BRAPI_TOKEN }}
         run: node scripts/atualizar-cotacoes.mjs
 
       - name: Publicar dados atualizados
