@@ -14,6 +14,7 @@ const state = {
   alloc: { ...DEFAULT_ALLOC },
   customAssets: {},
   excluded: {},
+  removed: {},
   quotes: null,
   quotesLoading: true,
   quotesError: null,
@@ -28,6 +29,7 @@ function loadPersisted() {
   }
   state.customAssets = load(STORE_KEYS.CUSTOM, {}) || {};
   state.excluded = load(STORE_KEYS.EXCLUDED, {}) || {};
+  state.removed = load(STORE_KEYS.REMOVED, {}) || {};
 }
 
 function persistAlloc() {
@@ -38,6 +40,9 @@ function persistCustom() {
 }
 function persistExcluded() {
   save(STORE_KEYS.EXCLUDED, state.excluded);
+}
+function persistRemoved() {
+  save(STORE_KEYS.REMOVED, state.removed);
 }
 
 let fullRenderTimer = null;
@@ -203,7 +208,22 @@ function renderToolbarActions(root) {
     },
     ["↺ Distribuir igualmente"],
   );
-  host.append(statusBtn, resetBtn);
+  const restoreBtn = el(
+    "button",
+    {
+      type: "button",
+      class: "btn btn--ghost btn--sm",
+      title: "Traz de volta os ativos apagados (X) em todas as categorias",
+      onClick: () => {
+        state.removed = {};
+        persistRemoved();
+        renderAssetCards(root);
+        showToast("Ativos apagados foram restaurados.");
+      },
+    },
+    ["Restaurar apagados"],
+  );
+  host.append(statusBtn, resetBtn, restoreBtn);
 }
 
 function statusLabel() {
@@ -322,6 +342,7 @@ function buildAssetCard(root, asset) {
       items,
       customAssets: state.customAssets[asset.key] ?? [],
       excluded: state.excluded[asset.key] ?? [],
+      removed: state.removed[asset.key] ?? [],
       loading: state.quotesLoading,
       error: state.quotesError,
     },
@@ -344,6 +365,14 @@ function buildAssetCard(root, asset) {
         const next = list.includes(ticker) ? list.filter((t) => t !== ticker) : [...list, ticker];
         state.excluded = { ...state.excluded, [asset.key]: next };
         persistExcluded();
+        renderAssetCards(root);
+      },
+      onRemovePermanently: (ticker) => {
+        const list = state.removed[asset.key] ?? [];
+        if (!list.includes(ticker)) {
+          state.removed = { ...state.removed, [asset.key]: [...list, ticker] };
+          persistRemoved();
+        }
         renderAssetCards(root);
       },
     },
