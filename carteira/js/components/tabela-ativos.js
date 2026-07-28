@@ -20,13 +20,11 @@ export function renderSuggestions(container, assetKey, allocatedValue, state, ha
     ...state.items
       .filter((item) => !removed.includes(item.ticker))
       .map((item) => ({ item, excluded: state.excluded.includes(item.ticker) })),
-    ...state.customAssets
-      .filter((c) => !removed.includes(c.ticker || c.name))
-      .map((c) => ({
-        item: customToSuggestion(c),
-        custom: c,
-        excluded: state.excluded.includes(c.ticker || c.name),
-      })),
+    ...state.customAssets.map((c) => ({
+      item: customToSuggestion(c),
+      custom: c,
+      excluded: state.excluded.includes(c.ticker || c.name),
+    })),
   ];
   const activeCount = combined.filter((c) => !c.excluded).length;
   const perItemAllocated = activeCount > 0 ? allocatedValue / activeCount : 0;
@@ -77,9 +75,19 @@ export function renderSuggestions(container, assetKey, allocatedValue, state, ha
           ]),
           el("div", { class: "suggestion-item__meta" }, s.sector),
           el("div", { class: "suggestion-item__metric" }, s.metric),
-          !excluded && activeCount > 1
-            ? el("div", { class: "suggestion-item__alloc" }, `Alocado: ${brl(itemAllocated)}`)
-            : null,
+          el("div", { class: "suggestion-item__bottom-row" }, [
+            !excluded && activeCount > 1
+              ? el("span", { class: "suggestion-item__alloc" }, `Alocado: ${brl(itemAllocated)}`)
+              : el("span"),
+            el("button", {
+              type: "button",
+              class: "icon-btn suggestion-item__eye",
+              "aria-label": excluded ? `Mostrar ${s.ticker} de novo` : `Ocultar ${s.ticker}`,
+              title: excluded ? "Mostrar de novo" : "Ocultar (sem apagar)",
+              onClick: () => handlers.onToggleExclude(key),
+              html: excluded ? eyeOffSVG() : eyeSVG(),
+            }),
+          ]),
         ]),
         el("div", { class: "suggestion-item__right" }, [
           el("div", {}, [
@@ -95,16 +103,6 @@ export function renderSuggestions(container, assetKey, allocatedValue, state, ha
             html: closeSVG(),
           }),
         ]),
-      ]),
-      el("div", { class: "suggestion-item__footer" }, [
-        el("button", {
-          type: "button",
-          class: "icon-btn suggestion-item__eye",
-          "aria-label": excluded ? `Mostrar ${s.ticker} de novo` : `Ocultar ${s.ticker}`,
-          title: excluded ? "Mostrar de novo" : "Ocultar (sem apagar)",
-          onClick: () => handlers.onToggleExclude(key),
-          html: excluded ? eyeOffSVG() : eyeSVG(),
-        }),
       ]),
     ]);
     list.append(li);
