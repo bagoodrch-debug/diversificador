@@ -1,6 +1,15 @@
 // Roda em Node (GitHub Actions), NUNCA no navegador.
-// Lê o token da Brapi de uma variável de ambiente (GitHub Secret) e grava
-// dados/cotacoes.json — um arquivo público, mas sem nenhuma credencial nele.
+// Grava dados/cotacoes.json — um arquivo público, sem nenhuma credencial.
+//
+// Fontes de dados, todas gratuitas e sem token:
+// - Ações/BDRs/FIIs/ETF de ouro: endpoint "não-oficial" v8/finance/chart do
+//   Yahoo Finance (o mesmo que o site deles usa por trás dos panos). Não tem
+//   cota paga, mas também não é uma API com contrato/SLA — o Yahoo pode
+//   mudar ou bloquear isso sem aviso. Por isso mantemos a atualização de
+//   hora em hora (não mais frequente), pra não parecer abuso.
+// - Ouro spot: AwesomeAPI (gratuita, sem token).
+// - Tesouro Direto: sandbox público da Brapi (gratuito, sem token — ver
+//   comentário mais abaixo).
 //
 // Observação: os tickers acompanhados aqui espelham
 // js/data/ativos.data.js (mantidos separados de propósito para que este
@@ -8,43 +17,46 @@
 // módulos ESM/CJS entre ambientes diferentes). Se adicionar um ticker em um
 // arquivo, adicione no outro também.
 
-const TOKEN = process.env.BRAPI_TOKEN;
-if (!TOKEN) {
-  console.error("BRAPI_TOKEN não definido. Configure em Settings > Secrets and variables > Actions.");
-  process.exit(1);
-}
-
-const BRAPI = "https://brapi.dev/api";
 const TROY_OUNCE_G = 31.1034768;
+const YAHOO_UA = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36";
 
 const STOCK_TICKERS = ["PETR4", "ITUB4", "VALE3", "WEGE3", "BBAS3", "BBDC4", "ABEV3"];
 const BDR_TICKERS = ["IVVB11", "AAPL34", "MSFT34", "GOGL34", "AMZO34"];
 const FII_TICKERS = ["HGLG11", "KNRI11", "MXRF11", "XPML11", "VISC11"];
 const GOLD_ETF_TICKER = "GOLD11";
 
-async function fetchBrapiOne(ticker) {
-  const url = `${BRAPI}/quote/${encodeURIComponent(ticker)}?token=${encodeURIComponent(TOKEN)}`;
-  const r = await fetch(url);
-  if (!r.ok) throw new Error(`brapi ${ticker} ${r.status}`);
+async function fetchYahooOne(ticker) {
+  const url = `https://query1.finance.yahoo.com/v8/finance/chart/${encodeURIComponent(ticker)}.SA`;
+  const r = await fetch(url, { headers: { "User-Agent": YAHOO_UA } });
+  if (!r.ok) throw new Error(`yahoo ${ticker} ${r.status}`);
   const j = await r.json();
-  const item = j.results?.[0];
-  if (!item) return null;
+  const meta = j.chart?.result?.[0]?.meta;
+  if (!meta || meta.regularMarketPrice == null) return null;
+  const price = meta.regularMarketPrice;
+  const prevClose = meta.previousClose ?? meta.chartPreviousClose;
+  const changePct = prevClose ? ((price - prevClose) / prevClose) * 100 : null;
   return {
-    symbol: item.symbol,
-    price: item.regularMarketPrice ?? 0,
-    changePct: item.regularMarketChangePercent ?? null,
-    name: item.longName ?? item.shortName ?? null,
+    symbol: ticker,
+    price,
+    changePct,
+    name: meta.longName ?? meta.shortName ?? null,
   };
 }
 
-async function fetchBrapi(tickers) {
-  const settled = await Promise.allSettled(tickers.map(fetchBrapiOne));
+async function fetchYahoo(tickers) {
   const out = [];
   const errors = [];
-  settled.forEach((s, i) => {
-    if (s.status === "fulfilled" && s.value) out.push(s.value);
-    else errors.push(`${tickers[i]}: ${s.reason?.message ?? s.reason}`);
-  });
+  // Uma de cada vez, com uma pequena pausa — o Yahoo não tem cota paga, mas
+  // rajadas de requisições em paralelo aumentam a chance de bloqueio por IP.
+  for (const ticker of tickers) {
+    try {
+      const item = await fetchYahooOne(ticker);
+      if (item) out.push(item);
+    } catch (e) {
+      errors.push(`${ticker}: ${e instanceof Error ? e.message : String(e)}`);
+    }
+    await new Promise((res) => setTimeout(res, 250));
+  }
   return { out, errors };
 }
 
@@ -115,10 +127,10 @@ async function safe(label, promise, fallback, errors) {
 async function main() {
   const errors = [];
 
-  const stocksR = await safe("stocks", fetchBrapi(STOCK_TICKERS), { out: [], errors: [] }, errors);
-  const bdrsR = await safe("bdrs", fetchBrapi(BDR_TICKERS), { out: [], errors: [] }, errors);
-  const fiisR = await safe("fiis", fetchBrapi(FII_TICKERS), { out: [], errors: [] }, errors);
-  const goldEtfR = await safe("goldEtf", fetchBrapi([GOLD_ETF_TICKER]), { out: [], errors: [] }, errors);
+  const stocksR = await safe("stocks", fetchYahoo(STOCK_TICKERS), { out: [], errors: [] }, errors);
+  const bdrsR = await safe("bdrs", fetchYahoo(BDR_TICKERS), { out: [], errors: [] }, errors);
+  const fiisR = await safe("fiis", fetchYahoo(FII_TICKERS), { out: [], errors: [] }, errors);
+  const goldEtfR = await safe("goldEtf", fetchYahoo([GOLD_ETF_TICKER]), { out: [], errors: [] }, errors);
   const gold = await safe("gold", fetchGold(), null, errors);
   const treasury = await safe("treasury", fetchTreasury(), [], errors);
 
