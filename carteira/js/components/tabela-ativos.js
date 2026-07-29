@@ -80,29 +80,29 @@ export function renderSuggestions(container, assetKey, allocatedValue, state, ha
             : null,
         ]),
         el("div", { class: "suggestion-item__right" }, [
-          el("div", { class: "suggestion-item__right-top" }, [
-            el("div", {}, [
-              el("div", { class: "suggestion-item__price" }, brl(s.price)),
-              el("div", { class: "suggestion-item__qty" }, `~${qtyLabel} ${unitLabel}`),
-            ]),
-            el("button", {
-              type: "button",
-              class: "icon-btn icon-btn--danger",
-              "aria-label": `Apagar ${s.ticker}`,
-              title: "Apagar da lista",
-              onClick: () => (custom ? handlers.onRemoveCustom(custom.id) : handlers.onRemovePermanently(key)),
-              html: closeSVG(),
-            }),
+          el("div", {}, [
+            el("div", { class: "suggestion-item__price" }, brl(s.price)),
+            el("div", { class: "suggestion-item__qty" }, `~${qtyLabel} ${unitLabel}`),
           ]),
           el("button", {
             type: "button",
-            class: "icon-btn suggestion-item__eye",
-            "aria-label": excluded ? `Mostrar ${s.ticker} de novo` : `Ocultar ${s.ticker}`,
-            title: excluded ? "Mostrar de novo" : "Ocultar (sem apagar)",
-            onClick: () => handlers.onToggleExclude(key),
-            html: excluded ? eyeOffSVG() : eyeSVG(),
+            class: "icon-btn icon-btn--danger",
+            "aria-label": `Apagar ${s.ticker}`,
+            title: "Apagar da lista",
+            onClick: () => (custom ? handlers.onRemoveCustom(custom.id) : handlers.onRemovePermanently(key)),
+            html: closeSVG(),
           }),
         ]),
+      ]),
+      el("div", { class: "suggestion-item__footer" }, [
+        el("button", {
+          type: "button",
+          class: "icon-btn suggestion-item__eye",
+          "aria-label": excluded ? `Mostrar ${s.ticker} de novo` : `Ocultar ${s.ticker}`,
+          title: excluded ? "Mostrar de novo" : "Ocultar (sem apagar)",
+          onClick: () => handlers.onToggleExclude(key),
+          html: excluded ? eyeOffSVG() : eyeSVG(),
+        }),
       ]),
     ]);
     list.append(li);
