@@ -1,0 +1,264 @@
+/* ==========================================================================
+   Reserva de Emergência — layout específico
+   ========================================================================== */
+
+.reserva-hero {
+  padding-block: 2rem 1rem;
+  text-align: center;
+}
+.reserva-hero h1 {
+  font-size: clamp(1.6rem, 3.5vw, 2.1rem);
+  font-weight: 700;
+  letter-spacing: -0.02em;
+}
+.reserva-hero p {
+  margin-top: 0.4rem;
+  color: var(--color-muted-foreground);
+  max-width: 52ch;
+  margin-inline: auto;
+}
+
+/* ---------------------------- Switch deslizante --------------------------- */
+
+.mode-switch-wrap {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.9rem;
+  margin: 1.5rem auto 1.75rem;
+  flex-wrap: wrap;
+}
+.mode-switch-label {
+  font-size: 0.82rem;
+  font-weight: 500;
+  color: var(--color-muted-foreground);
+  transition: color 0.2s ease;
+  cursor: default;
+}
+.mode-switch[data-mode="planejar"] ~ .mode-switch-label[data-side="left"],
+.mode-switch-wrap:has(.mode-switch[data-mode="planejar"]) .mode-switch-label[data-side="left"] {
+  color: var(--color-foreground);
+  font-weight: 600;
+}
+.mode-switch-wrap:has(.mode-switch[data-mode="sei-quanto"]) .mode-switch-label[data-side="right"] {
+  color: var(--color-primary);
+  font-weight: 600;
+}
+
+.mode-switch {
+  position: relative;
+  width: 60px;
+  height: 32px;
+  border-radius: 999px;
+  border: 2px solid var(--color-border);
+  background: var(--color-secondary);
+  flex-shrink: 0;
+  transition: border-color 0.2s ease;
+}
+.mode-switch[data-mode="sei-quanto"] {
+  border-color: var(--color-primary);
+}
+.mode-switch__knob {
+  position: absolute;
+  top: 2px;
+  left: 2px;
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  background: var(--color-muted-foreground);
+  transition: transform 0.25s ease, background-color 0.25s ease;
+}
+.mode-switch[data-mode="sei-quanto"] .mode-switch__knob {
+  transform: translateX(28px);
+  background: var(--color-primary);
+}
+
+/* ------------------------------ Painéis deslizantes ----------------------- */
+
+.panels-viewport {
+  overflow: hidden;
+}
+.panels-track {
+  display: flex;
+  width: 200%;
+  transition: transform 0.35s ease;
+}
+.panels-track[data-mode="planejar"] {
+  transform: translateX(0%);
+}
+.panels-track[data-mode="sei-quanto"] {
+  transform: translateX(-50%);
+}
+.panel {
+  width: 50%;
+  flex-shrink: 0;
+  box-sizing: border-box;
+}
+.panel:first-child {
+  margin-right: 1.5rem;
+}
+.panel h2 {
+  font-size: 1.1rem;
+  font-weight: 600;
+}
+.panel-lead {
+  margin-top: 0.25rem;
+  font-size: 0.85rem;
+  color: var(--color-muted-foreground);
+  margin-bottom: 1.25rem;
+}
+
+@media (max-width: 760px) {
+  .panels-track {
+    width: 100%;
+    transition: none;
+  }
+  .panels-track[data-mode],
+  .panels-track[data-mode="sei-quanto"] {
+    transform: none;
+  }
+  .panel {
+    width: 100%;
+    display: none;
+  }
+  .panels-track[data-mode="planejar"] .panel:first-child,
+  .panels-track[data-mode="sei-quanto"] .panel:last-child {
+    display: block;
+  }
+  .panel:first-child {
+    margin-right: 0;
+  }
+}
+
+/* --------------------------------- Campos --------------------------------- */
+
+.field-group {
+  margin-bottom: 1rem;
+}
+.field-label {
+  display: block;
+  font-size: 0.7rem;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+  color: var(--color-muted-foreground);
+  margin-bottom: 0.35rem;
+}
+
+.base-toggle {
+  display: flex;
+  gap: 0.4rem;
+  margin-bottom: 1rem;
+}
+.base-toggle__opt {
+  flex: 1;
+  padding: 0.5rem 0.6rem;
+  border-radius: var(--radius-md);
+  border: 1px solid var(--color-border);
+  background: var(--color-secondary);
+  font-size: 0.82rem;
+  color: var(--color-muted-foreground);
+  transition: background-color 0.15s ease, color 0.15s ease, border-color 0.15s ease;
+}
+.base-toggle__opt[aria-pressed="true"] {
+  background: var(--color-primary);
+  color: var(--color-primary-foreground);
+  border-color: var(--color-primary);
+  font-weight: 600;
+}
+
+.taxa-section {
+  border-top: 1px solid var(--color-border);
+  padding-top: 1rem;
+  margin-top: 0.5rem;
+  margin-bottom: 1rem;
+}
+.taxa-auto-toggle {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.85rem;
+  margin-bottom: 0.75rem;
+  cursor: pointer;
+}
+.taxa-auto-toggle input {
+  width: 16px;
+  height: 16px;
+  accent-color: var(--color-primary);
+}
+.cdi-info {
+  background: var(--color-secondary);
+  border-radius: var(--radius-md);
+  padding: 0.65rem 0.8rem;
+  margin-bottom: 1rem;
+}
+.cdi-info__value {
+  font-size: 0.9rem;
+  font-weight: 600;
+  margin: 0;
+}
+.cdi-info__meta {
+  font-size: 0.75rem;
+  color: var(--color-muted-foreground);
+  margin: 0.15rem 0 0;
+}
+.cdi-info__error {
+  font-size: 0.8rem;
+  color: var(--color-destructive);
+  margin: 0;
+}
+
+/* -------------------------------- Resultado -------------------------------- */
+
+.resultado {
+  border-top: 1px solid var(--color-border);
+  padding-top: 1.25rem;
+  margin-top: 0.5rem;
+}
+.resultado-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 0.75rem;
+  margin-bottom: 1rem;
+}
+.result-item {
+  display: flex;
+  flex-direction: column;
+  gap: 0.15rem;
+  background: var(--color-secondary);
+  border-radius: var(--radius-md);
+  padding: 0.65rem 0.75rem;
+}
+.result-item__label {
+  font-size: 0.68rem;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+  color: var(--color-muted-foreground);
+}
+.result-item__value {
+  font-size: 1.05rem;
+  font-weight: 700;
+}
+
+.progress-bar {
+  height: 8px;
+  border-radius: 999px;
+  background: var(--color-secondary);
+  overflow: hidden;
+  margin-top: 0.5rem;
+}
+.progress-bar__fill {
+  height: 100%;
+  background: var(--color-primary);
+  border-radius: 999px;
+  transition: width 0.3s ease;
+}
+.progress-label {
+  font-size: 0.75rem;
+  color: var(--color-muted-foreground);
+  margin: 0.35rem 0 0;
+}
+
+.resultado .disclaimer {
+  margin-top: 0.75rem;
+}
