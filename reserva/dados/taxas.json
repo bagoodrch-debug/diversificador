@@ -1,5 +1,9 @@
 {
-  "updatedAt": null,
-  "cdi": null,
-  "error": "Este é um arquivo inicial de exemplo. Rode o workflow 'Atualizar taxa CDI' (aba Actions) para gerar os dados reais."
+  "updatedAt": "2026-07-30T02:00:21.408Z",
+  "cdi": {
+    "dataReferencia": "28/07/2026",
+    "taxaDiariaPct": 0.052531,
+    "taxaAnualPct": 14.150020022937992
+  },
+  "error": null
 }
