@@ -107,46 +107,6 @@
   font-weight: 600;
 }
 
-/* --------------------------------- Taxa ------------------------------------ */
-
-.taxa-auto-toggle {
-  display: flex;
-  align-items: center;
-  gap: 0.55rem;
-  font-size: 0.87rem;
-  font-weight: 500;
-  margin-bottom: 0.9rem;
-  cursor: pointer;
-}
-.taxa-auto-toggle input {
-  width: 17px;
-  height: 17px;
-  accent-color: var(--color-primary);
-}
-.cdi-info {
-  background: var(--color-secondary);
-  border: 1px solid var(--color-border);
-  border-radius: var(--radius-lg);
-  padding: 0.8rem 1rem;
-  margin-bottom: 1.1rem;
-}
-.cdi-info__value {
-  font-family: var(--font-heading);
-  font-size: 0.95rem;
-  font-weight: 700;
-  margin: 0;
-}
-.cdi-info__meta {
-  font-size: 0.76rem;
-  color: var(--color-muted-foreground);
-  margin: 0.2rem 0 0;
-}
-.cdi-info__error {
-  font-size: 0.8rem;
-  color: var(--color-destructive);
-  margin: 0;
-}
-
 /* -------------------------------- Resumo ----------------------------------- */
 
 .resumo-card {
@@ -159,6 +119,11 @@
 }
 .resumo-linha strong {
   color: var(--color-primary);
+}
+.cdi-explicacao {
+  font-size: 0.8rem;
+  color: var(--color-muted-foreground);
+  margin: 0.6rem 0 0;
 }
 
 /* ------------------------------ Projeção / barras -------------------------- */
