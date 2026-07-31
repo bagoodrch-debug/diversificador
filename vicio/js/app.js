@@ -10,15 +10,13 @@ const PRESETS = [
   { label: "Lanche", nome: "Lanche", valor: 25, frequencia: "semana" },
   { label: "Vape", nome: "Vape (pod descartável)", valor: 80, frequencia: "semana" },
   { label: "Streaming", nome: "Assinatura de streaming", valor: 40, frequencia: "mes" },
+  { label: "Outro", nome: "", valor: 0, frequencia: "dia" },
 ];
 
 const DEFAULTS = {
   nome: "Cigarro",
   valor: 12,
   frequencia: "dia",
-  usarCdiAuto: true,
-  taxaManualPct: 11,
-  percentualCdi: 100,
 };
 
 const PERIODOS = [
@@ -38,9 +36,6 @@ function persist() {
     nome: state.nome,
     valor: state.valor,
     frequencia: state.frequencia,
-    usarCdiAuto: state.usarCdiAuto,
-    taxaManualPct: state.taxaManualPct,
-    percentualCdi: state.percentualCdi,
   });
 }
 
@@ -50,10 +45,9 @@ function paraMensal(valor, frequencia) {
   return valor;
 }
 
+/** A projeção usa 100% do CDI atual — sem opção de ajuste, por simplicidade. */
 function taxaEfetiva() {
-  const base = state.usarCdiAuto ? state.cdiAnualPct : state.taxaManualPct;
-  if (base == null) return null;
-  return base * (state.percentualCdi / 100);
+  return state.cdiAnualPct;
 }
 
 /** Aporte mensal fixo, juros compostos mês a mês. */
@@ -86,7 +80,6 @@ async function fetchTaxaCdi(root) {
     state.cdiError = e instanceof Error ? e.message : "Erro ao buscar a taxa CDI.";
   }
   renderResultado(root);
-  renderCdiInfo(root);
 }
 
 function render(root) {
@@ -176,90 +169,19 @@ function render(root) {
     ]),
   ]);
 
-  const cdiInfoBox = el("div", { class: "cdi-info", id: "cdi-info" });
-  const manualField = field({
-    label: "Taxa (% ao ano)",
-    value: state.taxaManualPct,
-    isPercent: true,
-    onChange: (v) => {
-      state.taxaManualPct = v;
-      persist();
-      renderResultado(root);
-    },
-  });
-  cdiInfoBox.style.display = state.usarCdiAuto ? "" : "none";
-  manualField.style.display = state.usarCdiAuto ? "none" : "";
-
-  const taxaCard = el("section", { class: "panel card" }, [
-    el("h2", {}, "Se você investisse em vez de gastar"),
-    el("p", { class: "panel-lead" }, "Assumimos que o valor renderia baseado no CDI."),
-    el("label", { class: "taxa-auto-toggle" }, [
-      el("input", {
-        type: "checkbox",
-        checked: state.usarCdiAuto || undefined,
-        onChange: (e) => {
-          state.usarCdiAuto = e.target.checked;
-          cdiInfoBox.style.display = state.usarCdiAuto ? "" : "none";
-          manualField.style.display = state.usarCdiAuto ? "none" : "";
-          persist();
-          renderResultado(root);
-        },
-      }),
-      el("span", {}, "Usar o CDI atual automaticamente"),
-    ]),
-    cdiInfoBox,
-    manualField,
-    field({
-      label: "Seu investimento rende quantos % do CDI?",
-      value: state.percentualCdi,
-      isPercent: true,
-      onChange: (v) => {
-        state.percentualCdi = v;
-        persist();
-        renderResultado(root);
-      },
-    }),
-  ]);
-
-  root.append(gastoCard, taxaCard, el("div", { id: "resultado-host" }));
+  root.append(gastoCard, el("div", { id: "resultado-host" }));
   renderResultado(root);
-  renderCdiInfo(root);
+  if (!state.nome) nomeInput.focus();
 }
 
-function field({ label, value, onChange, isPercent = false }) {
-  const input = el("input", {
-    class: "field",
-    inputmode: "numeric",
-    value: isPercent ? String(value) : formatCurrencyInput(value),
-    onFocus: (e) => e.target.select(),
-    onInput: (e) => {
-      if (isPercent) {
-        const n = parseFloat(e.target.value.replace(",", ".").replace(/[^0-9.]/g, ""));
-        onChange(Number.isFinite(n) ? n : 0);
-      } else {
-        const n = parseCurrencyInput(e.target.value);
-        e.target.value = formatCurrencyInput(n);
-        onChange(n);
-      }
-    },
-  });
-  return el("div", { class: "field-group" }, [el("label", { class: "field-label" }, label), input]);
-}
-
-function renderCdiInfo(root) {
-  const box = qs("#cdi-info", root);
-  if (!box) return;
-  clear(box);
+function cdiExplicacao() {
   if (state.cdiAnualPct != null) {
-    box.append(
-      el("p", { class: "cdi-info__value" }, `CDI atual: ${state.cdiAnualPct.toFixed(2).replace(".", ",")}% ao ano`),
-      el("p", { class: "cdi-info__meta" }, `Referência: ${state.cdiDataRef ?? "—"}`),
-    );
-  } else if (state.cdiError) {
-    box.append(el("p", { class: "cdi-info__error" }, `Não foi possível buscar o CDI agora. ${state.cdiError}`));
-  } else {
-    box.append(el("p", { class: "cdi-info__meta" }, "Buscando taxa CDI…"));
+    return `As projeções abaixo consideram o CDI atual: ${state.cdiAnualPct.toFixed(2).replace(".", ",")}% ao ano (referência: ${state.cdiDataRef ?? "—"}).`;
   }
+  if (state.cdiError) {
+    return `Não foi possível buscar o CDI agora. ${state.cdiError}`;
+  }
+  return "Buscando a taxa CDI atual…";
 }
 
 function renderResultado(root) {
@@ -281,11 +203,11 @@ function renderResultado(root) {
       el("strong", {}, brl(aporteAnual)),
       " por ano.",
     ]),
+    el("p", { class: "cdi-explicacao" }, cdiExplicacao()),
   ]);
   host.append(resumo);
 
   if (taxa == null) {
-    host.append(el("p", { class: "disclaimer" }, "Informe a taxa (ou aguarde o CDI carregar) para ver a projeção."));
     return;
   }
 
