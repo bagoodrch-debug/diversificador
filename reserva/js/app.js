@@ -6,7 +6,6 @@ import { getTaxas } from "./services/taxas-service.js";
 const DEFAULTS = {
   mode: "planejar",
   planejar: {
-    baseTipo: "salario",
     valorMensalReferencia: 3000,
     jaTemGuardado: 0,
     aporteMensal: 300,
@@ -150,52 +149,12 @@ function updateSwitch(root) {
 function buildPlanejarPanel(root) {
   const p = state.planejar;
 
-  const baseSelect = el(
-    "div",
-    { class: "base-toggle" },
-    [
-      el(
-        "button",
-        {
-          type: "button",
-          class: "base-toggle__opt",
-          "aria-pressed": String(p.baseTipo === "salario"),
-          onClick: () => {
-            p.baseTipo = "salario";
-            persist();
-            renderPanels(root);
-          },
-        },
-        "Salário",
-      ),
-      el(
-        "button",
-        {
-          type: "button",
-          class: "base-toggle__opt",
-          "aria-pressed": String(p.baseTipo === "gasto"),
-          onClick: () => {
-            p.baseTipo = "gasto";
-            persist();
-            renderPanels(root);
-          },
-        },
-        "Gasto mensal",
-      ),
-    ],
-  );
-
-  const refLabel = p.baseTipo === "salario" ? "Renda mensal líquida" : "Gasto mensal médio";
-
   const panel = el("section", { class: "panel card" }, [
     el("h2", {}, "Planejar do zero"),
-    el("p", { class: "panel-lead" }, "A meta é guardar 6 vezes esse valor mensal."),
-
-    el("label", { class: "field-label" }, "Base do cálculo"),
-    baseSelect,
+    el("p", { class: "panel-lead" }, "A meta é guardar 6 vezes sua renda mensal."),
 
     field({
-      label: refLabel,
+      label: "Renda mensal",
       value: p.valorMensalReferencia,
       onChange: (v) => {
         p.valorMensalReferencia = v;
@@ -385,7 +344,7 @@ function renderResultadoPlanejar(root) {
   const alvo = p.valorMensalReferencia * 6;
   const mesesJaGuardados = p.valorMensalReferencia > 0 ? p.jaTemGuardado / p.valorMensalReferencia : 0;
 
-  host.append(resultadoCard({ alvo, jaTem: p.jaTemGuardado, aporteMensal: p.aporteMensal, taxa, mesesJaGuardados, baseLabel: p.baseTipo === "salario" ? "salário" : "gasto" }));
+  host.append(resultadoCard({ alvo, jaTem: p.jaTemGuardado, aporteMensal: p.aporteMensal, taxa, mesesJaGuardados, baseLabel: "salário" }));
 }
 
 function renderResultadoSeiQuanto(root) {
