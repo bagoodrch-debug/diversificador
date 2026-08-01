@@ -156,10 +156,16 @@
   font-weight: 700;
 }
 
+.ordem-quitacao__titulo {
+  font-size: 0.76rem;
+  font-weight: 600;
+  color: var(--color-muted-foreground);
+  margin: 0.85rem 0 0;
+}
 .ordem-quitacao {
   list-style: decimal;
   padding-left: 1.1rem;
-  margin: 0.85rem 0 0;
+  margin: 0.4rem 0 0;
   font-size: 0.82rem;
 }
 .ordem-quitacao li {
