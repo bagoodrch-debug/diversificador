@@ -319,6 +319,8 @@ function estrategiaCard({ titulo, subtitulo, resultado, destaque }) {
   const mesesResto = resultado.meses % 12;
   const tempoLabel = anos > 0 ? `${anos}a ${mesesResto}m` : `${mesesResto} meses`;
 
+  const ordemCronologica = [...resultado.ordem].sort((a, b) => (a.mes ?? Infinity) - (b.mes ?? Infinity));
+
   return el("div", { class: `estrategia-card${destaque ? " estrategia-card--destaque" : ""}` }, [
     el("h3", {}, titulo),
     el("p", { class: "estrategia-card__sub" }, subtitulo),
@@ -330,10 +332,11 @@ function estrategiaCard({ titulo, subtitulo, resultado, destaque }) {
       el("span", { class: "estrategia-card__label" }, "Total pago em juros"),
       el("span", { class: "estrategia-card__value" }, brl(resultado.totalJuros)),
     ]),
+    el("p", { class: "ordem-quitacao__titulo" }, "Ordem em que cada dívida é quitada:"),
     el(
       "ol",
       { class: "ordem-quitacao" },
-      resultado.ordem.map((o) =>
+      ordemCronologica.map((o) =>
         el("li", {}, [
           el("span", {}, o.nome || "Dívida"),
           el("span", { class: "ordem-quitacao__mes" }, o.mes ? `mês ${o.mes}` : "—"),
