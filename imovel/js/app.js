@@ -167,14 +167,15 @@ function render(root) {
     numberField("Prazo do financiamento (anos)", "prazoAnos", root),
   ]);
 
+  const sistemaBotoes = [];
   const sistemaToggle = el(
     "div",
     { class: "freq-toggle" },
     [
       ["sac", "SAC (parcelas decrescentes)"],
       ["price", "PRICE (parcelas fixas)"],
-    ].map(([value, label]) =>
-      el(
+    ].map(([value, label]) => {
+      const btn = el(
         "button",
         {
           type: "button",
@@ -182,13 +183,17 @@ function render(root) {
           "aria-pressed": String(state.sistema === value),
           onClick: () => {
             state.sistema = value;
+            sistemaBotoes.forEach((b) => b.setAttribute("aria-pressed", String(b.dataset.valor === value)));
             persist();
             renderResultado(root);
           },
         },
         label,
-      ),
-    ),
+      );
+      btn.dataset.valor = value;
+      sistemaBotoes.push(btn);
+      return btn;
+    }),
   );
 
   const premissasCard = el("section", { class: "panel card" }, [
