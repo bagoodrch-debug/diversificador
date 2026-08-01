@@ -1,0 +1,74 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Bola de Neve de Dívidas — Many Mens</title>
+  <meta name="description" content="Liste suas dívidas e descubra a ordem ideal de quitação: Bola de Neve (menor saldo primeiro) ou Avalanche (maior juros primeiro), com o tempo e o valor de juros que cada estratégia custa." />
+  <link rel="canonical" href="https://SEU-USUARIO.github.io/dividas/" />
+  <link rel="icon" type="image/png" href="../assets/icons/favicon.png" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Sora:wght@600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+
+  <link rel="stylesheet" href="css/tokens.css" />
+  <link rel="stylesheet" href="css/base.css" />
+  <link rel="stylesheet" href="css/layout.css" />
+  <link rel="stylesheet" href="css/components.css" />
+  <link rel="stylesheet" href="css/dividas.css" />
+</head>
+<body>
+  <header class="site-header">
+    <div class="container site-header__inner">
+      <div class="header-left">
+        <a href="../index.html" class="back-to-hub" aria-label="Voltar para o site principal (Many Mens)" title="Voltar para Many Mens">
+          <img src="../assets/icons/favicon.png" alt="" />
+        </a>
+        <a href="index.html" class="brand">
+          <svg class="brand__mark" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+            <circle cx="12" cy="12" r="4" stroke="var(--color-primary)" stroke-width="2"/>
+            <circle cx="21" cy="21" r="6.5" stroke="var(--color-primary)" stroke-width="2"/>
+          </svg>
+          <span>Bola de <span class="brand__gold">Neve</span></span>
+        </a>
+      </div>
+      <button class="nav-toggle icon-btn" aria-label="Abrir menu" aria-expanded="false">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 6h16M4 12h16M4 18h16"/></svg>
+      </button>
+      <nav class="main-nav">
+        <a href="index.html" aria-current="page">Calculadora</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="container">
+    <div class="dividas-hero">
+      <h1>Bola de Neve de Dívidas</h1>
+      <p>Liste suas dívidas e veja a ordem ideal de quitação: Bola de Neve (menor saldo primeiro) ou Avalanche (maior juros primeiro) — e quanto tempo e dinheiro cada uma custa.</p>
+    </div>
+
+    <div id="dividas-root">
+      <noscript>Esta calculadora precisa de JavaScript habilitado para funcionar.</noscript>
+    </div>
+
+    <footer class="sim__disclaimer" style="margin-top:1rem">
+      <p>Esta ferramenta tem fins educacionais e de simulação pessoal. Não constitui recomendação financeira. A simulação não considera multas, taxas adicionais, renegociações ou mudanças futuras nas taxas de juros.</p>
+      <p>Os valores são salvos automaticamente neste navegador.</p>
+    </footer>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container site-footer__inner">
+      <div class="site-footer__links">
+        <a href="../index.html">Many Mens</a>
+        <a href="../carteira/index.html">Alocador de Carteira</a>
+        <a href="../reserva/index.html">Reserva de Emergência</a>
+        <a href="../vicio/index.html">Quanto Custa Seu Vício</a>
+      </div>
+      <p>&copy; <span id="year"></span> Many Mens. Conteúdo educacional — não é recomendação de investimento.</p>
+    </div>
+  </footer>
+
+  <script type="module" src="js/app.js"></script>
+</body>
+</html>

@@ -1,0 +1,185 @@
+/* ==========================================================================
+   Bola de Neve de Dívidas — layout específico
+   ========================================================================== */
+
+.brand span {
+  font-family: var(--font-heading);
+}
+
+.dividas-hero {
+  padding-block: 2.25rem 1.25rem;
+  text-align: center;
+}
+.dividas-hero h1 {
+  font-family: var(--font-heading);
+  font-weight: 700;
+  font-size: clamp(1.7rem, 3.5vw, 2.3rem);
+  letter-spacing: -0.01em;
+}
+.dividas-hero p {
+  margin-top: 0.5rem;
+  color: var(--color-muted-foreground);
+  max-width: 54ch;
+  margin-inline: auto;
+  font-size: 0.95rem;
+}
+
+.panel {
+  margin-bottom: 1.5rem;
+  padding: 1.75rem;
+}
+.panel h2 {
+  font-family: var(--font-heading);
+  font-size: 1.15rem;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+}
+.panel-lead {
+  margin-top: 0.3rem;
+  font-size: 0.87rem;
+  color: var(--color-muted-foreground);
+  margin-bottom: 1.25rem;
+}
+
+.field-group {
+  margin-bottom: 0;
+}
+.field-label {
+  display: block;
+  font-size: 0.68rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: var(--color-muted-foreground);
+  margin-bottom: 0.3rem;
+}
+
+/* ------------------------------- Lista de dívidas -------------------------- */
+
+.dividas-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.9rem;
+}
+
+.divida-row {
+  display: grid;
+  grid-template-columns: 1.4fr 1fr 0.8fr 1fr auto;
+  gap: 0.7rem;
+  align-items: end;
+  background: var(--color-secondary);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  padding: 0.85rem;
+}
+.divida-row__field {
+  min-width: 0;
+}
+.divida-row__remove {
+  margin-bottom: 0.1rem;
+}
+
+@media (max-width: 760px) {
+  .divida-row {
+    grid-template-columns: 1fr 1fr;
+    grid-template-areas:
+      "nome nome"
+      "saldo taxa"
+      "minimo remove";
+  }
+  .divida-row__field--nome {
+    grid-area: nome;
+  }
+  .divida-row__remove {
+    grid-area: remove;
+    justify-self: end;
+  }
+}
+
+/* -------------------------------- Orçamento -------------------------------- */
+
+.orcamento-info {
+  margin-top: 0.75rem;
+  font-size: 0.82rem;
+  color: var(--color-muted-foreground);
+}
+
+/* ---------------------------- Comparação de estratégias -------------------- */
+
+.comparacao-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.25rem;
+  margin-bottom: 1.25rem;
+}
+@media (max-width: 700px) {
+  .comparacao-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.estrategia-card {
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  padding: 1.25rem;
+  background: var(--color-secondary);
+}
+.estrategia-card--destaque {
+  border-color: var(--color-primary);
+  background: linear-gradient(160deg, var(--color-secondary), color-mix(in oklch, var(--color-primary) 10%, var(--color-secondary)));
+}
+.estrategia-card h3 {
+  font-family: var(--font-heading);
+  font-size: 1.05rem;
+  font-weight: 700;
+  margin: 0;
+}
+.estrategia-card__sub {
+  font-size: 0.78rem;
+  color: var(--color-muted-foreground);
+  margin: 0.15rem 0 1rem;
+}
+.estrategia-card__stat {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  padding-block: 0.5rem;
+  border-top: 1px solid var(--color-border);
+}
+.estrategia-card__label {
+  font-size: 0.76rem;
+  color: var(--color-muted-foreground);
+}
+.estrategia-card__value {
+  font-family: var(--font-heading);
+  font-size: 1.05rem;
+  font-weight: 700;
+}
+
+.ordem-quitacao {
+  list-style: decimal;
+  padding-left: 1.1rem;
+  margin: 0.85rem 0 0;
+  font-size: 0.82rem;
+}
+.ordem-quitacao li {
+  display: flex;
+  justify-content: space-between;
+  gap: 0.5rem;
+  padding-block: 0.25rem;
+}
+.ordem-quitacao__mes {
+  color: var(--color-muted-foreground);
+  flex-shrink: 0;
+}
+
+.economia-nota {
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--color-primary);
+  background: var(--color-secondary);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  padding: 0.85rem 1rem;
+  margin-bottom: 1rem;
+}
