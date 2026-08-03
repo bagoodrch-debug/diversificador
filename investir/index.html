@@ -1,0 +1,95 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>CDB x Tesouro x Poupança — Many Mens</title>
+  <meta name="description" content="Compare o rendimento líquido (já descontando Imposto de Renda) de CDB, Tesouro Selic e Poupança, e descubra onde vale mais a pena deixar seu dinheiro parado." />
+  <link rel="canonical" href="https://SEU-USUARIO.github.io/investir/" />
+  <link rel="icon" type="image/png" href="../assets/icons/favicon.png" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Sora:wght@600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+
+  <link rel="stylesheet" href="css/tokens.css" />
+  <link rel="stylesheet" href="css/base.css" />
+  <link rel="stylesheet" href="css/layout.css" />
+  <link rel="stylesheet" href="css/components.css" />
+  <link rel="stylesheet" href="css/investir.css" />
+</head>
+<body>
+  <header class="site-header">
+    <div class="container site-header__inner">
+      <div class="header-left">
+        <a href="../index.html" class="back-to-hub" aria-label="Voltar para o site principal (Many Mens)" title="Voltar para Many Mens">
+          <img src="../assets/icons/favicon.png" alt="" />
+        </a>
+        <a href="index.html" class="brand">
+          <svg class="brand__mark" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+            <path d="M6 20l6-7 5 4 8-10" stroke="var(--color-primary)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+          <span>CDB x Tesouro x <span class="brand__gold">Poupança</span></span>
+        </a>
+      </div>
+      <button class="nav-toggle icon-btn" aria-label="Abrir menu" aria-expanded="false">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 6h16M4 12h16M4 18h16"/></svg>
+      </button>
+      <nav class="main-nav">
+        <a href="index.html" aria-current="page">Comparador</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="container">
+    <div class="investir-hero">
+      <h1>CDB x Tesouro x Poupança</h1>
+      <p>Compare o rendimento líquido — já descontando Imposto de Renda — e descubra onde vale mais a pena deixar seu dinheiro parado.</p>
+    </div>
+
+    <div class="investir-layout">
+      <aside class="ad-rail">
+        <!-- Espaço de anúncio (ex: Google AdSense). Troque pelo snippet real quando aprovado. -->
+        <div class="ad-slot">
+          <span class="ad-slot__label">Publicidade</span>
+          <span>300x250</span>
+        </div>
+      </aside>
+
+      <div>
+        <div id="investir-root">
+          <noscript>Esta calculadora precisa de JavaScript habilitado para funcionar.</noscript>
+        </div>
+
+        <footer class="sim__disclaimer" style="margin-top:1rem">
+          <p>Esta ferramenta tem fins educacionais e de simulação pessoal. Não constitui recomendação de investimento. As taxas e regras (IR regressivo, regra da poupança, custódia B3) podem mudar — confirme sempre as condições atuais antes de investir.</p>
+          <p>Os valores são salvos automaticamente neste navegador.</p>
+        </footer>
+      </div>
+
+      <aside class="ad-rail">
+        <!-- Espaço de anúncio (ex: Google AdSense). Troque pelo snippet real quando aprovado. -->
+        <div class="ad-slot">
+          <span class="ad-slot__label">Publicidade</span>
+          <span>300x250</span>
+        </div>
+      </aside>
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container site-footer__inner">
+      <div class="site-footer__links">
+        <a href="../index.html">Many Mens</a>
+        <a href="../carteira/index.html">Alocador de Carteira</a>
+        <a href="../reserva/index.html">Reserva de Emergência</a>
+        <a href="../vicio/index.html">Quanto Custa Seu Vício</a>
+        <a href="../dividas/index.html">Bola de Neve de Dívidas</a>
+        <a href="../imovel/index.html">Alugar ou Financiar</a>
+      </div>
+      <p>&copy; <span id="year"></span> Many Mens. Conteúdo educacional — não é recomendação de investimento.</p>
+    </div>
+  </footer>
+
+  <script type="module" src="js/app.js"></script>
+</body>
+</html>
