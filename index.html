@@ -33,36 +33,41 @@
   </header>
 
   <main>
-    <div class="container hub-layout">
-      <aside class="ad-rail">
-        <!-- Espaço de anúncio (ex: Google AdSense). Troque pelo snippet real quando aprovado. -->
-        <div class="ad-slot">
-          <span class="ad-slot__label">Publicidade</span>
-          <span>300x250</span>
-        </div>
-      </aside>
+    <!-- Espaço de anúncio (ex: Google AdSense). Fixo na borda da tela, só
+         aparece em telas bem largas (ver media query no CSS). -->
+    <aside class="ad-rail ad-rail--left">
+      <div class="ad-slot">
+        <span class="ad-slot__label">Publicidade</span>
+        <span>300x250</span>
+      </div>
+    </aside>
+    <aside class="ad-rail ad-rail--right">
+      <div class="ad-slot">
+        <span class="ad-slot__label">Publicidade</span>
+        <span>300x250</span>
+      </div>
+    </aside>
 
-      <div>
-        <section class="hero">
-          <p class="hero__eyebrow">Procuramos melhorar sua vida</p>
-          <h1>Homem não <span class="hl-red">chora</span>?<br />Homem <span class="hl-cyan">age</span>.</h1>
-          <p class="lead">
-            Ferramentas simples pra sair da teoria. Sem fórmula mágica —
-            só o que dá pra usar <span class="hl-gold" style="font-weight:600">hoje mesmo</span>
-            pra organizar sua cabeça e seu bolso.
-          </p>
-          <div class="hero__actions">
-            <a class="btn btn--solid" href="#projetos">Ver ferramentas</a>
-            <a class="btn btn--ghost" href="https://www.instagram.com/manymensofc/" target="_blank" rel="noopener">
-              @manymensofc
-            </a>
-          </div>
-          <img class="seal" src="assets/icons/favicon.png" alt="" />
-        </section>
+    <section class="hero container">
+      <p class="hero__eyebrow">Procuramos melhorar sua vida</p>
+      <h1>Homem não <span class="hl-red">chora</span>?<br />Homem <span class="hl-cyan">age</span>.</h1>
+      <p class="lead">
+        Ferramentas simples pra sair da teoria. Sem fórmula mágica —
+        só o que dá pra usar <span class="hl-gold" style="font-weight:600">hoje mesmo</span>
+        pra organizar sua cabeça e seu bolso.
+      </p>
+      <div class="hero__actions">
+        <a class="btn btn--solid" href="#projetos">Ver ferramentas</a>
+        <a class="btn btn--ghost" href="https://www.instagram.com/manymensofc/" target="_blank" rel="noopener">
+          @manymensofc
+        </a>
+      </div>
+      <img class="seal" src="assets/icons/favicon.png" alt="" />
+    </section>
 
-        <section class="section" id="projetos">
-          <div class="section__head">
-            <div>
+    <section class="section container" id="projetos">
+      <div class="section__head">
+        <div>
               <h2>Ferramentas</h2>
               <p>Cada uma resolve um problema específico. Sem cadastro, sem enrolação.</p>
             </div>
@@ -136,16 +141,6 @@
             </div>
           </div>
         </section>
-      </div>
-
-      <aside class="ad-rail">
-        <!-- Espaço de anúncio (ex: Google AdSense). Troque pelo snippet real quando aprovado. -->
-        <div class="ad-slot">
-          <span class="ad-slot__label">Publicidade</span>
-          <span>300x250</span>
-        </div>
-      </aside>
-    </div>
   </main>
 
   <footer class="site-footer">
