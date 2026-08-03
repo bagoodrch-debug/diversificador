@@ -195,6 +195,8 @@ button { font: inherit; color: inherit; background: none; border: none; cursor: 
   bottom: -1.5rem;
   width: 150px;
   height: 150px;
+  object-fit: cover;
+  border-radius: 50%;
   transform: rotate(-8deg);
   filter: drop-shadow(0 10px 24px rgba(0, 0, 0, 0.55));
 }
@@ -227,15 +229,25 @@ button { font: inherit; color: inherit; background: none; border: none; cursor: 
 
 .project-grid {
   display: grid;
-  gap: 1.25rem;
-  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 1rem;
+  grid-template-columns: repeat(3, 1fr);
+}
+@media (max-width: 860px) {
+  .project-grid {
+    grid-template-columns: 1fr;
+  }
+}
+@media (min-width: 861px) and (max-width: 1100px) {
+  .project-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
 }
 .project-card {
   position: relative;
   border-radius: var(--radius-lg);
   border: 1px solid var(--border);
   background: linear-gradient(160deg, var(--surface), var(--surface-2));
-  padding: 1.75rem;
+  padding: 1.4rem;
   overflow: hidden;
   transition: transform .18s ease, border-color .18s ease;
 }
@@ -305,8 +317,8 @@ button { font: inherit; color: inherit; background: none; border: none; cursor: 
 /* Faixas laterais de anúncio em volta do conteúdo principal */
 .hub-layout {
   display: grid;
-  grid-template-columns: 160px minmax(0, 1fr) 160px;
-  gap: 1.5rem;
+  grid-template-columns: 140px minmax(0, 1fr) 140px;
+  gap: 2rem;
   align-items: start;
 }
 @media (max-width: 1100px) {
