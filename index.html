@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Many Mens — Ferramentas e conteúdo pra quem constrói</title>
   <meta name="description" content="Um portal de ferramentas práticas e conteúdo direto ao ponto: disciplina, dinheiro e ação. Comece pelo simulador de alocação de carteira." />
-  <link rel="icon" type="image/svg+xml" href="assets/icons/favicon.png" />
+  <link rel="icon" type="image/png" href="assets/icons/favicon.png" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Anton&family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
@@ -33,23 +33,6 @@
   </header>
 
   <main>
-    <section class="hero container">
-      <p class="hero__eyebrow">Procuramos melhorar sua vida</p>
-      <h1>Homem não <span class="hl-red">chora</span>?<br />Homem <span class="hl-cyan">age</span>.</h1>
-      <p class="lead">
-        Ferramentas simples pra sair da teoria. Sem fórmula mágica —
-        só o que dá pra usar <span class="hl-gold" style="font-weight:600">hoje mesmo</span>
-        pra organizar sua cabeça e seu bolso.
-      </p>
-      <div class="hero__actions">
-        <a class="btn btn--solid" href="#projetos">Ver ferramentas</a>
-        <a class="btn btn--ghost" href="https://www.instagram.com/manymensofc/" target="_blank" rel="noopener">
-          @manymensofc
-        </a>
-      </div>
-      <img class="seal" src="assets/icons/favicon.png" alt="" />
-    </section>
-
     <div class="container hub-layout">
       <aside class="ad-rail">
         <!-- Espaço de anúncio (ex: Google AdSense). Troque pelo snippet real quando aprovado. -->
@@ -59,82 +42,101 @@
         </div>
       </aside>
 
-      <section class="section" id="projetos">
-        <div class="section__head">
-          <div>
-            <h2>Ferramentas</h2>
-            <p>Cada uma resolve um problema específico. Sem cadastro, sem enrolação.</p>
+      <div>
+        <section class="hero">
+          <p class="hero__eyebrow">Procuramos melhorar sua vida</p>
+          <h1>Homem não <span class="hl-red">chora</span>?<br />Homem <span class="hl-cyan">age</span>.</h1>
+          <p class="lead">
+            Ferramentas simples pra sair da teoria. Sem fórmula mágica —
+            só o que dá pra usar <span class="hl-gold" style="font-weight:600">hoje mesmo</span>
+            pra organizar sua cabeça e seu bolso.
+          </p>
+          <div class="hero__actions">
+            <a class="btn btn--solid" href="#projetos">Ver ferramentas</a>
+            <a class="btn btn--ghost" href="https://www.instagram.com/manymensofc/" target="_blank" rel="noopener">
+              @manymensofc
+            </a>
           </div>
-        </div>
+          <img class="seal" src="assets/icons/favicon.png" alt="" />
+        </section>
 
-        <div class="project-grid">
-          <a class="project-card" href="carteira/index.html" style="--card-accent:#f5b942" data-reveal>
-            <span class="project-card__tag">Finanças</span>
-            <h3>Alocador de Carteira</h3>
-            <p>Simule como distribuir seu dinheiro entre Renda Fixa, Ações, Ações no Exterior, FIIs e Ouro — com sugestões baseadas em cotações reais.</p>
-            <span class="project-card__link">
-              Abrir simulador
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
-            </span>
-          </a>
-
-          <a class="project-card" href="reserva/index.html" style="--card-accent:#22e0e0" data-reveal>
-            <span class="project-card__tag">Finanças</span>
-            <h3>Reserva de Emergência</h3>
-            <p>Descubra quanto guardar (6x salário ou gasto mensal) e quanto tempo falta pra completar, usando a taxa CDI atual.</p>
-            <span class="project-card__link">
-              Abrir calculadora
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
-            </span>
-          </a>
-
-          <a class="project-card" href="vicio/index.html" style="--card-accent:#ff3b30" data-reveal>
-            <span class="project-card__tag">Finanças</span>
-            <h3>Quanto Custa Seu Vício</h3>
-            <p>Cigarro, café, iFood — veja quanto um gasto pequeno do dia a dia viraria em 1, 5 ou 10 anos se fosse investido.</p>
-            <span class="project-card__link">
-              Abrir calculadora
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
-            </span>
-          </a>
-
-          <a class="project-card" href="dividas/index.html" style="--card-accent:#22e0e0" data-reveal>
-            <span class="project-card__tag">Finanças</span>
-            <h3>Bola de Neve de Dívidas</h3>
-            <p>Liste suas dívidas e descubra a ordem ideal de quitação — Bola de Neve ou Avalanche — e quanto tempo e dinheiro cada uma economiza.</p>
-            <span class="project-card__link">
-              Abrir calculadora
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
-            </span>
-          </a>
-
-          <a class="project-card" href="imovel/index.html" style="--card-accent:#f5b942" data-reveal>
-            <span class="project-card__tag">Finanças</span>
-            <h3>Alugar ou Financiar?</h3>
-            <p>Informe o aluguel, o valor do imóvel e a entrada disponível — descubra em quanto tempo compensa financiar em vez de alugar e investir a diferença.</p>
-            <span class="project-card__link">
-              Abrir calculadora
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
-            </span>
-          </a>
-
-          <a class="project-card" href="investir/index.html" style="--card-accent:#22e0e0" data-reveal>
-            <span class="project-card__tag">Finanças</span>
-            <h3>CDB x Tesouro x Poupança</h3>
-            <p>Compare o rendimento líquido (já descontando IR) e descubra onde vale mais a pena deixar seu dinheiro parado.</p>
-            <span class="project-card__link">
-              Abrir comparador
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
-            </span>
-          </a>
-
-          <div class="project-card project-card--soon" data-reveal>
-            <span class="project-card__tag">Em breve</span>
-            <h3 style="margin-top:.9rem">Próxima ferramenta</h3>
-            <p style="margin-bottom:0">Esse espaço é pro próximo microsite do Many Mens. Volte em breve.</p>
+        <section class="section" id="projetos">
+          <div class="section__head">
+            <div>
+              <h2>Ferramentas</h2>
+              <p>Cada uma resolve um problema específico. Sem cadastro, sem enrolação.</p>
+            </div>
           </div>
-        </div>
-      </section>
+
+          <div class="project-grid">
+            <a class="project-card" href="carteira/index.html" style="--card-accent:#f5b942" data-reveal>
+              <span class="project-card__tag">Finanças</span>
+              <h3>Alocador de Carteira</h3>
+              <p>Simule como distribuir seu dinheiro entre Renda Fixa, Ações, Ações no Exterior, FIIs e Ouro — com sugestões baseadas em cotações reais.</p>
+              <span class="project-card__link">
+                Abrir simulador
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+              </span>
+            </a>
+
+            <a class="project-card" href="reserva/index.html" style="--card-accent:#22e0e0" data-reveal>
+              <span class="project-card__tag">Finanças</span>
+              <h3>Reserva de Emergência</h3>
+              <p>Descubra quanto guardar (6x salário ou gasto mensal) e quanto tempo falta pra completar, usando a taxa CDI atual.</p>
+              <span class="project-card__link">
+                Abrir calculadora
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+              </span>
+            </a>
+
+            <a class="project-card" href="vicio/index.html" style="--card-accent:#ff3b30" data-reveal>
+              <span class="project-card__tag">Finanças</span>
+              <h3>Quanto Custa Seu Vício</h3>
+              <p>Cigarro, café, iFood — veja quanto um gasto pequeno do dia a dia viraria em 1, 5 ou 10 anos se fosse investido.</p>
+              <span class="project-card__link">
+                Abrir calculadora
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+              </span>
+            </a>
+
+            <a class="project-card" href="dividas/index.html" style="--card-accent:#22e0e0" data-reveal>
+              <span class="project-card__tag">Finanças</span>
+              <h3>Bola de Neve de Dívidas</h3>
+              <p>Liste suas dívidas e descubra a ordem ideal de quitação — Bola de Neve ou Avalanche — e quanto tempo e dinheiro cada uma economiza.</p>
+              <span class="project-card__link">
+                Abrir calculadora
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+              </span>
+            </a>
+
+            <a class="project-card" href="imovel/index.html" style="--card-accent:#f5b942" data-reveal>
+              <span class="project-card__tag">Finanças</span>
+              <h3>Alugar ou Financiar?</h3>
+              <p>Informe o aluguel, o valor do imóvel e a entrada disponível — descubra em quanto tempo compensa financiar em vez de alugar e investir a diferença.</p>
+              <span class="project-card__link">
+                Abrir calculadora
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+              </span>
+            </a>
+
+            <a class="project-card" href="investir/index.html" style="--card-accent:#22e0e0" data-reveal>
+              <span class="project-card__tag">Finanças</span>
+              <h3>CDB x Tesouro x Poupança</h3>
+              <p>Compare o rendimento líquido (já descontando IR) e descubra onde vale mais a pena deixar seu dinheiro parado.</p>
+              <span class="project-card__link">
+                Abrir comparador
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+              </span>
+            </a>
+
+            <div class="project-card project-card--soon" data-reveal>
+              <span class="project-card__tag">Em breve</span>
+              <h3 style="margin-top:.9rem">Próxima ferramenta</h3>
+              <p style="margin-bottom:0">Esse espaço é pro próximo microsite do Many Mens. Volte em breve.</p>
+            </div>
+          </div>
+        </section>
+      </div>
 
       <aside class="ad-rail">
         <!-- Espaço de anúncio (ex: Google AdSense). Troque pelo snippet real quando aprovado. -->
@@ -144,20 +146,6 @@
         </div>
       </aside>
     </div>
-
-    <!--
-      ESPAÇO DE ANÚNCIO (Google AdSense) — faixa horizontal, abaixo da grade.
-      Depois de ser aprovado no AdSense, troque este bloco pelo snippet
-      <ins class="adsbygoogle">...</ins> que o próprio AdSense fornece.
-      Deixei rotulado como "Publicidade" por transparência com o visitante —
-      recomendo manter esse rótulo mesmo depois de ativar o anúncio real.
-    -->
-    <section class="section container">
-      <div class="ad-slot">
-        <span class="ad-slot__label">Publicidade</span>
-        Espaço reservado para anúncio (Google AdSense)
-      </div>
-    </section>
   </main>
 
   <footer class="site-footer">
