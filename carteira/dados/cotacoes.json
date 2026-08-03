@@ -1,118 +1,118 @@
 {
-  "updatedAt": "2026-08-03T13:39:51.464Z",
+  "updatedAt": "2026-08-03T16:23:20.063Z",
   "stocks": [
     {
       "symbol": "PETR4",
-      "price": 42.45,
-      "changePct": -2.233993551358818,
+      "price": 43.04,
+      "changePct": -0.8751727314601625,
       "name": "Petróleo Brasileiro S.A. - Petrobras"
     },
     {
       "symbol": "ITUB4",
-      "price": 43.06,
-      "changePct": 0.4317211235478231,
+      "price": 42.89,
+      "changePct": 0.035218741034973584,
       "name": "Itaú Unibanco Holding S.A."
     },
     {
       "symbol": "VALE3",
-      "price": 75.65,
-      "changePct": -0.8259045621394802,
+      "price": 74.06,
+      "changePct": -2.910330361824854,
       "name": "Vale S.A."
     },
     {
       "symbol": "WEGE3",
-      "price": 47.72,
-      "changePct": 1.1016949152542288,
+      "price": 47.86,
+      "changePct": 1.3983050847457554,
       "name": "WEG S.A."
     },
     {
       "symbol": "BBAS3",
-      "price": 21.38,
-      "changePct": 0.1405152224824243,
+      "price": 21.2,
+      "changePct": -0.702576112412188,
       "name": "Banco do Brasil S.A."
     },
     {
       "symbol": "BBDC4",
-      "price": 18.54,
-      "changePct": 0.5968529571351028,
+      "price": 18.43,
+      "changePct": 0,
       "name": "Banco Bradesco S.A."
     },
     {
       "symbol": "ABEV3",
-      "price": 15.96,
-      "changePct": -0.1876172607879885,
+      "price": 15.93,
+      "changePct": -0.37523452157598813,
       "name": "Ambev S.A."
     }
   ],
   "bdrs": [
     {
       "symbol": "IVVB11",
-      "price": 430.49,
-      "changePct": 0.4902075211839732,
+      "price": 434.42,
+      "changePct": 1.407595882256829,
       "name": "ISHARES S&P 500 CLASSE DE ÍNDICE EM COTAS DE CLASSES DE ÍNDICE IE - RESPONSABILIDADE LIMITADA"
     },
     {
       "symbol": "AAPL34",
-      "price": 78.68,
-      "changePct": 1.105114366486782,
+      "price": 77.53,
+      "changePct": -0.3726548445129685,
       "name": "Apple Inc."
     },
     {
       "symbol": "MSFT34",
-      "price": 99.8,
-      "changePct": 1.4433828013823966,
+      "price": 102.99,
+      "changePct": 4.685911770685098,
       "name": "Microsoft Corporation"
     },
     {
       "symbol": "GOGL34",
-      "price": 152.31,
-      "changePct": 1.1018918021905055,
+      "price": 158.73,
+      "changePct": 5.3634251576501715,
       "name": "Alphabet Inc."
     },
     {
       "symbol": "AMZO34",
-      "price": 70.02,
-      "changePct": 1.9659239842726,
+      "price": 72.34,
+      "changePct": 5.344400757244797,
       "name": "Amazon.com, Inc."
     }
   ],
   "fiis": [
     {
       "symbol": "HGLG11",
-      "price": 147.1,
-      "changePct": 0.5811965811965772,
+      "price": 147.41,
+      "changePct": 0.7931623931623909,
       "name": "Cshg Logistica - Fundo De Investimento Imobiliario"
     },
     {
       "symbol": "KNRI11",
-      "price": 156.3,
-      "changePct": -0.22342802425789612,
+      "price": 154.16,
+      "changePct": -1.5895308011490643,
       "name": "Kinea Renda Imobiliária Fundo de Investimento Imobiliário"
     },
     {
       "symbol": "MXRF11",
-      "price": 9.52,
-      "changePct": 0.42194092827003316,
+      "price": 9.46,
+      "changePct": -0.21097046413501658,
       "name": "Maxi Renda Fundo De Investimento Imobiliaro - FII"
     },
     {
       "symbol": "XPML11",
-      "price": 105.3,
-      "changePct": 0.49627791563275053,
+      "price": 105.19,
+      "changePct": 0.3912960488642838,
       "name": "Xp Malls Fundo Investimentos Imobiliarios"
     },
     {
       "symbol": "VISC11",
-      "price": 104.56,
-      "changePct": 0.4901489668428689,
+      "price": 103.97,
+      "changePct": -0.07688611244593782,
       "name": "Vinci Shopping Centers Fundo Investimento Imobiliario - Fii"
     }
   ],
   "goldEtf": [
     {
       "symbol": "GOLD11",
-      "price": 21.25,
-      "changePct": -0.5149812734082371,
+      "price": 21.28,
+      "changePct": -0.37453183520598454,
       "name": "TREND ETF LBMA OURO CLASSE DE ÍNDICE INVESTIMENTO NO EXTERIOR - RESPONSABILIDADE LIMITADA"
     }
   ],
