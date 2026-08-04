@@ -1,0 +1,133 @@
+/* ==========================================================================
+   Calculadora de Juros Compostos — layout específico
+   ========================================================================== */
+
+.brand span {
+  font-family: var(--font-heading);
+}
+
+.juros-hero {
+  padding-block: 2.25rem 1.25rem;
+  text-align: center;
+}
+.juros-hero h1 {
+  font-family: var(--font-heading);
+  font-weight: 700;
+  font-size: clamp(1.6rem, 3.5vw, 2.2rem);
+  letter-spacing: -0.01em;
+}
+.juros-hero p {
+  margin-top: 0.5rem;
+  color: var(--color-muted-foreground);
+  max-width: 52ch;
+  margin-inline: auto;
+  font-size: 0.95rem;
+}
+
+.panel {
+  margin-bottom: 1.5rem;
+  padding: 1.75rem;
+}
+.panel h2 {
+  font-family: var(--font-heading);
+  font-size: 1.15rem;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+}
+
+.field-group {
+  margin-bottom: 1.1rem;
+}
+.field-label {
+  display: block;
+  font-size: 0.7rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: var(--color-muted-foreground);
+  margin-bottom: 0.35rem;
+}
+.field-row {
+  display: flex;
+  gap: 1.25rem;
+  flex-wrap: wrap;
+}
+
+.freq-toggle {
+  display: flex;
+  gap: 0.4rem;
+}
+.freq-toggle__opt {
+  flex: 1;
+  padding: 0.45rem 0.5rem;
+  border-radius: var(--radius-md);
+  border: 1px solid var(--color-border);
+  background: var(--color-secondary);
+  font-size: 0.76rem;
+  color: var(--color-muted-foreground);
+  transition: background-color 0.15s ease, color 0.15s ease, border-color 0.15s ease;
+}
+.freq-toggle__opt[aria-pressed="true"] {
+  background: var(--color-primary);
+  color: var(--color-primary-foreground);
+  border-color: var(--color-primary);
+  font-weight: 600;
+}
+
+.resultado-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 0.85rem;
+  margin-bottom: 1.25rem;
+}
+@media (max-width: 640px) {
+  .resultado-grid {
+    grid-template-columns: 1fr;
+  }
+}
+.result-item {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+  background: var(--color-secondary);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  padding: 0.8rem 0.9rem;
+}
+.result-item__label {
+  font-size: 0.68rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: var(--color-muted-foreground);
+}
+.result-item__value {
+  font-family: var(--font-heading);
+  font-size: 1.1rem;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+}
+
+.tabela-anual {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.83rem;
+  margin-bottom: 1rem;
+}
+.tabela-anual th,
+.tabela-anual td {
+  padding: 0.5rem 0.6rem;
+  text-align: right;
+  border-bottom: 1px solid var(--color-border);
+}
+.tabela-anual th:first-child,
+.tabela-anual td:first-child {
+  text-align: left;
+}
+.tabela-anual th {
+  font-size: 0.66rem;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+  color: var(--color-muted-foreground);
+  font-weight: 600;
+}
