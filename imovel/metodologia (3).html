@@ -1,0 +1,148 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <script defer src="/assets/cookie-consent.js"></script>
+  <title>Metodologia — Alugar ou Financiar — Many Mens</title>
+  <meta name="description" content="Como a calculadora Alugar ou Financiar ajuda no seu dia a dia, como usar, e como o cálculo funciona por dentro." />
+  <link rel="canonical" href="https://manymens.com.br/imovel/metodologia.html" />
+  <link rel="icon" type="image/png" href="../assets/icons/favicon.png" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Sora:wght@600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/tokens.css" />
+  <link rel="stylesheet" href="css/base.css" />
+  <link rel="stylesheet" href="css/layout.css" />
+  <link rel="stylesheet" href="css/components.css" />
+  <link rel="stylesheet" href="css/imovel.css" />
+</head>
+<body>
+  <header class="site-header">
+    <div class="container site-header__inner">
+      <div class="header-left">
+        <a href="../index.html" class="back-to-hub" aria-label="Voltar para o site principal (Many Mens)" title="Voltar para Many Mens">
+          <img src="../assets/icons/favicon.png" alt="" />
+        </a>
+        <a href="index.html" class="brand">
+          <svg class="brand__mark" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+            <path d="M6 16 16 7l10 9" stroke="var(--color-primary)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            <path d="M9 14v11h14V14" stroke="var(--color-primary)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+          <span>Alugar ou <span class="brand__gold">Financiar</span></span>
+        </a>
+      </div>
+      <button class="nav-toggle icon-btn" aria-label="Abrir menu" aria-expanded="false">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 6h16M4 12h16M4 18h16"/></svg>
+      </button>
+      <nav class="main-nav">
+        <a href="index.html">Calculadora</a>
+        <a href="metodologia.html" aria-current="page">Metodologia</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="container">
+    <div class="imovel-hero">
+      <h1>Metodologia</h1>
+      <p>Como essa calculadora ajuda no seu dia a dia, como usar, e a conta por trás do resultado.</p>
+    </div>
+
+    <article class="content">
+      <h2>Pra que serve isso, na prática</h2>
+      <p>
+        "É melhor alugar ou financiar?" é uma das dúvidas mais buscadas de
+        finanças pessoais no Brasil — e a resposta correta depende de
+        números, não de opinião. Essa calculadora simula os dois caminhos
+        com os seus dados reais e mostra em quanto tempo (se algum dia)
+        financiar o imóvel supera financeiramente alugar e investir a
+        diferença.
+      </p>
+
+      <h2>Como usar</h2>
+      <ol>
+        <li>Informe o aluguel mensal, o valor do imóvel, a entrada que você tem disponível, a taxa do financiamento e o prazo.</li>
+        <li>Ajuste as premissas se quiser (sistema SAC ou PRICE, valorização esperada do imóvel, reajuste anual do aluguel, custos de aquisição) — os valores padrão já são razoáveis.</li>
+        <li>Veja o veredito no topo do resultado e a tabela comparando o patrimônio de cada caminho ao longo dos anos.</li>
+      </ol>
+
+      <h2>Como a conta funciona</h2>
+      <h3>1. Quem financia</h3>
+      <p>
+        Simulamos o financiamento mês a mês, no sistema escolhido:
+      </p>
+      <ul>
+        <li><strong>SAC:</strong> a parte de amortização da parcela é constante, então a parcela total vai <em>diminuindo</em> com o tempo (menos juros a cada mês, porque o saldo devedor encolhe).</li>
+        <li><strong>PRICE:</strong> a parcela é fixa do início ao fim, mas no total você paga mais juros que no SAC.</li>
+      </ul>
+      <p>
+        O patrimônio de quem financia, em qualquer ponto do tempo, é
+        <code>valor atualizado do imóvel (com valorização) − saldo devedor
+        restante</code>.
+      </p>
+      <h3>2. Quem aluga e investe</h3>
+      <p>
+        Quem aluga começa investindo o mesmo dinheiro que o comprador
+        colocaria como entrada e custos de aquisição. Todo mês, a diferença
+        entre o que o financiamento custaria naquele mês e o aluguel
+        (reajustado uma vez por ano) é aplicada nesse investimento, rendendo
+        no CDI atual. Se em algum momento o aluguel ficar mais caro que a
+        parcela do financiamento teria sido, essa diferença sai do
+        investimento em vez de entrar.
+      </p>
+      <h3>3. O ponto de virada</h3>
+      <p>
+        A cada mês simulado, comparamos os dois patrimônios. O resultado
+        mostra o primeiro mês em que financiar ultrapassa alugar — ou avisa
+        que, no cenário informado, alugar continua sendo melhor durante todo
+        o período simulado.
+      </p>
+
+      <div class="callout">
+        <strong>Por que às vezes "alugar" nunca perde:</strong> quando o CDI
+        está muito mais alto que a valorização esperada do imóvel, o
+        dinheiro investido cresce mais rápido do que o imóvel se valoriza —
+        e nesse cenário, financiar raramente compensa financeiramente,
+        mesmo em prazos longos. Isso é uma leitura real do momento
+        econômico, não um erro da calculadora.
+      </div>
+
+      <h2>Limitações</h2>
+      <ul>
+        <li>Valorização do imóvel e reajuste do aluguel são tratados como taxas constantes — na realidade, variam.</li>
+        <li>Não inclui IPTU, condomínio, seguros ou manutenção (assumidos parecidos nos dois cenários, já que aluguéis no Brasil também costumam cobrar condomínio e IPTU do inquilino).</li>
+        <li>Decisões de moradia envolvem fatores além do financeiro — estabilidade, liberdade de mudança, contexto familiar. Esta ferramenta olha só pro lado do dinheiro.</li>
+      </ul>
+    </article>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container site-footer__inner">
+      <div class="site-footer__links">
+        <a href="../index.html">Many Mens</a>
+        <a href="../carteira/index.html">Alocador de Carteira</a>
+        <a href="../reserva/index.html">Reserva de Emergência</a>
+        <a href="../vicio/index.html">Quanto Custa Seu Vício</a>
+        <a href="../dividas/index.html">Bola de Neve de Dívidas</a>
+        <a href="../investir/index.html">CDB x Tesouro x Poupança</a>
+      </div>
+      <p>&copy; <span id="year"></span> Many Mens. Conteúdo educacional — não é recomendação de investimento.</p>
+    </div>
+  </footer>
+
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      const y = document.getElementById("year");
+      if (y) y.textContent = new Date().getFullYear();
+      const toggle = document.querySelector(".nav-toggle");
+      const nav = document.querySelector(".main-nav");
+      if (toggle && nav) {
+        toggle.addEventListener("click", () => {
+          const open = nav.classList.toggle("is-open");
+          toggle.setAttribute("aria-expanded", String(open));
+        });
+      }
+    });
+  </script>
+</body>
+</html>

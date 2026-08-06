@@ -1,0 +1,143 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <script defer src="/assets/cookie-consent.js"></script>
+  <title>Metodologia — Bola de Neve de Dívidas — Many Mens</title>
+  <meta name="description" content="Como a calculadora Bola de Neve de Dívidas ajuda no seu dia a dia, como usar, e como o cálculo funciona por dentro." />
+  <link rel="canonical" href="https://manymens.com.br/dividas/metodologia.html" />
+  <link rel="icon" type="image/png" href="../assets/icons/favicon.png" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Sora:wght@600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/tokens.css" />
+  <link rel="stylesheet" href="css/base.css" />
+  <link rel="stylesheet" href="css/layout.css" />
+  <link rel="stylesheet" href="css/components.css" />
+  <link rel="stylesheet" href="css/dividas.css" />
+</head>
+<body>
+  <header class="site-header">
+    <div class="container site-header__inner">
+      <div class="header-left">
+        <a href="../index.html" class="back-to-hub" aria-label="Voltar para o site principal (Many Mens)" title="Voltar para Many Mens">
+          <img src="../assets/icons/favicon.png" alt="" />
+        </a>
+        <a href="index.html" class="brand">
+          <svg class="brand__mark" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+            <circle cx="12" cy="12" r="4" stroke="var(--color-primary)" stroke-width="2"/>
+            <circle cx="21" cy="21" r="6.5" stroke="var(--color-primary)" stroke-width="2"/>
+          </svg>
+          <span>Bola de <span class="brand__gold">Neve</span></span>
+        </a>
+      </div>
+      <button class="nav-toggle icon-btn" aria-label="Abrir menu" aria-expanded="false">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 6h16M4 12h16M4 18h16"/></svg>
+      </button>
+      <nav class="main-nav">
+        <a href="index.html">Calculadora</a>
+        <a href="metodologia.html" aria-current="page">Metodologia</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="container">
+    <div class="dividas-hero">
+      <h1>Metodologia</h1>
+      <p>Como essa calculadora ajuda no seu dia a dia, como usar, e a conta por trás do resultado.</p>
+    </div>
+
+    <article class="content">
+      <h2>Pra que serve isso, na prática</h2>
+      <p>
+        Quem tem mais de uma dívida quase sempre se pergunta: "qual eu pago
+        primeiro?" Existem duas respostas clássicas — pagar a menor dívida
+        primeiro (motivação, vitórias rápidas) ou pagar a de maior juros
+        primeiro (economia real de dinheiro). Essa calculadora simula as
+        duas com os seus números de verdade, e te mostra exatamente quanto
+        tempo e quanto dinheiro cada estratégia custa — pra você decidir com
+        clareza, não no achismo.
+      </p>
+
+      <h2>Como usar</h2>
+      <ol>
+        <li>Liste cada dívida: nome, saldo devedor, juros que ela cobra por mês, e o pagamento mínimo dela.</li>
+        <li>Informe quanto você consegue pagar de dívidas, no total, por mês (isso já deve incluir os mínimos de todas).</li>
+        <li>A calculadora mostra, lado a lado, a Bola de Neve e a Avalanche: tempo até quitar tudo, total pago em juros, e a ordem real em que cada dívida termina.</li>
+      </ol>
+
+      <h2>Como a conta funciona</h2>
+      <h3>1. As duas estratégias</h3>
+      <ul>
+        <li><strong>Bola de Neve:</strong> ordena as dívidas da menor pra maior saldo devedor. Todo o dinheiro "extra" (o que sobra depois de pagar os mínimos de todas) vai pra menor dívida da lista.</li>
+        <li><strong>Avalanche:</strong> ordena as dívidas da maior pra menor taxa de juros. O extra vai pra dívida mais cara primeiro.</li>
+      </ul>
+      <h3>2. A simulação, mês a mês</h3>
+      <p>
+        Pra cada estratégia, simulamos assim: todo mês, aplicamos os juros
+        de cada dívida ativa, pagamos o mínimo de cada uma, e jogamos todo o
+        valor extra na dívida prioritária daquela estratégia. Quando uma
+        dívida é quitada, o pagamento mínimo dela <strong>não desaparece</strong> —
+        ele se soma ao valor extra e passa a acelerar a próxima dívida da
+        fila. É esse efeito de "bola rolando ladeira abaixo" que dá nome à
+        estratégia.
+      </p>
+      <h3>3. A ordem de quitação</h3>
+      <p>
+        A lista de "ordem em que cada dívida é quitada" mostra o mês real em
+        que cada uma chega a zero — em ordem cronológica, não na ordem de
+        prioridade. Isso importa porque, matematicamente, uma dívida de
+        prioridade mais baixa pode terminar antes de uma de prioridade mais
+        alta, se o saldo dela for pequeno o bastante pra ser quitada só com
+        o pagamento mínimo.
+      </p>
+
+      <div class="callout">
+        <strong>Qual escolher?</strong> A Avalanche é sempre igual ou mais
+        barata em juros — nunca perde pra Bola de Neve nesse quesito. Mas a
+        Bola de Neve costuma ser mais fácil de manter na prática, porque
+        você vê dívidas sumindo mais rápido no começo, o que ajuda a não
+        desistir no meio do caminho. A calculadora existe pra você decidir
+        com os dois números na mão, não só com a teoria.
+      </div>
+
+      <h2>Limitações</h2>
+      <ul>
+        <li>Assume que as taxas de juros de cada dívida ficam constantes durante toda a simulação.</li>
+        <li>Não considera multas, renegociações, ou mudanças no orçamento disponível ao longo do tempo.</li>
+        <li>Não é recomendação financeira.</li>
+      </ul>
+    </article>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container site-footer__inner">
+      <div class="site-footer__links">
+        <a href="../index.html">Many Mens</a>
+        <a href="../carteira/index.html">Alocador de Carteira</a>
+        <a href="../reserva/index.html">Reserva de Emergência</a>
+        <a href="../vicio/index.html">Quanto Custa Seu Vício</a>
+        <a href="../imovel/index.html">Alugar ou Financiar</a>
+        <a href="../investir/index.html">CDB x Tesouro x Poupança</a>
+      </div>
+      <p>&copy; <span id="year"></span> Many Mens. Conteúdo educacional — não é recomendação de investimento.</p>
+    </div>
+  </footer>
+
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      const y = document.getElementById("year");
+      if (y) y.textContent = new Date().getFullYear();
+      const toggle = document.querySelector(".nav-toggle");
+      const nav = document.querySelector(".main-nav");
+      if (toggle && nav) {
+        toggle.addEventListener("click", () => {
+          const open = nav.classList.toggle("is-open");
+          toggle.setAttribute("aria-expanded", String(open));
+        });
+      }
+    });
+  </script>
+</body>
+</html>
