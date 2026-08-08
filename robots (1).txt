@@ -1,4 +1,0 @@
-User-agent: *
-Allow: /
-
-Sitemap: https://manymens.com.br/sitemap.xml
