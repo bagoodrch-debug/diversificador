@@ -189,3 +189,8 @@
   padding: 0.85rem 1rem;
   margin-bottom: 1rem;
 }
+@media (max-width: 760px) {
+  .divida-row__field:nth-of-type(2) { grid-area: saldo; }
+  .divida-row__field--sm { grid-area: taxa; }
+  .divida-row__field:nth-of-type(4) { grid-area: minimo; }
+}

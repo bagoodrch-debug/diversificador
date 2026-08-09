@@ -131,3 +131,11 @@
   color: var(--color-muted-foreground);
   font-weight: 600;
 }
+@media (max-width: 640px) {
+  .tabela-anual {
+    display: block;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    white-space: nowrap;
+  }
+}

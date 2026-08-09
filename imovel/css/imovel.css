@@ -176,4 +176,13 @@
   .tabela-patrimonio td {
     padding: 0.45rem 0.35rem;
   }
+  
+}
+@media (max-width: 640px) {
+  .tabela-patrimonio {
+    display: block;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    white-space: nowrap;
+  }
 }

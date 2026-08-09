@@ -90,3 +90,9 @@ img, svg {
 .tabular-nums {
   font-variant-numeric: tabular-nums;
 }
+
+/* Blindagem contra overflow horizontal em celular — não afeta desktop */
+html, body {
+  overflow-x: hidden;
+  max-width: 100%;
+}

@@ -170,4 +170,20 @@
   .nav-toggle {
     display: inline-flex;
   }
+  /* Evita que o nome da ferramenta estoure o cabeçalho em telas pequenas */
+@media (max-width: 420px) {
+  .header-left {
+    min-width: 0;
+    flex: 1 1 auto;
+  }
+  .brand {
+    min-width: 0;
+  }
+  .brand > span {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    min-width: 0;
+  }
+}
 }
