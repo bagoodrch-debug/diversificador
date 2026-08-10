@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-08-10T11:06:38.098Z",
+  "updatedAt": "2026-08-10T13:03:11.318Z",
   "stocks": [
     {
       "symbol": "PETR4",
@@ -16,13 +16,13 @@
     {
       "symbol": "VALE3",
       "price": 74.97,
-      "changePct": -0.5571030640668546,
+      "changePct": 0,
       "name": "Vale S.A."
     },
     {
       "symbol": "WEGE3",
       "price": 48.12,
-      "changePct": -0.5785123966942173,
+      "changePct": 0,
       "name": "WEG S.A."
     },
     {
@@ -98,13 +98,13 @@
     {
       "symbol": "XPML11",
       "price": 104.55,
-      "changePct": 0.14367816091953206,
+      "changePct": 0,
       "name": "Xp Malls Fundo Investimentos Imobiliarios"
     },
     {
       "symbol": "VISC11",
       "price": 103.93,
-      "changePct": 0.09631127805066794,
+      "changePct": 0,
       "name": "Vinci Shopping Centers Fundo Investimento Imobiliario - Fii"
     }
   ],
