@@ -86,6 +86,7 @@ function calcularPlano(dividasEntrada, orcamentoTotal, criterio) {
   const minimosSim = ordenadas.map((d) => d.pagamentoMinimo || 0);
   const taxasSim = ordenadas.map((d) => (d.taxaMensalPct || 0) / 100);
   const mesQuitacaoSim = ordenadas.map(() => null);
+  const saldoRestanteNaQuitacao = ordenadas.map(() => null);
   let totalJuros = 0;
   let mes = 0;
 
@@ -114,11 +115,17 @@ function calcularPlano(dividasEntrada, orcamentoTotal, criterio) {
       if (saldosSim[i] <= 0.005 && mesQuitacaoSim[i] == null) {
         saldosSim[i] = 0;
         mesQuitacaoSim[i] = mes;
+        saldoRestanteNaQuitacao[i] = saldosSim.reduce((s, v) => s + v, 0);
       }
     }
   }
 
-  const etapas = etapasBase.map((etapa, i) => ({ ...etapa, ordem: i + 1, mesQuitacao: mesQuitacaoSim[i] }));
+  const etapas = etapasBase.map((etapa, i) => ({
+    ...etapa,
+    ordem: i + 1,
+    mesQuitacao: mesQuitacaoSim[i],
+    saldoRestanteApos: saldoRestanteNaQuitacao[i],
+  }));
   const atingivel = saldosSim.every((s) => s <= 0.005);
 
   return {
@@ -329,7 +336,7 @@ function renderResultado(root) {
   if (plano.semDividasAtivas) {
     host.append(
       el("section", { class: "panel card" }, [
-        el("h2", {}, "Parabéns! 🎉"),
+        el("h2", {}, "Parabéns"),
         el("p", {}, "Todas as dívidas cadastradas já estão quitadas (saldo zerado)."),
       ]),
     );
@@ -354,58 +361,41 @@ function renderResultado(root) {
   const nomeMetodo = plano.criterio === "saldo" ? "Bola de Neve" : "Avalanche";
   const porqueLabel =
     plano.criterio === "saldo"
-      ? `porque tem o menor saldo (${brl(prioridade.saldo)}) entre as dívidas ativas`
-      : `porque tem a maior taxa de juros (${prioridade.taxaMensalPct.toFixed(1).replace(".", ",")}% a.m.) entre as dívidas ativas`;
+      ? `menor saldo entre as dívidas ativas (${brl(prioridade.saldo)})`
+      : `maior taxa de juros entre as dívidas ativas (${prioridade.taxaMensalPct.toFixed(1).replace(".", ",")}% a.m.)`;
 
-  // --- Resumo do mês: "o que eu faço com meu dinheiro este mês" ---
+  // --- Destaque: o que pagar agora ---
   host.append(
     el("section", { class: "panel card resumo-mes" }, [
-      el("h2", {}, "O que fazer com seu dinheiro este mês"),
-      el("p", { class: "resumo-linha" }, ["💰 Você tem ", el("strong", {}, brl(plano.orcamentoTotal)), " disponíveis para dívidas este mês."]),
-      el("p", { class: "resumo-linha" }, ["🔒 ", el("strong", {}, brl(plano.somaMinimos)), " vão para os pagamentos mínimos de todas as dívidas."]),
-      el("p", { class: "resumo-linha" }, [
-        "🎯 Os ",
-        el("strong", {}, brl(plano.extraBase)),
-        " restantes vão inteiros para \"",
-        el("strong", {}, prioridade.nome),
-        "\" — ",
-        porqueLabel,
-        ".",
+      el("span", { class: "resumo-mes__eyebrow" }, "Prioridade deste mês"),
+      el("h2", { class: "resumo-mes__nome" }, prioridade.nome),
+      el("div", { class: "resumo-mes__valor" }, [
+        el("span", { class: "resumo-mes__valor-num" }, brl(prioridade.pagamentoRecomendado)),
+        el("span", { class: "resumo-mes__valor-label" }, "pagamento recomendado este mês"),
       ]),
-      el("p", { class: "resumo-linha resumo-linha--destaque" }, [
-        "👉 Pagamento recomendado em ",
-        el("strong", {}, prioridade.nome),
-        ": ",
-        el("strong", { class: "resumo-valor" }, brl(prioridade.pagamentoRecomendado)),
-        " este mês.",
+      el("div", { class: "resumo-mes__breakdown" }, [
+        el("span", {}, [brl(prioridade.pagamentoMinimo), " mínimo"]),
+        el("span", { class: "resumo-mes__mais" }, "+"),
+        el("span", {}, [brl(prioridade.valorExtra), " extra"]),
       ]),
       el(
         "p",
-        { class: "disclaimer", style: "margin-top:.6rem" },
-        "Você paga o mínimo das outras dívidas e concentra todo o dinheiro extra nesta. Quando ela for quitada, o valor que era usado nela é transferido automaticamente para a próxima da fila.",
+        { class: "resumo-mes__explicacao" },
+        `Escolhida por ter ${porqueLabel}. As outras dívidas recebem só o pagamento mínimo — todo o valor extra do seu orçamento (${brl(plano.extraBase)}) é concentrado aqui. Quando ela for quitada, esse valor inteiro passa para a próxima da fila automaticamente.`,
       ),
     ]),
   );
 
-  // --- Plano de quitação (cascata) ---
-  const etapasEls = [];
-  plano.etapas.forEach((etapa, i) => {
-    etapasEls.push(etapaCard(etapa, i === 0));
-    if (i < plano.etapas.length - 1) {
-      etapasEls.push(
-        el("div", { class: "cascata-seta" }, [
-          el("span", {}, `↓ ao quitar, libera ${brl(etapa.pagamentoMinimo)}/mês para a próxima`),
-        ]),
-      );
-    }
-  });
-
+  // --- Plano de quitação: linha do tempo ---
   host.append(
     el("section", { class: "panel card" }, [
-      el("div", { class: "plano-head" }, [
-        el("h2", {}, `Seu plano de quitação (${nomeMetodo})`),
-      ]),
-      el("div", { class: "plano-etapas" }, etapasEls),
+      el("h2", {}, `Seu plano de quitação`),
+      el("p", { class: "panel-lead" }, `Método: ${nomeMetodo}. Ordem em que suas dívidas vão sumir.`),
+      el(
+        "div",
+        { class: "timeline" },
+        plano.etapas.map((etapa, i) => timelineItem(etapa, i === 0, i === plano.etapas.length - 1)),
+      ),
     ]),
   );
 
@@ -431,7 +421,7 @@ function renderResultado(root) {
             { class: "disclaimer", style: "color:var(--color-destructive)" },
             "Com esse orçamento, o plano não quita tudo em 50 anos de simulação — considere aumentar o valor mensal.",
           ),
-      progressoBar(plano),
+      progressoMarcos(plano, saldoTotalHoje),
       el(
         "p",
         { class: "disclaimer" },
@@ -441,51 +431,40 @@ function renderResultado(root) {
   );
 }
 
-function etapaCard(etapa, ehPrioridadeAtual) {
-  return el("div", { class: `etapa-card${ehPrioridadeAtual ? " etapa-card--atual" : ""}` }, [
-    el("div", { class: "etapa-card__top" }, [
-      el("span", { class: "etapa-card__ordem" }, `${etapa.ordem}º`),
-      el("div", { style: "min-width:0" }, [
-        el("h3", {}, etapa.nome),
-        ehPrioridadeAtual ? el("span", { class: "etapa-card__tag" }, "Prioridade atual") : null,
-      ]),
-    ]),
-    el("div", { class: "etapa-card__grid" }, [
-      etapaStat("Saldo", brl(etapa.saldo)),
-      etapaStat("Pagamento mínimo", brl(etapa.pagamentoMinimo)),
-      etapaStat("Valor extra recebido", brl(etapa.valorExtra)),
-      etapaStat("Pagamento planejado", brl(etapa.pagamentoRecomendado), true),
-      etapaStat("Previsão de quitação", etapa.mesQuitacao ? formatAnosMeses(etapa.mesQuitacao) : "—"),
-    ]),
-  ]);
-}
+function progressoMarcos(plano, saldoTotalHoje) {
+  const ordemCronologica = [...plano.etapas].sort((a, b) => a.mesQuitacao - b.mesQuitacao);
+  const marcos = [{ label: "Hoje", valor: saldoTotalHoje }];
+  ordemCronologica.forEach((etapa) => {
+    marcos.push({ label: `${etapa.nome} quitada`, valor: Math.max(etapa.saldoRestanteApos, 0) });
+  });
 
-function etapaStat(label, value, destaque = false) {
-  return el("div", { class: `etapa-stat${destaque ? " etapa-stat--destaque" : ""}` }, [
-    el("span", { class: "etapa-stat__label" }, label),
-    el("span", { class: "etapa-stat__value" }, value),
-  ]);
-}
-
-function progressoBar(plano) {
-  const saldoTotalHoje = plano.etapas.reduce((s, e) => s + e.saldo, 0);
-  const marcos = [
-    { label: "Hoje", valor: saldoTotalHoje },
-    ...plano.etapas.map((e) => ({
-      label: `Após quitar ${e.nome}`,
-      valor: plano.etapas.filter((x) => x.mesQuitacao > e.mesQuitacao || (x.mesQuitacao === e.mesQuitacao && x.ordem > e.ordem)).reduce((s, x) => s + x.saldo, 0),
-    })),
-  ];
   return el(
     "div",
     { class: "marcos-divida" },
-    marcos.map((m, i) =>
+    marcos.map((m) =>
       el("div", { class: "marco-item" }, [
-        el("span", { class: "marco-item__valor" }, brl(Math.max(m.valor, 0))),
+        el("span", { class: "marco-item__valor" }, brl(m.valor)),
         el("span", { class: "marco-item__label" }, m.label),
       ]),
     ),
   );
+}
+
+function timelineItem(etapa, ehAtual, ehUltima) {
+  return el("div", { class: `timeline__item${ehAtual ? " timeline__item--atual" : ""}${ehUltima ? " timeline__item--ultima" : ""}` }, [
+    el("div", { class: "timeline__marker" }, String(etapa.ordem)),
+    el("div", { class: "timeline__content" }, [
+      el("div", { class: "timeline__header" }, [
+        el("h3", {}, etapa.nome),
+        ehAtual ? el("span", { class: "timeline__badge" }, "Pague agora") : null,
+      ]),
+      el("div", { class: "timeline__stats" }, [
+        el("span", {}, ["Saldo ", el("strong", {}, brl(etapa.saldo))]),
+        el("span", {}, ["Pagamento ", el("strong", {}, `${brl(etapa.pagamentoRecomendado)}/mês`)]),
+        el("span", {}, ["Quita em ", el("strong", {}, etapa.mesQuitacao ? formatAnosMeses(etapa.mesQuitacao) : "—")]),
+      ]),
+    ]),
+  ]);
 }
 
 function resultItem(label, value) {
