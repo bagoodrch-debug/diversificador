@@ -1,118 +1,118 @@
 {
-  "updatedAt": "2026-08-10T13:03:11.318Z",
+  "updatedAt": "2026-08-10T14:56:36.806Z",
   "stocks": [
     {
       "symbol": "PETR4",
-      "price": 40.87,
-      "changePct": -2.9907429385236295,
+      "price": 41.53,
+      "changePct": 1.6148764374847167,
       "name": "Petróleo Brasileiro S.A. - Petrobras"
     },
     {
       "symbol": "ITUB4",
-      "price": 40.75,
-      "changePct": -2.5818790341859867,
+      "price": 40.57,
+      "changePct": -0.4417177914110422,
       "name": "Itaú Unibanco Holding S.A."
     },
     {
       "symbol": "VALE3",
-      "price": 74.97,
-      "changePct": 0,
+      "price": 75.72,
+      "changePct": 1.0004001600640255,
       "name": "Vale S.A."
     },
     {
       "symbol": "WEGE3",
-      "price": 48.12,
-      "changePct": 0,
+      "price": 47.84,
+      "changePct": -0.5818786367414672,
       "name": "WEG S.A."
     },
     {
       "symbol": "BBAS3",
-      "price": 20.06,
-      "changePct": -1.0848126232741735,
+      "price": 20.16,
+      "changePct": 0.498504486540386,
       "name": "Banco do Brasil S.A."
     },
     {
       "symbol": "BBDC4",
-      "price": 17.31,
-      "changePct": -2.203389830508478,
+      "price": 17.15,
+      "changePct": -0.9243212016175629,
       "name": "Banco Bradesco S.A."
     },
     {
       "symbol": "ABEV3",
-      "price": 15.48,
-      "changePct": -1.14942528735632,
+      "price": 15.3,
+      "changePct": -1.1627906976744167,
       "name": "Ambev S.A."
     }
   ],
   "bdrs": [
     {
       "symbol": "IVVB11",
-      "price": 444.35,
-      "changePct": 0.09010023651312853,
+      "price": 447.06,
+      "changePct": 0.609879599414871,
       "name": "ISHARES S&P 500 CLASSE DE ÍNDICE EM COTAS DE CLASSES DE ÍNDICE IE - RESPONSABILIDADE LIMITADA"
     },
     {
       "symbol": "AAPL34",
-      "price": 79.31,
-      "changePct": -0.18073441606169158,
+      "price": 78.15,
+      "changePct": -1.4626150548480603,
       "name": "Apple Inc."
     },
     {
       "symbol": "MSFT34",
-      "price": 105.44,
-      "changePct": -0.40615849626901557,
+      "price": 108.49,
+      "changePct": 2.8926403641881615,
       "name": "Microsoft Corporation"
     },
     {
       "symbol": "GOGL34",
-      "price": 150.3,
-      "changePct": -1.403831015481492,
+      "price": 151.39,
+      "changePct": 0.7252162341982534,
       "name": "Alphabet Inc."
     },
     {
       "symbol": "AMZO34",
-      "price": 69.53,
-      "changePct": 0.01438434982739516,
+      "price": 70.93,
+      "changePct": 2.0135193441679933,
       "name": "Amazon.com, Inc."
     }
   ],
   "fiis": [
     {
       "symbol": "HGLG11",
-      "price": 147,
-      "changePct": -0.1697792869269949,
+      "price": 145.95,
+      "changePct": -0.714285714285722,
       "name": "Cshg Logistica - Fundo De Investimento Imobiliario"
     },
     {
       "symbol": "KNRI11",
-      "price": 154.11,
-      "changePct": 0.7189072609633507,
+      "price": 152.91,
+      "changePct": -0.7786645902277703,
       "name": "Kinea Renda Imobiliária Fundo de Investimento Imobiliário"
     },
     {
       "symbol": "MXRF11",
-      "price": 9.46,
-      "changePct": 0.31813361611878194,
+      "price": 9.45,
+      "changePct": -0.10570824524314547,
       "name": "Maxi Renda Fundo De Investimento Imobiliaro - FII"
     },
     {
       "symbol": "XPML11",
-      "price": 104.55,
-      "changePct": 0,
+      "price": 103.66,
+      "changePct": -0.8512673362027743,
       "name": "Xp Malls Fundo Investimentos Imobiliarios"
     },
     {
       "symbol": "VISC11",
-      "price": 103.93,
-      "changePct": 0,
+      "price": 103.47,
+      "changePct": -0.4426055999230328,
       "name": "Vinci Shopping Centers Fundo Investimento Imobiliario - Fii"
     }
   ],
   "goldEtf": [
     {
       "symbol": "GOLD11",
-      "price": 22.96,
-      "changePct": 2.0444444444444483,
+      "price": 23.04,
+      "changePct": 0.34843205574912145,
       "name": "TREND ETF LBMA OURO CLASSE DE ÍNDICE INVESTIMENTO NO EXTERIOR - RESPONSABILIDADE LIMITADA"
     }
   ],
