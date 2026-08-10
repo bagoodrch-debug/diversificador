@@ -12,6 +12,7 @@ const DEFAULT_DIVIDAS = [
 const state = {
   dividas: DEFAULT_DIVIDAS.map((d) => ({ ...d })),
   orcamentoTotal: 900,
+  criterio: "saldo", // "saldo" = Bola de Neve · "taxa" = Avalanche
 };
 
 function loadPersisted() {
@@ -19,86 +20,124 @@ function loadPersisted() {
   if (saved && Array.isArray(saved.dividas) && saved.dividas.length > 0) {
     state.dividas = saved.dividas;
     state.orcamentoTotal = saved.orcamentoTotal ?? state.orcamentoTotal;
+    state.criterio = saved.criterio ?? state.criterio;
   }
 }
 function persist() {
-  save(KEYS.STATE, { dividas: state.dividas, orcamentoTotal: state.orcamentoTotal });
+  save(KEYS.STATE, { dividas: state.dividas, orcamentoTotal: state.orcamentoTotal, criterio: state.criterio });
 }
 
 function novoId() {
   return `d${Date.now()}${Math.floor(Math.random() * 1000)}`;
 }
 
-/**
- * Simula a quitação das dívidas com um critério de prioridade.
- * criterio: "saldo" (bola de neve — menor saldo primeiro) ou
- *           "taxa" (avalanche — maior juros primeiro)
- */
-function simular(dividas, orcamentoTotal, criterio) {
-  const ordenados = [...dividas].sort((a, b) =>
+/* ==========================================================================
+   NÚCLEO DO CÁLCULO — um lugar só, parametrizado por critério de ordenação.
+   "saldo"  → Bola de Neve (menor saldo primeiro)
+   "taxa"   → Avalanche (maior juros primeiro)
+   Trocar o método no futuro é só chamar calcularPlano com outro critério —
+   nenhuma lógica de ordenação fica espalhada pela interface.
+   ========================================================================== */
+function calcularPlano(dividasEntrada, orcamentoTotal, criterio) {
+  const ativas = dividasEntrada.filter((d) => d.saldo > 0.01);
+  const jaQuitadas = dividasEntrada.filter((d) => d.saldo <= 0.01);
+
+  if (ativas.length === 0) {
+    return { valido: true, semDividasAtivas: true, jaQuitadas, criterio };
+  }
+
+  const somaMinimos = ativas.reduce((soma, d) => soma + (d.pagamentoMinimo || 0), 0);
+  const extraBase = orcamentoTotal - somaMinimos;
+
+  if (extraBase < 0) {
+    return { valido: false, somaMinimos, faltam: -extraBase, orcamentoTotal, criterio };
+  }
+
+  // 1) Ordena pelo critério da estratégia.
+  const ordenadas = [...ativas].sort((a, b) =>
     criterio === "saldo" ? a.saldo - b.saldo : b.taxaMensalPct - a.taxaMensalPct,
   );
-  const n = ordenados.length;
-  const saldos = ordenados.map((d) => d.saldo);
-  const minimos = ordenados.map((d) => d.pagamentoMinimo);
-  const taxas = ordenados.map((d) => d.taxaMensalPct / 100);
-  const quitadoNoMes = ordenados.map(() => null);
 
-  const somaMinimos = minimos.reduce((a, b) => a + b, 0);
-  const extraBase = Math.max(orcamentoTotal - somaMinimos, 0);
+  // 2) Pagamento planejado por posição — dá pra calcular direto, sem simular:
+  //    a dívida da vez recebe o mínimo dela + todo o "extra" acumulado até
+  //    ali (o extra inicial mais o mínimo de cada dívida já quitada antes
+  //    dela). Isso É o efeito cascata, de forma explícita.
+  let extraAcumulado = extraBase;
+  const etapasBase = ordenadas.map((d, i) => {
+    const valorExtra = i === 0 ? extraBase : extraAcumulado;
+    const pagamentoRecomendado = (d.pagamentoMinimo || 0) + valorExtra;
+    extraAcumulado += d.pagamentoMinimo || 0;
+    return {
+      id: d.id,
+      nome: d.nome || "Dívida",
+      saldo: d.saldo,
+      taxaMensalPct: d.taxaMensalPct || 0,
+      pagamentoMinimo: d.pagamentoMinimo || 0,
+      valorExtra,
+      pagamentoRecomendado,
+    };
+  });
 
+  // 3) Simulação mês a mês (com juros compostos reais) só pra descobrir
+  //    QUANDO cada dívida é quitada — isso não dá pra calcular direto
+  //    porque depende dos juros acumulando mês a mês.
+  const n = ordenadas.length;
+  const saldosSim = ordenadas.map((d) => d.saldo);
+  const minimosSim = ordenadas.map((d) => d.pagamentoMinimo || 0);
+  const taxasSim = ordenadas.map((d) => (d.taxaMensalPct || 0) / 100);
+  const mesQuitacaoSim = ordenadas.map(() => null);
   let totalJuros = 0;
   let mes = 0;
 
-  while (saldos.some((s) => s > 0.005) && mes < LIMITE_MESES) {
+  while (saldosSim.some((s) => s > 0.005) && mes < LIMITE_MESES) {
     mes++;
-
-    // 1) aplica juros do mês em cada dívida ainda ativa
     for (let i = 0; i < n; i++) {
-      if (saldos[i] > 0) {
-        const juros = saldos[i] * taxas[i];
+      if (saldosSim[i] > 0) {
+        const juros = saldosSim[i] * taxasSim[i];
         totalJuros += juros;
-        saldos[i] += juros;
+        saldosSim[i] += juros;
       }
     }
-
-    // 2) paga o mínimo de cada dívida ativa
     for (let i = 0; i < n; i++) {
-      if (saldos[i] > 0) {
-        saldos[i] -= Math.min(minimos[i], saldos[i]);
-      }
+      if (saldosSim[i] > 0) saldosSim[i] -= Math.min(minimosSim[i], saldosSim[i]);
     }
-
-    // 3) o "extra" (orçamento sobrando + mínimos de dívidas já quitadas)
-    //    vai inteiro para a dívida de maior prioridade que ainda está ativa
     let extraDisponivel = extraBase;
-    for (let i = 0; i < n; i++) {
-      if (saldos[i] <= 0) extraDisponivel += minimos[i];
-    }
+    for (let i = 0; i < n; i++) if (saldosSim[i] <= 0) extraDisponivel += minimosSim[i];
     for (let i = 0; i < n && extraDisponivel > 0; i++) {
-      if (saldos[i] > 0) {
-        const pagamento = Math.min(extraDisponivel, saldos[i]);
-        saldos[i] -= pagamento;
+      if (saldosSim[i] > 0) {
+        const pagamento = Math.min(extraDisponivel, saldosSim[i]);
+        saldosSim[i] -= pagamento;
         extraDisponivel -= pagamento;
       }
     }
-
-    // 4) marca quitação
     for (let i = 0; i < n; i++) {
-      if (saldos[i] <= 0.005 && quitadoNoMes[i] == null) {
-        saldos[i] = 0;
-        quitadoNoMes[i] = mes;
+      if (saldosSim[i] <= 0.005 && mesQuitacaoSim[i] == null) {
+        saldosSim[i] = 0;
+        mesQuitacaoSim[i] = mes;
       }
     }
   }
 
+  const etapas = etapasBase.map((etapa, i) => ({ ...etapa, ordem: i + 1, mesQuitacao: mesQuitacaoSim[i] }));
+  const atingivel = saldosSim.every((s) => s <= 0.005);
+
   return {
-    meses: mes,
+    valido: true,
+    orcamentoTotal,
+    somaMinimos,
+    extraBase,
+    etapas,
+    totalMeses: mes,
     totalJuros,
-    atingivel: saldos.every((s) => s <= 0.005),
-    ordem: ordenados.map((d, i) => ({ nome: d.nome, mes: quitadoNoMes[i] })),
+    atingivel,
+    jaQuitadas,
+    criterio,
   };
 }
+
+/* ==========================================================================
+   APP / RENDER
+   ========================================================================== */
 
 export function initDividasApp() {
   loadPersisted();
@@ -109,8 +148,6 @@ export function initDividasApp() {
 
 function render(root) {
   clear(root);
-
-  const somaMinimos = state.dividas.reduce((a, d) => a + d.pagamentoMinimo, 0);
 
   const listaHost = el("div", { class: "dividas-list" });
   const dividasCard = el("section", { class: "panel card" }, [
@@ -132,7 +169,6 @@ function render(root) {
       "+ Adicionar dívida",
     ),
   ]);
-
   renderListaDividas(listaHost, root);
 
   const orcamentoInput = el("input", {
@@ -153,8 +189,37 @@ function render(root) {
     el("h2", {}, "Quanto você pode pagar por mês, no total?"),
     el("p", { class: "panel-lead" }, "Inclua os mínimos de todas as dívidas mais qualquer valor extra disponível."),
     el("div", { class: "field-group" }, [el("label", { class: "field-label" }, "Orçamento mensal total"), orcamentoInput]),
-    el("p", { class: "orcamento-info", id: "orcamento-info" }),
   ]);
+
+  const metodoBotoes = [];
+  const metodoToggle = el(
+    "div",
+    { class: "freq-toggle", style: "margin-top:.75rem" },
+    [
+      ["saldo", "Bola de Neve (recomendado)"],
+      ["taxa", "Avalanche"],
+    ].map(([value, label]) => {
+      const btn = el(
+        "button",
+        {
+          type: "button",
+          class: "freq-toggle__opt",
+          "aria-pressed": String(state.criterio === value),
+          onClick: () => {
+            state.criterio = value;
+            metodoBotoes.forEach((b) => b.setAttribute("aria-pressed", String(b.dataset.valor === value)));
+            persist();
+            renderResultado(root);
+          },
+        },
+        label,
+      );
+      btn.dataset.valor = value;
+      metodoBotoes.push(btn);
+      return btn;
+    }),
+  );
+  orcamentoCard.append(el("div", { class: "field-group" }, [el("label", { class: "field-label" }, "Método de quitação"), metodoToggle]));
 
   root.append(dividasCard, orcamentoCard, el("div", { id: "resultado-host" }));
   renderResultado(root);
@@ -248,102 +313,195 @@ function closeSVG() {
   return `<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M18 6 6 18M6 6l12 12"/></svg>`;
 }
 
+/* ==========================================================================
+   RESULTADO — o "Plano de Quitação"
+   ========================================================================== */
+
 function renderResultado(root) {
   const host = qs("#resultado-host", root);
-  const orcamentoInfo = qs("#orcamento-info", root);
   if (!host) return;
   clear(host);
 
-  const somaMinimos = state.dividas.reduce((a, d) => a + d.pagamentoMinimo, 0);
-  const extra = state.orcamentoTotal - somaMinimos;
-
-  if (orcamentoInfo) {
-    orcamentoInfo.textContent = `Soma dos pagamentos mínimos: ${brl(somaMinimos)}. Sobra pra acelerar a quitação: ${brl(Math.max(extra, 0))} por mês.`;
-    orcamentoInfo.style.color = extra < 0 ? "var(--color-destructive)" : "";
-  }
-
   if (state.dividas.length === 0) return;
 
-  if (extra < 0) {
+  const plano = calcularPlano(state.dividas, state.orcamentoTotal, state.criterio);
+
+  if (plano.semDividasAtivas) {
     host.append(
-      el(
-        "p",
-        { class: "disclaimer", style: "color:var(--color-destructive)" },
-        `Seu orçamento mensal não cobre nem os pagamentos mínimos (faltam ${brl(-extra)}). Aumente o orçamento ou renegocie alguma dívida antes de simular.`,
-      ),
+      el("section", { class: "panel card" }, [
+        el("h2", {}, "Parabéns! 🎉"),
+        el("p", {}, "Todas as dívidas cadastradas já estão quitadas (saldo zerado)."),
+      ]),
     );
     return;
   }
 
-  const bolaDeNeve = simular(state.dividas, state.orcamentoTotal, "saldo");
-  const avalanche = simular(state.dividas, state.orcamentoTotal, "taxa");
+  if (!plano.valido) {
+    host.append(
+      el("section", { class: "panel card" }, [
+        el("h2", {}, "O orçamento não fecha"),
+        el(
+          "p",
+          { class: "disclaimer", style: "color:var(--color-destructive);font-size:.9rem" },
+          `A soma dos pagamentos mínimos é ${brl(plano.somaMinimos)}, mas seu orçamento mensal é ${brl(plano.orcamentoTotal)} — faltam ${brl(plano.faltam)} por mês. Aumente o orçamento disponível ou renegocie alguma dívida antes de montar o plano.`,
+        ),
+      ]),
+    );
+    return;
+  }
 
-  const economiaMeses = bolaDeNeve.meses - avalanche.meses;
-  const economiaJuros = bolaDeNeve.totalJuros - avalanche.totalJuros;
+  const prioridade = plano.etapas[0];
+  const nomeMetodo = plano.criterio === "saldo" ? "Bola de Neve" : "Avalanche";
+  const porqueLabel =
+    plano.criterio === "saldo"
+      ? `porque tem o menor saldo (${brl(prioridade.saldo)}) entre as dívidas ativas`
+      : `porque tem a maior taxa de juros (${prioridade.taxaMensalPct.toFixed(1).replace(".", ",")}% a.m.) entre as dívidas ativas`;
+
+  // --- Resumo do mês: "o que eu faço com meu dinheiro este mês" ---
+  host.append(
+    el("section", { class: "panel card resumo-mes" }, [
+      el("h2", {}, "O que fazer com seu dinheiro este mês"),
+      el("p", { class: "resumo-linha" }, ["💰 Você tem ", el("strong", {}, brl(plano.orcamentoTotal)), " disponíveis para dívidas este mês."]),
+      el("p", { class: "resumo-linha" }, ["🔒 ", el("strong", {}, brl(plano.somaMinimos)), " vão para os pagamentos mínimos de todas as dívidas."]),
+      el("p", { class: "resumo-linha" }, [
+        "🎯 Os ",
+        el("strong", {}, brl(plano.extraBase)),
+        " restantes vão inteiros para \"",
+        el("strong", {}, prioridade.nome),
+        "\" — ",
+        porqueLabel,
+        ".",
+      ]),
+      el("p", { class: "resumo-linha resumo-linha--destaque" }, [
+        "👉 Pagamento recomendado em ",
+        el("strong", {}, prioridade.nome),
+        ": ",
+        el("strong", { class: "resumo-valor" }, brl(prioridade.pagamentoRecomendado)),
+        " este mês.",
+      ]),
+      el(
+        "p",
+        { class: "disclaimer", style: "margin-top:.6rem" },
+        "Você paga o mínimo das outras dívidas e concentra todo o dinheiro extra nesta. Quando ela for quitada, o valor que era usado nela é transferido automaticamente para a próxima da fila.",
+      ),
+    ]),
+  );
+
+  // --- Plano de quitação (cascata) ---
+  const etapasEls = [];
+  plano.etapas.forEach((etapa, i) => {
+    etapasEls.push(etapaCard(etapa, i === 0));
+    if (i < plano.etapas.length - 1) {
+      etapasEls.push(
+        el("div", { class: "cascata-seta" }, [
+          el("span", {}, `↓ ao quitar, libera ${brl(etapa.pagamentoMinimo)}/mês para a próxima`),
+        ]),
+      );
+    }
+  });
 
   host.append(
     el("section", { class: "panel card" }, [
-      el("h2", {}, "Comparação das estratégias"),
-      el("div", { class: "comparacao-grid" }, [
-        estrategiaCard({
-          titulo: "Bola de Neve",
-          subtitulo: "Menor saldo primeiro",
-          resultado: bolaDeNeve,
-          destaque: economiaMeses <= 0,
-        }),
-        estrategiaCard({
-          titulo: "Avalanche",
-          subtitulo: "Maior juros primeiro",
-          resultado: avalanche,
-          destaque: economiaMeses >= 0,
-        }),
+      el("div", { class: "plano-head" }, [
+        el("h2", {}, `Seu plano de quitação (${nomeMetodo})`),
       ]),
-      economiaMeses > 0 || economiaJuros > 0
-        ? el(
+      el("div", { class: "plano-etapas" }, etapasEls),
+    ]),
+  );
+
+  // --- Resultado final ---
+  const hoje = new Date();
+  const dataFinal = new Date(hoje.getFullYear(), hoje.getMonth() + plano.totalMeses, hoje.getDate());
+  const dataFinalLabel = dataFinal.toLocaleDateString("pt-BR", { month: "long", year: "numeric" });
+  const saldoTotalHoje = plano.etapas.reduce((s, e) => s + e.saldo, 0);
+
+  host.append(
+    el("section", { class: "panel card" }, [
+      el("h2", {}, "Resultado do plano"),
+      el("div", { class: "resultado-grid" }, [
+        resultItem("Dívida total hoje", brl(saldoTotalHoje)),
+        resultItem("Valor mensal destinado", brl(plano.orcamentoTotal)),
+        resultItem("Tempo até quitar tudo", plano.atingivel ? formatAnosMeses(plano.totalMeses) : "não atinge"),
+        resultItem("Total pago em juros", brl(plano.totalJuros)),
+      ]),
+      plano.atingivel
+        ? el("p", { class: "economia-nota" }, `Livre de dívidas por volta de ${dataFinalLabel}.`)
+        : el(
             "p",
-            { class: "economia-nota" },
-            `A Avalanche quita tudo ${economiaMeses > 0 ? `${economiaMeses} ${economiaMeses === 1 ? "mês" : "meses"} mais rápido` : "no mesmo tempo"} e economiza ${brl(Math.max(economiaJuros, 0))} em juros, comparada à Bola de Neve.`,
-          )
-        : el("p", { class: "economia-nota" }, "Nesse caso as duas estratégias dão praticamente no mesmo resultado."),
+            { class: "disclaimer", style: "color:var(--color-destructive)" },
+            "Com esse orçamento, o plano não quita tudo em 50 anos de simulação — considere aumentar o valor mensal.",
+          ),
+      progressoBar(plano),
       el(
         "p",
         { class: "disclaimer" },
-        "A Bola de Neve prioriza motivação (quitar dívidas pequenas rápido gera sensação de progresso). A Avalanche é matematicamente mais barata. Esta simulação é educacional e não considera taxas adicionais, multas ou renegociações.",
+        "Simulação educacional e não é recomendação financeira. Não considera multas, taxas adicionais, renegociações ou mudanças futuras nas taxas de juros.",
       ),
     ]),
   );
 }
 
-function estrategiaCard({ titulo, subtitulo, resultado, destaque }) {
-  const anos = Math.floor(resultado.meses / 12);
-  const mesesResto = resultado.meses % 12;
-  const tempoLabel = anos > 0 ? `${anos}a ${mesesResto}m` : `${mesesResto} meses`;
-
-  const ordemCronologica = [...resultado.ordem].sort((a, b) => (a.mes ?? Infinity) - (b.mes ?? Infinity));
-
-  return el("div", { class: `estrategia-card${destaque ? " estrategia-card--destaque" : ""}` }, [
-    el("h3", {}, titulo),
-    el("p", { class: "estrategia-card__sub" }, subtitulo),
-    el("div", { class: "estrategia-card__stat" }, [
-      el("span", { class: "estrategia-card__label" }, "Tempo até quitar tudo"),
-      el("span", { class: "estrategia-card__value" }, resultado.atingivel ? tempoLabel : "não atinge"),
+function etapaCard(etapa, ehPrioridadeAtual) {
+  return el("div", { class: `etapa-card${ehPrioridadeAtual ? " etapa-card--atual" : ""}` }, [
+    el("div", { class: "etapa-card__top" }, [
+      el("span", { class: "etapa-card__ordem" }, `${etapa.ordem}º`),
+      el("div", { style: "min-width:0" }, [
+        el("h3", {}, etapa.nome),
+        ehPrioridadeAtual ? el("span", { class: "etapa-card__tag" }, "Prioridade atual") : null,
+      ]),
     ]),
-    el("div", { class: "estrategia-card__stat" }, [
-      el("span", { class: "estrategia-card__label" }, "Total pago em juros"),
-      el("span", { class: "estrategia-card__value" }, brl(resultado.totalJuros)),
+    el("div", { class: "etapa-card__grid" }, [
+      etapaStat("Saldo", brl(etapa.saldo)),
+      etapaStat("Pagamento mínimo", brl(etapa.pagamentoMinimo)),
+      etapaStat("Valor extra recebido", brl(etapa.valorExtra)),
+      etapaStat("Pagamento planejado", brl(etapa.pagamentoRecomendado), true),
+      etapaStat("Previsão de quitação", etapa.mesQuitacao ? formatAnosMeses(etapa.mesQuitacao) : "—"),
     ]),
-    el("p", { class: "ordem-quitacao__titulo" }, "Ordem em que cada dívida é quitada:"),
-    el(
-      "ol",
-      { class: "ordem-quitacao" },
-      ordemCronologica.map((o) =>
-        el("li", {}, [
-          el("span", {}, o.nome || "Dívida"),
-          el("span", { class: "ordem-quitacao__mes" }, o.mes ? `mês ${o.mes}` : "—"),
-        ]),
-      ),
-    ),
   ]);
+}
+
+function etapaStat(label, value, destaque = false) {
+  return el("div", { class: `etapa-stat${destaque ? " etapa-stat--destaque" : ""}` }, [
+    el("span", { class: "etapa-stat__label" }, label),
+    el("span", { class: "etapa-stat__value" }, value),
+  ]);
+}
+
+function progressoBar(plano) {
+  const saldoTotalHoje = plano.etapas.reduce((s, e) => s + e.saldo, 0);
+  const marcos = [
+    { label: "Hoje", valor: saldoTotalHoje },
+    ...plano.etapas.map((e) => ({
+      label: `Após quitar ${e.nome}`,
+      valor: plano.etapas.filter((x) => x.mesQuitacao > e.mesQuitacao || (x.mesQuitacao === e.mesQuitacao && x.ordem > e.ordem)).reduce((s, x) => s + x.saldo, 0),
+    })),
+  ];
+  return el(
+    "div",
+    { class: "marcos-divida" },
+    marcos.map((m, i) =>
+      el("div", { class: "marco-item" }, [
+        el("span", { class: "marco-item__valor" }, brl(Math.max(m.valor, 0))),
+        el("span", { class: "marco-item__label" }, m.label),
+      ]),
+    ),
+  );
+}
+
+function resultItem(label, value) {
+  return el("div", { class: "result-item" }, [
+    el("span", { class: "result-item__label" }, label),
+    el("span", { class: "result-item__value" }, value),
+  ]);
+}
+
+function formatAnosMeses(totalMeses) {
+  const anos = Math.floor(totalMeses / 12);
+  const meses = totalMeses % 12;
+  const partes = [];
+  if (anos > 0) partes.push(`${anos} ano${anos > 1 ? "s" : ""}`);
+  if (meses > 0 || anos === 0) partes.push(`${meses} ${meses === 1 ? "mês" : "meses"}`);
+  return partes.join(" e ");
 }
 
 onReady(() => {
