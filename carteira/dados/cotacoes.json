@@ -1,118 +1,118 @@
 {
-  "updatedAt": "2026-08-12T13:04:55.331Z",
+  "updatedAt": "2026-08-12T14:54:47.780Z",
   "stocks": [
     {
       "symbol": "PETR4",
-      "price": 41.66,
-      "changePct": 0,
+      "price": 41.77,
+      "changePct": 0.2640422467594972,
       "name": "Petróleo Brasileiro S.A. - Petrobras"
     },
     {
       "symbol": "ITUB4",
-      "price": 39,
-      "changePct": -3.513112320633354,
+      "price": 38.84,
+      "changePct": -0.41025641025640147,
       "name": "Itaú Unibanco Holding S.A."
     },
     {
       "symbol": "VALE3",
-      "price": 74.4,
-      "changePct": 2.4175497427172132,
+      "price": 73.06,
+      "changePct": 0.5729325833725706,
       "name": "Vale S.A."
     },
     {
       "symbol": "WEGE3",
-      "price": 47.36,
-      "changePct": -0.5668696199874095,
+      "price": 47.68,
+      "changePct": 0.6756756756756763,
       "name": "WEG S.A."
     },
     {
       "symbol": "BBAS3",
-      "price": 19.28,
-      "changePct": -3.744383424862706,
+      "price": 19.33,
+      "changePct": 0.2593360995850475,
       "name": "Banco do Brasil S.A."
     },
     {
       "symbol": "BBDC4",
-      "price": 16.79,
-      "changePct": -2.2700814901047766,
+      "price": 16.83,
+      "changePct": 0.23823704586062627,
       "name": "Banco Bradesco S.A."
     },
     {
       "symbol": "ABEV3",
-      "price": 15.01,
-      "changePct": -1.702685003274393,
+      "price": 14.92,
+      "changePct": -0.5996002664890064,
       "name": "Ambev S.A."
     }
   ],
   "bdrs": [
     {
       "symbol": "IVVB11",
-      "price": 450.35,
-      "changePct": 0.7832606019917197,
+      "price": 451.77,
+      "changePct": 0.3153103142000575,
       "name": "ISHARES S&P 500 CLASSE DE ÍNDICE EM COTAS DE CLASSES DE ÍNDICE IE - RESPONSABILIDADE LIMITADA"
     },
     {
       "symbol": "AAPL34",
-      "price": 78.51,
-      "changePct": 0.07648183556405644,
+      "price": 78.21,
+      "changePct": -0.3821169277799151,
       "name": "Apple Inc."
     },
     {
       "symbol": "MSFT34",
-      "price": 108,
-      "changePct": 0,
+      "price": 106.59,
+      "changePct": -1.3055555555555522,
       "name": "Microsoft Corporation"
     },
     {
       "symbol": "GOGL34",
-      "price": 148,
-      "changePct": -2.323125659978887,
+      "price": 148.05,
+      "changePct": 0.03378378378379147,
       "name": "Alphabet Inc."
     },
     {
       "symbol": "AMZO34",
-      "price": 70.2,
-      "changePct": -0.5947323704333074,
+      "price": 69.6,
+      "changePct": -0.8547008547008668,
       "name": "Amazon.com, Inc."
     }
   ],
   "fiis": [
     {
       "symbol": "HGLG11",
-      "price": 145.55,
-      "changePct": -0.44459644322843866,
+      "price": 146.02,
+      "changePct": 0.3229130882858116,
       "name": "Cshg Logistica - Fundo De Investimento Imobiliario"
     },
     {
       "symbol": "KNRI11",
-      "price": 152.18,
-      "changePct": 0.9820836098208483,
+      "price": 151.34,
+      "changePct": -0.5519779208831669,
       "name": "Kinea Renda Imobiliária Fundo de Investimento Imobiliário"
     },
     {
       "symbol": "MXRF11",
-      "price": 9.35,
-      "changePct": 0,
+      "price": 9.34,
+      "changePct": -0.10695187165775173,
       "name": "Maxi Renda Fundo De Investimento Imobiliaro - FII"
     },
     {
       "symbol": "XPML11",
-      "price": 103.61,
-      "changePct": -0.009650646593326689,
+      "price": 103.12,
+      "changePct": -0.4729273236174065,
       "name": "Xp Malls Fundo Investimentos Imobiliarios"
     },
     {
       "symbol": "VISC11",
-      "price": 103.24,
-      "changePct": -0.251207729468604,
+      "price": 103.28,
+      "changePct": 0.038744672607522526,
       "name": "Vinci Shopping Centers Fundo Investimento Imobiliario - Fii"
     }
   ],
   "goldEtf": [
     {
       "symbol": "GOLD11",
-      "price": 23.44,
-      "changePct": 0.5577005577005687,
+      "price": 23.73,
+      "changePct": 1.2372013651877096,
       "name": "TREND ETF LBMA OURO CLASSE DE ÍNDICE INVESTIMENTO NO EXTERIOR - RESPONSABILIDADE LIMITADA"
     }
   ],
