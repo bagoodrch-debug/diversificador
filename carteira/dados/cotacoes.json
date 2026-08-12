@@ -1,10 +1,10 @@
 {
-  "updatedAt": "2026-08-12T11:44:01.093Z",
+  "updatedAt": "2026-08-12T13:04:55.331Z",
   "stocks": [
     {
       "symbol": "PETR4",
       "price": 41.66,
-      "changePct": -1.3497513615912866,
+      "changePct": 0,
       "name": "Petróleo Brasileiro S.A. - Petrobras"
     },
     {
@@ -16,7 +16,7 @@
     {
       "symbol": "VALE3",
       "price": 74.4,
-      "changePct": -2.0150138285262758,
+      "changePct": 2.4175497427172132,
       "name": "Vale S.A."
     },
     {
@@ -60,7 +60,7 @@
     {
       "symbol": "MSFT34",
       "price": 108,
-      "changePct": 0.7180826261307433,
+      "changePct": 0,
       "name": "Microsoft Corporation"
     },
     {
@@ -92,7 +92,7 @@
     {
       "symbol": "MXRF11",
       "price": 9.35,
-      "changePct": -0.953389830508473,
+      "changePct": 0,
       "name": "Maxi Renda Fundo De Investimento Imobiliaro - FII"
     },
     {
@@ -121,24 +121,24 @@
     {
       "name": "Tesouro Selic 2031",
       "rate": 0.07,
-      "unitPrice": 19564.97,
-      "minAmount": 195.64970000000002,
+      "unitPrice": 19575.13,
+      "minAmount": 195.75130000000001,
       "maturity": "2031-03-01",
       "type": "Pós-fixado (Selic + spread)"
     },
     {
       "name": "Tesouro Prefixado com Juros Semestrais 2037",
-      "rate": 14.54,
-      "unitPrice": 784.07,
-      "minAmount": 7.840700000000001,
+      "rate": 14.61,
+      "unitPrice": 781.58,
+      "minAmount": 7.8158,
       "maturity": "2037-01-01",
       "type": "Prefixado (taxa nominal)"
     },
     {
       "name": "Tesouro IPCA+ com Juros Semestrais 2060",
-      "rate": 7.48,
-      "unitPrice": 4056.17,
-      "minAmount": 40.5617,
+      "rate": 7.51,
+      "unitPrice": 4043.62,
+      "minAmount": 40.4362,
       "maturity": "2060-08-15",
       "type": "Híbrido (IPCA + taxa real)"
     }
