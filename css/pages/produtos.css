@@ -113,13 +113,13 @@
 
 .loja-badge img {
   display: block;
-  width: 100%;
-  height: 100%;
+  width: 150%;
+  height: 150%;
   object-fit: contain;
 }
 
 .loja-badge--amazon {
-  background: #ff9900;
+  background: #ffffff;
 }
 
 .loja-badge--ml {
@@ -138,7 +138,7 @@
   border: 1px dashed var(--border);
   overflow: hidden;
 }
-}
+
 .produto-card__img span {
   font-size: 0.65rem;
   text-transform: uppercase;
