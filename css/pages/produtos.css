@@ -93,30 +93,41 @@
   flex-wrap: wrap;
   gap: 0.6rem;
 }
+
 .lojas-parceiras__label {
   font-size: 0.78rem;
   color: var(--muted);
   margin-right: 0.2rem;
 }
+
 .loja-badge {
   display: inline-flex;
   align-items: center;
-  padding: 0.35rem 0.85rem;
+  justify-content: center;
+  width: 100px;
+  height: 36px;
+  padding: 0.35rem 0.6rem;
   border-radius: 999px;
-  font-size: 0.82rem;
-  font-weight: 700;
-}
-.loja-badge--amazon {
-  background: #ff9900;
-  color: #0c0c0e;
-  font-style: italic;
-  text-transform: lowercase;
-}
-.loja-badge--ml {
-  background: #fee600;
-  color: #0c0c0e;
+  overflow: hidden;
 }
 
+.loja-badge img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+.loja-badge--amazon {
+  background: #ff9900;
+}
+
+.loja-badge--ml {
+  background: #fee600;
+}
+
+
+/* Imagem do produto */
 .produto-card__img {
   display: flex;
   align-items: center;
@@ -126,6 +137,7 @@
   background: var(--surface-2);
   border: 1px dashed var(--border);
   overflow: hidden;
+}
 }
 .produto-card__img span {
   font-size: 0.65rem;
