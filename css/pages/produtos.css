@@ -104,18 +104,30 @@
   display: inline-flex;
   align-items: center;
   justify-content: center;
+
   width: 100px;
   height: 36px;
+
   padding: 0.35rem 0.6rem;
   border-radius: 999px;
+
   overflow: hidden;
+  text-decoration: none;
+  cursor: pointer;
+
+  position: relative;
+  z-index: 10;
 }
 
 .loja-badge img {
   display: block;
-  width: 150%;
-  height: 150%;
+
+  width: 170%;
+  height: 175%;
+
   object-fit: contain;
+
+  pointer-events: none;
 }
 
 .loja-badge--amazon {
