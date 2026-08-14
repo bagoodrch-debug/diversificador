@@ -137,7 +137,8 @@
 
 .loja-badge--ml img {
   width: 170%;
-  height: 170%;
+  height: auto;
+  max-width: none;
   object-fit: contain;
 }
 .loja-badge--ml {
