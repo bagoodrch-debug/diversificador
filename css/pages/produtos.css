@@ -134,6 +134,12 @@
   background: #ffffff;
 }
 
+
+.loja-badge--ml img {
+  width: 120%;
+  height: 120%;
+  object-fit: contain;
+}
 .loja-badge--ml {
   background: #fee600;
 }
