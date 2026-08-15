@@ -278,3 +278,38 @@
   }
   .categoria-count { display: none; }
 }
+/* ==========================================================================
+   Guias de categoria (conteúdo real) + aviso honesto de "em breve"
+   ========================================================================== */
+
+.categoria-guia {
+  font-size: 0.9rem;
+  line-height: 1.65;
+  color: color-mix(in srgb, var(--fg) 88%, transparent);
+  max-width: 68ch;
+  margin: 0 0 1.25rem;
+  padding-bottom: 1.1rem;
+  border-bottom: 1px solid var(--border);
+}
+.categoria-guia em {
+  color: var(--gold);
+  font-style: normal;
+}
+
+.categoria-guia--vazio {
+  border: 1px dashed var(--border);
+  border-radius: var(--radius-lg);
+  padding: 1rem 1.1rem;
+  font-size: 0.85rem;
+  color: var(--muted);
+  line-height: 1.5;
+}
+.categoria-guia--vazio__label {
+  display: inline-block;
+  font-family: var(--font-display);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  font-size: 0.68rem;
+  color: var(--gold);
+  margin-right: 0.5rem;
+}
