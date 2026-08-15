@@ -11,9 +11,13 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 
-  const path = location.pathname.split("/").pop() || "index.html";
+  const normalizar = (p) => p.replace(/index\.html$/, "").replace(/\/$/, "") || "/";
+  const atual = normalizar(location.pathname);
   document.querySelectorAll(".main-nav a").forEach((a) => {
-    if (a.getAttribute("href") === path) a.setAttribute("aria-current", "page");
+    const href = a.getAttribute("href");
+    if (href.startsWith("#")) return;
+    const destino = normalizar(new URL(href, location.href).pathname);
+    if (destino === atual) a.setAttribute("aria-current", "page");
   });
 
   const reveals = document.querySelectorAll("[data-reveal]");

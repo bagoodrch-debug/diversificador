@@ -136,7 +136,7 @@
 
 
 .loja-badge--ml img {
-  width: 120%;
+  width: 200%;
   height: auto;
   max-width: none;
   object-fit: contain;
@@ -278,6 +278,7 @@
   }
   .categoria-count { display: none; }
 }
+
 /* ==========================================================================
    Guias de categoria (conteúdo real) + aviso honesto de "em breve"
    ========================================================================== */

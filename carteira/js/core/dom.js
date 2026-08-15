@@ -40,10 +40,13 @@ export function onReady(fn) {
 
 /** Marca o link de navegação da página atual (aria-current="page"). */
 export function markActiveNav() {
-  const path = location.pathname.split("/").pop() || "index.html";
+  const normalizar = (p) => p.replace(/index\.html$/, "").replace(/\/$/, "") || "/";
+  const atual = normalizar(location.pathname);
   qsa(".main-nav a").forEach((a) => {
     const href = a.getAttribute("href");
-    if (href === path || (path === "" && href === "index.html")) {
+    if (href.startsWith("#")) return; // âncora na mesma página, não é "outra página"
+    const destino = normalizar(new URL(href, location.href).pathname);
+    if (destino === atual) {
       a.setAttribute("aria-current", "page");
     }
   });
