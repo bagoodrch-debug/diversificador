@@ -1,251 +1,548 @@
-<!doctype html>
-<html lang="pt-BR">
-<head>
-  <meta charset="utf-8" />
-  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3680170972347280"
-     crossorigin="anonymous"></script>
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <!-- Google tag (gtag.js) -->
-  <script defer src="/assets/cookie-consent.js"></script>
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-K5M9CFHHEE"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
+/* ==========================================================================
+   Base
+   ========================================================================== */
+*, *::before, *::after { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--fg);
+  font-family: var(--font-body);
+  line-height: 1.55;
+  -webkit-font-smoothing: antialiased;
+}
+img, svg { display: block; max-width: 100%; }
+a { color: inherit; text-decoration: none; }
+button { font: inherit; color: inherit; background: none; border: none; cursor: pointer; }
+.container { width: 100%; max-width: 1180px; margin-inline: auto; padding-inline: 1.25rem; }
+::selection { background: var(--gold); color: #0c0c0e; }
 
-  gtag('config', 'G-K5M9CFHHEE');
-</script>
-  <title>Many Mens — Ferramentas e conteúdo pra quem constrói</title>
-  <meta name="description" content="Um portal de ferramentas práticas e conteúdo direto ao ponto: disciplina, dinheiro e ação. Comece pelo simulador de alocação de carteira." />
-  <link rel="icon" type="image/png" href="assets/icons/favicon.png" />
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Anton&family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="css/tokens.css" />
-  <link rel="stylesheet" href="css/styles.css" />
-  <link rel="canonical" href="https://manymens.com.br/" />
-  <meta name="robots" content="index, follow" />
-</head>
-<body>
-  <header class="site-header">
-    <div class="container site-header__inner">
-      <a href="index.html" class="brand">
-        <img class="brand__mark" src="assets/icons/favicon.png" alt="Many Mens" />
-        <span class="brand__name">Many <span>Mens</span></span>
-      </a>
-      <div class="header-right">
-        <nav class="main-nav">
-          <a href="index.html">Início</a>
-          <a href="index.html#projetos">Ferramentas</a>
-          <a href="produtos.html">Produtos</a>
-        </nav>
-        <button class="nav-toggle icon-btn" aria-label="Abrir menu" aria-expanded="false">
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 6h16M4 12h16M4 18h16"/></svg>
-        </button>
-      </div>
-    </div>
-  </header>
+/* ==========================================================================
+   Header
+   ========================================================================== */
+.site-header {
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  background: color-mix(in srgb, var(--bg) 85%, transparent);
+  backdrop-filter: blur(10px);
+  border-bottom: 1px solid var(--border);
+}
+.site-header__inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 68px;
+}
+.brand { display: flex; align-items: center; gap: 0.6rem; }
+.brand__mark { width: 34px; height: 34px; }
+.brand__name {
+  font-family: var(--font-display);
+  font-weight: 600;
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
+  font-size: 1.05rem;
+}
+.brand__name span { color: var(--gold); }
+.header-right {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+}
+.main-nav {
+  display: flex;
+  align-items: center;
+  gap: 1.4rem;
+}
+.main-nav a {
+  font-family: var(--font-display);
+  font-size: 0.8rem;
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
+  color: var(--muted);
+  transition: color 0.15s ease;
+}
+.main-nav a:hover,
+.main-nav a[aria-current="page"] {
+  color: var(--fg);
+}
+.nav-toggle {
+  display: none;
+  padding: 0.4rem;
+  border-radius: var(--radius-sm);
+  color: var(--fg);
+}
+@media (max-width: 760px) {
+  .header-cta { display: none; }
+  .main-nav {
+    position: fixed;
+    inset: 68px 0 auto 0;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0;
+    background: var(--bg);
+    border-bottom: 1px solid var(--border);
+    padding: 0.5rem 1.25rem 1rem;
+    transform: translateY(-8px);
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.15s ease, transform 0.15s ease;
+  }
+  .main-nav a {
+    padding: 0.7rem 0;
+    width: 100%;
+    border-bottom: 1px solid var(--border);
+  }
+  .main-nav.is-open {
+    opacity: 1;
+    transform: translateY(0);
+    pointer-events: auto;
+  }
+  .nav-toggle { display: inline-flex; }
+}
 
-  <main>
-    <!-- Espaço de anúncio (ex: Google AdSense). Fixo na borda da tela, só
-         aparece em telas bem largas (ver media query no CSS). -->
-    <aside class="ad-rail ad-rail--left">
-      <div class="ad-slot">
-        <span class="ad-slot__label">Publicidade</span>
-        <span>300x250</span>
-      </div>
-    </aside>
-    <aside class="ad-rail ad-rail--right">
-      <div class="ad-slot">
-        <span class="ad-slot__label">Publicidade</span>
-        <span>300x250</span>
-      </div>
-    </aside>
+/* ==========================================================================
+   Hero — o manifesto
+   ========================================================================== */
+.hero {
+  position: relative;
+  padding-block: 5rem 4rem;
+  overflow: hidden;
+  border-bottom: 1px solid var(--border);
+}
+.hero::before {
+  content: "";
+  position: absolute;
+  inset: -20% -10% auto auto;
+  width: 60vw;
+  height: 60vw;
+  max-width: 640px;
+  max-height: 640px;
+  border-radius: 50%;
+  background: radial-gradient(circle, color-mix(in srgb, var(--gold) 14%, transparent), transparent 70%);
+  pointer-events: none;
+}
+.hero__eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-family: var(--font-display);
+  text-transform: uppercase;
+  letter-spacing: 0.18em;
+  font-size: 0.72rem;
+  color: var(--gold);
+}
+.hero__eyebrow::before {
+  content: "";
+  width: 28px;
+  height: 2px;
+  background: var(--gold);
+}
+.hero h1 {
+  margin: 1rem 0 0;
+  font-family: var(--font-display);
+  font-weight: 700;
+  text-transform: uppercase;
+  font-size: clamp(2.4rem, 7vw, 4.6rem);
+  line-height: 0.98;
+  letter-spacing: 0.02em;
+  max-width: 16ch;
+}
+.hero h1 em {
+  font-style: normal;
+  color: var(--gold);
+}
+/* Palavras de destaque, no mesmo espírito das legendas do feed do Instagram */
+.hl-red { color: var(--hl-red); }
+.hl-cyan { color: var(--hl-cyan); }
+.hl-gold { color: var(--hl-gold); }
+.hero p.lead {
+  margin-top: 1.4rem;
+  max-width: 52ch;
+  font-size: 1.05rem;
+  color: var(--muted);
+}
+.hero__actions {
+  margin-top: 2rem;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.9rem;
+}
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.8rem 1.4rem;
+  border-radius: var(--radius-sm);
+  font-weight: 600;
+  font-size: 0.9rem;
+  transition: transform .15s ease, filter .15s ease, background-color .15s ease;
+}
+.btn--solid { background: var(--gold); color: #0c0c0e; }
+.btn--solid:hover { filter: brightness(1.08); transform: translateY(-1px); }
+.btn--ghost { border: 1px solid var(--border); color: var(--fg); }
+.btn--ghost:hover { background: var(--surface); }
 
-    <section class="hero container">
-      <p class="hero__eyebrow">Procuramos melhorar sua vida</p>
-      <h1>Homem não <span class="hl-red">espera</span><br />Homem <span class="hl-cyan">age</span>.</h1>
-      <p class="lead">
-        Ferramentas simples pra sair da teoria. Sem fórmula mágica —
-        só o que dá pra usar <span class="hl-gold" style="font-weight:600">hoje mesmo</span>
-        pra organizar sua cabeça e seu bolso.
-      </p>
-      <div class="hero__actions">
-        <a class="btn btn--solid" href="#projetos">Ver ferramentas</a>
-        <a class="btn btn--ghost" href="https://www.instagram.com/manymensofc/" target="_blank" rel="noopener">
-          Instagram
-        </a>
-      </div>
-      <img class="seal" src="assets/icons/favicon.png" alt="" />
-    </section>
+/* Selo / emblema — elemento assinatura, reaproveitado nos microsites */
+.seal {
+  position: absolute;
+  right: 2.5rem;
+  bottom: -1.5rem;
+  width: 150px;
+  height: 150px;
+  object-fit: cover;
+  border-radius: 50%;
+  transform: rotate(-8deg);
+  filter: drop-shadow(0 10px 24px rgba(0, 0, 0, 0.55));
+}
+@media (max-width: 860px) {
+  .seal { display: none; }
+}
 
-    <section class="section container" id="projetos">
-      <div class="section__head">
-        <div>
-              <h2>Ferramentas</h2>
-              <p>Cada uma resolve um problema específico. Sem cadastro, sem enrolação.</p>
-            </div>
-          </div>
+/* ==========================================================================
+   Seção: projetos (microsites)
+   ========================================================================== */
+.section {
+  padding-block: 3.5rem;
+}
+.section__head {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-bottom: 1.75rem;
+  flex-wrap: wrap;
+}
+.section__head h2 {
+  font-family: var(--font-display);
+  text-transform: uppercase;
+  letter-spacing: 0.02em;
+  font-size: 1.5rem;
+  margin: 0;
+}
+.section__head p { color: var(--muted); margin: 0.35rem 0 0; font-size: 0.9rem; }
 
-          <div class="project-grid">
-            <a class="project-card" href="carteira/index.html" style="--card-accent:#f5b942" data-reveal>
-              <span class="project-card__tag">Finanças</span>
-              <h3>Alocador de Carteira</h3>
-              <p>Simule como distribuir seu dinheiro entre Renda Fixa, Ações, Ações no Exterior, FIIs e Ouro — com sugestões baseadas em cotações reais.</p>
-              <span class="project-card__link">
-                Abrir simulador
-                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
-              </span>
-            </a>
+.project-grid {
+  display: grid;
+  gap: 1.25rem;
+  grid-template-columns: repeat(3, 1fr);
+}
+@media (max-width: 860px) {
+  .project-grid {
+    grid-template-columns: 1fr;
+  }
+}
+.project-card {
+  position: relative;
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--border);
+  background: linear-gradient(160deg, var(--surface), var(--surface-2));
+  padding: 1.75rem;
+  overflow: hidden;
+  transition: transform .18s ease, border-color .18s ease;
+}
+.project-card:hover { transform: translateY(-4px); border-color: color-mix(in srgb, var(--card-accent, var(--gold)) 50%, var(--border)); }
+.project-card__tag {
+  display: inline-block;
+  font-size: 0.68rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--card-accent, var(--gold));
+  border: 1px solid color-mix(in srgb, var(--card-accent, var(--gold)) 45%, transparent);
+  border-radius: 999px;
+  padding: 0.2rem 0.6rem;
+}
+.project-card h3 {
+  font-family: var(--font-display);
+  text-transform: uppercase;
+  font-size: 1.3rem;
+  letter-spacing: 0.02em;
+  margin: 0.9rem 0 0.5rem;
+}
+.project-card p {
+  color: var(--muted);
+  font-size: 0.88rem;
+  margin: 0 0 1.4rem;
+}
+.project-card__link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--card-accent, var(--gold));
+}
+.project-card__link svg { transition: transform .15s ease; }
+.project-card:hover .project-card__link svg { transform: translateX(3px); }
 
-            <a class="project-card" href="reserva/index.html" style="--card-accent:#22e0e0" data-reveal>
-              <span class="project-card__tag">Finanças</span>
-              <h3>Reserva de Emergência</h3>
-              <p>Descubra quanto guardar (6x salário ou gasto mensal) e quanto tempo falta pra completar, usando a taxa CDI atual.</p>
-              <span class="project-card__link">
-                Abrir calculadora
-                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
-              </span>
-            </a>
+.project-card--soon {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+  border-style: dashed;
+  opacity: 0.7;
+}
 
-            <a class="project-card" href="vicio/index.html" style="--card-accent:#ff3b30" data-reveal>
-              <span class="project-card__tag">Finanças</span>
-              <h3>Quanto Custa Seu Vício</h3>
-              <p>Cigarro, café, iFood — veja quanto um gasto pequeno do dia a dia viraria em 1, 5 ou 10 anos se fosse investido.</p>
-              <span class="project-card__link">
-                Abrir calculadora
-                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
-              </span>
-            </a>
+/* ==========================================================================
+   Espaço de anúncio (rotulado com transparência)
+   ========================================================================== */
+.ad-slot {
+  border: 1px dashed var(--border);
+  border-radius: var(--radius-md);
+  padding: 1.25rem;
+  text-align: center;
+  color: var(--muted);
+  font-size: 0.75rem;
+}
+.ad-slot__label {
+  display: block;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  font-size: 0.62rem;
+  margin-bottom: 0.6rem;
+  color: var(--muted);
+}
 
-            <a class="project-card" href="juros/index.html" style="--card-accent:#22e0e0" data-reveal>
-              <span class="project-card__tag">Finanças</span>
-              <h3>Juros Compostos</h3>
-              <p>Informe valor inicial, aporte mensal, taxa e tempo — veja quanto seu dinheiro pode render.</p>
-              <span class="project-card__link">
-                Abrir calculadora
-                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
-              </span>
-            </a>
+/* Anúncios fixos na borda real da tela (não dividem espaço com o conteúdo).
+   Só aparecem em telas bem largas, onde sobra espaço nas laterais do
+   container central (1180px) sem encostar nele. */
+.ad-rail {
+  position: fixed;
+  top: 50%;
+  transform: translateY(-50%);
+  display: none;
+  z-index: 10;
+  width: 160px;
+}
+.ad-rail--left {
+  left: 24px;
+}
+.ad-rail--right {
+  right: 24px;
+}
+@media (min-width: 1600px) {
+  .ad-rail {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
+}
+.ad-rail .ad-slot {
+  min-height: 250px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.4rem;
+}
+.ad-rail .ad-slot__label {
+  margin-bottom: 0;
+}
 
-            <a class="project-card" href="investir/index.html" style="--card-accent:#f5b942" data-reveal>
-              <span class="project-card__tag">Finanças</span>
-              <h3>CDB x Tesouro x Poupança</h3>
-              <p>Compare o rendimento líquido (já descontando IR) e descubra onde vale mais a pena deixar seu dinheiro parado.</p>
-              <span class="project-card__link">
-                Abrir comparador
-                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
-              </span>
-            </a>
+/* ==========================================================================
+   Footer
+   ========================================================================== */
+.site-footer {
+  border-top: 1px solid var(--border);
+  padding-block: 2.5rem;
+}
+.site-footer__inner {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.5rem;
+  align-items: center;
+  justify-content: space-between;
+}
+.site-footer__links { display: flex; gap: 1.5rem; font-size: 0.85rem; color: var(--muted); }
+.site-footer__links a:hover { color: var(--fg); }
+.site-footer small { color: var(--muted); font-size: 0.75rem; }
 
-            <a class="project-card" href="dividas/index.html" style="--card-accent:#22e0e0" data-reveal>
-              <span class="project-card__tag">Finanças</span>
-              <h3>Bola de Neve de Dívidas</h3>
-              <p>Liste suas dívidas e descubra a ordem ideal de quitação — Bola de Neve ou Avalanche — e quanto tempo e dinheiro cada uma economiza.</p>
-              <span class="project-card__link">
-                Abrir calculadora
-                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
-              </span>
-            </a>
+/* Reveal on load (respects prefers-reduced-motion via tokens.css) */
+[data-reveal] {
+  opacity: 0;
+  transform: translateY(10px);
+  transition: opacity .5s ease, transform .5s ease;
+}
+[data-reveal].is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
 
-            <a class="project-card" href="imovel/index.html" style="--card-accent:#f5b942" data-reveal>
-              <span class="project-card__tag">Finanças</span>
-              <h3>Alugar ou Financiar?</h3>
-              <p>Informe o aluguel, o valor do imóvel e a entrada disponível — descubra em quanto tempo compensa financiar em vez de alugar e investir a diferença.</p>
-              <span class="project-card__link">
-                Abrir calculadora
-                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
-              </span>
-            </a>
+/* ==========================================================================
+   Nossa História — seção institucional, depois das Ferramentas
+   ========================================================================== */
 
-            <div class="project-card project-card--soon" data-reveal>
-              <span class="project-card__tag">Em breve</span>
-              <h3 style="margin-top:.9rem">Próxima ferramenta</h3>
-              <p style="margin-bottom:0">Esse espaço é pro próximo microsite do Many Mens. Volte em breve.</p>
-            </div>
-          </div>
-        </section>
-        <section class="historia">
-          <div class="container historia__inner">
-            <div class="historia__texto">
-              <p class="historia__eyebrow">Nossa história</p>
-              <h2 class="historia__titulo">Many Mens,<br />vamos te <span class="hl-cyan">contar</span>.</h2>
+.historia {
+  border-top: 1px solid var(--border);
+  padding-block: 4rem;
+  position: relative;
+  overflow: hidden;
+}
+.historia::before {
+  content: "";
+  position: absolute;
+  inset: auto -10% -30% auto;
+  width: 50vw;
+  height: 50vw;
+  max-width: 520px;
+  max-height: 520px;
+  border-radius: 50%;
+  background: radial-gradient(circle, color-mix(in srgb, var(--gold) 10%, transparent), transparent 70%);
+  pointer-events: none;
+}
 
-              <p>
-                O Many Mens não começou como projeto de site. Começou como
-                vontade de ajudar — abrir a cabeça de quem segue a gente pra
-                outras possibilidades na vida, além da rotina automática que
-                ninguém questiona. Foi assim que nasceu o perfil, com
-                conteúdo direto sobre disciplina, dinheiro e ação.
-              </p>
+.historia__inner {
+  display: grid;
+  grid-template-columns: 1.4fr 1fr;
+  gap: 3rem;
+  align-items: start;
+  position: relative;
+}
+@media (max-width: 860px) {
+  .historia__inner {
+    grid-template-columns: 1fr;
+    gap: 2.5rem;
+  }
+}
 
-              <p>
-                As ferramentas vieram de um problema bem prático: na hora de
-                simular uma reserva de emergência, comparar CDB com Tesouro
-                Direto, ou decidir se compensava financiar um imóvel, as
-                calculadoras que existiam por aí eram cheias de anúncio,
-                complicadas demais, ou simplesmente não existiam do jeito que
-                eu precisava. Então resolvi construir as minhas.
-              </p>
+.historia__eyebrow {
+  font-family: var(--font-display);
+  text-transform: uppercase;
+  letter-spacing: 0.18em;
+  font-size: 0.72rem;
+  color: var(--gold);
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+.historia__eyebrow::before {
+  content: "";
+  width: 28px;
+  height: 2px;
+  background: var(--gold);
+}
 
-              <div class="historia__versiculo">
-                <span class="historia__aspas" aria-hidden="true">&ldquo;</span>
-                <p>Há muitos planos no coração do homem, mas o que prevalece é o propósito do Senhor.</p>
-                <cite>Provérbios 19:21</cite>
-              </div>
+.historia__titulo {
+  font-family: var(--font-display);
+  text-transform: uppercase;
+  font-weight: 400;
+  font-size: clamp(2rem, 5vw, 3.2rem);
+  line-height: 0.98;
+  letter-spacing: 0.005em;
+  margin: 1rem 0 1.5rem;
+}
 
-              <p>
-                Hoje são sete ferramentas, de graça, sem cadastro, feitas pra
-                qualquer pessoa usar em menos de um minuto — e o objetivo
-                continua sendo o mesmo de sempre:
-              </p>
-              <p class="historia__frase-final">
-                <span class="hl-red">Procuramos</span> melhorar a sua
-                <span class="hl-gold">vida</span> — da melhor forma que estiver ao nosso alcance.
-              </p>
+.historia__texto > p {
+  color: color-mix(in srgb, var(--fg) 85%, transparent);
+  font-size: 0.98rem;
+  line-height: 1.7;
+  margin-bottom: 1.1rem;
+  max-width: 58ch;
+}
 
-              <a class="btn btn--solid" href="https://www.instagram.com/manymensofc/" target="_blank" rel="noopener">
-                Segue a gente no Instagram
-              </a>
-            </div>
+.historia__versiculo {
+  position: relative;
+  border-left: 2px solid var(--gold);
+  padding: 0.3rem 0 0.3rem 1.4rem;
+  margin: 1.75rem 0 1.75rem;
+}
+.historia__aspas {
+  position: absolute;
+  top: -1.2rem;
+  left: 0.6rem;
+  font-family: var(--font-display);
+  font-size: 3.5rem;
+  color: var(--gold);
+  opacity: 0.5;
+  line-height: 1;
+}
+.historia__versiculo p {
+  font-size: 1.05rem;
+  font-style: italic;
+  color: var(--fg);
+  line-height: 1.5;
+  margin: 0 0 0.4rem;
+  max-width: 46ch;
+}
+.historia__versiculo cite {
+  font-style: normal;
+  font-size: 0.78rem;
+  color: var(--muted);
+  letter-spacing: 0.03em;
+}
 
-            <div class="historia__visual" aria-hidden="true">
-              <div class="historia__selo">
-                <img src="assets/icons/favicon.png" alt="" />
-              </div>
-              <div class="historia__stats">
-                <div class="historia__stat">
-                  <strong>7</strong>
-                  <span>ferramentas</span>
-                </div>
-                <div class="historia__stat">
-                  <strong>0</strong>
-                  <span>cadastro</span>
-                </div>
-                <div class="historia__stat">
-                  <strong>100%</strong>
-                  <span>gratuito</span>
-                </div>
-              </div>
-            </div>
-          </div>
-        </section>
-  </main>
+.historia__frase-final {
+  font-family: var(--font-display);
+  font-size: 1.15rem;
+  text-transform: uppercase;
+  letter-spacing: 0.01em;
+  color: var(--fg) !important;
+  line-height: 1.4 !important;
+  margin-bottom: 1.75rem !important;
+}
 
-  <footer class="site-footer">
-    <div class="container site-footer__inner">
-      <div class="site-footer__links">
-        <a href="https://www.instagram.com/manymensofc/" target="_blank" rel="noopener">Instagram</a>
-        <a href="https://linktr.ee/Manymens" target="_blank" rel="noopener">Linktree</a>
-        <a href="produtos.html">Produtos</a>
-        <a href="privacidade.html">Privacidade</a>
-        <a href="termos.html">Termos de Uso</a>
-        <a href="cookies.html">Cookies</a>
-      </div>
-      <small>&copy; <span id="year"></span> Many Mens. Conteúdo educacional.</small>
-    </div>
-  </footer>
+/* Lado visual: selo + números */
+.historia__visual {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2.5rem;
+  padding-top: 1.5rem;
+}
+.historia__selo {
+  width: 190px;
+  height: 190px;
+  border-radius: 50%;
+  overflow: hidden;
+  border: 1px solid var(--border);
+  box-shadow: var(--shadow-md);
+  transform: rotate(-4deg);
+}
+.historia__selo img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
 
-  <script src="js/main.js"></script>
-</body>
-</html>
+.historia__stats {
+  display: flex;
+  gap: 1.5rem;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+.historia__stat {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+.historia__stat strong {
+  font-family: var(--font-display);
+  font-size: 2.1rem;
+  color: var(--gold);
+  line-height: 1;
+}
+.historia__stat span {
+  font-size: 0.72rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--muted);
+  margin-top: 0.35rem;
+}
+
+@media (max-width: 860px) {
+  .historia__visual {
+    flex-direction: row;
+    justify-content: center;
+    padding-top: 0;
+  }
+  .historia__selo {
+    width: 120px;
+    height: 120px;
+  }
+  .historia__stats {
+    flex-direction: column;
+    gap: 0.9rem;
+  }
+}
