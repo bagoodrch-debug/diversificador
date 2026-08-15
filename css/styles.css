@@ -546,3 +546,102 @@ button { font: inherit; color: inherit; background: none; border: none; cursor: 
     gap: 0.9rem;
   }
 }
+
+/* ==========================================================================
+   Banner do blog "Manual do Homem" — entre Ferramentas e Nossa História
+   ========================================================================== */
+
+.blog-banner-wrap {
+  padding-block: 1rem 0;
+}
+
+.blog-banner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 2rem;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  background: linear-gradient(160deg, var(--surface), var(--surface-2));
+  padding: 2rem 2.25rem;
+  transition: transform 0.18s ease, border-color 0.18s ease;
+}
+.blog-banner:hover {
+  transform: translateY(-3px);
+  border-color: color-mix(in srgb, var(--gold) 50%, var(--border));
+}
+
+.blog-banner__tag {
+  display: inline-block;
+  font-family: var(--font-display);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  font-size: 0.7rem;
+  color: var(--gold);
+  border: 1px solid color-mix(in srgb, var(--gold) 45%, transparent);
+  border-radius: 999px;
+  padding: 0.25rem 0.7rem;
+  margin-bottom: 0.75rem;
+}
+
+.blog-banner__texto h2 {
+  font-family: var(--font-display);
+  text-transform: uppercase;
+  font-weight: 400;
+  font-size: clamp(1.3rem, 2.6vw, 1.8rem);
+  line-height: 1.15;
+  margin: 0 0 0.6rem;
+  max-width: 32ch;
+}
+
+.blog-banner__texto p {
+  color: var(--muted);
+  font-size: 0.9rem;
+  max-width: 48ch;
+  margin: 0 0 1.1rem;
+}
+
+.blog-banner__cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-weight: 600;
+  font-size: 0.9rem;
+  color: var(--gold);
+}
+.blog-banner:hover .blog-banner__cta svg {
+  transform: translateX(3px);
+}
+.blog-banner__cta svg {
+  transition: transform 0.18s ease;
+}
+
+.blog-banner__selo {
+  flex-shrink: 0;
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  overflow: hidden;
+  border: 1px solid var(--border);
+  transform: rotate(6deg);
+}
+.blog-banner__selo img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+@media (max-width: 640px) {
+  .blog-banner {
+    flex-direction: column;
+    text-align: center;
+    padding: 1.75rem 1.5rem;
+  }
+  .blog-banner__texto p {
+    margin-inline: auto;
+  }
+  .blog-banner__selo {
+    width: 72px;
+    height: 72px;
+  }
+}
