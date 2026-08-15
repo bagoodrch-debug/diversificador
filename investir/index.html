@@ -4,10 +4,11 @@
   <meta charset="utf-8" />
   <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3680170972347280"
      crossorigin="anonymous"></script>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
   <script defer src="/assets/cookie-consent.js"></script>
   <title>CDB x Tesouro x Poupança — Many Mens</title>
-  <meta name="description" content="Compare o rendimento líquido (já descontando Imposto de Renda) de CDB, Tesouro Selic e Poupança, e descubra onde vale mais a pena deixar seu dinheiro parado." />
-  <link rel="canonical" href="https://SEU-USUARIO.github.io/investir/" />
+  <meta name="description" content="Compare o rendimento líquido (já descontando Imposto de Renda) de CDB, Tesouro Selic e Poupança, e descubra onde vale mais a pena deixar seu dinheiro parado. Veja também como o cálculo funciona." />
+  <link rel="canonical" href="https://manymens.com.br/investir/index.html" />
   <link rel="icon" type="image/png" href="../assets/icons/favicon.png" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -38,7 +39,7 @@
       </button>
       <nav class="main-nav">
         <a href="index.html" aria-current="page">Comparador</a>
-        <a href="metodologia.html">Metodologia</a>
+        <a href="#metodologia">Metodologia</a>
       </nav>
     </div>
   </header>
@@ -49,20 +50,86 @@
       <p>Compare o rendimento líquido — já descontando Imposto de Renda — e descubra onde vale mais a pena deixar seu dinheiro parado.</p>
     </div>
 
-    
+    <div id="investir-root">
+      <noscript>Esta calculadora precisa de JavaScript habilitado para funcionar.</noscript>
+    </div>
 
-      <div>
-        <div id="investir-root">
-          <noscript>Esta calculadora precisa de JavaScript habilitado para funcionar.</noscript>
-        </div>
+    <footer class="sim__disclaimer" style="margin-top:1rem">
+      <p>Esta ferramenta tem fins educacionais e de simulação pessoal. Não constitui recomendação de investimento. As taxas e regras (IR regressivo, regra da poupança, custódia B3) podem mudar — confirme sempre as condições atuais antes de investir.</p>
+      <p>Os valores são salvos automaticamente neste navegador.</p>
+    </footer>
 
-        <footer class="sim__disclaimer" style="margin-top:1rem">
-          <p>Esta ferramenta tem fins educacionais e de simulação pessoal. Não constitui recomendação de investimento. As taxas e regras (IR regressivo, regra da poupança, custódia B3) podem mudar — confirme sempre as condições atuais antes de investir.</p>
-          <p>Os valores são salvos automaticamente neste navegador.</p>
-        </footer>
+    <article class="content" id="metodologia">
+      <h2>Pra que serve isso, na prática</h2>
+      <p>
+        Muita gente deixa dinheiro parado na poupança sem saber que
+        existem opções tão seguras quanto (ou mais) que rendem
+        consideravelmente mais. O problema é que comparar "de cabeça" é
+        confuso, porque cada produto desconta imposto de um jeito
+        diferente. Esse comparador já desconta tudo (Imposto de Renda,
+        taxa de custódia) e te mostra o número que realmente importa: o
+        quanto sobra no seu bolso no final.
+      </p>
+
+      <h2>Como usar</h2>
+      <ol style="padding-left:1.25rem;list-style:decimal;margin-bottom:.85rem">
+        <li style="margin-bottom:.35rem">Informe o valor que você quer investir e por quantos meses.</li>
+        <li style="margin-bottom:.35rem">Escolha um exemplo de CDB (ilustrativo) ou digite a taxa real que o seu banco te ofereceu, em % do CDI.</li>
+        <li style="margin-bottom:.35rem">Veja os três cards comparando Poupança, Tesouro Selic e CDB — o melhor líquido é destacado automaticamente.</li>
+      </ol>
+
+      <h2>Como a conta funciona</h2>
+      <h3>1. A taxa de cada produto</h3>
+      <ul>
+        <li><strong>Poupança:</strong> segue a regra oficial — se a Selic está acima de 8,5% ao ano, rende 0,5% ao mês; se está em 8,5% ou abaixo, rende 70% da Selic. Usamos o CDI como aproximação da Selic (na prática, os dois andam quase colados).</li>
+        <li><strong>Tesouro Selic:</strong> rende próximo do CDI (CDI + um pequeno spread, que dá pra ajustar).</li>
+        <li><strong>CDB:</strong> rende o percentual do CDI que você informar (é assim que os bancos costumam anunciar, tipo "110% do CDI").</li>
+      </ul>
+      <h3>2. Imposto de Renda regressivo</h3>
+      <p>
+        CDB e Tesouro pagam IR sobre o rendimento (não sobre o valor
+        total), numa tabela que diminui quanto mais tempo o dinheiro fica
+        aplicado:
+      </p>
+      <ul>
+        <li>Até 180 dias: 22,5%</li>
+        <li>De 181 a 360 dias: 20%</li>
+        <li>De 361 a 720 dias: 17,5%</li>
+        <li>Acima de 720 dias: 15%</li>
+      </ul>
+      <p>
+        A <strong>poupança é isenta</strong> — não paga IR nenhum. É por
+        isso que ela às vezes ainda ganha de opções com taxa bruta maior,
+        em prazos bem curtos.
+      </p>
+      <h3>3. Taxa de custódia (só no Tesouro)</h3>
+      <p>
+        O Tesouro Direto cobra uma taxa de custódia da B3, calculada
+        proporcionalmente ao valor investido e ao tempo. CDB e poupança
+        não têm essa taxa.
+      </p>
+
+      <div class="callout">
+        <strong>Por que às vezes o CDB a 100% do CDI rende mais líquido que o Tesouro Selic</strong>,
+        mesmo os dois tendo taxa bruta parecida: o Tesouro paga a taxa de
+        custódia da B3 e o CDB não. É um detalhe pequeno, mas que pode
+        decidir qual opção ganha na ponta do lápis.
       </div>
 
-      
+      <h2>Perguntas frequentes</h2>
+      <h3>CDB é garantido?</h3>
+      <p>Sim, pelo FGC (Fundo Garantidor de Créditos), até R$ 250 mil por CPF e por instituição financeira — dentro desse limite, o risco é considerado bem baixo.</p>
+      <h3>Por que a poupança ainda existe, se rende tão pouco?</h3>
+      <p>Simplicidade e isenção de IR pesam pra quem quer algo sem burocracia nenhuma, ou pra prazos muito curtos onde o IR alto de outras opções pesa mais.</p>
+
+      <h2>Limitações</h2>
+      <ul>
+        <li>As taxas dos exemplos de CDB são ilustrativas — não são dados ao vivo de nenhum banco. Sempre confira a taxa real oferecida a você.</li>
+        <li>Assume que o CDI fica constante durante todo o prazo simulado.</li>
+        <li>Não é recomendação de investimento — confira sempre carência, liquidez e garantias reais antes de decidir.</li>
+      </ul>
+    </article>
+  </main>
 
   <footer class="site-footer">
     <div class="container site-footer__inner">

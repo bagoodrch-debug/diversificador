@@ -1,0 +1,326 @@
+/* ==========================================================================
+   Reserva de Emergência — layout específico
+   ========================================================================== */
+
+.brand span {
+  font-family: var(--font-heading);
+}
+
+.reserva-hero {
+  padding-block: 2.25rem 1.25rem;
+  text-align: center;
+}
+.reserva-hero h1 {
+  font-family: var(--font-heading);
+  font-weight: 700;
+  font-size: clamp(1.7rem, 3.5vw, 2.3rem);
+  letter-spacing: -0.01em;
+}
+.reserva-hero p {
+  margin-top: 0.5rem;
+  color: var(--color-muted-foreground);
+  max-width: 50ch;
+  margin-inline: auto;
+  font-size: 0.95rem;
+}
+
+/* ---------------------------- Switch deslizante --------------------------- */
+
+.mode-switch-wrap {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  margin: 1.75rem auto 2rem;
+  flex-wrap: wrap;
+}
+.mode-switch-label {
+  font-size: 0.85rem;
+  font-weight: 500;
+  color: var(--color-muted-foreground);
+  transition: color 0.2s ease;
+  cursor: default;
+}
+.mode-switch[data-mode="planejar"] ~ .mode-switch-label[data-side="left"],
+.mode-switch-wrap:has(.mode-switch[data-mode="planejar"]) .mode-switch-label[data-side="left"] {
+  color: var(--color-foreground);
+  font-weight: 600;
+}
+.mode-switch-wrap:has(.mode-switch[data-mode="sei-quanto"]) .mode-switch-label[data-side="right"] {
+  color: var(--color-primary);
+  font-weight: 600;
+}
+
+.mode-switch {
+  position: relative;
+  width: 60px;
+  height: 32px;
+  border-radius: 999px;
+  border: 2px solid var(--color-border);
+  background: var(--color-secondary);
+  flex-shrink: 0;
+  transition: border-color 0.2s ease;
+}
+.mode-switch[data-mode="sei-quanto"] {
+  border-color: var(--color-primary);
+}
+.mode-switch__knob {
+  position: absolute;
+  top: 2px;
+  left: 2px;
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  background: var(--color-muted-foreground);
+  transition: transform 0.25s ease, background-color 0.25s ease;
+}
+.mode-switch[data-mode="sei-quanto"] .mode-switch__knob {
+  transform: translateX(28px);
+  background: var(--color-primary);
+}
+
+/* ------------------------------ Painéis deslizantes ----------------------- */
+
+.panels-viewport {
+  overflow: hidden;
+}
+.panels-track {
+  display: flex;
+  width: 200%;
+  transition: transform 0.35s ease;
+}
+.panels-track[data-mode="planejar"] {
+  transform: translateX(0%);
+}
+.panels-track[data-mode="sei-quanto"] {
+  transform: translateX(-50%);
+}
+.panel {
+  width: 50%;
+  flex-shrink: 0;
+  box-sizing: border-box;
+  padding: 1.75rem;
+}
+.panel:first-child {
+  margin-right: 1.5rem;
+}
+.panel h2 {
+  font-family: var(--font-heading);
+  font-size: 1.2rem;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+}
+.panel-lead {
+  margin-top: 0.3rem;
+  font-size: 0.87rem;
+  color: var(--color-muted-foreground);
+  margin-bottom: 1.5rem;
+  padding-bottom: 1.25rem;
+  border-bottom: 1px solid var(--color-border);
+}
+
+@media (max-width: 760px) {
+  .panels-track {
+    width: 100%;
+    transition: none;
+  }
+  .panels-track[data-mode],
+  .panels-track[data-mode="sei-quanto"] {
+    transform: none;
+  }
+  .panel {
+    width: 100%;
+    display: none;
+  }
+  .panels-track[data-mode="planejar"] .panel:first-child,
+  .panels-track[data-mode="sei-quanto"] .panel:last-child {
+    display: block;
+  }
+  .panel:first-child {
+    margin-right: 0;
+  }
+}
+
+/* --------------------------------- Campos --------------------------------- */
+
+.field-group {
+  margin-bottom: 1.1rem;
+}
+.field-label {
+  display: block;
+  font-size: 0.72rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: var(--color-muted-foreground);
+  margin-bottom: 0.4rem;
+}
+
+.taxa-section {
+  border-top: 1px solid var(--color-border);
+  padding-top: 1.25rem;
+  margin-top: 0.75rem;
+  margin-bottom: 1.25rem;
+}
+.taxa-auto-toggle {
+  display: flex;
+  align-items: center;
+  gap: 0.55rem;
+  font-size: 0.87rem;
+  font-weight: 500;
+  margin-bottom: 0.9rem;
+  cursor: pointer;
+}
+.taxa-auto-toggle input {
+  width: 17px;
+  height: 17px;
+  accent-color: var(--color-primary);
+}
+.cdi-info {
+  background: var(--color-secondary);
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--color-border);
+  padding: 0.8rem 1rem;
+  margin-bottom: 1.1rem;
+}
+.cdi-info__value {
+  font-family: var(--font-heading);
+  font-size: 0.95rem;
+  font-weight: 700;
+  margin: 0;
+}
+.cdi-info__meta {
+  font-size: 0.76rem;
+  color: var(--color-muted-foreground);
+  margin: 0.2rem 0 0;
+}
+.cdi-info__error {
+  font-size: 0.8rem;
+  color: var(--color-destructive);
+  margin: 0;
+}
+
+/* -------------------------------- Resultado -------------------------------- */
+
+.resultado {
+  border-top: 1px solid var(--color-border);
+  padding-top: 1.5rem;
+  margin-top: 0.75rem;
+}
+.resultado-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 0.85rem;
+  margin-bottom: 1.1rem;
+}
+.result-item {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+  background: var(--color-secondary);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  padding: 0.8rem 0.9rem;
+}
+.result-item__label {
+  font-size: 0.68rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: var(--color-muted-foreground);
+}
+.result-item__value {
+  font-family: var(--font-heading);
+  font-size: 1.1rem;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+}
+
+.progress-bar {
+  height: 8px;
+  border-radius: 999px;
+  background: var(--color-secondary);
+  overflow: hidden;
+  margin-top: 0.5rem;
+}
+.progress-bar__fill {
+  height: 100%;
+  background: var(--color-primary);
+  border-radius: 999px;
+  transition: width 0.3s ease;
+}
+.progress-label {
+  font-size: 0.75rem;
+  color: var(--color-muted-foreground);
+  margin: 0.35rem 0 0;
+}
+
+.resultado .disclaimer {
+  margin-top: 0.75rem;
+}
+
+/* ==========================================================================
+   Seção de metodologia (texto explicativo, dentro da própria calculadora)
+   ========================================================================== */
+
+.content {
+  padding-block: 2rem 1rem;
+  max-width: 72ch;
+  border-top: 1px solid var(--color-border);
+  margin-top: 1rem;
+}
+
+.content h2 {
+  font-family: var(--font-heading);
+  font-size: 1.15rem;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+  margin-top: 2rem;
+  margin-bottom: 0.6rem;
+}
+.content h2:first-child {
+  margin-top: 0;
+}
+
+.content h3 {
+  font-size: 0.95rem;
+  font-weight: 600;
+  margin-top: 1.25rem;
+  margin-bottom: 0.4rem;
+  color: var(--color-primary);
+}
+
+.content p {
+  color: color-mix(in oklch, var(--color-foreground) 88%, transparent);
+  margin-bottom: 0.85rem;
+  line-height: 1.6;
+}
+
+.content ul {
+  list-style: disc;
+  padding-left: 1.25rem;
+  margin-bottom: 0.85rem;
+}
+.content ul li {
+  margin-bottom: 0.35rem;
+  color: color-mix(in oklch, var(--color-foreground) 88%, transparent);
+}
+
+.content code {
+  background: var(--color-secondary);
+  border-radius: 4px;
+  padding: 0.1rem 0.35rem;
+  font-size: 0.85em;
+}
+
+.content .callout {
+  border: 1px solid var(--color-border);
+  background: var(--color-card);
+  border-radius: var(--radius-lg);
+  padding: 1rem;
+  margin-block: 1.25rem;
+  font-size: 0.85rem;
+}
+.content .callout strong {
+  color: var(--color-primary);
+}

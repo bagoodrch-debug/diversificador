@@ -7,8 +7,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <script defer src="/assets/cookie-consent.js"></script>
   <title>Bola de Neve de Dívidas — Many Mens</title>
-  <meta name="description" content="Liste suas dívidas e descubra a ordem ideal de quitação: Bola de Neve (menor saldo primeiro) ou Avalanche (maior juros primeiro), com o tempo e o valor de juros que cada estratégia custa." />
-  <link rel="canonical" href="https://SEU-USUARIO.github.io/dividas/" />
+  <meta name="description" content="Liste suas dívidas e receba um plano de pagamento claro: qual quitar primeiro, quanto pagar em cada uma este mês, e quando ela vira prioridade. Bola de Neve ou Avalanche." />
+  <link rel="canonical" href="https://manymens.com.br/dividas/index.html" />
   <link rel="icon" type="image/png" href="../assets/icons/favicon.png" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -40,7 +40,7 @@
       </button>
       <nav class="main-nav">
         <a href="index.html" aria-current="page">Calculadora</a>
-        <a href="metodologia.html">Metodologia</a>
+        <a href="#metodologia">Metodologia</a>
       </nav>
     </div>
   </header>
@@ -59,6 +59,73 @@
       <p>Esta ferramenta tem fins educacionais e de simulação pessoal. Não constitui recomendação financeira. A simulação não considera multas, taxas adicionais, renegociações ou mudanças futuras nas taxas de juros.</p>
       <p>Os valores são salvos automaticamente neste navegador.</p>
     </footer>
+
+    <article class="content" id="metodologia">
+      <h2>Pra que serve isso, na prática</h2>
+      <p>
+        Quem tem mais de uma dívida quase sempre se pergunta: "qual eu pago
+        primeiro, e quanto?" Essa calculadora responde isso de forma direta:
+        em vez de mostrar só números soltos, ela monta um <strong>plano de
+        pagamento</strong> — diz exatamente qual dívida receber o dinheiro
+        extra este mês, quanto pagar em cada uma das outras, e o que
+        acontece quando cada uma for quitada.
+      </p>
+
+      <h2>Como usar</h2>
+      <ol style="padding-left:1.25rem;list-style:decimal;margin-bottom:.85rem">
+        <li style="margin-bottom:.35rem">Liste cada dívida: nome, saldo devedor, juros que ela cobra por mês, e o pagamento mínimo dela.</li>
+        <li style="margin-bottom:.35rem">Informe quanto você consegue pagar de dívidas, no total, por mês (isso já deve incluir os mínimos de todas).</li>
+        <li style="margin-bottom:.35rem">Escolha o método — Bola de Neve (recomendado) ou Avalanche.</li>
+        <li style="margin-bottom:.35rem">A calculadora mostra o orçamento resumido, alerta se alguma dívida for "armadilha" (veja abaixo), e o plano completo: quem paga o quê, este mês e nos meses seguintes.</li>
+      </ol>
+
+      <h2>Como a conta funciona</h2>
+      <h3>1. As duas estratégias</h3>
+      <ul>
+        <li><strong>Bola de Neve:</strong> ordena as dívidas da menor pra maior saldo devedor. Todo o dinheiro "extra" (o que sobra depois de pagar os mínimos de todas) vai pra menor dívida da lista.</li>
+        <li><strong>Avalanche:</strong> ordena as dívidas da maior pra menor taxa de juros. O extra vai pra dívida mais cara primeiro.</li>
+      </ul>
+      <h3>2. O efeito cascata</h3>
+      <p>
+        Quando a dívida prioritária é quitada, o valor que estava sendo
+        pago nela <strong>não desaparece</strong> — o mínimo dela se soma
+        ao extra e passa a acelerar a próxima dívida da fila. É esse efeito
+        de "bola rolando ladeira abaixo" que dá nome à estratégia, e é por
+        isso que o plano mostra, pra cada dívida, quanto tempo falta até
+        ela virar prioridade.
+      </p>
+      <h3>3. Dívida "armadilha"</h3>
+      <p>
+        A calculadora verifica, pra cada dívida que ainda não é prioridade,
+        se o pagamento mínimo dela cobre os juros que ela gera naquele mês.
+        Se não cobrir, ela entra em crescimento mesmo sendo "paga em dia" —
+        e a ferramenta avisa isso com destaque, porque é um sinal de que
+        vale considerar aumentar o pagamento mínimo dela ou repensar a
+        ordem de prioridade.
+      </p>
+
+      <div class="callout">
+        <strong>Qual escolher?</strong> A Avalanche é sempre igual ou mais
+        barata em juros — nunca perde pra Bola de Neve nesse quesito. Mas a
+        Bola de Neve costuma ser mais fácil de manter na prática, porque
+        você vê dívidas sumindo mais rápido no começo, o que ajuda a não
+        desistir no meio do caminho. A calculadora existe pra você decidir
+        com os dois números na mão, não só com a teoria.
+      </div>
+
+      <h2>Perguntas frequentes</h2>
+      <h3>E se o orçamento não cobrir nem os mínimos?</h3>
+      <p>A calculadora avisa isso diretamente, em vez de fingir que o plano funciona — nesse caso, o caminho costuma ser aumentar o orçamento disponível ou negociar alguma dívida antes de seguir.</p>
+      <h3>Posso trocar de método no meio do caminho?</h3>
+      <p>Sim, o botão de alternar entre Bola de Neve e Avalanche recalcula o plano na hora, com os mesmos dados que você já cadastrou.</p>
+
+      <h2>Limitações</h2>
+      <ul>
+        <li>Assume que as taxas de juros de cada dívida ficam constantes durante toda a simulação.</li>
+        <li>Não considera multas, renegociações, ou mudanças no orçamento disponível ao longo do tempo.</li>
+        <li>Não é recomendação financeira.</li>
+      </ul>
+    </article>
   </main>
 
   <footer class="site-footer">
@@ -68,6 +135,8 @@
         <a href="../carteira/index.html">Alocador de Carteira</a>
         <a href="../reserva/index.html">Reserva de Emergência</a>
         <a href="../vicio/index.html">Quanto Custa Seu Vício</a>
+        <a href="../imovel/index.html">Alugar ou Financiar</a>
+        <a href="../investir/index.html">CDB x Tesouro x Poupança</a>
       </div>
       <p>&copy; <span id="year"></span> Many Mens. Conteúdo educacional — não é recomendação de investimento.</p>
     </div>

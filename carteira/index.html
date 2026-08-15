@@ -7,8 +7,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <script defer src="/assets/cookie-consent.js"></script>
   <title>Distribui Rico — Simulador de Alocação de Carteira</title>
-  <meta name="description" content="Simule como distribuir seu investimento entre Renda Fixa, Ações, Ações no Exterior, FIIs e Ouro, com sugestões de ativos baseadas em cotações reais." />
-  <link rel="canonical" href="https://SEU-USUARIO.github.io/carteira/" />
+  <meta name="description" content="Simule como distribuir seu investimento entre Renda Fixa, Ações, Ações no Exterior, FIIs e Ouro, com sugestões de ativos baseadas em cotações reais. Veja também como usar e como o cálculo funciona." />
+  <link rel="canonical" href="https://manymens.com.br/carteira/index.html" />
 
   <meta property="og:type" content="website" />
   <meta property="og:title" content="Distribui Rico — Simulador de Alocação de Carteira" />
@@ -16,13 +16,14 @@
   <meta property="og:image" content="assets/og/distribui-rico-og.png" />
   <meta name="twitter:card" content="summary_large_image" />
 
-  <link rel="icon" type="image/svg+xml" href="assets/icons/favicon.png" />
+  <link rel="icon" type="image/png" href="assets/icons/favicon.png" />
 
   <link rel="stylesheet" href="css/tokens.css" />
   <link rel="stylesheet" href="css/base.css" />
   <link rel="stylesheet" href="css/layout.css" />
   <link rel="stylesheet" href="css/components.css" />
   <link rel="stylesheet" href="css/pages/home.css" />
+  <link rel="stylesheet" href="css/pages/content.css" />
 </head>
 <body>
   <header class="site-header">
@@ -44,7 +45,7 @@
       </button>
       <nav class="main-nav">
         <a href="index.html" aria-current="page">Simulador</a>
-        <a href="metodologia.html">Metodologia</a>
+        <a href="#metodologia">Metodologia</a>
         <a href="sobre.html">Sobre</a>
       </nav>
     </div>
@@ -58,12 +59,87 @@
     <div id="simulador-root">
       <noscript>Este simulador precisa de JavaScript habilitado para funcionar.</noscript>
     </div>
+
+    <article class="content" id="metodologia">
+      <h2>Pra que serve isso, na prática</h2>
+      <p>
+        A maioria das pessoas sabe, em teoria, que "não deve colocar todo o
+        dinheiro numa coisa só" — mas na hora de decidir quanto vai pra
+        renda fixa, quanto vai pra ações, quanto vai pra fora do país, a
+        conta trava. O Alocador de Carteira existe pra tirar essa decisão
+        da cabeça e transformar em números concretos: você escolhe os
+        percentuais entre cinco classes de ativos, e a ferramenta traduz
+        isso em reais, sugere ativos reais dentro de cada classe (com
+        cotação atualizada) e calcula quantas cotas ou títulos caberiam no
+        valor alocado.
+      </p>
+
+      <h2>Como usar</h2>
+      <ol style="padding-left:1.25rem;list-style:decimal;margin-bottom:.85rem">
+        <li style="margin-bottom:.35rem">Informe o valor total que você tem disponível pra investir.</li>
+        <li style="margin-bottom:.35rem">Ajuste os sliders de cada classe — Renda Fixa, Ações, Ações no Exterior, FIIs e Ouro — até chegar numa distribuição que faça sentido pro seu perfil. Mexer num slider redistribui os outros automaticamente, sempre somando 100%.</li>
+        <li style="margin-bottom:.35rem">Pra cada classe, a ferramenta sugere ativos reais (com preço atualizado) e quantas cotas/títulos você conseguiria comprar com o valor alocado ali.</li>
+        <li style="margin-bottom:.35rem">Não gostou de uma sugestão? Dá pra ocultar (ícone de olho, sem apagar) ou remover de vez, e adicionar outro ativo manualmente ou por busca.</li>
+      </ol>
+      <p>Tudo o que você configura fica salvo automaticamente no seu navegador — não precisa recomeçar do zero a cada visita.</p>
+
+      <h2>De onde vêm os dados</h2>
+      <ul>
+        <li><strong>Ações, BDRs, FIIs e ETF de ouro:</strong> API da <strong>Brapi</strong> (brapi.dev).</li>
+        <li><strong>Ouro spot (XAU/BRL):</strong> AwesomeAPI.</li>
+        <li><strong>Títulos públicos:</strong> API pública do Tesouro Direto.</li>
+      </ul>
+
+      <h2>Por que o site não chama a Brapi diretamente do navegador</h2>
+      <p>
+        Este é um site estático hospedado no GitHub Pages — ele não tem um servidor
+        próprio rodando o tempo todo. Se o token da Brapi fosse colocado no
+        JavaScript do site, qualquer visitante poderia abrir as ferramentas de
+        desenvolvedor do navegador e copiar a chave em segundos. Por isso a chave
+        <strong>nunca</strong> entra em nenhum arquivo público do repositório.
+      </p>
+      <ol style="padding-left:1.25rem;list-style:decimal;margin-bottom:.85rem">
+        <li style="margin-bottom:.35rem">O token da Brapi fica guardado apenas em <em>GitHub Actions Secrets</em>, um cofre do próprio GitHub, associado ao repositório.</li>
+        <li style="margin-bottom:.35rem">Um workflow (<code>.github/workflows/atualizar-cotacoes.yml</code>) roda automaticamente nos servidores do GitHub.</li>
+        <li style="margin-bottom:.35rem">Esse workflow executa <code>scripts/atualizar-cotacoes.mjs</code>, que busca as cotações usando o token e grava o resultado em <code>dados/cotacoes.json</code>.</li>
+        <li style="margin-bottom:.35rem">O site (rodando no navegador de cada visitante) só lê esse arquivo <code>dados/cotacoes.json</code> — que é público, mas não contém nenhuma credencial.</li>
+      </ol>
+      <div class="callout">
+        <strong>Resultado:</strong> o token nunca trafega para o navegador do
+        visitante e nunca aparece no histórico do Git, mesmo o repositório sendo
+        público.
+      </div>
+
+      <h2>Como o cálculo das sugestões funciona</h2>
+      <p>
+        Para cada classe de ativo, o valor alocado é dividido igualmente entre os
+        ativos ativos (não excluídos) daquela classe. A quantidade sugerida de
+        cotas/títulos é o valor por ativo dividido pelo preço unitário,
+        arredondada para baixo. Isso é apenas uma ilustração de proporção — não
+        considera lote mínimo real de negociação, custos de corretagem ou
+        impostos.
+      </p>
+
+      <h2>Perguntas frequentes</h2>
+      <h3>A ferramenta me diz o que comprar?</h3>
+      <p>Não. Ela mostra exemplos reais dentro de cada classe pra deixar a simulação concreta, mas a escolha final — e o risco dela — é sua. Não é recomendação de investimento.</p>
+      <h3>Os dados são em tempo real?</h3>
+      <p>Não no sentido de milissegundo a milissegundo — refletem o último ciclo do robô que atualiza as cotações. Para a maioria das decisões de alocação, essa defasagem é irrelevante.</p>
+      <h3>Posso simular uma carteira que já tenho, em vez de uma nova?</h3>
+      <p>Sim — só informar o valor total que já está investido e ajustar os percentuais pra bater com sua distribuição atual, ou testar cenários de rebalanceamento.</p>
+
+      <h2>Limitações</h2>
+      <ul>
+        <li>Não considera Imposto de Renda, taxas de corretagem ou de administração.</li>
+        <li>As sugestões cobrem uma lista curada de ativos, não a bolsa inteira.</li>
+        <li>Não é recomendação de investimento nem consultoria financeira.</li>
+      </ul>
+    </article>
   </main>
 
   <footer class="site-footer">
     <div class="container site-footer__inner">
       <div class="site-footer__links">
-        <a href="metodologia.html">Metodologia</a>
         <a href="sobre.html">Sobre</a>
       </div>
       <p>&copy; <span id="year"></span> Distribui Rico. Conteúdo educacional — não é recomendação de investimento.</p>

@@ -7,8 +7,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <script defer src="/assets/cookie-consent.js"></script>
   <title>Alugar ou Financiar? — Many Mens</title>
-  <meta name="description" content="Informe o aluguel, o valor do imóvel e a entrada disponível, e descubra em quanto tempo (se algum dia) compensa financiar em vez de alugar e investir a diferença." />
-  <link rel="canonical" href="https://SEU-USUARIO.github.io/imovel/" />
+  <meta name="description" content="Informe o aluguel, o valor do imóvel e a entrada disponível, e descubra em quanto tempo (se algum dia) compensa financiar em vez de alugar e investir a diferença. Veja também como o cálculo funciona." />
+  <link rel="canonical" href="https://manymens.com.br/imovel/index.html" />
   <link rel="icon" type="image/png" href="../assets/icons/favicon.png" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -40,7 +40,7 @@
       </button>
       <nav class="main-nav">
         <a href="index.html" aria-current="page">Calculadora</a>
-        <a href="metodologia.html">Metodologia</a>
+        <a href="#metodologia">Metodologia</a>
       </nav>
     </div>
   </header>
@@ -59,6 +59,77 @@
       <p>Esta ferramenta tem fins educacionais e de simulação pessoal. Não constitui recomendação financeira — decisões de moradia envolvem fatores além do financeiro (estabilidade, liberdade de mudança, contexto familiar).</p>
       <p>Os valores são salvos automaticamente neste navegador.</p>
     </footer>
+
+    <article class="content" id="metodologia">
+      <h2>Pra que serve isso, na prática</h2>
+      <p>
+        "É melhor alugar ou financiar?" é uma das dúvidas mais buscadas de
+        finanças pessoais no Brasil — e a resposta correta depende de
+        números, não de opinião. Essa calculadora simula os dois caminhos
+        com os seus dados reais e mostra em quanto tempo (se algum dia)
+        financiar o imóvel supera financeiramente alugar e investir a
+        diferença.
+      </p>
+
+      <h2>Como usar</h2>
+      <ol style="padding-left:1.25rem;list-style:decimal;margin-bottom:.85rem">
+        <li style="margin-bottom:.35rem">Informe o aluguel mensal, o valor do imóvel, a entrada que você tem disponível, a taxa do financiamento e o prazo.</li>
+        <li style="margin-bottom:.35rem">Ajuste as premissas se quiser (sistema SAC ou PRICE, valorização esperada do imóvel, reajuste anual do aluguel, custos de aquisição) — os valores padrão já são razoáveis.</li>
+        <li style="margin-bottom:.35rem">Veja o veredito no topo do resultado e a tabela comparando o patrimônio de cada caminho ao longo dos anos.</li>
+      </ol>
+
+      <h2>Como a conta funciona</h2>
+      <h3>1. Quem financia</h3>
+      <p>Simulamos o financiamento mês a mês, no sistema escolhido:</p>
+      <ul>
+        <li><strong>SAC:</strong> a parte de amortização da parcela é constante, então a parcela total vai <em>diminuindo</em> com o tempo (menos juros a cada mês, porque o saldo devedor encolhe).</li>
+        <li><strong>PRICE:</strong> a parcela é fixa do início ao fim, mas no total você paga mais juros que no SAC.</li>
+      </ul>
+      <p>
+        O patrimônio de quem financia, em qualquer ponto do tempo, é
+        <code>valor atualizado do imóvel (com valorização) − saldo devedor
+        restante</code>.
+      </p>
+      <h3>2. Quem aluga e investe</h3>
+      <p>
+        Quem aluga começa investindo o mesmo dinheiro que o comprador
+        colocaria como entrada e custos de aquisição. Todo mês, a diferença
+        entre o que o financiamento custaria naquele mês e o aluguel
+        (reajustado uma vez por ano) é aplicada nesse investimento, rendendo
+        no CDI atual. Se em algum momento o aluguel ficar mais caro que a
+        parcela do financiamento teria sido, essa diferença sai do
+        investimento em vez de entrar.
+      </p>
+      <h3>3. O ponto de virada</h3>
+      <p>
+        A cada mês simulado, comparamos os dois patrimônios. O resultado
+        mostra o primeiro mês em que financiar ultrapassa alugar — ou avisa
+        que, no cenário informado, alugar continua sendo melhor durante todo
+        o período simulado.
+      </p>
+
+      <div class="callout">
+        <strong>Por que às vezes "alugar" nunca perde:</strong> quando o CDI
+        está muito mais alto que a valorização esperada do imóvel, o
+        dinheiro investido cresce mais rápido do que o imóvel se valoriza —
+        e nesse cenário, financiar raramente compensa financeiramente,
+        mesmo em prazos longos. Isso é uma leitura real do momento
+        econômico, não um erro da calculadora.
+      </div>
+
+      <h2>Perguntas frequentes</h2>
+      <h3>SAC ou PRICE, qual é "melhor"?</h3>
+      <p>O SAC costuma sair mais barato no total (menos juros pagos), mas exige uma parcela inicial mais alta. O PRICE facilita o começo com parcela menor, mas custa mais juros ao longo do contrato.</p>
+      <h3>A calculadora considera ITBI e cartório?</h3>
+      <p>Sim, como um custo de aquisição percentual sobre o valor do imóvel, editável nas premissas.</p>
+
+      <h2>Limitações</h2>
+      <ul>
+        <li>Valorização do imóvel e reajuste do aluguel são tratados como taxas constantes — na realidade, variam.</li>
+        <li>Não inclui IPTU, condomínio, seguros ou manutenção (assumidos parecidos nos dois cenários, já que aluguéis no Brasil também costumam cobrar condomínio e IPTU do inquilino).</li>
+        <li>Decisões de moradia envolvem fatores além do financeiro — estabilidade, liberdade de mudança, contexto familiar. Esta ferramenta olha só pro lado do dinheiro.</li>
+      </ul>
+    </article>
   </main>
 
   <footer class="site-footer">
