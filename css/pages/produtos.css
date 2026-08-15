@@ -232,22 +232,24 @@
   margin-top: 0.3rem;
 }
 
-/* Botões de afiliado — cor associada à marca, sem reproduzir o logo oficial */
+/* Botões de afiliado — logo real de cada marca */
 .afiliado-btn {
   flex: 1;
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  gap: 0.4rem;
-  padding: 0.55rem 0.5rem;
+  padding: 0.55rem 0.7rem;
   border-radius: var(--radius-sm);
-  font-size: 0.78rem;
-  font-weight: 600;
   transition: filter 0.15s ease, transform 0.15s ease;
 }
+.afiliado-btn img {
+  height: 18px;
+  width: auto;
+  display: block;
+}
 .afiliado-btn:hover { filter: brightness(1.08); transform: translateY(-1px); }
-.afiliado-btn--amazon { background: #ff9900; color: #0c0c0e; }
-.afiliado-btn--ml { background: #fee600; color: #0c0c0e; }
+.afiliado-btn--amazon { background: #ffffff; border: 1px solid var(--border); }
+.afiliado-btn--ml { background: #fee600; }
 
 .produtos__disclaimer {
   margin-top: 2rem;

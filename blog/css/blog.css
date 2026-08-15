@@ -113,7 +113,7 @@
 
 /* Página de artigo individual */
 .artigo {
-  max-width: 68ch;
+  max-width: 900px;
   padding-block: 2rem 4rem;
 }
 .artigo__voltar {
@@ -228,19 +228,21 @@
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  gap: 0.4rem;
-  padding: 0.5rem 0.9rem;
+  padding: 0.55rem 1.1rem;
   border-radius: var(--radius-sm);
-  font-size: 0.78rem;
-  font-weight: 600;
   transition: filter 0.15s ease, transform 0.15s ease;
+}
+.afiliado-btn img {
+  height: 18px;
+  width: auto;
+  display: block;
 }
 .afiliado-btn:hover {
   filter: brightness(1.08);
   transform: translateY(-1px);
 }
-.afiliado-btn--amazon { background: #ff9900; color: #0c0c0e; }
-.afiliado-btn--ml { background: #fee600; color: #0c0c0e; }
+.afiliado-btn--amazon { background: #ffffff; border: 1px solid var(--border); }
+.afiliado-btn--ml { background: #fee600; }
 
 .artigo__disclaimer {
   font-size: 0.75rem !important;
