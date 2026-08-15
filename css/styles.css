@@ -368,3 +368,181 @@ button { font: inherit; color: inherit; background: none; border: none; cursor: 
   opacity: 1;
   transform: translateY(0);
 }
+
+/* ==========================================================================
+   Nossa História — seção institucional, depois das Ferramentas
+   ========================================================================== */
+
+.historia {
+  border-top: 1px solid var(--border);
+  padding-block: 4rem;
+  position: relative;
+  overflow: hidden;
+}
+.historia::before {
+  content: "";
+  position: absolute;
+  inset: auto -10% -30% auto;
+  width: 50vw;
+  height: 50vw;
+  max-width: 520px;
+  max-height: 520px;
+  border-radius: 50%;
+  background: radial-gradient(circle, color-mix(in srgb, var(--gold) 10%, transparent), transparent 70%);
+  pointer-events: none;
+}
+
+.historia__inner {
+  display: grid;
+  grid-template-columns: 1.4fr 1fr;
+  gap: 3rem;
+  align-items: start;
+  position: relative;
+}
+@media (max-width: 860px) {
+  .historia__inner {
+    grid-template-columns: 1fr;
+    gap: 2.5rem;
+  }
+}
+
+.historia__eyebrow {
+  font-family: var(--font-display);
+  text-transform: uppercase;
+  letter-spacing: 0.18em;
+  font-size: 0.72rem;
+  color: var(--gold);
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+.historia__eyebrow::before {
+  content: "";
+  width: 28px;
+  height: 2px;
+  background: var(--gold);
+}
+
+.historia__titulo {
+  font-family: var(--font-display);
+  text-transform: uppercase;
+  font-weight: 400;
+  font-size: clamp(2rem, 5vw, 3.2rem);
+  line-height: 0.98;
+  letter-spacing: 0.005em;
+  margin: 1rem 0 1.5rem;
+}
+
+.historia__texto > p {
+  color: color-mix(in srgb, var(--fg) 85%, transparent);
+  font-size: 0.98rem;
+  line-height: 1.7;
+  margin-bottom: 1.1rem;
+  max-width: 58ch;
+}
+
+.historia__versiculo {
+  position: relative;
+  border-left: 2px solid var(--gold);
+  padding: 0.3rem 0 0.3rem 1.4rem;
+  margin: 1.75rem 0 1.75rem;
+}
+.historia__aspas {
+  position: absolute;
+  top: -1.2rem;
+  left: 0.6rem;
+  font-family: var(--font-display);
+  font-size: 3.5rem;
+  color: var(--gold);
+  opacity: 0.5;
+  line-height: 1;
+}
+.historia__versiculo p {
+  font-size: 1.05rem;
+  font-style: italic;
+  color: var(--fg);
+  line-height: 1.5;
+  margin: 0 0 0.4rem;
+  max-width: 46ch;
+}
+.historia__versiculo cite {
+  font-style: normal;
+  font-size: 0.78rem;
+  color: var(--muted);
+  letter-spacing: 0.03em;
+}
+
+.historia__frase-final {
+  font-family: var(--font-display);
+  font-size: 1.15rem;
+  text-transform: uppercase;
+  letter-spacing: 0.01em;
+  color: var(--fg) !important;
+  line-height: 1.4 !important;
+  margin-bottom: 1.75rem !important;
+}
+
+/* Lado visual: selo + números */
+.historia__visual {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2.5rem;
+  padding-top: 1.5rem;
+}
+.historia__selo {
+  width: 190px;
+  height: 190px;
+  border-radius: 50%;
+  overflow: hidden;
+  border: 1px solid var(--border);
+  box-shadow: var(--shadow-md);
+  transform: rotate(-4deg);
+}
+.historia__selo img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.historia__stats {
+  display: flex;
+  gap: 1.5rem;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+.historia__stat {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+.historia__stat strong {
+  font-family: var(--font-display);
+  font-size: 2.1rem;
+  color: var(--gold);
+  line-height: 1;
+}
+.historia__stat span {
+  font-size: 0.72rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--muted);
+  margin-top: 0.35rem;
+}
+
+@media (max-width: 860px) {
+  .historia__visual {
+    flex-direction: row;
+    justify-content: center;
+    padding-top: 0;
+  }
+  .historia__selo {
+    width: 120px;
+    height: 120px;
+  }
+  .historia__stats {
+    flex-direction: column;
+    gap: 0.9rem;
+  }
+}
