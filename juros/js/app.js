@@ -21,20 +21,23 @@ function persist() {
   save(KEYS.STATE, { ...state });
 }
 
-/** Simula mês a mês, devolvendo o saldo final e a série anual. */
+/** Simula mês a mês. A granularidade da série devolvida acompanha a unidade
+ *  escolhida pelo usuário: mês a mês se tempoPeriodo="mes", ano a ano se
+ *  tempoPeriodo="ano" — assim a tabela nunca fica vazia ou "errada". */
 function simular({ valorInicial, aporteMensal, taxa, taxaPeriodo, tempo, tempoPeriodo }) {
   const taxaMensal = taxaPeriodo === "ano" ? Math.pow(1 + taxa / 100, 1 / 12) - 1 : taxa / 100;
-  const meses = tempoPeriodo === "ano" ? Math.round(tempo * 12) : Math.round(tempo);
+  const totalMeses = tempoPeriodo === "ano" ? Math.round(tempo * 12) : Math.round(tempo);
+  const passoMeses = tempoPeriodo === "ano" ? 12 : 1;
 
   let saldo = valorInicial;
   let totalAportado = valorInicial;
-  const serieAnual = [];
+  const serie = [];
 
-  for (let mes = 1; mes <= meses; mes++) {
+  for (let mes = 1; mes <= totalMeses; mes++) {
     saldo = saldo * (1 + taxaMensal) + aporteMensal;
     totalAportado += aporteMensal;
-    if (mes % 12 === 0 || mes === meses) {
-      serieAnual.push({ mes, saldo, totalAportado, juros: saldo - totalAportado });
+    if (mes % passoMeses === 0 || mes === totalMeses) {
+      serie.push({ mes, saldo, totalAportado, juros: saldo - totalAportado });
     }
   }
 
@@ -42,7 +45,8 @@ function simular({ valorInicial, aporteMensal, taxa, taxaPeriodo, tempo, tempoPe
     valorFinal: saldo,
     totalAportado,
     totalJuros: saldo - totalAportado,
-    serieAnual,
+    serie,
+    unidadeSerie: tempoPeriodo === "ano" ? "ano" : "mes",
   };
 }
 
@@ -79,10 +83,22 @@ function render(root) {
       renderResultado(root);
     },
   });
-  const taxaPeriodoToggle = periodoToggle(state.taxaPeriodo, ["mes", "% ao mês"], ["ano", "% ao ano"], (v) => {
-    state.taxaPeriodo = v;
-    persist();
-    render(root);
+  const taxaPeriodoToggle = periodoToggle({
+    valorAtual: state.taxaPeriodo,
+    opcaoA: ["mes", "% ao mês"],
+    opcaoB: ["ano", "% ao ano"],
+    onChange: (novoPeriodo) => {
+      if (novoPeriodo !== state.taxaPeriodo) {
+        state.taxa =
+          novoPeriodo === "ano"
+            ? (Math.pow(1 + state.taxa / 100, 12) - 1) * 100 // mês → ano
+            : (Math.pow(1 + state.taxa / 100, 1 / 12) - 1) * 100; // ano → mês
+        state.taxa = Math.round(state.taxa * 100) / 100;
+        state.taxaPeriodo = novoPeriodo;
+        persist();
+        render(root);
+      }
+    },
   });
 
   const tempoInput = el("input", {
@@ -97,10 +113,22 @@ function render(root) {
       renderResultado(root);
     },
   });
-  const tempoPeriodoToggle = periodoToggle(state.tempoPeriodo, ["mes", "Meses"], ["ano", "Anos"], (v) => {
-    state.tempoPeriodo = v;
-    persist();
-    render(root);
+  const tempoPeriodoToggle = periodoToggle({
+    valorAtual: state.tempoPeriodo,
+    opcaoA: ["mes", "Meses"],
+    opcaoB: ["ano", "Anos"],
+    onChange: (novoPeriodo) => {
+      if (novoPeriodo !== state.tempoPeriodo) {
+        state.tempo =
+          novoPeriodo === "ano"
+            ? Math.round((state.tempo / 12) * 100) / 100 // meses → anos
+            : Math.round(state.tempo * 12); // anos → meses
+        if (state.tempo <= 0) state.tempo = 1;
+        state.tempoPeriodo = novoPeriodo;
+        persist();
+        render(root);
+      }
+    },
   });
 
   const card = el("section", { class: "panel card" }, [
@@ -133,30 +161,23 @@ function moneyField(valor, onChange) {
   });
 }
 
-function periodoToggle(atual, [valorA, labelA], [valorB, labelB], onChange) {
-  const botoes = [];
-  const wrap = el(
+function periodoToggle({ valorAtual, opcaoA, opcaoB, onChange }) {
+  return el(
     "div",
     { class: "freq-toggle", style: "margin-top:.5rem" },
-    [
-      [valorA, labelA],
-      [valorB, labelB],
-    ].map(([value, label]) => {
-      const btn = el(
+    [opcaoA, opcaoB].map(([value, label]) =>
+      el(
         "button",
         {
           type: "button",
           class: "freq-toggle__opt",
-          "aria-pressed": String(atual === value),
+          "aria-pressed": String(valorAtual === value),
           onClick: () => onChange(value),
         },
         label,
-      );
-      botoes.push(btn);
-      return btn;
-    }),
+      ),
+    ),
   );
-  return wrap;
 }
 
 function renderResultado(root) {
@@ -165,6 +186,7 @@ function renderResultado(root) {
   clear(host);
 
   const r = simular(state);
+  const colunaLabel = r.unidadeSerie === "ano" ? "Ano" : "Mês";
 
   host.append(
     el("section", { class: "panel card" }, [
@@ -175,13 +197,17 @@ function renderResultado(root) {
         resultItem("Total em juros", brl(r.totalJuros)),
       ]),
       el("table", { class: "tabela-anual" }, [
-        el("thead", {}, el("tr", {}, [el("th", {}, "Ano"), el("th", {}, "Total investido"), el("th", {}, "Juros acumulados"), el("th", {}, "Saldo")])),
+        el(
+          "thead",
+          {},
+          el("tr", {}, [el("th", {}, colunaLabel), el("th", {}, "Total investido"), el("th", {}, "Juros acumulados"), el("th", {}, "Saldo")]),
+        ),
         el(
           "tbody",
           {},
-          r.serieAnual.map((linha, i) =>
+          r.serie.map((linha, i) =>
             el("tr", {}, [
-              el("td", {}, `${i + 1}`),
+              el("td", {}, r.unidadeSerie === "ano" ? `${i + 1}` : `${linha.mes}`),
               el("td", {}, brl(linha.totalAportado)),
               el("td", {}, brl(linha.juros)),
               el("td", {}, brl(linha.saldo)),
