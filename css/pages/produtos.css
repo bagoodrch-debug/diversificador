@@ -136,7 +136,7 @@
 
 
 .loja-badge--ml img {
-  width: 140%;
+  width: 200%;
   height: auto;
   max-width: none;
   object-fit: contain;
@@ -238,21 +238,18 @@
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  padding: 0.55rem 0.7rem;
+  padding: 0.6rem 0.8rem;
   border-radius: var(--radius-sm);
   transition: filter 0.15s ease, transform 0.15s ease;
 }
 .afiliado-btn img {
-  height: 30px;
+  height: 26px;
   width: auto;
   display: block;
 }
 .afiliado-btn:hover { filter: brightness(1.08); transform: translateY(-1px); }
-.afiliado-btn--amazon { background: #ffffff; border: 1px solid var(--border); }
+.afiliado-btn--amazon { background: #ffffff; }
 .afiliado-btn--ml { background: #fee600; }
-.afiliado-btn--amazon img { height: 28px; }
-.afiliado-btn--ml img { height: 30px; }
-
 
 .produtos__disclaimer {
   margin-top: 2rem;

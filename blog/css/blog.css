@@ -228,12 +228,12 @@
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  padding: 0.55rem 1.1rem;
+  padding: 0.6rem 1.3rem;
   border-radius: var(--radius-sm);
   transition: filter 0.15s ease, transform 0.15s ease;
 }
 .afiliado-btn img {
-  height: 18px;
+  height: 30px;
   width: auto;
   display: block;
 }
@@ -241,7 +241,7 @@
   filter: brightness(1.08);
   transform: translateY(-1px);
 }
-.afiliado-btn--amazon { background: #ffffff; border: 1px solid var(--border); }
+.afiliado-btn--amazon { background: #ffffff; }
 .afiliado-btn--ml { background: #fee600; }
 
 .artigo__disclaimer {
