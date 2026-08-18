@@ -250,8 +250,8 @@
 .afiliado-btn:hover { filter: brightness(1.08); transform: translateY(-1px); }
 .afiliado-btn--amazon { background: #ffffff; border: 1px solid var(--border); }
 .afiliado-btn--ml { background: #fee600; }
-.afiliado-btn--amazon img { height: 30px; }
-.afiliado-btn--ml img { height: 36px; }
+.afiliado-btn--amazon img { height: 28px; }
+.afiliado-btn--ml img { height: 30px; }
 
 
 .produtos__disclaimer {
