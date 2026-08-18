@@ -39,6 +39,7 @@
       </button>
       <nav class="main-nav">
         <a href="./" aria-current="page">Calculadora</a>
+        <a href="#metodologia">Metodologia</a>
       </nav>
     </div>
   </header>
@@ -57,6 +58,73 @@
       <p>Esta ferramenta tem fins educacionais e de simulação pessoal. Não constitui recomendação de investimento.</p>
       <p>Os valores são salvos automaticamente neste navegador.</p>
     </footer>
+
+    <article class="content" id="metodologia">
+      <h2>Pra que serve isso, na prática</h2>
+      <p>
+        "Juros sobre juros" é fácil de dizer e difícil de sentir na pele —
+        até você ver o número. Essa calculadora existe pra tirar o efeito
+        dos juros compostos do campo da teoria e mostrar, com os seus
+        próprios valores, o quanto um aporte mensal constante pode virar ao
+        longo do tempo. Serve tanto pra planejar quanto pra entender por que
+        "começar cedo" é repetido tanto quando o assunto é investimento.
+      </p>
+
+      <h2>Como usar</h2>
+      <ol style="padding-left:1.25rem;list-style:decimal;margin-bottom:.85rem">
+        <li style="margin-bottom:.35rem">Informe o valor inicial (pode ser zero, se você está começando do nada) e o aporte mensal que pretende fazer.</li>
+        <li style="margin-bottom:.35rem">Informe a taxa de juros — em % ao mês ou % ao ano, o que for mais fácil pra você. Trocar a unidade converte o número automaticamente, sem precisar recalcular na mão.</li>
+        <li style="margin-bottom:.35rem">Informe o tempo — em meses ou anos, mesma lógica da taxa.</li>
+        <li style="margin-bottom:.35rem">Veja o resultado: valor final, total investido, total em juros, e uma tabela detalhando a evolução mês a mês ou ano a ano.</li>
+      </ol>
+
+      <h2>Como a conta funciona</h2>
+      <h3>1. Simulação, não fórmula fechada</h3>
+      <p>
+        Em vez de aplicar só a fórmula clássica de juros compostos (que
+        funciona bem sem aporte mensal), a calculadora simula mês a mês:
+        todo mês, aplica o rendimento sobre o saldo acumulado e soma o
+        aporte. Isso dá o resultado correto mesmo com aportes mensais
+        constantes, que a fórmula fechada simples não cobre sozinha.
+      </p>
+      <h3>2. Conversão de taxa anual pra mensal</h3>
+      <p>
+        Se você informou a taxa em % ao ano, ela precisa virar uma taxa
+        mensal equivalente antes de entrar na simulação — e isso
+        <strong>não é</strong> simplesmente dividir por 12. A conversão
+        correta é <code>(1 + taxa anual) elevado a 1/12, menos 1</code>,
+        que é a forma de manter o mesmo rendimento composto ao longo do
+        ano, seja calculado mês a mês ou de uma vez.
+      </p>
+      <h3>3. A tabela acompanha a unidade escolhida</h3>
+      <p>
+        Se você está pensando em meses, a tabela detalha mês a mês. Se está
+        pensando em anos, detalha ano a ano. Isso evita a situação de pedir
+        uma simulação de 6 meses e a tabela aparecer quase vazia porque
+        estava agrupando por ano.
+      </p>
+
+      <div class="callout">
+        <strong>Por que o gráfico "acelera" nos últimos anos:</strong> é o
+        próprio efeito dos juros compostos aparecendo — o rendimento de um
+        mês passa a render também nos meses seguintes. Quanto mais tempo
+        passa, maior a fatia do total que vem do rendimento acumulado, não
+        do dinheiro que você efetivamente colocou.
+      </div>
+
+      <h2>Perguntas frequentes</h2>
+      <h3>Por que o valor final parece "pequeno" nos primeiros anos?</h3>
+      <p>Os juros compostos têm efeito cumulativo — no começo, o rendimento sobre o rendimento ainda é pequeno. É nos anos finais da simulação que esse efeito realmente aparece, por isso simulações de prazo curto tendem a parecer menos impressionantes que as de prazo longo.</p>
+      <h3>A taxa usada é real ou nominal?</h3>
+      <p>É a taxa que você digitar — a calculadora não desconta inflação automaticamente. Se quiser simular em termos reais (poder de compra), informe uma taxa já descontada da inflação esperada.</p>
+
+      <h2>Limitações</h2>
+      <ul>
+        <li>Assume que a taxa de juros fica constante durante toda a simulação (na prática, taxas de investimento variam com o tempo).</li>
+        <li>Não desconta Imposto de Renda nem taxas de administração.</li>
+        <li>Não é recomendação de investimento.</li>
+      </ul>
+    </article>
   </main>
 
   <footer class="site-footer">
