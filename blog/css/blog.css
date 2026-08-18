@@ -228,21 +228,18 @@
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  padding: 0.6rem 1.3rem;
-  border-radius: var(--radius-sm);
   transition: filter 0.15s ease, transform 0.15s ease;
 }
 .afiliado-btn img {
-  height: 30px;
+  height: 38px;
   width: auto;
   display: block;
+  border-radius: var(--radius-sm);
 }
 .afiliado-btn:hover {
   filter: brightness(1.08);
   transform: translateY(-1px);
 }
-.afiliado-btn--amazon { background: #ffffff; }
-.afiliado-btn--ml { background: #fee600; }
 
 .artigo__disclaimer {
   font-size: 0.75rem !important;
