@@ -146,12 +146,15 @@
 }
 
 
-/* Imagem do produto */
+/* Imagem do produto — 15% de respiro fixo nas bordas; imagem alta/fina
+   encosta em cima/embaixo, imagem larga encosta nas laterais. */
 .produto-card__img {
   display: flex;
   align-items: center;
   justify-content: center;
-  height: 110px;
+  aspect-ratio: 1 / 1;
+  box-sizing: border-box;
+  padding: 15%;
   border-radius: var(--radius-sm);
   background: var(--surface-2);
   border: 1px dashed var(--border);

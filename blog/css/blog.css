@@ -204,6 +204,8 @@
 .artigo__produto img {
   width: 90px;
   height: 90px;
+  box-sizing: border-box;
+  padding: 15%;
   object-fit: contain;
   background: var(--surface-2);
   border-radius: var(--radius-md);
