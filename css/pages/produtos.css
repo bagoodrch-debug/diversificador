@@ -243,13 +243,16 @@
   transition: filter 0.15s ease, transform 0.15s ease;
 }
 .afiliado-btn img {
-  height: 26px;
+  height: 30px;
   width: auto;
   display: block;
 }
 .afiliado-btn:hover { filter: brightness(1.08); transform: translateY(-1px); }
 .afiliado-btn--amazon { background: #ffffff; border: 1px solid var(--border); }
 .afiliado-btn--ml { background: #fee600; }
+.afiliado-btn--amazon img { height: 30px; }
+.afiliado-btn--ml img { height: 36px; }
+
 
 .produtos__disclaimer {
   margin-top: 2rem;
