@@ -96,3 +96,9 @@ html, body {
   overflow-x: hidden;
   max-width: 100%;
 }
+/* Trava de segurança pra Flexbox em telas pequenas: sem isso, inputs e
+   botões dentro de uma linha (display:flex) não encolhem além do tamanho
+   "natural" deles, e empurram conteúdo pra fora da tela no celular. */
+input, select, textarea, button {
+  min-width: 0;
+}

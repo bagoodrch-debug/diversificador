@@ -297,16 +297,19 @@ function produtoCard(p, destaque) {
       el("span", {}, "Valor final líquido"),
       el("strong", {}, brl(r.valorFinalLiquido)),
     ]),
-    el(
-      "ul",
-      { class: "produto-card__lista produto-card__lista--boas" },
-      p.vantagens.map((v) => el("li", {}, v)),
-    ),
-    el(
-      "ul",
-      { class: "produto-card__lista produto-card__lista--ruins" },
-      p.desvantagens.map((v) => el("li", {}, v)),
-    ),
+    el("details", { class: "produto-card__detalhes" }, [
+      el("summary", {}, "Vantagens e desvantagens"),
+      el(
+        "ul",
+        { class: "produto-card__lista produto-card__lista--boas" },
+        p.vantagens.map((v) => el("li", {}, v)),
+      ),
+      el(
+        "ul",
+        { class: "produto-card__lista produto-card__lista--ruins" },
+        p.desvantagens.map((v) => el("li", {}, v)),
+      ),
+    ]),
   ]);
 }
 
