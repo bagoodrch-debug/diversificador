@@ -1,0 +1,156 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8" />
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3680170972347280"
+     crossorigin="anonymous"></script>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <script defer src="/assets/cookie-consent.js"></script>
+  <title>Consórcio vale a pena? — Many Mens</title>
+  <meta name="description" content="Compare o consórcio com investir o valor equivalente ou financiar (SAC) — com os números do seu próprio contrato, sem enrolação. Veja também como o cálculo funciona." />
+  <link rel="canonical" href="https://manymens.com.br/consorcio/" />
+  <link rel="icon" type="image/png" href="../assets/icons/favicon.png" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Sora:wght@600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+
+  <link rel="stylesheet" href="css/tokens.css" />
+  <link rel="stylesheet" href="css/base.css" />
+  <link rel="stylesheet" href="css/layout.css" />
+  <link rel="stylesheet" href="css/components.css" />
+  <link rel="stylesheet" href="css/consorcio.css" />
+</head>
+<body>
+  <header class="site-header">
+    <div class="container site-header__inner">
+      <div class="header-left">
+        <a href="../" class="back-to-hub" aria-label="Voltar para o site principal (Many Mens)" title="Voltar para Many Mens">
+          <img src="../assets/icons/favicon.png" alt="" />
+        </a>
+        <a href="./" class="brand">
+          <svg class="brand__mark" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+            <path d="M8 12h16M8 12l3-4M8 12l3 4M24 20H8M24 20l-3-4M24 20l-3 4" stroke="var(--color-primary)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+          <span>Consórcio <span class="brand__gold">vale a pena?</span></span>
+        </a>
+      </div>
+      <button class="nav-toggle icon-btn" aria-label="Abrir menu" aria-expanded="false">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 6h16M4 12h16M4 18h16"/></svg>
+      </button>
+      <nav class="main-nav">
+        <a href="./" aria-current="page">Comparador</a>
+        <a href="#metodologia">Metodologia</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="container">
+    <div class="consorcio-hero">
+      <h1>Consórcio vale a pena?</h1>
+      <p>Coloque os números do seu contrato e compare com investir o equivalente ou financiar — sem depender de gerador ou promessa, só matemática.</p>
+    </div>
+
+    <div id="consorcio-root">
+      <noscript>Esta calculadora precisa de JavaScript habilitado para funcionar.</noscript>
+    </div>
+
+    <footer class="sim__disclaimer" style="margin-top:1rem">
+      <p>Esta ferramenta tem fins educacionais e de simulação pessoal. Não constitui recomendação financeira. Regras, taxas e índices de reajuste variam entre administradoras — confira sempre o contrato real.</p>
+      <p>Os valores são salvos automaticamente neste navegador.</p>
+    </footer>
+
+    <article class="content" id="metodologia">
+      <h2>Pra que serve isso, na prática</h2>
+      <p>
+        "Consórcio sem juros" é uma das frases mais repetidas — e mais
+        incompletas — do mercado financeiro brasileiro. Não ter juros no
+        nome não significa não ter custo: existe uma taxa de administração
+        (geralmente entre 15% e 25% do valor do bem) e o saldo devedor é
+        reajustado todo ano por um índice de inflação (IGPM, INCC ou
+        IPCA, dependendo do bem). Essa calculadora simula isso mês a mês,
+        com os números do seu contrato, e compara com dois caminhos
+        alternativos: investir o equivalente, ou financiar.
+      </p>
+
+      <h2>Como usar</h2>
+      <ol style="padding-left:1.25rem;list-style:decimal;margin-bottom:.85rem">
+        <li style="margin-bottom:.35rem">Informe o valor do bem (ou da carta de crédito), o prazo em meses, a taxa de administração total e o índice de reajuste anual — todos esses números estão no seu contrato de consórcio.</li>
+        <li style="margin-bottom:.35rem">Ajuste as premissas: quanto o bem deve se valorizar por ano, e a taxa de um financiamento SAC pra comparação (o rendimento do investimento usa o CDI atual automaticamente).</li>
+        <li style="margin-bottom:.35rem">Veja os três cenários lado a lado — Consórcio, Investir e comprar à vista depois, e Financiamento — com o patrimônio final de cada um em destaque.</li>
+      </ol>
+
+      <h2>Como a conta funciona</h2>
+      <h3>1. O consórcio</h3>
+      <p>
+        O saldo devedor já nasce maior que o valor do bem — é o valor do
+        bem mais a taxa de administração embutida. A cada 12 meses, esse
+        saldo é reajustado pelo índice informado. A parcela de cada mês é
+        sempre <code>saldo devedor ÷ meses restantes</code> — por isso ela
+        sobe ao longo do contrato, mesmo sem "juro" nenhum no nome: quem
+        sobe é o saldo (pela inflação), não uma taxa de juros.
+      </p>
+      <h3>2. Investir o equivalente</h3>
+      <p>
+        Pra ser uma comparação justa, simulamos alguém investindo, todo
+        mês, o <strong>mesmo valor</strong> que seria a parcela do
+        consórcio naquele mês específico — nem mais, nem menos. Esse
+        valor rende à taxa do CDI atual, buscada automaticamente. No
+        final do prazo, comparamos esse saldo acumulado com o valor do
+        bem já valorizado, pra ver se dava (ou não) pra comprar à vista.
+      </p>
+      <h3>3. Financiamento (SAC)</h3>
+      <p>
+        Sistema de Amortização Constante — a parte de amortização da
+        parcela é fixa, então a parcela total <em>diminui</em> com o
+        tempo (menos juros a cada mês, porque o saldo devedor encolhe).
+        Diferente do consórcio, a posse do bem é imediata, sem depender
+        de sorteio ou lance.
+      </p>
+
+      <div class="callout">
+        <strong>Por que essa ferramenta não força o consórcio a perder:</strong>
+        testamos matematicamente e, em cenários realistas de hoje (CDI
+        alto comparado à valorização típica de um bem), investir tende a
+        ganhar — mas o resultado muda se você colocar um CDI baixo e uma
+        valorização de bem muito alta. É assim de propósito: a ferramenta
+        calcula com os números que você fornecer, não entrega uma
+        resposta pronta.
+      </div>
+
+      <h2>Perguntas frequentes</h2>
+      <h3>Por que a contemplação não entra na conta?</h3>
+      <p>Porque ela é uma loteria — depende de sorteio ou lance, sem data garantida. A simulação presume que você teve o uso do bem durante todo o prazo, o que é o cenário mais favorável ao consórcio; se a contemplação demorar, o resultado real tende a ficar pior pra essa opção, não melhor.</p>
+      <h3>A taxa de administração é sempre cobrada "adiantada"?</h3>
+      <p>Varia por administradora. Este simulador considera a taxa distribuída igualmente entre todas as parcelas (o modelo mais comum e verificável) — se a sua for concentrada no início, o efeito prático pra quem desiste cedo é ainda pior do que o simulado aqui.</p>
+      <h3>E se eu não for comprar o bem, só especular com a carta?</h3>
+      <p>Essa ferramenta não cobre revenda de cota no mercado secundário — geralmente feita com deságio (perda), o que é outro ponto de atenção que vale pesquisar separadamente antes de contar com essa saída.</p>
+
+      <h2>Limitações</h2>
+      <ul>
+        <li>Presume que o consórcio foi contemplado a tempo de usar o bem por todo o prazo simulado — na prática, a contemplação não é garantida nessa janela.</li>
+        <li>Índices de reajuste, taxas de administração e regras de rateio variam entre administradoras e tipos de bem — confira sempre o contrato real.</li>
+        <li>Não considera Imposto de Renda sobre o rendimento do investimento, nem custos de manutenção/seguro do bem em nenhum dos três cenários.</li>
+        <li>Não é recomendação financeira.</li>
+      </ul>
+    </article>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container site-footer__inner">
+      <div class="site-footer__links">
+        <a href="../">Many Mens</a>
+        <a href="../carteira/">Alocador de Carteira</a>
+        <a href="../reserva/">Reserva de Emergência</a>
+        <a href="../vicio/">Quanto Custa Seu Vício</a>
+        <a href="../dividas/">Bola de Neve de Dívidas</a>
+        <a href="../imovel/">Alugar ou Financiar</a>
+        <a href="../investir/">CDB x Tesouro x Poupança</a>
+        <a href="../juros/">Juros Compostos</a>
+      </div>
+      <p>&copy; <span id="year"></span> Many Mens. Conteúdo educacional — não é recomendação de investimento.</p>
+    </div>
+  </footer>
+
+  <script type="module" src="js/app.js"></script>
+</body>
+</html>
