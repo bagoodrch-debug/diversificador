@@ -1,11 +1,11 @@
 /* ==========================================================================
    Manual do Homem — blog
    ========================================================================== */
-
+ 
 .blog {
   padding-block: 2.5rem 4rem;
 }
-
+ 
 .blog__heading {
   max-width: 60ch;
   margin-bottom: 2.5rem;
@@ -31,14 +31,14 @@
   color: var(--muted);
   font-size: 0.95rem;
 }
-
+ 
 /* Grade de artigos */
 .artigos-grid {
   display: grid;
   gap: 1.5rem;
   grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
 }
-
+ 
 .artigo-card {
   display: flex;
   flex-direction: column;
@@ -110,7 +110,7 @@
 .artigo-card--em-breve p {
   margin: 0;
 }
-
+ 
 /* Página de artigo individual */
 .artigo {
   max-width: 900px;
@@ -179,7 +179,7 @@
 .artigo article strong {
   color: var(--fg);
 }
-
+ 
 /* Caixa de recomendação de produto, dentro do artigo */
 .artigo__recomendacao {
   border: 1px solid var(--gold);
@@ -242,7 +242,7 @@
   filter: brightness(1.08);
   transform: translateY(-1px);
 }
-
+ 
 .artigo__disclaimer {
   font-size: 0.75rem !important;
   color: var(--muted) !important;
@@ -250,7 +250,7 @@
   padding-top: 1rem;
   margin-top: 2rem !important;
 }
-
+ 
 @media (max-width: 560px) {
   .artigo__produto {
     flex-direction: column;
@@ -261,7 +261,7 @@
     height: 72px;
   }
 }
-
+ 
 /* ==========================================================================
    Anúncios fixos na borda da tela — mesmo padrão usado na home
    ========================================================================== */
@@ -292,4 +292,48 @@
 }
 .ad-rail .ad-slot__label {
   margin-bottom: 0;
+}
+/* ==========================================================================
+   CTA de ferramenta dentro do artigo (link em destaque pra calculadora)
+   ========================================================================== */
+.ferramenta-cta {
+  border: 1px solid var(--gold);
+  border-radius: var(--radius-lg);
+  background: linear-gradient(160deg, var(--surface), color-mix(in srgb, var(--gold) 8%, var(--surface)));
+  padding: 1.5rem;
+  margin: 1.75rem 0;
+  text-align: center;
+}
+.ferramenta-cta__eyebrow {
+  display: inline-block;
+  font-family: var(--font-display);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  font-size: 0.68rem;
+  color: var(--gold);
+  margin-bottom: 0.6rem;
+}
+.ferramenta-cta h2 {
+  margin-top: 0 !important;
+  font-size: 1.15rem !important;
+}
+.ferramenta-cta p {
+  max-width: 52ch;
+  margin-inline: auto;
+  font-size: 0.9rem !important;
+}
+.ferramenta-cta__btn {
+  display: inline-block;
+  margin-top: 1rem;
+  background: var(--gold);
+  color: #0c0c0e;
+  font-weight: 700;
+  font-size: 0.9rem;
+  padding: 0.75rem 1.5rem;
+  border-radius: 999px;
+  transition: filter 0.15s ease, transform 0.15s ease;
+}
+.ferramenta-cta__btn:hover {
+  filter: brightness(1.08);
+  transform: translateY(-1px);
 }
