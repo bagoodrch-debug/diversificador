@@ -220,3 +220,81 @@
 .content .callout strong {
   color: var(--color-primary);
 }
+
+/* ==========================================================================
+   Adições: toggle de tipo de bem, texto de apoio, legenda e gráfico
+   ========================================================================== */
+
+.panel-lead {
+  font-size: 0.85rem;
+  color: var(--color-muted-foreground);
+  margin: -0.5rem 0 1.1rem;
+  line-height: 1.5;
+}
+
+.freq-toggle {
+  display: flex;
+  gap: 0.4rem;
+  margin-bottom: 0.5rem;
+}
+.freq-toggle__opt {
+  flex: 1;
+  padding: 0.55rem 0.6rem;
+  border-radius: var(--radius-md);
+  border: 1px solid var(--color-border);
+  background: var(--color-secondary);
+  font-size: 0.82rem;
+  color: var(--color-muted-foreground);
+  transition: background-color 0.15s ease, color 0.15s ease, border-color 0.15s ease;
+}
+.freq-toggle__opt[aria-pressed="true"] {
+  background: var(--color-primary);
+  color: var(--color-primary-foreground);
+  border-color: var(--color-primary);
+  font-weight: 600;
+}
+
+.card-resultado h3 {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+.card-resultado__dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+/* ------------------------------ Gráfico de linhas ---------------------------- */
+
+.grafico-legenda {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  margin-bottom: 1rem;
+}
+.grafico-legenda__item {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  font-size: 0.82rem;
+  color: var(--color-muted-foreground);
+}
+.grafico-legenda__cor {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+.grafico-wrap {
+  width: 100%;
+  overflow-x: auto;
+}
+.grafico-wrap svg {
+  width: 100%;
+  height: auto;
+  min-width: 480px;
+  display: block;
+}
