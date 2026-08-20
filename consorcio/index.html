@@ -82,21 +82,41 @@
       <h2>Como a conta funciona</h2>
       <h3>1. O consórcio</h3>
       <p>
-        O saldo devedor já nasce maior que o valor do bem — é o valor do
-        bem mais a taxa de administração embutida. A cada 12 meses, esse
-        saldo é reajustado pelo índice informado. A parcela de cada mês é
-        sempre <code>saldo devedor ÷ meses restantes</code> — por isso ela
-        sobe ao longo do contrato, mesmo sem "juro" nenhum no nome: quem
-        sobe é o saldo (pela inflação), não uma taxa de juros.
+        O saldo devedor já nasce maior que o valor do bem — é o valor
+        original mais a taxa de administração, aplicada uma única vez
+        sobre o valor da carta (não sobre o saldo restante, e não cobrada
+        de uma vez só: ela é diluída dentro das parcelas ao longo de todo
+        o prazo). A cada 12 meses, esse saldo é reajustado pelo índice
+        informado. A parcela de cada mês é sempre
+        <code>saldo devedor ÷ meses restantes</code> — por isso ela sobe
+        ao longo do contrato, mesmo sem "juro" nenhum no nome.
+      </p>
+      <p>
+        No resultado, separamos o total pago em três partes bem
+        diferentes: o <strong>valor original</strong> do bem, a
+        <strong>taxa de administração</strong> (fixa, calculada só sobre o
+        valor original) e o <strong>efeito dos reajustes</strong> (o
+        quanto os reajustes anuais adicionaram por cima disso). Misturar
+        essas duas últimas numa coisa só, chamando tudo de "taxa", seria
+        impreciso — são custos de natureza diferente.
       </p>
       <h3>2. Investir o equivalente</h3>
       <p>
         Pra ser uma comparação justa, simulamos alguém investindo, todo
         mês, o <strong>mesmo valor</strong> que seria a parcela do
         consórcio naquele mês específico — nem mais, nem menos. Esse
-        valor rende à taxa do CDI atual, buscada automaticamente. No
-        final do prazo, comparamos esse saldo acumulado com o valor do
-        bem já valorizado, pra ver se dava (ou não) pra comprar à vista.
+        valor rende à taxa do CDI atual, mês a mês (juros compostos reais,
+        não uma conta anual simplificada), com Imposto de Renda descontado
+        só sobre o rendimento (nunca sobre o valor aportado), usando a
+        alíquota regressiva oficial de acordo com o prazo total — ou zero,
+        se você marcar a opção "isento".
+      </p>
+      <p>
+        O patrimônio final dessa opção é o <strong>saldo investido
+        inteiro</strong>, líquido de IR — não descontamos o valor do bem
+        dele. O que fazemos é mostrar essa mesma quantia dividida em duas
+        partes, só pra ilustrar: quanto seria gasto comprando o bem à
+        vista no final, e quanto sobraria depois disso.
       </p>
       <h3>3. Financiamento (SAC)</h3>
       <p>
@@ -104,7 +124,9 @@
         parcela é fixa, então a parcela total <em>diminui</em> com o
         tempo (menos juros a cada mês, porque o saldo devedor encolhe).
         Diferente do consórcio, a posse do bem é imediata, sem depender
-        de sorteio ou lance.
+        de sorteio ou lance. Esta simulação não inclui seguros nem tarifas
+        bancárias adicionais, que variam bastante entre instituições —
+        vale confirmar isso na sua proposta real antes de comparar.
       </p>
 
       <h3>4. O tipo de bem muda a conta</h3>
@@ -114,27 +136,32 @@
         o tempo. Por isso a ferramenta pede o tipo de bem e já sugere uma
         valorização (ou depreciação) padrão diferente pra cada um — mas
         você pode ajustar o número livremente, já que isso varia muito
-        conforme o mercado e a região.
+        conforme o mercado e a região. A mesma taxa de valorização é
+        aplicada de forma idêntica nas três alternativas, pra manter a
+        comparação justa.
       </p>
       <h3>5. O gráfico de evolução</h3>
       <p>
-        Além do resultado final, a ferramenta mostra o <strong>patrimônio
-        mês a mês</strong> em cada caminho — no consórcio e no
-        financiamento, é o valor do bem (já valorizado ou depreciado)
-        menos o que ainda falta pagar; em investir, é o saldo acumulado.
-        Ver a curva inteira, não só o número final, ajuda a enxergar
-        <em>quando</em> um caminho passa a compensar mais que o outro, não
-        só se compensa.
+        Além do resultado final, a ferramenta mostra o
+        <strong>patrimônio líquido projetado mês a mês</strong> em cada
+        caminho — no consórcio e no financiamento, é o valor do bem (já
+        valorizado ou depreciado) menos o que ainda falta pagar; em
+        investir, é o saldo acumulado líquido de IR, que já <em>inclui</em>
+        o valor do bem, como se fosse comprado à vista ao final. Ver a
+        curva inteira, não só o número final, ajuda a enxergar
+        <em>quando</em> um caminho passa a valer mais que o outro.
       </p>
 
       <div class="callout">
-        <strong>Por que essa ferramenta não força o consórcio a perder:</strong>
-        testamos matematicamente e, em cenários realistas de hoje (CDI
-        alto comparado à valorização típica de um bem), investir tende a
-        ganhar — mas o resultado muda se você colocar um CDI baixo e uma
-        valorização de bem muito alta. É assim de propósito: a ferramenta
-        calcula com os números que você fornecer, não entrega uma
-        resposta pronta.
+        <strong>Por que essa ferramenta não declara um "vencedor" absoluto:</strong>
+        o resultado depende inteiramente das premissas que você
+        preencheu — CDI, valorização do bem, taxa de administração,
+        prazo. Testamos com cenários diferentes e o resultado muda de
+        lado dependendo dos números. Por isso, mostramos qual opção teve
+        o <em>maior patrimônio projetado com as premissas informadas</em>,
+        não uma opinião pronta sobre qual é "melhor" — isso é uma decisão
+        que também envolve fatores fora da matemática (liquidez, urgência,
+        disciplina pessoal).
       </div>
 
       <h2>Perguntas frequentes</h2>
@@ -144,12 +171,15 @@
       <p>Varia por administradora. Este simulador considera a taxa distribuída igualmente entre todas as parcelas (o modelo mais comum e verificável) — se a sua for concentrada no início, o efeito prático pra quem desiste cedo é ainda pior do que o simulado aqui.</p>
       <h3>E se eu não for comprar o bem, só especular com a carta?</h3>
       <p>Essa ferramenta não cobre revenda de cota no mercado secundário — geralmente feita com deságio (perda), o que é outro ponto de atenção que vale pesquisar separadamente antes de contar com essa saída.</p>
+      <h3>Por que o IR muda sozinho quando eu troco o prazo?</h3>
+      <p>A alíquota segue a tabela regressiva oficial de renda fixa: 22,5% até 180 dias, 20% até 360 dias, 17,5% até 720 dias, e 15% acima disso. Como o prazo do investimento é sempre igual ao prazo do consórcio, a alíquota é recalculada automaticamente. Se o seu investimento for isento (como LCI/LCA), marque a opção "Isento" no card de investimento.</p>
 
       <h2>Limitações</h2>
       <ul>
         <li>Presume que o consórcio foi contemplado a tempo de usar o bem por todo o prazo simulado — na prática, a contemplação não é garantida nessa janela.</li>
         <li>Índices de reajuste, taxas de administração e regras de rateio variam entre administradoras e tipos de bem — confira sempre o contrato real.</li>
-        <li>Não considera Imposto de Renda sobre o rendimento do investimento, nem custos de manutenção/seguro do bem em nenhum dos três cenários.</li>
+        <li>O Imposto de Renda do investimento usa uma alíquota única baseada no prazo total, aplicada sobre o rendimento acumulado — na prática, cada aporte mensal tem seu próprio prazo de aplicação, então o IR real pode variar um pouco em relação a essa simplificação.</li>
+        <li>Não inclui custos de manutenção, seguro ou tarifas bancárias do bem ou do financiamento.</li>
         <li>Não é recomendação financeira.</li>
       </ul>
     </article>

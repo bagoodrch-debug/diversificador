@@ -17,6 +17,7 @@ const DEFAULTS = {
   tipoBem: "imovel",
   valorizacaoBemAnualPct: TIPOS_BEM.imovel.valorizacaoAnualPct,
   taxaFinanciamentoAnualPct: 11,
+  investimentoIsentoIR: false,
 };
 
 const state = { ...DEFAULTS, cdiAnualPct: null, cdiError: null, cdiDataRef: null };
@@ -34,18 +35,30 @@ function persist() {
     tipoBem: state.tipoBem,
     valorizacaoBemAnualPct: state.valorizacaoBemAnualPct,
     taxaFinanciamentoAnualPct: state.taxaFinanciamentoAnualPct,
+    investimentoIsentoIR: state.investimentoIsentoIR,
   });
+}
+
+/** Tabela regressiva oficial de IR sobre renda fixa, por prazo (em dias). */
+function aliquotaIRRegressiva(dias) {
+  if (dias <= 180) return 0.225;
+  if (dias <= 360) return 0.2;
+  if (dias <= 720) return 0.175;
+  return 0.15;
 }
 
 /**
  * Simula um consórcio mês a mês. O saldo devedor já nasce com a taxa de
- * administração embutida, e é reajustado uma vez por ano pelo índice
- * informado (igual IGPM/INCC fazem na vida real). A parcela de cada mês é
- * sempre saldo-devedor-atual dividido pelos meses restantes - por isso ela
- * sobe ao longo do tempo, mesmo o "juro" sendo zero por nome.
+ * administração embutida (aplicada sobre o valor original da carta, uma
+ * única vez), e é reajustado uma vez por ano pelo índice informado (igual
+ * IGPM/INCC fazem na vida real). A parcela de cada mês é sempre
+ * saldo-devedor-atual dividido pelos meses restantes - por isso ela sobe
+ * ao longo do tempo, mesmo o "juro" sendo zero por nome.
  *
- * Também devolve o patrimônio (valor do bem valorizado menos saldo devedor)
- * mês a mês, pra alimentar o gráfico de evolução.
+ * Devolve também a decomposição do total pago em três partes bem
+ * separadas — valor original, taxa de administração nominal, e o efeito
+ * extra causado pelos reajustes anuais — porque essas são coisas
+ * diferentes e não devem ser somadas e chamadas todas de "administração".
  */
 function simularConsorcio({ valorBem, prazoMeses, taxaAdministracaoPct, reajusteAnualPct, valorizacaoBemAnualPct }) {
   let saldoDevedor = valorBem * (1 + taxaAdministracaoPct / 100);
@@ -69,19 +82,28 @@ function simularConsorcio({ valorBem, prazoMeses, taxaAdministracaoPct, reajuste
     serieMensal.push(Math.max(valorBemAtual - Math.max(saldoDevedor, 0), 0));
   }
 
+  const taxaAdministracaoNominal = valorBem * (taxaAdministracaoPct / 100);
+  const efeitoReajustes = totalPago - valorBem - taxaAdministracaoNominal;
+
   return {
     totalPago,
     parcelas,
     serieMensal,
     primeiraParcela: parcelas[0],
     ultimaParcela: parcelas[parcelas.length - 1],
+    valorOriginal: valorBem,
+    taxaAdministracaoNominal,
+    efeitoReajustes,
   };
 }
 
 /** Quem não faz consórcio investe, mês a mês, o mesmo valor que estaria
  *  pagando de parcela naquele mês (fluxo de caixa igual, pra comparação
- *  justa) - rendendo à taxa informada. */
-function simularInvestirEquivalente({ parcelasConsorcio, taxaAnualPct }) {
+ *  justa) - rendendo à taxa informada, mês a mês (juros compostos reais,
+ *  não uma multiplicação anual simplificada). O Imposto de Renda, quando
+ *  não isento, incide só sobre o rendimento acumulado (nunca sobre o
+ *  capital aportado), usando a alíquota regressiva pelo prazo total. */
+function simularInvestirEquivalente({ parcelasConsorcio, taxaAnualPct, prazoMeses, isentoIR }) {
   const taxaMensal = Math.pow(1 + taxaAnualPct / 100, 1 / 12) - 1;
   let saldo = 0;
   let totalAportado = 0;
@@ -91,7 +113,28 @@ function simularInvestirEquivalente({ parcelasConsorcio, taxaAnualPct }) {
     totalAportado += parcela;
     serieMensal.push(saldo);
   }
-  return { saldoFinal: saldo, totalAportado, totalJuros: saldo - totalAportado, serieMensal };
+
+  const rendimentoBruto = saldo - totalAportado;
+  const aliquotaIR = isentoIR ? 0 : aliquotaIRRegressiva(prazoMeses * 30);
+  const ir = Math.max(rendimentoBruto, 0) * aliquotaIR;
+  const rendimentoLiquido = rendimentoBruto - ir;
+  const saldoFinalLiquido = totalAportado + rendimentoLiquido;
+
+  // A série mensal (pro gráfico) é ajustada proporcionalmente pra refletir
+  // o líquido também, sem precisar re-simular mês a mês o IR.
+  const fatorLiquido = saldo > 0 ? saldoFinalLiquido / saldo : 1;
+  const serieMensalLiquida = serieMensal.map((v) => v * fatorLiquido);
+
+  return {
+    saldoFinalBruto: saldo,
+    saldoFinalLiquido,
+    totalAportado,
+    rendimentoBruto,
+    aliquotaIR,
+    ir,
+    rendimentoLiquido,
+    serieMensal: serieMensalLiquida,
+  };
 }
 
 /** Financiamento SAC padrão: amortização constante, parcela decrescente. */
@@ -117,7 +160,13 @@ function simularFinanciamentoSAC({ valorBem, prazoMeses, taxaAnualPct, valorizac
     serieMensal.push(Math.max(valorBemAtual - Math.max(saldoDevedor, 0), 0));
   }
 
-  return { totalPago, totalJuros, primeiraParcela, serieMensal };
+  return {
+    totalPago,
+    totalJuros,
+    primeiraParcela,
+    ultimaParcela: amortizacaoConstante + Math.max(saldoDevedor + amortizacaoConstante, 0) * taxaMensal,
+    serieMensal,
+  };
 }
 
 export function initConsorcioApp() {
@@ -141,6 +190,7 @@ async function fetchTaxaCdi(root) {
   } catch (e) {
     state.cdiError = e instanceof Error ? e.message : "Erro ao buscar a taxa CDI.";
   }
+  renderCdiInfo(root);
   renderResultado(root);
 }
 
@@ -151,7 +201,7 @@ function render(root) {
     el("h2", {}, "Os dados do seu consórcio"),
     moneyField("Valor do bem / carta de crédito", "valorBem", root),
     numberField("Prazo (meses)", "prazoMeses", root),
-    percentField("Taxa de administração total (%)", "taxaAdministracaoPct", root, "Some no contrato — costuma ficar entre 15% e 25%."),
+    percentField("Taxa de administração total (%)", "taxaAdministracaoPct", root, "Aplicada sobre o valor original da carta, uma única vez — o valor total é diluído nas parcelas ao longo do prazo, não cobrado de uma vez."),
     percentField("Reajuste anual do saldo (%)", "reajusteAnualPct", root, "IGPM, INCC ou IPCA, dependendo do bem — confira no seu contrato."),
   ]);
 
@@ -197,7 +247,7 @@ function render(root) {
       "Valorização anual do bem (%)",
       "valorizacaoBemAnualPct",
       root,
-      "Use negativo pra depreciação (ex: -8 para um carro perdendo valor).",
+      "Use negativo pra depreciação (ex: -8 para um carro perdendo valor). Aplicado do mesmo jeito nas três alternativas, pra manter a comparação justa.",
     ),
   ]);
 
@@ -206,19 +256,52 @@ function render(root) {
     el(
       "p",
       { class: "panel-lead" },
-      "Usa o mesmo valor e o mesmo prazo do consórcio acima — só muda a taxa de juros, no sistema SAC (parcela vai diminuindo com o tempo).",
+      "Usa o mesmo valor e o mesmo prazo do consórcio acima — só muda a taxa de juros, no sistema SAC (parcela decrescente). Não inclui eventuais seguros ou tarifas do banco, que variam por instituição.",
     ),
     percentField("Taxa do financiamento (% ao ano)", "taxaFinanciamentoAnualPct", root),
   ]);
+
+  const irBotoes = [];
+  const irToggle = el(
+    "div",
+    { class: "freq-toggle" },
+    [
+      [false, "Tributado (regra regressiva)"],
+      [true, "Isento (ex: LCI/LCA)"],
+    ].map(([valor, label]) => {
+      const btn = el(
+        "button",
+        {
+          type: "button",
+          class: "freq-toggle__opt",
+          "aria-pressed": String(state.investimentoIsentoIR === valor),
+          onClick: () => {
+            state.investimentoIsentoIR = valor;
+            irBotoes.forEach((b) => b.setAttribute("aria-pressed", String(b.dataset.valor === String(valor))));
+            persist();
+            renderResultado(root);
+          },
+        },
+        label,
+      );
+      btn.dataset.valor = String(valor);
+      irBotoes.push(btn);
+      return btn;
+    }),
+  );
 
   const investirCard = el("section", { class: "panel card" }, [
     el("h2", {}, "Se você investisse, em vez de consorciar"),
     el(
       "p",
       { class: "panel-lead" },
-      "Investe, todo mês, o mesmo valor que seria a parcela do consórcio naquele mês, rendendo a taxa abaixo.",
+      "Investe, todo mês, o mesmo valor que seria a parcela do consórcio naquele mês, rendendo a taxa abaixo, mês a mês.",
     ),
-    el("div", { class: "cdi-info", id: "cdi-info" }),
+    el("div", { class: "cdi-info-compacta", id: "cdi-info" }),
+    el("div", { class: "field-group" }, [
+      el("label", { class: "field-label" }, "Imposto de Renda sobre o rendimento"),
+      irToggle,
+    ]),
   ]);
 
   root.append(dadosCard, bemCard, financiamentoCard, investirCard, el("div", { id: "resultado-host" }));
@@ -285,13 +368,16 @@ function renderCdiInfo(root) {
   clear(box);
   if (state.cdiAnualPct != null) {
     box.append(
-      el("p", { class: "cdi-info__value" }, `CDI atual: ${state.cdiAnualPct.toFixed(2).replace(".", ",")}% ao ano`),
-      el("p", { class: "cdi-info__meta" }, `Referência: ${state.cdiDataRef ?? "—"}`),
+      el(
+        "p",
+        { class: "cdi-info-compacta__linha" },
+        `Rentabilidade: CDI ${state.cdiAnualPct.toFixed(2).replace(".", ",")}% a.a. · referência ${state.cdiDataRef ?? "—"}`,
+      ),
     );
   } else if (state.cdiError) {
-    box.append(el("p", { class: "cdi-info__error" }, `Não foi possível buscar o CDI agora. ${state.cdiError}`));
+    box.append(el("p", { class: "cdi-info-compacta__linha cdi-info-compacta__linha--erro" }, `CDI indisponível: ${state.cdiError}`));
   } else {
-    box.append(el("p", { class: "cdi-info__meta" }, "Buscando taxa CDI…"));
+    box.append(el("p", { class: "cdi-info-compacta__linha" }, "Buscando taxa CDI…"));
   }
 }
 
@@ -316,6 +402,8 @@ function renderResultado(root) {
   const investir = simularInvestirEquivalente({
     parcelasConsorcio: consorcio.parcelas,
     taxaAnualPct: state.cdiAnualPct,
+    prazoMeses: state.prazoMeses,
+    isentoIR: state.investimentoIsentoIR,
   });
 
   const financiamento = simularFinanciamentoSAC({
@@ -328,53 +416,55 @@ function renderResultado(root) {
   const valorBemFinal = state.valorBem * Math.pow(1 + state.valorizacaoBemAnualPct / 100, state.prazoMeses / 12);
 
   const patrimonioConsorcio = consorcio.serieMensal[consorcio.serieMensal.length - 1];
-  const patrimonioInvestir = investir.saldoFinal;
+  const patrimonioInvestir = investir.saldoFinalLiquido;
   const patrimonioFinanciamento = financiamento.serieMensal[financiamento.serieMensal.length - 1];
+
+  const dinheiroQueSobra = patrimonioInvestir - valorBemFinal;
 
   const cards = [
     {
       nome: "Consórcio",
       cor: "#ff3b30",
       patrimonioFinal: patrimonioConsorcio,
-      totalPago: consorcio.totalPago,
       serieMensal: consorcio.serieMensal,
-      extra: [
-        ["1ª parcela", brl(consorcio.primeiraParcela)],
-        ["Última parcela", brl(consorcio.ultimaParcela)],
-        ["Custo da administração", brl(consorcio.totalPago - state.valorBem)],
+      linhas: [
+        ["Total pago", brl(consorcio.totalPago)],
+        ["Parcela inicial", brl(consorcio.primeiraParcela)],
+        ["Parcela final", brl(consorcio.ultimaParcela)],
+        ["Taxa de administração", brl(consorcio.taxaAdministracaoNominal)],
+        ["Efeito dos reajustes", brl(consorcio.efeitoReajustes)],
+        ["Valor do bem no final", brl(valorBemFinal)],
       ],
-      nota: "Presume que a carta foi contemplada a tempo de usar o bem por todo o prazo — na prática, a contemplação depende de sorteio ou lance.",
+      nota: "Presume contemplação a tempo de usar o bem durante o prazo considerado — a contemplação em si depende de sorteio ou lance, sem data garantida.",
     },
     {
       nome: "Investir e comprar à vista depois",
       cor: "#22e0e0",
       patrimonioFinal: patrimonioInvestir,
-      totalPago: investir.totalAportado,
       serieMensal: investir.serieMensal,
-      extra: [
-        ["Total investido", brl(investir.totalAportado)],
-        ["Rendimento acumulado", brl(investir.totalJuros)],
-        [
-          "Dá pra comprar o bem?",
-          patrimonioInvestir >= valorBemFinal ? "Sim, e sobra troco" : "Ainda não, falta " + brl(valorBemFinal - patrimonioInvestir),
-        ],
+      linhas: [
+        ["Total aportado", brl(investir.totalAportado)],
+        ["Rendimento bruto", brl(investir.rendimentoBruto)],
+        ["IR pago" + (state.investimentoIsentoIR ? " (isento)" : ` (${(investir.aliquotaIR * 100).toFixed(1).replace(".", ",")}%)`), brl(investir.ir)],
+        ["Rendimento líquido", brl(investir.rendimentoLiquido)],
+        ["Valor do bem comprado", brl(Math.min(patrimonioInvestir, valorBemFinal))],
+        [dinheiroQueSobra >= 0 ? "Dinheiro que sobra" : "Ainda faltaria", brl(Math.abs(dinheiroQueSobra))],
       ],
-      nota: `Investe, todo mês, o mesmo valor que seria a parcela do consórcio naquele mês, rendendo ${state.cdiAnualPct
-        .toFixed(1)
-        .replace(".", ",")}% a.a. (CDI atual).`,
+      nota: "Patrimônio total = dinheiro que renderia investindo o equivalente à parcela do consórcio, mês a mês. O bem não está subtraído — está incluído dentro desse total, como se fosse comprado à vista no final.",
     },
     {
       nome: "Financiamento (SAC)",
       cor: "#f5b942",
       patrimonioFinal: patrimonioFinanciamento,
-      totalPago: financiamento.totalPago,
       serieMensal: financiamento.serieMensal,
-      extra: [
-        ["1ª parcela", brl(financiamento.primeiraParcela)],
-        ["Total em juros", brl(financiamento.totalJuros)],
-        ["Posse do bem", "Imediata, desde o mês 1"],
+      linhas: [
+        ["Total pago", brl(financiamento.totalPago)],
+        ["Parcela inicial", brl(financiamento.primeiraParcela)],
+        ["Parcela final", brl(financiamento.ultimaParcela)],
+        ["Total de juros", brl(financiamento.totalJuros)],
+        ["Valor do bem no final", brl(valorBemFinal)],
       ],
-      nota: "Diferente do consórcio, você tem o bem em mãos desde o primeiro mês — não depende de sorteio.",
+      nota: "Posse do bem imediata, desde o mês 1 — diferente do consórcio, não depende de sorteio nem lance.",
     },
   ];
 
@@ -387,7 +477,7 @@ function renderResultado(root) {
       el(
         "p",
         { class: "disclaimer" },
-        "Simulação educacional. Taxas de administração, índices de reajuste e regras variam entre administradoras — confira sempre o contrato real antes de decidir. Não é recomendação financeira.",
+        "Resultado baseado nas premissas informadas acima — mude qualquer campo e a comparação recalcula na hora. Consórcio não tem juros tradicionais, mas tem taxa de administração e reajustes; a contemplação não tem data garantida. Investimento tem risco e rentabilidade futura não garantida. Financiamento garante posse imediata, mas cobra juros. Taxas de administração, seguros e regras variam entre instituições — confira sempre o contrato real. Não é recomendação financeira.",
       ),
     ]),
   );
@@ -398,7 +488,7 @@ function renderResultado(root) {
       el(
         "p",
         { class: "panel-lead" },
-        "Cada linha mostra o quanto você teria de patrimônio (bem menos dívida, ou saldo investido) mês a mês, em cada caminho.",
+        "Cada linha mostra o patrimônio líquido projetado mês a mês: no consórcio e no financiamento, é o valor do bem (já valorizado ou depreciado) menos o que ainda falta pagar; em investir, é o saldo acumulado líquido de IR — que já inclui o valor do bem, caso comprado à vista ao final.",
       ),
       el("div", { class: "grafico-legenda" }, cards.map((c) => legendaItem(c))),
       graficoLinhas(cards, state.prazoMeses),
@@ -453,7 +543,7 @@ function graficoLinhas(cards, prazoMeses) {
     );
   }
 
-  const svg = `<svg viewBox="0 0 ${larguraTotal} ${alturaTotal}" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Gráfico comparando a evolução do patrimônio nos três cenários">${guias}${linhas}${marcasAno.join("")}</svg>`;
+  const svg = `<svg viewBox="0 0 ${larguraTotal} ${alturaTotal}" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Gráfico comparando o patrimônio líquido projetado nos três cenários">${guias}${linhas}${marcasAno.join("")}</svg>`;
 
   return el("div", { class: "grafico-wrap", html: svg });
 }
@@ -466,17 +556,13 @@ function brlCompacto(valor) {
 
 function cardResultado(c, destaque) {
   return el("div", { class: `card-resultado${destaque ? " card-resultado--destaque" : ""}` }, [
-    destaque ? el("span", { class: "card-resultado__selo" }, "Melhor patrimônio final") : null,
+    destaque ? el("span", { class: "card-resultado__selo" }, "Maior patrimônio projetado") : null,
     el("h3", {}, [el("span", { class: "card-resultado__dot", style: `background:${c.cor}` }), c.nome]),
     el("div", { class: "card-resultado__stat card-resultado__stat--total" }, [
-      el("span", { class: "card-resultado__label" }, "Patrimônio ao final"),
+      el("span", { class: "card-resultado__label" }, "Patrimônio final"),
       el("span", { class: "card-resultado__value" }, brl(c.patrimonioFinal)),
     ]),
-    el("div", { class: "card-resultado__stat" }, [
-      el("span", { class: "card-resultado__label" }, "Total pago no período"),
-      el("span", { class: "card-resultado__value" }, brl(c.totalPago)),
-    ]),
-    ...c.extra.map(([label, value]) =>
+    ...c.linhas.map(([label, value]) =>
       el("div", { class: "card-resultado__stat" }, [
         el("span", { class: "card-resultado__label" }, label),
         el("span", { class: "card-resultado__value" }, value),
