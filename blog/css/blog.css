@@ -6,21 +6,24 @@
    cabeçalho, que ganha a classe .site-header--claro (ver mais abaixo). */
 .artigo {
   --surface: #ffffff;
-  --surface-2: #f1ece2;
-  --fg: #22201b;
-  --muted: #6c6459;
-  --border: #e6ddce;
+  --surface-2: #f4f4f4;
+  --fg: #0d0d0d;
+  --muted: #55524c;
+  --border: #e2e2e2;
   background: #ffffff;
 }
 
-/* Cabeçalho claro, usado só nas páginas de artigo — reaproveita as mesmas
-   variáveis (--bg/--fg/--muted/--border) que o resto do header já usa,
-   então logo, menu e botão de menu mobile se adaptam sozinhos. */
+/* Cabeçalho claro, usado só nas páginas de artigo. O cabeçalho padrão do
+   site usa uma cor semitransparente com desfoque (pra ficar bonito sobre
+   o hero preto nas outras páginas) — aqui isso é sobrescrito pra branco
+   sólido de verdade, sem misturar com o fundo escuro por trás. */
 .site-header--claro {
   --bg: #ffffff;
-  --fg: #22201b;
-  --muted: #6c6459;
-  --border: #e6ddce;
+  --fg: #0d0d0d;
+  --muted: #55524c;
+  --border: #e2e2e2;
+  background: #ffffff !important;
+  backdrop-filter: none !important;
 }
 
 .blog {
