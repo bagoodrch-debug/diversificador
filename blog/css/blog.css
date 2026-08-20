@@ -1,11 +1,25 @@
 /* ==========================================================================
    Manual do Homem — blog
    ========================================================================== */
- 
+
+/* Tema claro só pra área de conteúdo do blog (index e artigos). O
+   cabeçalho/rodapé continuam pretos/dourados, iguais ao resto do site —
+   só a partir daqui pra baixo a página vai clareando aos poucos, com o
+   degradê abaixo, em vez de trocar de preto pra branco de uma vez. */
+.blog,
+.artigo {
+  --surface: #ffffff;
+  --surface-2: #f1ece2;
+  --fg: #22201b;
+  --muted: #6c6459;
+  --border: #e6ddce;
+  background: linear-gradient(180deg, #050505 0px, #050505 0px, #f8f5ef 220px);
+}
+
 .blog {
   padding-block: 2.5rem 4rem;
 }
- 
+
 .blog__heading {
   max-width: 60ch;
   margin-bottom: 2.5rem;
@@ -31,52 +45,63 @@
   color: var(--muted);
   font-size: 0.95rem;
 }
- 
+
 /* Grade de artigos */
 .artigos-grid {
   display: grid;
   gap: 1.5rem;
   grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
 }
- 
+
 .artigo-card {
   display: flex;
   flex-direction: column;
   border: 1px solid var(--border);
   border-radius: var(--radius-lg);
-  background: linear-gradient(160deg, var(--surface), var(--surface-2));
+  background: var(--surface);
+  box-shadow: 0 8px 24px rgba(20, 15, 5, 0.08);
   overflow: hidden;
-  transition: transform 0.18s ease, border-color 0.18s ease;
+  transition: transform 0.18s ease, box-shadow 0.18s ease;
 }
 .artigo-card:not(.artigo-card--em-breve):hover {
   transform: translateY(-4px);
-  border-color: color-mix(in srgb, var(--gold) 50%, var(--border));
+  box-shadow: 0 14px 32px rgba(20, 15, 5, 0.14);
 }
 .artigo-card__img {
-  height: 160px;
-  background: var(--surface-2);
+  height: 180px;
+  overflow: hidden;
+}
+.artigo-card__img img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+/* Cards sem foto de verdade (só um ícone) ganham um fundo com gradiente
+   e o ícone bem maior, pra não sobrar espaço vazio. */
+.artigo-card__img--icone {
   display: flex;
   align-items: center;
   justify-content: center;
-  border-bottom: 1px solid var(--border);
+  background: linear-gradient(160deg, #fff6e4, #ffe9bd);
 }
-.artigo-card__img img {
-  max-width: 60%;
-  max-height: 60%;
-  object-fit: contain;
+.artigo-card__img--icone svg {
+  width: 42%;
+  height: 42%;
 }
 .artigo-card__tag {
   font-family: var(--font-display);
   text-transform: uppercase;
   letter-spacing: 0.06em;
   font-size: 0.66rem;
-  color: var(--gold);
+  color: color-mix(in srgb, var(--gold) 70%, #7a5a12);
   margin: 1.1rem 1.1rem 0;
 }
 .artigo-card h2 {
   font-size: 1.05rem;
   line-height: 1.3;
   margin: 0.5rem 1.1rem 0.5rem;
+  color: var(--fg);
 }
 .artigo-card p {
   font-size: 0.85rem;
@@ -90,7 +115,7 @@
   gap: 0.4rem;
   font-size: 0.82rem;
   font-weight: 600;
-  color: var(--gold);
+  color: color-mix(in srgb, var(--gold) 75%, #7a5a12);
   margin: 1rem 1.1rem 1.1rem;
 }
 .artigo-card--em-breve {
@@ -110,7 +135,7 @@
 .artigo-card--em-breve p {
   margin: 0;
 }
- 
+
 /* Página de artigo individual */
 .artigo {
   max-width: 900px;
@@ -131,7 +156,7 @@
   text-transform: uppercase;
   letter-spacing: 0.08em;
   font-size: 0.7rem;
-  color: var(--gold);
+  color: color-mix(in srgb, var(--gold) 70%, #7a5a12);
   border: 1px solid color-mix(in srgb, var(--gold) 45%, transparent);
   border-radius: 999px;
   padding: 0.2rem 0.65rem;
@@ -144,6 +169,7 @@
   font-size: clamp(1.6rem, 4vw, 2.3rem);
   line-height: 1.1;
   margin: 0 0 0.6rem;
+  color: var(--fg);
 }
 .artigo__meta {
   font-size: 0.8rem;
@@ -158,6 +184,7 @@
   text-transform: uppercase;
   font-weight: 400;
   margin: 2rem 0 0.75rem;
+  color: var(--fg);
 }
 .artigo article p {
   font-size: 0.96rem;
@@ -179,12 +206,12 @@
 .artigo article strong {
   color: var(--fg);
 }
- 
+
 /* Caixa de recomendação de produto, dentro do artigo */
 .artigo__recomendacao {
-  border: 1px solid var(--gold);
+  border: 1px solid color-mix(in srgb, var(--gold) 55%, var(--border));
   border-radius: var(--radius-lg);
-  background: linear-gradient(160deg, var(--surface), color-mix(in srgb, var(--gold) 6%, var(--surface)));
+  background: linear-gradient(160deg, var(--surface), color-mix(in srgb, var(--gold) 10%, var(--surface)));
   padding: 1.5rem;
   margin: 2rem 0;
 }
@@ -193,7 +220,7 @@
   text-transform: uppercase;
   letter-spacing: 0.08em;
   font-size: 0.68rem;
-  color: var(--gold);
+  color: color-mix(in srgb, var(--gold) 70%, #7a5a12);
   margin: 0 0 1rem !important;
 }
 .artigo__produto {
@@ -215,6 +242,7 @@
 .artigo__produto h3 {
   font-size: 1.05rem;
   margin: 0 0 0.4rem;
+  color: var(--fg);
 }
 .artigo__produto p {
   font-size: 0.85rem !important;
@@ -242,7 +270,7 @@
   filter: brightness(1.08);
   transform: translateY(-1px);
 }
- 
+
 .artigo__disclaimer {
   font-size: 0.75rem !important;
   color: var(--muted) !important;
@@ -250,7 +278,7 @@
   padding-top: 1rem;
   margin-top: 2rem !important;
 }
- 
+
 @media (max-width: 560px) {
   .artigo__produto {
     flex-direction: column;
@@ -261,7 +289,7 @@
     height: 72px;
   }
 }
- 
+
 /* ==========================================================================
    Anúncios fixos na borda da tela — mesmo padrão usado na home
    ========================================================================== */
@@ -297,9 +325,9 @@
    CTA de ferramenta dentro do artigo (link em destaque pra calculadora)
    ========================================================================== */
 .ferramenta-cta {
-  border: 1px solid var(--gold);
+  border: 1px solid color-mix(in srgb, var(--gold) 60%, var(--border));
   border-radius: var(--radius-lg);
-  background: linear-gradient(160deg, var(--surface), color-mix(in srgb, var(--gold) 8%, var(--surface)));
+  background: linear-gradient(160deg, var(--surface), color-mix(in srgb, var(--gold) 12%, var(--surface)));
   padding: 1.5rem;
   margin: 1.75rem 0;
   text-align: center;
@@ -310,12 +338,13 @@
   text-transform: uppercase;
   letter-spacing: 0.08em;
   font-size: 0.68rem;
-  color: var(--gold);
+  color: color-mix(in srgb, var(--gold) 70%, #7a5a12);
   margin-bottom: 0.6rem;
 }
 .ferramenta-cta h2 {
   margin-top: 0 !important;
   font-size: 1.15rem !important;
+  color: var(--fg);
 }
 .ferramenta-cta p {
   max-width: 52ch;
