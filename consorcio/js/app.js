@@ -201,8 +201,8 @@ function render(root) {
     el("h2", {}, "Os dados do seu consórcio"),
     moneyField("Valor do bem / carta de crédito", "valorBem", root),
     numberField("Prazo (meses)", "prazoMeses", root),
-    percentField("Taxa de administração total (%)", "taxaAdministracaoPct", root, "Aplicada sobre o valor original da carta, uma única vez — o valor total é diluído nas parcelas ao longo do prazo, não cobrado de uma vez."),
-    percentField("Reajuste anual do saldo (%)", "reajusteAnualPct", root, "IGPM, INCC ou IPCA, dependendo do bem — confira no seu contrato."),
+    percentField("Taxa de administração total (%)", "taxaAdministracaoPct", root, "Costuma ficar entre 15% e 25% — confira no contrato."),
+    percentField("Reajuste anual do saldo (%)", "reajusteAnualPct", root, "IGPM, INCC ou IPCA, dependendo do bem."),
   ]);
 
   const tipoBotoes = [];
@@ -237,27 +237,14 @@ function render(root) {
     el("div", { class: "field-group" }, [
       el("label", { class: "field-label" }, "Tipo de bem"),
       tipoToggle,
-      el(
-        "p",
-        { class: "field-ajuda" },
-        "Imóvel costuma se valorizar; veículo costuma perder valor com o tempo — por isso cada tipo já vem com uma estimativa diferente abaixo (mas você pode mudar o número).",
-      ),
+      el("p", { class: "field-ajuda" }, "Já sugerimos uma valorização típica pra cada tipo — ajuste se quiser."),
     ]),
-    percentField(
-      "Valorização anual do bem (%)",
-      "valorizacaoBemAnualPct",
-      root,
-      "Use negativo pra depreciação (ex: -8 para um carro perdendo valor). Aplicado do mesmo jeito nas três alternativas, pra manter a comparação justa.",
-    ),
+    percentField("Valorização anual do bem (%)", "valorizacaoBemAnualPct", root, "Negativo pra depreciação (ex: -8 pra um carro)."),
   ]);
 
-  const financiamentoCard = el("section", { class: "panel card" }, [
-    el("h2", {}, "Se você financiasse no banco, em vez de consorciar"),
-    el(
-      "p",
-      { class: "panel-lead" },
-      "Usa o mesmo valor e o mesmo prazo do consórcio acima — só muda a taxa de juros, no sistema SAC (parcela decrescente). Não inclui eventuais seguros ou tarifas do banco, que variam por instituição.",
-    ),
+  const financiamentoSub = el("div", { class: "premissa-sub" }, [
+    el("h3", {}, "Se financiasse no banco"),
+    el("p", { class: "panel-lead" }, "Mesmo valor e prazo do consórcio, no sistema SAC (parcela decrescente)."),
     percentField("Taxa do financiamento (% ao ano)", "taxaFinanciamentoAnualPct", root),
   ]);
 
@@ -290,13 +277,9 @@ function render(root) {
     }),
   );
 
-  const investirCard = el("section", { class: "panel card" }, [
-    el("h2", {}, "Se você investisse, em vez de consorciar"),
-    el(
-      "p",
-      { class: "panel-lead" },
-      "Investe, todo mês, o mesmo valor que seria a parcela do consórcio naquele mês, rendendo a taxa abaixo, mês a mês.",
-    ),
+  const investirSub = el("div", { class: "premissa-sub" }, [
+    el("h3", {}, "Se investisse"),
+    el("p", { class: "panel-lead" }, "Aporta, todo mês, o valor que seria a parcela do consórcio."),
     el("div", { class: "cdi-info-compacta", id: "cdi-info" }),
     el("div", { class: "field-group" }, [
       el("label", { class: "field-label" }, "Imposto de Renda sobre o rendimento"),
@@ -304,7 +287,13 @@ function render(root) {
     ]),
   ]);
 
-  root.append(dadosCard, bemCard, financiamentoCard, investirCard, el("div", { id: "resultado-host" }));
+  const premissasCard = el("section", { class: "panel card" }, [
+    el("h2", {}, "Premissas da comparação"),
+    financiamentoSub,
+    investirSub,
+  ]);
+
+  root.append(dadosCard, bemCard, premissasCard, el("div", { id: "resultado-host" }));
   renderCdiInfo(root);
   renderResultado(root);
 }
@@ -427,44 +416,49 @@ function renderResultado(root) {
       cor: "#ff3b30",
       patrimonioFinal: patrimonioConsorcio,
       serieMensal: consorcio.serieMensal,
-      linhas: [
+      destaques: [
         ["Total pago", brl(consorcio.totalPago)],
-        ["Parcela inicial", brl(consorcio.primeiraParcela)],
-        ["Parcela final", brl(consorcio.ultimaParcela)],
+        ["Parcela inicial → final", `${brl(consorcio.primeiraParcela)} → ${brl(consorcio.ultimaParcela)}`],
+      ],
+      detalhes: [
+        ["Valor original", brl(consorcio.valorOriginal)],
         ["Taxa de administração", brl(consorcio.taxaAdministracaoNominal)],
         ["Efeito dos reajustes", brl(consorcio.efeitoReajustes)],
         ["Valor do bem no final", brl(valorBemFinal)],
       ],
-      nota: "Presume contemplação a tempo de usar o bem durante o prazo considerado — a contemplação em si depende de sorteio ou lance, sem data garantida.",
+      nota: "Presume contemplação a tempo de usar o bem no prazo — não é garantida.",
     },
     {
       nome: "Investir e comprar à vista depois",
       cor: "#22e0e0",
       patrimonioFinal: patrimonioInvestir,
       serieMensal: investir.serieMensal,
-      linhas: [
+      destaques: [
         ["Total aportado", brl(investir.totalAportado)],
+        [dinheiroQueSobra >= 0 ? "Sobra pra comprar o bem" : "Ainda faltaria", brl(Math.abs(dinheiroQueSobra))],
+      ],
+      detalhes: [
         ["Rendimento bruto", brl(investir.rendimentoBruto)],
-        ["IR pago" + (state.investimentoIsentoIR ? " (isento)" : ` (${(investir.aliquotaIR * 100).toFixed(1).replace(".", ",")}%)`), brl(investir.ir)],
+        ["IR" + (state.investimentoIsentoIR ? " (isento)" : ` (${(investir.aliquotaIR * 100).toFixed(1).replace(".", ",")}%)`), brl(investir.ir)],
         ["Rendimento líquido", brl(investir.rendimentoLiquido)],
         ["Valor do bem comprado", brl(Math.min(patrimonioInvestir, valorBemFinal))],
-        [dinheiroQueSobra >= 0 ? "Dinheiro que sobra" : "Ainda faltaria", brl(Math.abs(dinheiroQueSobra))],
       ],
-      nota: "Patrimônio total = dinheiro que renderia investindo o equivalente à parcela do consórcio, mês a mês. O bem não está subtraído — está incluído dentro desse total, como se fosse comprado à vista no final.",
+      nota: "O bem já está incluído no patrimônio, como se fosse comprado à vista ao final.",
     },
     {
       nome: "Financiamento (SAC)",
       cor: "#f5b942",
       patrimonioFinal: patrimonioFinanciamento,
       serieMensal: financiamento.serieMensal,
-      linhas: [
+      destaques: [
         ["Total pago", brl(financiamento.totalPago)],
-        ["Parcela inicial", brl(financiamento.primeiraParcela)],
-        ["Parcela final", brl(financiamento.ultimaParcela)],
+        ["Parcela inicial → final", `${brl(financiamento.primeiraParcela)} → ${brl(financiamento.ultimaParcela)}`],
+      ],
+      detalhes: [
         ["Total de juros", brl(financiamento.totalJuros)],
         ["Valor do bem no final", brl(valorBemFinal)],
       ],
-      nota: "Posse do bem imediata, desde o mês 1 — diferente do consórcio, não depende de sorteio nem lance.",
+      nota: "Posse imediata desde o mês 1 — não depende de sorteio nem lance.",
     },
   ];
 
@@ -477,7 +471,7 @@ function renderResultado(root) {
       el(
         "p",
         { class: "disclaimer" },
-        "Resultado baseado nas premissas informadas acima — mude qualquer campo e a comparação recalcula na hora. Consórcio não tem juros tradicionais, mas tem taxa de administração e reajustes; a contemplação não tem data garantida. Investimento tem risco e rentabilidade futura não garantida. Financiamento garante posse imediata, mas cobra juros. Taxas de administração, seguros e regras variam entre instituições — confira sempre o contrato real. Não é recomendação financeira.",
+        "Resultado baseado nas premissas informadas acima — mude qualquer campo e recalcula na hora. Investimento tem risco; financiamento cobra juros; contemplação do consórcio não tem data garantida. Não é recomendação financeira.",
       ),
     ]),
   );
@@ -488,7 +482,7 @@ function renderResultado(root) {
       el(
         "p",
         { class: "panel-lead" },
-        "Cada linha mostra o patrimônio líquido projetado mês a mês: no consórcio e no financiamento, é o valor do bem (já valorizado ou depreciado) menos o que ainda falta pagar; em investir, é o saldo acumulado líquido de IR — que já inclui o valor do bem, caso comprado à vista ao final.",
+        "Patrimônio líquido projetado, mês a mês, em cada caminho.",
       ),
       el("div", { class: "grafico-legenda" }, cards.map((c) => legendaItem(c))),
       graficoLinhas(cards, state.prazoMeses),
@@ -562,12 +556,21 @@ function cardResultado(c, destaque) {
       el("span", { class: "card-resultado__label" }, "Patrimônio final"),
       el("span", { class: "card-resultado__value" }, brl(c.patrimonioFinal)),
     ]),
-    ...c.linhas.map(([label, value]) =>
+    ...c.destaques.map(([label, value]) =>
       el("div", { class: "card-resultado__stat" }, [
         el("span", { class: "card-resultado__label" }, label),
         el("span", { class: "card-resultado__value" }, value),
       ]),
     ),
+    el("details", { class: "card-resultado__detalhes" }, [
+      el("summary", {}, "Ver detalhes"),
+      ...c.detalhes.map(([label, value]) =>
+        el("div", { class: "card-resultado__stat" }, [
+          el("span", { class: "card-resultado__label" }, label),
+          el("span", { class: "card-resultado__value" }, value),
+        ]),
+      ),
+    ]),
     el("p", { class: "card-resultado__nota" }, c.nota),
   ]);
 }

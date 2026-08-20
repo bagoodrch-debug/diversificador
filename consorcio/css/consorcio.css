@@ -146,6 +146,47 @@
   padding-top: 0.65rem;
 }
 
+.card-resultado__detalhes {
+  margin-top: 0.4rem;
+  border-top: 1px solid var(--color-border);
+  padding-top: 0.5rem;
+}
+.card-resultado__detalhes summary {
+  cursor: pointer;
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: var(--color-primary);
+  list-style: none;
+  padding-block: 0.3rem;
+}
+.card-resultado__detalhes summary::-webkit-details-marker {
+  display: none;
+}
+.card-resultado__detalhes summary::after {
+  content: " ▾";
+}
+.card-resultado__detalhes[open] summary::after {
+  content: " ▴";
+}
+
+/* Subseções dentro do card único de premissas (financiamento / investir) */
+.premissa-sub {
+  padding-top: 1.1rem;
+  margin-top: 1.1rem;
+  border-top: 1px solid var(--color-border);
+}
+.premissa-sub:first-child {
+  padding-top: 0;
+  margin-top: 0;
+  border-top: none;
+}
+.premissa-sub h3 {
+  font-family: var(--font-heading);
+  font-size: 0.92rem;
+  font-weight: 700;
+  margin: 0 0 0.35rem;
+}
+
 /* ==========================================================================
    Seção de metodologia (texto explicativo, no final da página)
    ========================================================================== */
