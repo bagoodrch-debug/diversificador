@@ -34,6 +34,7 @@ body.pagina-artigo {
   --muted: #55524c;
   --border: #e2e2e2;
   background: #ffffff !important;
+  background-color: #ffffff !important;
   backdrop-filter: none !important;
 }
 .site-header--claro .brand__mark {
@@ -41,9 +42,16 @@ body.pagina-artigo {
   border: 2px solid #0d0d0d;
 }
 .site-header--claro .brand__name {
-  border: 1px solid #0d0d0d;
-  border-radius: 999px;
-  padding: 0.35rem 0.9rem;
+  color: #0d0d0d !important;
+}
+.site-header--claro .brand__name span {
+  color: var(--gold) !important;
+}
+.site-header--claro .main-nav a {
+  color: #0d0d0d !important;
+}
+.site-header--claro .main-nav a[aria-current="page"] {
+  color: var(--gold) !important;
 }
 
 .blog {
@@ -247,12 +255,8 @@ body.pagina-artigo {
 }
 
 /* Caixa de recomendação de produto, dentro do artigo */
+/* "O que a gente usa" — solto, sem caixa ao redor, só espaçamento. */
 .artigo__recomendacao {
-  border: 1px solid color-mix(in srgb, #2f6fed 45%, var(--border));
-  border-radius: var(--radius-lg);
-  background: linear-gradient(160deg, var(--surface), color-mix(in srgb, #2f6fed 8%, var(--surface)));
-  box-shadow: inset 0 0 32px color-mix(in srgb, #2f6fed 12%, transparent);
-  padding: 1.5rem;
   margin: 2rem 0;
 }
 .artigo__recomendacao-label {
@@ -268,16 +272,27 @@ body.pagina-artigo {
   gap: 1.25rem;
   align-items: center;
 }
-.artigo__produto img {
+.artigo__produto-foto {
   width: 90px;
   height: 90px;
   box-sizing: border-box;
   padding: 15%;
-  object-fit: contain;
   background: var(--surface-2);
   border-radius: var(--radius-md);
-  border: 1px solid var(--border);
+  border: 1px solid color-mix(in srgb, #2f6fed 35%, var(--border));
+  box-shadow: 0 0 18px color-mix(in srgb, #2f6fed 18%, transparent);
   flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.artigo__produto-foto img {
+  max-width: 100%;
+  max-height: 100%;
+  width: auto;
+  height: auto;
+  object-fit: contain;
+  display: block;
 }
 .artigo__produto h3 {
   font-size: 1.05rem;
@@ -324,7 +339,7 @@ body.pagina-artigo {
     flex-direction: column;
     align-items: flex-start;
   }
-  .artigo__produto img {
+  .artigo__produto-foto {
     width: 72px;
     height: 72px;
   }
