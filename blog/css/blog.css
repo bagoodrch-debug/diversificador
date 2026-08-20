@@ -29,12 +29,12 @@ body.pagina-artigo {
    o hero preto nas outras páginas) — aqui isso é sobrescrito pra branco
    sólido de verdade, sem misturar com o fundo escuro por trás. */
 .site-header--claro {
-  --bg: #ffffff;
+  --bg: #d9d9d9;
   --fg: #0d0d0d;
   --muted: #55524c;
-  --border: #e2e2e2;
-  background: #ffffff !important;
-  background-color: #ffffff !important;
+  --border: #c7c7c7;
+  background: #d9d9d9 !important;
+  background-color: #d9d9d9 !important;
   backdrop-filter: none !important;
 }
 .site-header--claro .brand__mark {
@@ -276,7 +276,7 @@ body.pagina-artigo {
   width: 90px;
   height: 90px;
   box-sizing: border-box;
-  padding: 15%;
+  padding: 12px;
   background: var(--surface-2);
   border-radius: var(--radius-md);
   border: 1px solid color-mix(in srgb, #2f6fed 35%, var(--border));
@@ -287,10 +287,8 @@ body.pagina-artigo {
   justify-content: center;
 }
 .artigo__produto-foto img {
-  max-width: 100%;
-  max-height: 100%;
-  width: auto;
-  height: auto;
+  width: 100%;
+  height: 100%;
   object-fit: contain;
   display: block;
 }
