@@ -2,18 +2,25 @@
    Manual do Homem — blog
    ========================================================================== */
 
-/* Tema claro só pra área de conteúdo do blog (index e artigos). O
-   cabeçalho/rodapé continuam pretos/dourados, iguais ao resto do site —
-   só a partir daqui pra baixo a página vai clareando aos poucos, com o
-   degradê abaixo, em vez de trocar de preto pra branco de uma vez. */
-.blog,
+/* Página de artigo: fica branca por inteiro, sem degradê — inclusive o
+   cabeçalho, que ganha a classe .site-header--claro (ver mais abaixo). */
 .artigo {
   --surface: #ffffff;
   --surface-2: #f1ece2;
   --fg: #22201b;
   --muted: #6c6459;
   --border: #e6ddce;
-  background: linear-gradient(180deg, #050505 0px, #050505 0px, #f8f5ef 220px);
+  background: #ffffff;
+}
+
+/* Cabeçalho claro, usado só nas páginas de artigo — reaproveita as mesmas
+   variáveis (--bg/--fg/--muted/--border) que o resto do header já usa,
+   então logo, menu e botão de menu mobile se adaptam sozinhos. */
+.site-header--claro {
+  --bg: #ffffff;
+  --fg: #22201b;
+  --muted: #6c6459;
+  --border: #e6ddce;
 }
 
 .blog {
@@ -46,11 +53,20 @@
   font-size: 0.95rem;
 }
 
-/* Grade de artigos */
+/* Grade de artigos — vira um bloco branco isolado, com borda dura (sem
+   degradê); o resto da página (cabeçalho, título "Artigos que ensinam")
+   continua preto, igual o resto do site. */
 .artigos-grid {
+  --surface: #ffffff;
+  --fg: #22201b;
+  --muted: #6c6459;
+  --border: #e6ddce;
   display: grid;
   gap: 1.5rem;
   grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  background: #f8f5ef;
+  border-radius: var(--radius-lg);
+  padding: 1.75rem;
 }
 
 .artigo-card {
