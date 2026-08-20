@@ -4,6 +4,17 @@
 
 /* Página de artigo: fica branca por inteiro, sem degradê — inclusive o
    cabeçalho, que ganha a classe .site-header--claro (ver mais abaixo). */
+/* Toda a página do artigo (não só o conteúdo central) fica branca —
+   inclusive as laterais onde ficam os espaços de anúncio. O <body> das
+   páginas de artigo precisa ter a classe "pagina-artigo" pra isso valer. */
+body.pagina-artigo {
+  --bg: #ffffff;
+  --fg: #0d0d0d;
+  --muted: #55524c;
+  --border: #e2e2e2;
+  background: #ffffff;
+}
+
 .artigo {
   --surface: #ffffff;
   --surface-2: #f4f4f4;
@@ -24,6 +35,15 @@
   --border: #e2e2e2;
   background: #ffffff !important;
   backdrop-filter: none !important;
+}
+.site-header--claro .brand__mark {
+  border-radius: 50%;
+  border: 2px solid #0d0d0d;
+}
+.site-header--claro .brand__name {
+  border: 1px solid #0d0d0d;
+  border-radius: 999px;
+  padding: 0.35rem 0.9rem;
 }
 
 .blog {
@@ -228,9 +248,10 @@
 
 /* Caixa de recomendação de produto, dentro do artigo */
 .artigo__recomendacao {
-  border: 1px solid color-mix(in srgb, var(--gold) 55%, var(--border));
+  border: 1px solid color-mix(in srgb, #2f6fed 45%, var(--border));
   border-radius: var(--radius-lg);
-  background: linear-gradient(160deg, var(--surface), color-mix(in srgb, var(--gold) 10%, var(--surface)));
+  background: linear-gradient(160deg, var(--surface), color-mix(in srgb, #2f6fed 8%, var(--surface)));
+  box-shadow: inset 0 0 32px color-mix(in srgb, #2f6fed 12%, transparent);
   padding: 1.5rem;
   margin: 2rem 0;
 }
@@ -239,7 +260,7 @@
   text-transform: uppercase;
   letter-spacing: 0.08em;
   font-size: 0.68rem;
-  color: color-mix(in srgb, var(--gold) 70%, #7a5a12);
+  color: #2f6fed;
   margin: 0 0 1rem !important;
 }
 .artigo__produto {
