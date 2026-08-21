@@ -17,7 +17,7 @@ const DEFAULTS = {
   tipoBem: "imovel",
   valorizacaoBemAnualPct: TIPOS_BEM.imovel.valorizacaoAnualPct,
   taxaFinanciamentoAnualPct: 11,
-  investimentoIsentoIR: false,
+  valorInicialInvestido: 0,
 };
 
 const state = { ...DEFAULTS, cdiAnualPct: null, cdiError: null, cdiDataRef: null };
@@ -35,7 +35,7 @@ function persist() {
     tipoBem: state.tipoBem,
     valorizacaoBemAnualPct: state.valorizacaoBemAnualPct,
     taxaFinanciamentoAnualPct: state.taxaFinanciamentoAnualPct,
-    investimentoIsentoIR: state.investimentoIsentoIR,
+    valorInicialInvestido: state.valorInicialInvestido,
   });
 }
 
@@ -100,12 +100,13 @@ function simularConsorcio({ valorBem, prazoMeses, taxaAdministracaoPct, reajuste
 /** Quem não faz consórcio investe, mês a mês, o mesmo valor que estaria
  *  pagando de parcela naquele mês (fluxo de caixa igual, pra comparação
  *  justa) - rendendo à taxa informada, mês a mês (juros compostos reais,
- *  não uma multiplicação anual simplificada). O Imposto de Renda, quando
- *  não isento, incide só sobre o rendimento acumulado (nunca sobre o
- *  capital aportado), usando a alíquota regressiva pelo prazo total. */
-function simularInvestirEquivalente({ parcelasConsorcio, taxaAnualPct, prazoMeses, isentoIR }) {
+ *  não uma multiplicação anual simplificada), começando de um valor que a
+ *  pessoa já tinha guardado. Imposto de Renda incide só sobre o
+ *  rendimento (nunca sobre o capital), usando a alíquota regressiva pelo
+ *  prazo total — modelo simples: CDB básico, 100% do CDI. */
+function simularInvestirEquivalente({ parcelasConsorcio, taxaAnualPct, prazoMeses, valorInicial }) {
   const taxaMensal = Math.pow(1 + taxaAnualPct / 100, 1 / 12) - 1;
-  let saldo = 0;
+  let saldo = valorInicial;
   let totalAportado = 0;
   const serieMensal = [];
   for (const parcela of parcelasConsorcio) {
@@ -114,25 +115,36 @@ function simularInvestirEquivalente({ parcelasConsorcio, taxaAnualPct, prazoMese
     serieMensal.push(saldo);
   }
 
-  const rendimentoBruto = saldo - totalAportado;
-  const aliquotaIR = isentoIR ? 0 : aliquotaIRRegressiva(prazoMeses * 30);
+  const totalInvestido = totalAportado + valorInicial;
+  const rendimentoBruto = saldo - totalInvestido;
+  const aliquotaIR = aliquotaIRRegressiva(prazoMeses * 30);
   const ir = Math.max(rendimentoBruto, 0) * aliquotaIR;
   const rendimentoLiquido = rendimentoBruto - ir;
-  const saldoFinalLiquido = totalAportado + rendimentoLiquido;
+  const saldoFinalLiquido = totalInvestido + rendimentoLiquido;
 
   // A série mensal (pro gráfico) é ajustada proporcionalmente pra refletir
   // o líquido também, sem precisar re-simular mês a mês o IR.
   const fatorLiquido = saldo > 0 ? saldoFinalLiquido / saldo : 1;
   const serieMensalLiquida = serieMensal.map((v) => v * fatorLiquido);
 
+  // Quanto tempo a mais seria preciso pra chegar no mesmo patrimônio final
+  // aportando a mesma média mensal, mas sem nenhum rendimento — essa
+  // diferença é "o tempo que os juros economizaram" pra você.
+  const mediaAporteMensal = totalAportado / prazoMeses;
+  const mesesSemJuros = mediaAporteMensal > 0 ? (saldoFinalLiquido - valorInicial) / mediaAporteMensal : prazoMeses;
+  const tempoEconomizadoMeses = Math.max(Math.round(mesesSemJuros - prazoMeses), 0);
+
   return {
     saldoFinalBruto: saldo,
     saldoFinalLiquido,
     totalAportado,
+    valorInicial,
+    totalInvestido,
     rendimentoBruto,
     aliquotaIR,
     ir,
     rendimentoLiquido,
+    tempoEconomizadoMeses,
     serieMensal: serieMensalLiquida,
   };
 }
@@ -248,43 +260,20 @@ function render(root) {
     percentField("Taxa do financiamento (% ao ano)", "taxaFinanciamentoAnualPct", root),
   ]);
 
-  const irBotoes = [];
-  const irToggle = el(
-    "div",
-    { class: "freq-toggle" },
-    [
-      [false, "Tributado (regra regressiva)"],
-      [true, "Isento (ex: LCI/LCA)"],
-    ].map(([valor, label]) => {
-      const btn = el(
-        "button",
-        {
-          type: "button",
-          class: "freq-toggle__opt",
-          "aria-pressed": String(state.investimentoIsentoIR === valor),
-          onClick: () => {
-            state.investimentoIsentoIR = valor;
-            irBotoes.forEach((b) => b.setAttribute("aria-pressed", String(b.dataset.valor === String(valor))));
-            persist();
-            renderResultado(root);
-          },
-        },
-        label,
-      );
-      btn.dataset.valor = String(valor);
-      irBotoes.push(btn);
-      return btn;
-    }),
-  );
-
   const investirSub = el("div", { class: "premissa-sub" }, [
     el("h3", {}, "Se investisse"),
-    el("p", { class: "panel-lead" }, "Aporta, todo mês, o valor que seria a parcela do consórcio."),
+    el(
+      "p",
+      { class: "panel-lead" },
+      "CDB Básico, 100% do CDI. Aporta, todo mês, o valor que seria a parcela do consórcio.",
+    ),
     el("div", { class: "cdi-info-compacta", id: "cdi-info" }),
-    el("div", { class: "field-group" }, [
-      el("label", { class: "field-label" }, "Imposto de Renda sobre o rendimento"),
-      irToggle,
-    ]),
+    moneyField(
+      "Quanto você já tem guardado hoje",
+      "valorInicialInvestido",
+      root,
+      "Esse valor entra rendendo desde o mês 1, junto com os aportes mensais.",
+    ),
   ]);
 
   const premissasCard = el("section", { class: "panel card" }, [
@@ -298,7 +287,7 @@ function render(root) {
   renderResultado(root);
 }
 
-function moneyField(label, key, root) {
+function moneyField(label, key, root, ajuda) {
   const input = el("input", {
     class: "field",
     inputmode: "numeric",
@@ -312,7 +301,11 @@ function moneyField(label, key, root) {
       renderResultado(root);
     },
   });
-  return el("div", { class: "field-group" }, [el("label", { class: "field-label" }, label), input]);
+  return el("div", { class: "field-group" }, [
+    el("label", { class: "field-label" }, label),
+    input,
+    ajuda ? el("p", { class: "field-ajuda" }, ajuda) : null,
+  ]);
 }
 
 function percentField(label, key, root, ajuda) {
@@ -392,7 +385,7 @@ function renderResultado(root) {
     parcelasConsorcio: consorcio.parcelas,
     taxaAnualPct: state.cdiAnualPct,
     prazoMeses: state.prazoMeses,
-    isentoIR: state.investimentoIsentoIR,
+    valorInicial: state.valorInicialInvestido,
   });
 
   const financiamento = simularFinanciamentoSAC({
@@ -434,14 +427,20 @@ function renderResultado(root) {
       patrimonioFinal: patrimonioInvestir,
       serieMensal: investir.serieMensal,
       destaques: [
-        ["Total aportado", brl(investir.totalAportado)],
-        [dinheiroQueSobra >= 0 ? "Sobra pra comprar o bem" : "Ainda faltaria", brl(Math.abs(dinheiroQueSobra))],
+        ["Total investido", brl(investir.totalInvestido)],
+        [dinheiroQueSobra >= 0 ? "Sobra após a compra" : "Ainda faltaria pra comprar o bem", brl(Math.abs(dinheiroQueSobra))],
       ],
       detalhes: [
+        ["Já tinha guardado", brl(investir.valorInicial)],
+        ["Aporte mensal (mesmo da parcela)", `${brl(consorcio.primeiraParcela)} → ${brl(consorcio.ultimaParcela)}`],
         ["Rendimento bruto", brl(investir.rendimentoBruto)],
-        ["IR" + (state.investimentoIsentoIR ? " (isento)" : ` (${(investir.aliquotaIR * 100).toFixed(1).replace(".", ",")}%)`), brl(investir.ir)],
+        [`IR (${(investir.aliquotaIR * 100).toFixed(1).replace(".", ",")}%)`, brl(investir.ir)],
         ["Rendimento líquido", brl(investir.rendimentoLiquido)],
         ["Valor do bem comprado", brl(Math.min(patrimonioInvestir, valorBemFinal))],
+        [
+          "Tempo que os juros economizaram",
+          investir.tempoEconomizadoMeses > 0 ? `${investir.tempoEconomizadoMeses} meses a menos` : "—",
+        ],
       ],
       nota: "O bem já está incluído no patrimônio, como se fosse comprado à vista ao final.",
     },
