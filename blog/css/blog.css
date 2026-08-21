@@ -430,3 +430,57 @@ body.pagina-artigo {
   filter: brightness(1.08);
   transform: translateY(-1px);
 }
+
+/* Versão simples: "Leia também" — sem caixa, sem botão, só o link em
+   destaque com um tracinho azul embaixo. */
+.leia-tambem {
+  margin: 1.75rem 0;
+  font-size: 0.96rem;
+  line-height: 1.7;
+  color: color-mix(in srgb, var(--fg) 88%, transparent);
+  position: relative;
+  padding-bottom: 0.9rem;
+}
+.leia-tambem a {
+  color: #2f4fed;
+  font-weight: 600;
+}
+.leia-tambem a:hover {
+  color: #1c35b8;
+}
+.leia-tambem::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 40px;
+  height: 4px;
+  background: #2f4fed;
+  border-radius: 2px;
+}
+
+/* CTA compacto: pergunta curta + link, alinhado à esquerda, sem caixa
+   pesada — só uma barrinha dourada fina do lado, tipo banner de loja de
+   skincare (leve, não centralizado, sem sombra). */
+.cta-compacto {
+  display: block;
+  margin: 1.5rem 0;
+  padding: 0.7rem 0 0.7rem 0.9rem;
+  border-left: 3px solid var(--gold);
+  text-align: left;
+  font-size: 0.92rem;
+  line-height: 1.5;
+  color: color-mix(in srgb, var(--fg) 85%, transparent);
+}
+.cta-compacto strong {
+  color: var(--fg);
+}
+.cta-compacto__seta {
+  color: var(--gold);
+  font-weight: 700;
+  margin-left: 0.15rem;
+}
+.cta-compacto:hover .cta-compacto__seta {
+  margin-left: 0.35rem;
+  transition: margin-left 0.15s ease;
+}
