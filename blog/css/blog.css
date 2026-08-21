@@ -253,6 +253,17 @@ body.pagina-artigo {
 .artigo article strong {
   color: var(--fg);
 }
+.artigo article p a,
+.artigo article li a {
+  color: #2f4fed;
+  font-weight: 700;
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+.artigo article p a:hover,
+.artigo article li a:hover {
+  color: #1c35b8;
+}
 
 /* Caixa de recomendação de produto, dentro do artigo */
 /* "O que a gente usa" — solto, sem caixa ao redor, só espaçamento. */
