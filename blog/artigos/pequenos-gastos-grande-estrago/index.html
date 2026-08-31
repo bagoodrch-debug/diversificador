@@ -115,12 +115,50 @@
         delivery no almoço, aposta online — de R$ 20 por dia. Isoladamente
         parece irrelevante. Multiplicado pelo tempo, assusta:
       </p>
-      <ul>
-        <li><strong>R$ 5/dia</strong> — R$ 150/mês → R$ 1.800 em 1 ano → R$ 18.000 em 10 anos.</li>
-        <li><strong>R$ 15/dia</strong> — R$ 450/mês → R$ 5.400 em 1 ano → R$ 54.000 em 10 anos.</li>
-        <li><strong>R$ 20/dia</strong> — R$ 600/mês → R$ 7.200 em 1 ano → R$ 72.000 em 10 anos.</li>
-        <li><strong>R$ 30/dia</strong> — R$ 900/mês → R$ 10.800 em 1 ano → R$ 108.000 em 10 anos.</li>
-      </ul>
+      <div class="tabela-wrap">
+        <table class="tabela-comparativa">
+          <caption>Quanto um gasto diário vira acumulado, sem nenhum rendimento</caption>
+          <thead>
+            <tr>
+              <th scope="col">Gasto diário</th>
+              <th scope="col">Por mês</th>
+              <th scope="col">Em 1 ano</th>
+              <th scope="col">Em 5 anos</th>
+              <th scope="col">Em 10 anos</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <th scope="row">R$ 5</th>
+              <td>R$ 150</td>
+              <td>R$ 1.800</td>
+              <td>R$ 9.000</td>
+              <td>R$ 18.000</td>
+            </tr>
+            <tr>
+              <th scope="row">R$ 15</th>
+              <td>R$ 450</td>
+              <td>R$ 5.400</td>
+              <td>R$ 27.000</td>
+              <td>R$ 54.000</td>
+            </tr>
+            <tr>
+              <th scope="row">R$ 20</th>
+              <td>R$ 600</td>
+              <td>R$ 7.200</td>
+              <td>R$ 36.000</td>
+              <td>R$ 72.000</td>
+            </tr>
+            <tr>
+              <th scope="row">R$ 30</th>
+              <td>R$ 900</td>
+              <td>R$ 10.800</td>
+              <td>R$ 54.000</td>
+              <td>R$ 108.000</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
       <p>
         E isso é só o valor acumulado, sem nenhum rendimento — puro
         dinheiro que passou pela sua mão. O estrago fica maior ainda
@@ -134,13 +172,50 @@
         investidos em vez de gastos — o que a economia chama de
         <strong>custo de oportunidade</strong>. Pega o exemplo de um
         hábito de R$ 15 por dia (um lanche ou café reforçado), R$ 450 por
-        mês. Guardado embaixo do colchão, sem juro nenhum, esse valor
-        chega a R$ 5.400 em 1 ano, R$ 27.000 em 5 anos e R$ 54.000 em 10
-        anos. Investido a um retorno médio conservador de 10% ao ano, o
-        mesmo hábito de R$ 450/mês vira aproximadamente R$ 5.688 em 1 ano,
-        R$ 34.727 em 5 anos e <strong>R$ 90.656 em 10 anos</strong> — quase
-        R$ 37 mil a mais só pelo efeito dos juros compostos em cima do
-        mesmo dinheiro que já ia ser guardado de qualquer forma.
+        mês, comparando guardar embaixo do colchão sem juro nenhum contra
+        investir a um retorno médio conservador de 10% ao ano:
+      </p>
+      <div class="grafico-barras">
+        <div class="grafico-barras__titulo">R$ 15/dia (R$ 450/mês): acumulado x investido a 10% a.a.</div>
+        <div class="grafico-barras__linha">
+          <span class="grafico-barras__rotulo">1 ano — acumulado</span>
+          <div class="grafico-barras__trilha"><div class="grafico-barras__valor grafico-barras__valor--2" style="width:6%"></div></div>
+          <span class="grafico-barras__numero">R$ 5.400</span>
+        </div>
+        <div class="grafico-barras__linha">
+          <span class="grafico-barras__rotulo">1 ano — investido</span>
+          <div class="grafico-barras__trilha"><div class="grafico-barras__valor" style="width:6%"></div></div>
+          <span class="grafico-barras__numero">R$ 5.688</span>
+        </div>
+        <div class="grafico-barras__linha">
+          <span class="grafico-barras__rotulo">5 anos — acumulado</span>
+          <div class="grafico-barras__trilha"><div class="grafico-barras__valor grafico-barras__valor--2" style="width:30%"></div></div>
+          <span class="grafico-barras__numero">R$ 27.000</span>
+        </div>
+        <div class="grafico-barras__linha">
+          <span class="grafico-barras__rotulo">5 anos — investido</span>
+          <div class="grafico-barras__trilha"><div class="grafico-barras__valor" style="width:38%"></div></div>
+          <span class="grafico-barras__numero">R$ 34.727</span>
+        </div>
+        <div class="grafico-barras__linha">
+          <span class="grafico-barras__rotulo">10 anos — acumulado</span>
+          <div class="grafico-barras__trilha"><div class="grafico-barras__valor grafico-barras__valor--2" style="width:60%"></div></div>
+          <span class="grafico-barras__numero">R$ 54.000</span>
+        </div>
+        <div class="grafico-barras__linha">
+          <span class="grafico-barras__rotulo">10 anos — investido</span>
+          <div class="grafico-barras__trilha"><div class="grafico-barras__valor" style="width:100%"></div></div>
+          <span class="grafico-barras__numero">R$ 90.656</span>
+        </div>
+        <div class="grafico-barras__legenda">
+          <span><i class="cor-2"></i> Acumulado sem juros</span>
+          <span><i></i> Investido a 10% a.a.</span>
+        </div>
+      </div>
+      <p>
+        Em 10 anos, a diferença entre guardar parado e investir passa de
+        <strong>R$ 36 mil</strong> — só pelo efeito dos juros compostos em
+        cima do mesmo dinheiro que já ia ser guardado de qualquer forma.
       </p>
 
       <a class="cta-compacto" href="../../../juros/">

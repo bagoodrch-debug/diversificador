@@ -60,17 +60,29 @@
       <p>Cuidado pessoal, disciplina e dinheiro — sempre com a explicação primeiro, a recomendação depois.</p>
     </div>
 
+    <div class="blog-filtros" role="tablist" aria-label="Filtrar artigos por categoria">
+      <button type="button" class="blog-filtro" data-filtro="todos" aria-pressed="true">Todos</button>
+      <button type="button" class="blog-filtro" data-filtro="dinheiro" aria-pressed="false">Dinheiro</button>
+      <button type="button" class="blog-filtro" data-filtro="mente" aria-pressed="false">Mente</button>
+      <button type="button" class="blog-filtro" data-filtro="pele" aria-pressed="false">Pele</button>
+    </div>
+
     <!--
       COMO ADICIONAR UM ARTIGO NOVO:
       1. Duplique um arquivo em blog/artigos/ (ex: artigos/pele-oleosa-rotina-simples.html)
          e escreva o conteúdo novo, seguindo a mesma estrutura.
       2. Duplique um <a class="artigo-card"> aqui embaixo, apontando
          pro arquivo novo, com título e resumo reais.
-      3. Se quiser uma categoria nova (além de Pele, Disciplina, Dinheiro),
-         é só usar um texto novo em <span class="artigo-card__tag">.
+      3. Defina o atributo data-categoria="..." no <a class="artigo-card">
+         igual ao texto do <span class="artigo-card__tag">, em minúsculo
+         e sem acento (ex: tag "Dinheiro" -> data-categoria="dinheiro").
+         Isso é o que liga o card ao filtro certo.
+      4. Se for uma categoria nova (além de Pele, Dinheiro, Mente),
+         adicione um novo <button class="blog-filtro"> na barra de
+         filtros logo acima do grid, com o mesmo valor em data-filtro.
     -->
     <div class="artigos-grid">
-      <a class="artigo-card" href="artigos/pele-oleosa-rotina-simples/">
+      <a class="artigo-card" data-categoria="pele" href="artigos/pele-oleosa-rotina-simples/">
         <div class="artigo-card__img">
           <img src="../assets/img/pele.webp" alt="" />
         </div>
@@ -83,7 +95,7 @@
         </span>
       </a>
 
-      <a class="artigo-card" href="artigos/consorcio-imobiliario-vale-a-pena/">
+      <a class="artigo-card" data-categoria="dinheiro" href="artigos/consorcio-imobiliario-vale-a-pena/">
         <div class="artigo-card__img">
           <img src="../assets/img/consorcio.webp" alt="" />
         </div>>
@@ -96,7 +108,7 @@
         </span>
       </a>
 
-      <a class="artigo-card" href="artigos/brasil-vs-exterior-diversificacao/">
+      <a class="artigo-card" data-categoria="dinheiro" href="artigos/brasil-vs-exterior-diversificacao/">
         <div class="artigo-card__img">
           <img src="../assets/img/brasil-exterior.webp" alt="" />
         </div>
@@ -109,7 +121,7 @@
         </span>
       </a>
 
-      <a class="artigo-card" href="artigos/renda-fixa-vs-carteira-diversificada/">
+      <a class="artigo-card" data-categoria="dinheiro" href="artigos/renda-fixa-vs-carteira-diversificada/">
         <div class="artigo-card__img">
           <img src="../assets/img/renda-fixa.webp" alt="" />
         </div>
@@ -122,7 +134,7 @@
         </span>
       </a>
 
-      <a class="artigo-card" href="artigos/pequenos-gastos-grande-estrago/">
+      <a class="artigo-card" data-categoria="dinheiro" href="artigos/pequenos-gastos-grande-estrago/">
         <div class="artigo-card__img">
           <img src="../assets/img/pequenos-gastos.webp" alt="" />
         </div>
@@ -135,7 +147,7 @@
         </span>
       </a>
 
-      <a class="artigo-card" href="artigos/cortar-gastos-ou-aumentar-renda/">
+      <a class="artigo-card" data-categoria="dinheiro" href="artigos/cortar-gastos-ou-aumentar-renda/">
         <div class="artigo-card__img">
           <img src="../assets/img/cortar-gastos-aumentar-renda.webp" alt="" />
         </div>
@@ -148,7 +160,7 @@
         </span>
       </a>
 
-      <a class="artigo-card" href="artigos/reserva-emergencia-onde-guardar/">
+      <a class="artigo-card" data-categoria="dinheiro" href="artigos/reserva-emergencia-onde-guardar/">
         <div class="artigo-card__img">
           <img src="../assets/img/reserva-onde-guardar.webp" alt="" />
         </div>
@@ -161,7 +173,7 @@
         </span>
       </a>
 
-      <a class="artigo-card" href="artigos/reserva-emergencia-quanto-guardar/">
+      <a class="artigo-card" data-categoria="dinheiro" href="artigos/reserva-emergencia-quanto-guardar/">
         <div class="artigo-card__img">
           <img src="../assets/img/reserva-quanto-guardar.webp" alt="" />
         </div>
@@ -174,7 +186,7 @@
         </span>
       </a>
 
-      <a class="artigo-card" href="artigos/emburrecimento-era-smartphones/">
+      <a class="artigo-card" data-categoria="mente" href="artigos/emburrecimento-era-smartphones/">
         <div class="artigo-card__img">
           <img src="../assets/img/emburrecimento-smartphones.webp" alt="" />
         </div>
@@ -187,7 +199,7 @@
         </span>
       </a>
 
-      <a class="artigo-card" href="artigos/por-que-voce-nao-se-concentra/">
+      <a class="artigo-card" data-categoria="mente" href="artigos/por-que-voce-nao-se-concentra/">
         <div class="artigo-card__img">
           <img src="../assets/img/por-que-nao-se-concentra.webp" alt="" />
         </div>
@@ -200,7 +212,7 @@
         </span>
       </a>
 
-      <a class="artigo-card" href="artigos/como-curar-procrastinacao/">
+      <a class="artigo-card" data-categoria="mente" href="artigos/como-curar-procrastinacao/">
         <div class="artigo-card__img">
           <img src="../assets/img/curar-procrastinacao.webp" alt="" />
         </div>
@@ -213,7 +225,33 @@
         </span>
       </a>
 
-      <div class="artigo-card artigo-card--em-breve">
+      <a class="artigo-card" data-categoria="mente" href="artigos/protocolo-desintoxicacao-dopamina/">
+        <div class="artigo-card__img">
+          <img src="../assets/img/desintoxicacao-dopamina.webp" alt="" />
+        </div>
+        <span class="artigo-card__tag">Mente</span>
+        <h2>O protocolo de desintoxicação de dopamina</h2>
+        <p>Como recalibrar o cérebro, restaurar o foco e recuperar o controle sobre os impulsos — a ciência da dopamina e um roteiro prático em 3 fases.</p>
+        <span class="artigo-card__link">
+          Ler artigo
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+        </span>
+      </a>
+
+      <a class="artigo-card" data-categoria="mente" href="artigos/4-habitos-matinais-alta-performance/">
+        <div class="artigo-card__img">
+          <img src="../assets/img/habitos-matinais.webp" alt="" />
+        </div>
+        <span class="artigo-card__tag">Mente</span>
+        <h2>4 hábitos matinais que mudam o dia inteiro</h2>
+        <p>A neurobiologia por trás de uma rotina de foco de verdade — sem banho de gelo às 4h, só ciência básica de exercício, luz, leitura e ambiente.</p>
+        <span class="artigo-card__link">
+          Ler artigo
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+        </span>
+      </a>
+
+      <div class="artigo-card artigo-card--em-breve" data-categoria="em-breve">
         <span class="artigo-card__tag">Em breve</span>
         <h2>Próximo artigo</h2>
         <p>Estamos escrevendo o próximo. Volte em breve pra conferir.</p>
@@ -236,5 +274,27 @@
   </footer>
 
   <script src="../js/main.js"></script>
+  <script>
+    (function () {
+      var botoes = document.querySelectorAll(".blog-filtro");
+      var cards = document.querySelectorAll(".artigo-card[data-categoria]");
+
+      botoes.forEach(function (botao) {
+        botao.addEventListener("click", function () {
+          var filtro = botao.dataset.filtro;
+
+          botoes.forEach(function (b) {
+            b.setAttribute("aria-pressed", String(b === botao));
+          });
+
+          cards.forEach(function (card) {
+            var categoria = card.dataset.categoria;
+            var mostrar = filtro === "todos" ? true : categoria === filtro;
+            card.classList.toggle("is-oculto", !mostrar);
+          });
+        });
+      });
+    })();
+  </script>
 </body>
 </html>

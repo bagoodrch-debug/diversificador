@@ -171,6 +171,58 @@
         <strong>Quer comparar o rendimento líquido de verdade?</strong> O comparador <span class="texto-azul">CDB x Tesouro x Poupança</span> já desconta o Imposto de Renda pra você.<span class="cta-compacto__seta">→</span>
       </a>
 
+      <div class="tabela-wrap">
+        <table class="tabela-comparativa">
+          <caption>Poupança x CDB de liquidez diária x Tesouro Selic</caption>
+          <thead>
+            <tr>
+              <th scope="col">Critério</th>
+              <th scope="col">Poupança</th>
+              <th scope="col">CDB liquidez diária</th>
+              <th scope="col">Tesouro Selic</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <th scope="row">Facilidade / acesso</th>
+              <td>Muito alta, instantânea 24/7</td>
+              <td>Alta, no horário do banco</td>
+              <td>Alta, regras do Tesouro</td>
+            </tr>
+            <tr>
+              <th scope="row">Liquidez real</th>
+              <td>Imediata</td>
+              <td>D+0</td>
+              <td>D+0 ou D+1</td>
+            </tr>
+            <tr>
+              <th scope="row">Imposto de Renda</th>
+              <td>Isento pra pessoa física</td>
+              <td>Tabela regressiva, 22,5% a 15%</td>
+              <td>Tabela regressiva, 22,5% a 15%</td>
+            </tr>
+            <tr>
+              <th scope="row">Rentabilidade</th>
+              <td>Regra da poupança (~70% do CDI + TR)</td>
+              <td>Geralmente 100% do CDI bruto</td>
+              <td>Atrelada à taxa Selic</td>
+            </tr>
+            <tr>
+              <th scope="row">Garantia</th>
+              <td>FGC até R$ 250 mil por CPF/instituição</td>
+              <td>FGC até R$ 250 mil por CPF/instituição</td>
+              <td>Garantia soberana do Tesouro Nacional</td>
+            </tr>
+            <tr>
+              <th scope="row">Oscilação</th>
+              <td>Inexistente</td>
+              <td>Praticamente inexistente</td>
+              <td>Muito baixa (pequeno spread)</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
       <h2>E o Imposto de Renda?</h2>
       <p>
         Muita gente foge de CDB e Tesouro Selic com medo do IR, que segue
@@ -181,13 +233,31 @@
         a taxa bruta de um com a isenção do outro — o que importa é
         quanto cai líquido no bolso no final.
       </p>
+      <div class="grafico-barras">
+        <div class="grafico-barras__titulo">Rendimento líquido estimado (Selic a 10,5% a.a.)</div>
+        <div class="grafico-barras__linha">
+          <span class="grafico-barras__rotulo">CDB 100% CDI (IR 17,5%)</span>
+          <div class="grafico-barras__trilha"><div class="grafico-barras__valor" style="width:100%"></div></div>
+          <span class="grafico-barras__numero">8,66% a.a.</span>
+        </div>
+        <div class="grafico-barras__linha">
+          <span class="grafico-barras__rotulo">Tesouro Selic</span>
+          <div class="grafico-barras__trilha"><div class="grafico-barras__valor" style="width:98%"></div></div>
+          <span class="grafico-barras__numero">8,46% a.a.</span>
+        </div>
+        <div class="grafico-barras__linha">
+          <span class="grafico-barras__rotulo">CDB 100% CDI (IR 22,5%)</span>
+          <div class="grafico-barras__trilha"><div class="grafico-barras__valor" style="width:94%"></div></div>
+          <span class="grafico-barras__numero">8,14% a.a.</span>
+        </div>
+        <div class="grafico-barras__linha">
+          <span class="grafico-barras__rotulo">Poupança</span>
+          <div class="grafico-barras__trilha"><div class="grafico-barras__valor grafico-barras__valor--2" style="width:83%"></div></div>
+          <span class="grafico-barras__numero">7,15% a.a.</span>
+        </div>
+      </div>
       <p>
-        Numa simulação com Selic a 10,5% ao ano, o rendimento líquido
-        estimado fica em torno de <strong>8,66% a.a.</strong> no CDB 100%
-        do CDI com IR de 17,5%, <strong>8,46% a.a.</strong> no Tesouro
-        Selic, <strong>8,14% a.a.</strong> no mesmo CDB com IR de 22,5%
-        (prazo mais curto), e <strong>7,15% a.a.</strong> na poupança. A
-        diferença entre a melhor e a pior opção parece pequena em
+        A diferença entre a melhor e a pior opção parece pequena em
         percentual, mas em capital maior e prazo mais longo vira uma
         diferença real de dinheiro no bolso.
       </p>

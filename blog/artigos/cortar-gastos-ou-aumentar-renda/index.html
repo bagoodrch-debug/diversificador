@@ -153,11 +153,24 @@
         soma das partes isoladas. Numa simulação de 5 anos (60 meses) a
         10% ao ano:
       </p>
-      <ul>
-        <li><strong>Só economia:</strong> elimina R$ 300/mês de desperdício e investe. Resultado em 5 anos: cerca de R$ 22.968.</li>
-        <li><strong>Só renda extra:</strong> ganha R$ 1.000 líquidos a mais, infla o estilo de vida em R$ 300 e investe os R$ 700 restantes. Resultado em 5 anos: cerca de R$ 53.593.</li>
-        <li><strong>Efeito combinado:</strong> corta os R$ 300 de desperdício e soma os R$ 700 da renda extra, chegando a R$ 1.000/mês de aporte. Resultado em 5 anos: cerca de R$ 76.561.</li>
-      </ul>
+      <div class="grafico-barras">
+        <div class="grafico-barras__titulo">Resultado acumulado em 5 anos, por cenário</div>
+        <div class="grafico-barras__linha">
+          <span class="grafico-barras__rotulo">Só economia (R$ 300/mês)</span>
+          <div class="grafico-barras__trilha"><div class="grafico-barras__valor grafico-barras__valor--2" style="width:30%"></div></div>
+          <span class="grafico-barras__numero">R$ 22.968</span>
+        </div>
+        <div class="grafico-barras__linha">
+          <span class="grafico-barras__rotulo">Só renda extra (R$ 700/mês)</span>
+          <div class="grafico-barras__trilha"><div class="grafico-barras__valor" style="width:70%"></div></div>
+          <span class="grafico-barras__numero">R$ 53.593</span>
+        </div>
+        <div class="grafico-barras__linha">
+          <span class="grafico-barras__rotulo">Efeito combinado (R$ 1.000/mês)</span>
+          <div class="grafico-barras__trilha"><div class="grafico-barras__valor grafico-barras__valor--3" style="width:100%"></div></div>
+          <span class="grafico-barras__numero">R$ 76.561</span>
+        </div>
+      </div>
       <p>
         O cenário combinado não é só a soma dos outros dois — é
         praticamente o dobro do cenário "só economia" com o mesmo esforço
@@ -179,20 +192,35 @@
 
       <h2>Qual frente atacar primeiro</h2>
       <p>Não existe fórmula universal — o diagnóstico depende de qual motor está realmente travando o seu patrimônio hoje.</p>
-      <p><strong>Cortar gastos é prioridade se:</strong></p>
-      <ul>
-        <li>A conta fecha no vermelho ou você está endividado com juros altos.</li>
-        <li>Você gasta de forma reativa, sem acompanhar pra onde o dinheiro vai.</li>
-        <li>Tem vícios financeiros caros (delivery frequente, compra por impulso).</li>
-        <li>Não tem uma reserva de emergência mínima estruturada.</li>
-      </ul>
-      <p><strong>Aumentar renda é o foco se:</strong></p>
-      <ul>
-        <li>Seus custos fixos já estão bem enxutos, sem supérfluo relevante.</li>
-        <li>Sua capacidade de poupança está travada abaixo de R$ 300/mês.</li>
-        <li>Sua profissão tem oportunidade real de promoção ou serviço extra.</li>
-        <li>O custo de vida básico consome mais de 85% da sua renda líquida.</li>
-      </ul>
+      <div class="tabela-wrap">
+        <table class="tabela-comparativa">
+          <caption>Diagnóstico rápido: qual frente merece o esforço agora</caption>
+          <thead>
+            <tr>
+              <th scope="col">Cortar gastos é prioridade se...</th>
+              <th scope="col">Aumentar renda é o foco se...</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>A conta fecha no vermelho ou você está endividado com juros altos</td>
+              <td>Seus custos fixos já estão bem enxutos, sem supérfluo relevante</td>
+            </tr>
+            <tr>
+              <td>Você gasta de forma reativa, sem acompanhar pra onde o dinheiro vai</td>
+              <td>Sua capacidade de poupança está travada abaixo de R$ 300/mês</td>
+            </tr>
+            <tr>
+              <td>Tem vícios financeiros caros (delivery frequente, compra por impulso)</td>
+              <td>Sua profissão tem oportunidade real de promoção ou serviço extra</td>
+            </tr>
+            <tr>
+              <td>Não tem uma reserva de emergência mínima estruturada</td>
+              <td>O custo de vida básico consome mais de 85% da sua renda líquida</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
 
       <a class="cta-compacto" href="../../../vicio/">
         <strong>Mapeie seus vazamentos primeiro</strong> — jogue seus hábitos recorrentes na calculadora <span class="texto-azul">Quanto Custa Seu Vício</span> antes de decidir qual frente atacar.<span class="cta-compacto__seta">→</span>

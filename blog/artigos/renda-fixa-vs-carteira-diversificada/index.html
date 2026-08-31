@@ -136,6 +136,46 @@
         compensando a redução da renda fixa.
       </p>
 
+      <div class="tabela-wrap">
+        <table class="tabela-comparativa">
+          <caption>Investidor A (100% renda fixa) x Investidor B (carteira diversificada)</caption>
+          <thead>
+            <tr>
+              <th scope="col">Dimensão</th>
+              <th scope="col">Investidor A</th>
+              <th scope="col">Investidor B</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <th scope="row">Composição</th>
+              <td>R$ 100 mil em renda fixa pós-fixada</td>
+              <td>R$ 40 mil RF, R$ 20 mil ações BR, R$ 20 mil ações exterior, R$ 10 mil FIIs, R$ 10 mil ouro</td>
+            </tr>
+            <tr>
+              <th scope="row">Motores de rentabilidade</th>
+              <td>1 motor — a taxa Selic/CDI</td>
+              <td>5 motores independentes trabalhando ao mesmo tempo</td>
+            </tr>
+            <tr>
+              <th scope="row">Risco visível no extrato</th>
+              <td>Praticamente zero, saldo cresce de forma linear</td>
+              <td>Volatilidade de curto prazo na parcela de renda variável</td>
+            </tr>
+            <tr>
+              <th scope="row">Risco invisível</th>
+              <td>Alto — inflação, câmbio e corte de juros corroem o ganho real</td>
+              <td>Baixo — protegido por dolarização parcial e ativos reais</td>
+            </tr>
+            <tr>
+              <th scope="row">Se os juros caem</th>
+              <td>Ganho real encolhe, tende a buscar renda variável tarde demais</td>
+              <td>Ações e FIIs tendem a decolar, compensando a renda fixa</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
       <h2>O papel de cada classe dentro da carteira</h2>
       <p>
         Uma carteira equilibrada não é uma coleção aleatória de ativos —
@@ -178,16 +218,66 @@
 
       <h2>Simulação: R$ 50 mil, dois perfis</h2>
       <p>
-        Uma <strong>carteira conservadora</strong>, focada em reduzir
-        oscilação nominal, poderia ficar em algo como 70% renda fixa, 10%
-        ações Brasil, 10% ações exterior, 5% FIIs e 5% ouro. Já uma
-        <strong>carteira diversificada</strong>, com foco em espalhar os
-        fatores de risco, tende a algo mais equilibrado — 40% renda fixa,
-        20% ações Brasil, 20% ações exterior, 10% FIIs e 10% ouro. Não
-        existe uma fórmula pronta da internet que sirva pra todo mundo; o
-        que muda de uma pra outra é o quanto cada motor de rentabilidade
-        pesa dentro do total.
+        Não existe uma fórmula pronta da internet que sirva pra todo
+        mundo — o que muda de um perfil pro outro é o quanto cada motor
+        de rentabilidade pesa dentro do total:
       </p>
+      <div class="grafico-barras">
+        <div class="grafico-barras__titulo">Carteira conservadora — foco em renda fixa</div>
+        <div class="grafico-barras__linha">
+          <span class="grafico-barras__rotulo">Renda fixa</span>
+          <div class="grafico-barras__trilha"><div class="grafico-barras__valor" style="width:70%"></div></div>
+          <span class="grafico-barras__numero">70%</span>
+        </div>
+        <div class="grafico-barras__linha">
+          <span class="grafico-barras__rotulo">Ações Brasil</span>
+          <div class="grafico-barras__trilha"><div class="grafico-barras__valor" style="width:10%"></div></div>
+          <span class="grafico-barras__numero">10%</span>
+        </div>
+        <div class="grafico-barras__linha">
+          <span class="grafico-barras__rotulo">Ações exterior</span>
+          <div class="grafico-barras__trilha"><div class="grafico-barras__valor" style="width:10%"></div></div>
+          <span class="grafico-barras__numero">10%</span>
+        </div>
+        <div class="grafico-barras__linha">
+          <span class="grafico-barras__rotulo">Fundos imobiliários</span>
+          <div class="grafico-barras__trilha"><div class="grafico-barras__valor" style="width:5%"></div></div>
+          <span class="grafico-barras__numero">5%</span>
+        </div>
+        <div class="grafico-barras__linha">
+          <span class="grafico-barras__rotulo">Ouro</span>
+          <div class="grafico-barras__trilha"><div class="grafico-barras__valor" style="width:5%"></div></div>
+          <span class="grafico-barras__numero">5%</span>
+        </div>
+      </div>
+      <div class="grafico-barras">
+        <div class="grafico-barras__titulo">Carteira diversificada — foco equilibrado</div>
+        <div class="grafico-barras__linha">
+          <span class="grafico-barras__rotulo">Renda fixa</span>
+          <div class="grafico-barras__trilha"><div class="grafico-barras__valor" style="width:40%"></div></div>
+          <span class="grafico-barras__numero">40%</span>
+        </div>
+        <div class="grafico-barras__linha">
+          <span class="grafico-barras__rotulo">Ações Brasil</span>
+          <div class="grafico-barras__trilha"><div class="grafico-barras__valor" style="width:20%"></div></div>
+          <span class="grafico-barras__numero">20%</span>
+        </div>
+        <div class="grafico-barras__linha">
+          <span class="grafico-barras__rotulo">Ações exterior</span>
+          <div class="grafico-barras__trilha"><div class="grafico-barras__valor" style="width:20%"></div></div>
+          <span class="grafico-barras__numero">20%</span>
+        </div>
+        <div class="grafico-barras__linha">
+          <span class="grafico-barras__rotulo">Fundos imobiliários</span>
+          <div class="grafico-barras__trilha"><div class="grafico-barras__valor" style="width:10%"></div></div>
+          <span class="grafico-barras__numero">10%</span>
+        </div>
+        <div class="grafico-barras__linha">
+          <span class="grafico-barras__rotulo">Ouro</span>
+          <div class="grafico-barras__trilha"><div class="grafico-barras__valor" style="width:10%"></div></div>
+          <span class="grafico-barras__numero">10%</span>
+        </div>
+      </div>
 
       <h2>Diversificar demais também é erro</h2>
       <p>

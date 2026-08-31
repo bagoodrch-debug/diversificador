@@ -159,22 +159,103 @@
         Colocando lado a lado os dois cenários fica mais fácil enxergar a
         diferença estrutural:
       </p>
-      <ul>
-        <li><strong>Moeda:</strong> só real, exposto à desvalorização cambial &nbsp;vs.&nbsp; multimoeda (dólar, euro), protegendo o poder de compra global.</li>
-        <li><strong>Exposição econômica:</strong> dependência estrita do PIB e da fiscal brasileira &nbsp;vs.&nbsp; distribuição por várias economias e blocos de crescimento.</li>
-        <li><strong>Acesso a mercados:</strong> restrito à B3 &nbsp;vs.&nbsp; acesso aos maiores mercados do mundo (EUA, Europa, Ásia).</li>
-        <li><strong>Setores disponíveis:</strong> concentração em commodities, bancos e energia &nbsp;vs.&nbsp; setores como IA, semicondutores e biotech.</li>
-        <li><strong>Risco:</strong> alta vulnerabilidade a ruído político e institucional doméstico &nbsp;vs.&nbsp; diluição de risco geopolítico numa alocação global.</li>
-      </ul>
+      <div class="tabela-wrap">
+        <table class="tabela-comparativa">
+          <caption>Comparativo estratégico: concentração doméstica x exposição internacional</caption>
+          <thead>
+            <tr>
+              <th scope="col">Critério</th>
+              <th scope="col">Patrimônio 100% Brasil</th>
+              <th scope="col">Com exposição internacional</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <th scope="row">Moeda principal</th>
+              <td>Só real, exposto à desvalorização cambial</td>
+              <td>Multimoeda (dólar, euro), protege o poder de compra global</td>
+            </tr>
+            <tr>
+              <th scope="row">Exposição econômica</th>
+              <td>Dependência estrita do PIB e da fiscal brasileira</td>
+              <td>Distribuição por várias economias e blocos de crescimento</td>
+            </tr>
+            <tr>
+              <th scope="row">Acesso a mercados</th>
+              <td>Restrito à B3</td>
+              <td>Acesso aos maiores mercados do mundo (EUA, Europa, Ásia)</td>
+            </tr>
+            <tr>
+              <th scope="row">Setores disponíveis</th>
+              <td>Concentração em commodities, bancos e energia</td>
+              <td>Setores como IA, semicondutores e biotecnologia</td>
+            </tr>
+            <tr>
+              <th scope="row">Risco</th>
+              <td>Alta vulnerabilidade a ruído político e institucional doméstico</td>
+              <td>Diluição de risco geopolítico numa alocação global</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
       <p>
-        Numa simulação simples com R$ 100 mil: uma carteira 100% Brasil
-        pode ficar em algo como 60% renda fixa, 25% ações BR e 15% FIIs —
-        toda ela dependente do mesmo ambiente macroeconômico. Já uma
-        carteira globalmente diversificada consegue manter uma base sólida
-        em reais (pra despesas e necessidades locais) e ainda reservar uma
-        fatia — ações no exterior e ouro, por exemplo — com motores de
-        rentabilidade desvinculados da moeda e do risco soberano
-        brasileiro.
+        Numa simulação simples com R$ 100 mil, veja como a mesma quantia
+        se distribui num cenário 100% Brasil e num globalmente
+        diversificado:
+      </p>
+      <div class="grafico-barras">
+        <div class="grafico-barras__titulo">Carteira A — 100% Brasil</div>
+        <div class="grafico-barras__linha">
+          <span class="grafico-barras__rotulo">Renda fixa</span>
+          <div class="grafico-barras__trilha"><div class="grafico-barras__valor" style="width:60%"></div></div>
+          <span class="grafico-barras__numero">60%</span>
+        </div>
+        <div class="grafico-barras__linha">
+          <span class="grafico-barras__rotulo">Ações Brasil</span>
+          <div class="grafico-barras__trilha"><div class="grafico-barras__valor" style="width:25%"></div></div>
+          <span class="grafico-barras__numero">25%</span>
+        </div>
+        <div class="grafico-barras__linha">
+          <span class="grafico-barras__rotulo">Fundos imobiliários</span>
+          <div class="grafico-barras__trilha"><div class="grafico-barras__valor" style="width:15%"></div></div>
+          <span class="grafico-barras__numero">15%</span>
+        </div>
+      </div>
+      <div class="grafico-barras">
+        <div class="grafico-barras__titulo">Carteira B — globalmente diversificada</div>
+        <div class="grafico-barras__linha">
+          <span class="grafico-barras__rotulo">Renda fixa</span>
+          <div class="grafico-barras__trilha"><div class="grafico-barras__valor" style="width:40%"></div></div>
+          <span class="grafico-barras__numero">40%</span>
+        </div>
+        <div class="grafico-barras__linha">
+          <span class="grafico-barras__rotulo">Ações Brasil</span>
+          <div class="grafico-barras__trilha"><div class="grafico-barras__valor" style="width:20%"></div></div>
+          <span class="grafico-barras__numero">20%</span>
+        </div>
+        <div class="grafico-barras__linha">
+          <span class="grafico-barras__rotulo">Ações exterior</span>
+          <div class="grafico-barras__trilha"><div class="grafico-barras__valor" style="width:20%"></div></div>
+          <span class="grafico-barras__numero">20%</span>
+        </div>
+        <div class="grafico-barras__linha">
+          <span class="grafico-barras__rotulo">Fundos imobiliários</span>
+          <div class="grafico-barras__trilha"><div class="grafico-barras__valor" style="width:10%"></div></div>
+          <span class="grafico-barras__numero">10%</span>
+        </div>
+        <div class="grafico-barras__linha">
+          <span class="grafico-barras__rotulo">Ouro</span>
+          <div class="grafico-barras__trilha"><div class="grafico-barras__valor" style="width:5%"></div></div>
+          <span class="grafico-barras__numero">5%</span>
+        </div>
+      </div>
+      <p>
+        A Carteira A está inteira dependente do mesmo ambiente
+        macroeconômico. Já a Carteira B mantém uma base sólida em reais
+        pra despesas e necessidades locais, e ainda reserva uma fatia —
+        ações no exterior e ouro — com motores de rentabilidade
+        desvinculados da moeda e do risco soberano brasileiro.
       </p>
 
       <a class="cta-compacto" href="../../../carteira/">
