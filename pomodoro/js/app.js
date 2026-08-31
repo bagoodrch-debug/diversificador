@@ -6,7 +6,15 @@ const DEFAULTS = {
   pausaCurtaMin: 5,
   pausaLongaMin: 15,
   ciclosAtePausaLonga: 4,
+  autoIniciarPausas: true,
+  autoIniciarPomodoro: true,
   somAtivo: true,
+};
+
+const CORES = {
+  foco: "#c1584f",
+  pausaCurta: "#3f6d64",
+  pausaLonga: "#3a5a6b",
 };
 
 const state = {
@@ -38,10 +46,7 @@ function loadPersisted() {
     state.concluidosHoje = 0;
     state.concluidosData = hojeISO();
   }
-  // Garante que o tempo restante bate com a duração configurada do modo atual,
-  // caso o usuário tenha mudado as durações fora de uma sessão ativa.
-  state.segundosRestantes = Math.min(state.segundosRestantes, duracaoDoModo(state.modo));
-  if (!state.segundosRestantes) state.segundosRestantes = duracaoDoModo(state.modo);
+  state.segundosRestantes = Math.min(state.segundosRestantes, duracaoDoModo(state.modo)) || duracaoDoModo(state.modo);
 }
 
 function persist() {
@@ -57,13 +62,7 @@ function duracaoDoModo(modo) {
 function rotuloDoModo(modo) {
   if (modo === "pausaCurta") return "Pausa curta";
   if (modo === "pausaLonga") return "Pausa longa";
-  return "Foco";
-}
-
-function emojiDoModo(modo) {
-  if (modo === "pausaCurta") return "☕";
-  if (modo === "pausaLonga") return "🌿";
-  return "🍅";
+  return "Pomodoro";
 }
 
 function formatMMSS(totalSegundos) {
@@ -100,6 +99,7 @@ function playBeep() {
 
 function iniciar() {
   if (state.rodando) return;
+  if (!state.segundosRestantes) state.segundosRestantes = duracaoDoModo(state.modo);
   state.fimEm = Date.now() + state.segundosRestantes * 1000;
   state.rodando = true;
   persist();
@@ -126,29 +126,39 @@ function reiniciarCicloAtual() {
   renderTudo();
 }
 
-function pularParaProximo() {
-  avancarCiclo({ contarComoConcluido: false });
+/** Troca de modo manualmente pelas abas — não conta pra estatística de ciclos. */
+function trocarModo(novoModo) {
+  if (novoModo === state.modo) return;
+  state.modo = novoModo;
+  state.rodando = false;
+  state.fimEm = null;
+  state.segundosRestantes = duracaoDoModo(novoModo);
+  pararIntervalo();
+  persist();
+  renderTudo();
 }
 
-function avancarCiclo({ contarComoConcluido }) {
-  if (contarComoConcluido && state.modo === "foco") {
+/** Chamado quando um ciclo termina naturalmente (contagem chegou a zero). */
+function avancarCicloAutomatico() {
+  if (state.modo === "foco") {
     if (state.concluidosData !== hojeISO()) {
       state.concluidosHoje = 0;
       state.concluidosData = hojeISO();
     }
     state.concluidosHoje += 1;
-  }
-
-  if (state.modo === "foco") {
     state.cicloAtual += 1;
     const rodadaCompleta = state.cicloAtual % state.ciclosAtePausaLonga === 0;
     state.modo = rodadaCompleta ? "pausaLonga" : "pausaCurta";
+    state.rodando = state.autoIniciarPausas;
   } else {
     state.modo = "foco";
+    state.rodando = state.autoIniciarPomodoro;
   }
 
   state.segundosRestantes = duracaoDoModo(state.modo);
   state.fimEm = state.rodando ? Date.now() + state.segundosRestantes * 1000 : null;
+  if (state.rodando) garantirIntervalo();
+  else pararIntervalo();
   persist();
   renderTudo();
 }
@@ -158,7 +168,7 @@ function tick() {
   const restante = Math.round((state.fimEm - Date.now()) / 1000);
   if (restante <= 0) {
     playBeep();
-    avancarCiclo({ contarComoConcluido: true });
+    avancarCicloAutomatico();
     return;
   }
   state.segundosRestantes = restante;
@@ -177,11 +187,7 @@ function pararIntervalo() {
 }
 
 function atualizarTitulo() {
-  if (state.rodando) {
-    document.title = `${formatMMSS(state.segundosRestantes)} ${emojiDoModo(state.modo)} — Pomodoro`;
-  } else {
-    document.title = "Timer Pomodoro — Many Mens";
-  }
+  document.title = state.rodando ? `${formatMMSS(state.segundosRestantes)} — ${rotuloDoModo(state.modo)}` : "Técnica Pomodoro — Many Mens";
 }
 
 let refs = {};
@@ -198,68 +204,182 @@ export function initPomodoroApp() {
 function renderShell(root) {
   clear(root);
 
-  refs.modoLabel = el("span", { class: "pomo-modo__label" }, "");
-  refs.digitos = el("div", { class: "pomo-timer__digits" }, "25:00");
-  refs.dots = el("div", { class: "pomo-dots" }, []);
-  refs.contador = el("p", { class: "pomo-contador" }, "");
+  refs.tabs = {};
+  const tabsRow = el(
+    "div",
+    { class: "pomo-tabs", role: "tablist" },
+    ["foco", "pausaCurta", "pausaLonga"].map((modo) => {
+      const btn = el(
+        "button",
+        { type: "button", class: "pomo-tab", role: "tab", onClick: () => trocarModo(modo) },
+        rotuloDoModo(modo).toUpperCase(),
+      );
+      refs.tabs[modo] = btn;
+      return btn;
+    }),
+  );
 
-  refs.btnPrincipal = el("button", { class: "btn btn--primary pomo-btn-principal", type: "button", onClick: onClickPrincipal }, "Iniciar");
-  refs.btnReset = el("button", { class: "btn btn--ghost", type: "button", onClick: reiniciarCicloAtual }, "Reiniciar ciclo");
-  refs.btnPular = el("button", { class: "btn btn--ghost", type: "button", onClick: pularParaProximo }, "Pular →");
+  refs.digitos = el("div", { class: "pomo-digits" }, "25:00");
+  refs.btnPrincipal = el("button", { class: "pomo-btn-principal", type: "button", onClick: onClickPrincipal }, "Iniciar");
+  refs.btnReset = el("button", { class: "pomo-reset-link", type: "button", onClick: reiniciarCicloAtual }, "Reiniciar ciclo");
 
-  const timerCard = el("section", { class: "panel card pomo-card" }, [
-    el("div", { class: "pomo-modo" }, [refs.modoLabel]),
+  const iconeConfig = el("span", {
+    class: "pomo-config-btn__icon",
+    html:
+      '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 15a3 3 0 100-6 3 3 0 000 6z"/><path d="M19.4 15a1.65 1.65 0 00.33 1.82l.06.06a2 2 0 11-2.83 2.83l-.06-.06a1.65 1.65 0 00-1.82-.33 1.65 1.65 0 00-1 1.51V21a2 2 0 11-4 0v-.09A1.65 1.65 0 009 19.4a1.65 1.65 0 00-1.82.33l-.06.06a2 2 0 11-2.83-2.83l.06-.06A1.65 1.65 0 004.6 15a1.65 1.65 0 00-1.51-1H3a2 2 0 110-4h.09A1.65 1.65 0 004.6 9a1.65 1.65 0 00-.33-1.82l-.06-.06a2 2 0 112.83-2.83l.06.06A1.65 1.65 0 009 4.6a1.65 1.65 0 001-1.51V3a2 2 0 114 0v.09a1.65 1.65 0 001 1.51 1.65 1.65 0 001.82-.33l.06-.06a2 2 0 112.83 2.83l-.06.06A1.65 1.65 0 0019.4 9a1.65 1.65 0 001.51 1H21a2 2 0 110 4h-.09a1.65 1.65 0 00-1.51 1z"/></svg>',
+  });
+
+  refs.stage = el("div", { class: "pomo-stage" }, [
+    el("button", { class: "pomo-config-btn", type: "button", "aria-label": "Configurações", onClick: abrirModal }, [
+      iconeConfig,
+      el("span", { class: "pomo-config-btn__texto" }, "Configurações"),
+    ]),
+    tabsRow,
     refs.digitos,
-    refs.dots,
-    el("div", { class: "pomo-acoes" }, [refs.btnPrincipal, refs.btnReset, refs.btnPular]),
-    refs.contador,
+    refs.btnPrincipal,
+    refs.btnReset,
   ]);
 
+  refs.dots = el("div", { class: "pomo-dots" }, []);
+  refs.contador = el("p", { class: "pomo-contador" }, "");
+  const infoRow = el("div", { class: "pomo-info" }, [refs.dots, refs.contador]);
+
+  root.append(refs.stage, infoRow);
+  renderModal(root);
+}
+
+function onClickPrincipal() {
+  if (state.rodando) pausar();
+  else iniciar();
+}
+
+function renderTudo() {
+  atualizarDisplay();
+  atualizarTitulo();
+
+  refs.stage.style.background = CORES[state.modo];
+
+  Object.entries(refs.tabs).forEach(([modo, btn]) => {
+    btn.classList.toggle("pomo-tab--ativa", modo === state.modo);
+    btn.setAttribute("aria-selected", String(modo === state.modo));
+  });
+
+  refs.btnPrincipal.textContent = state.rodando ? "Pausar" : state.segundosRestantes < duracaoDoModo(state.modo) ? "Continuar" : "Iniciar";
+  refs.btnPrincipal.style.color = CORES[state.modo];
+
+  clear(refs.dots);
+  for (let i = 0; i < state.ciclosAtePausaLonga; i++) {
+    const posicaoNaRodada = state.cicloAtual % state.ciclosAtePausaLonga;
+    const rodadaRecemFechada = state.cicloAtual > 0 && posicaoNaRodada === 0 && state.modo === "pausaLonga";
+    const preenchido = i < posicaoNaRodada || rodadaRecemFechada;
+    refs.dots.append(el("span", { class: `pomo-dot${preenchido ? " pomo-dot--cheio" : ""}` }));
+  }
+
+  refs.contador.textContent = `${state.concluidosHoje} pomodoro${state.concluidosHoje === 1 ? "" : "s"} concluído${state.concluidosHoje === 1 ? "" : "s"} hoje`;
+
+  if (refs.toggleAutoPausas) atualizarModal();
+}
+
+function atualizarDisplay() {
+  refs.digitos.textContent = formatMMSS(state.segundosRestantes);
+}
+
+// ---------------------------------------------------------------------------
+// Modal de configurações
+// ---------------------------------------------------------------------------
+
+function renderModal(root) {
   refs.focoInput = numberField(state.focoMin, 1, 120, (v) => onDuracaoChange("focoMin", v));
   refs.pausaCurtaInput = numberField(state.pausaCurtaMin, 1, 60, (v) => onDuracaoChange("pausaCurtaMin", v));
   refs.pausaLongaInput = numberField(state.pausaLongaMin, 1, 90, (v) => onDuracaoChange("pausaLongaMin", v));
   refs.ciclosInput = numberField(state.ciclosAtePausaLonga, 2, 8, (v) => onDuracaoChange("ciclosAtePausaLonga", v));
 
-  refs.somToggle = el(
+  refs.toggleAutoPausas = toggleSwitch(state.autoIniciarPausas, (v) => {
+    state.autoIniciarPausas = v;
+    persist();
+  });
+  refs.toggleAutoPomodoro = toggleSwitch(state.autoIniciarPomodoro, (v) => {
+    state.autoIniciarPomodoro = v;
+    persist();
+  });
+  refs.toggleSom = toggleSwitch(state.somAtivo, (v) => {
+    state.somAtivo = v;
+    persist();
+  });
+
+  const campo = (labelTexto, inputEl) => el("div", { class: "pomo-modal__campo" }, [el("label", {}, labelTexto), inputEl]);
+  const linha = (labelTexto, toggleEl) => el("div", { class: "pomo-modal__linha" }, [el("span", {}, labelTexto), toggleEl]);
+
+  refs.modal = el("div", { class: "pomo-modal-overlay", onClick: (e) => e.target === refs.modal && fecharModal() }, [
+    el("div", { class: "pomo-modal", role: "dialog", "aria-modal": "true", "aria-label": "Configurações do timer" }, [
+      el("div", { class: "pomo-modal__header" }, [
+        el("h2", {}, "Configurações"),
+        el("button", { class: "pomo-modal__fechar", type: "button", "aria-label": "Fechar", onClick: fecharModal }, "×"),
+      ]),
+      el("p", { class: "pomo-modal__subtitulo" }, "Tempo (minutos)"),
+      el("div", { class: "pomo-modal__campos3" }, [
+        campo("Pomodoro", refs.focoInput),
+        campo("Pausa curta", refs.pausaCurtaInput),
+        campo("Pausa longa", refs.pausaLongaInput),
+      ]),
+      linha("Iniciar automaticamente as pausas?", refs.toggleAutoPausas),
+      linha("Iniciar automaticamente o pomodoro?", refs.toggleAutoPomodoro),
+      linha("Notificação sonora?", refs.toggleSom),
+      campo("Intervalo para pausa longa (ciclos)", refs.ciclosInput),
+    ]),
+  ]);
+
+  root.append(refs.modal);
+}
+
+function abrirModal() {
+  refs.modal.classList.add("pomo-modal-overlay--aberto");
+  document.body.classList.add("pomo-scroll-lock");
+}
+function fecharModal() {
+  refs.modal.classList.remove("pomo-modal-overlay--aberto");
+  document.body.classList.remove("pomo-scroll-lock");
+}
+
+function atualizarModal() {
+  setToggle(refs.toggleAutoPausas, state.autoIniciarPausas);
+  setToggle(refs.toggleAutoPomodoro, state.autoIniciarPomodoro);
+  setToggle(refs.toggleSom, state.somAtivo);
+}
+
+function toggleSwitch(valorInicial, onChange) {
+  const track = el("span", { class: "pomo-switch__track", "data-on": String(valorInicial) }, [el("span", { class: "pomo-switch__thumb" })]);
+  const btn = el(
     "button",
     {
       type: "button",
-      class: "freq-toggle__opt pomo-som-toggle",
-      "aria-pressed": String(state.somAtivo),
+      class: "pomo-switch",
+      role: "switch",
+      "aria-checked": String(valorInicial),
       onClick: () => {
-        state.somAtivo = !state.somAtivo;
-        persist();
-        renderTudo();
+        const novo = track.dataset.on !== "true";
+        track.dataset.on = String(novo);
+        btn.setAttribute("aria-checked", String(novo));
+        onChange(novo);
       },
     },
-    state.somAtivo ? "🔔 Som ativado" : "🔕 Som desativado",
+    [track],
   );
-
-  const settingsCard = el("section", { class: "panel card" }, [
-    el("h2", {}, "Ajustar tempos"),
-    el("div", { class: "field-row" }, [
-      el("div", { class: "field-group", style: "flex:1" }, [el("label", { class: "field-label" }, "Foco (min)"), refs.focoInput]),
-      el("div", { class: "field-group", style: "flex:1" }, [el("label", { class: "field-label" }, "Pausa curta (min)"), refs.pausaCurtaInput]),
-    ]),
-    el("div", { class: "field-row" }, [
-      el("div", { class: "field-group", style: "flex:1" }, [el("label", { class: "field-label" }, "Pausa longa (min)"), refs.pausaLongaInput]),
-      el("div", { class: "field-group", style: "flex:1" }, [el("label", { class: "field-label" }, "Ciclos até pausa longa"), refs.ciclosInput]),
-    ]),
-    el("div", { class: "field-group", style: "margin-bottom:0" }, [el("label", { class: "field-label" }, "Notificação sonora"), refs.somToggle]),
-    el("p", { class: "disclaimer", style: "margin-top:.85rem" }, "Pause o ciclo atual pra editar os tempos sem interromper a contagem em andamento."),
-  ]);
-
-  root.append(timerCard, settingsCard);
+  return btn;
+}
+function setToggle(btn, valor) {
+  const track = btn.querySelector(".pomo-switch__track");
+  track.dataset.on = String(valor);
+  btn.setAttribute("aria-checked", String(valor));
 }
 
 function numberField(valor, min, max, onChange) {
   return el("input", {
-    class: "field",
+    class: "pomo-modal__input",
     type: "number",
     min: String(min),
     max: String(max),
     value: String(valor),
-    disabled: state.rodando,
     onFocus: (e) => e.target.select(),
     onInput: (e) => {
       const n = parseInt(e.target.value, 10);
@@ -275,39 +395,6 @@ function onDuracaoChange(campo, valor) {
   }
   persist();
   renderTudo();
-}
-
-function onClickPrincipal() {
-  if (state.rodando) pausar();
-  else iniciar();
-}
-
-function renderTudo() {
-  atualizarDisplay();
-  atualizarTitulo();
-
-  refs.modoLabel.textContent = `${emojiDoModo(state.modo)} ${rotuloDoModo(state.modo)}`;
-  refs.modoLabel.className = `pomo-modo__label pomo-modo__label--${state.modo}`;
-
-  refs.btnPrincipal.textContent = state.rodando ? "Pausar" : state.segundosRestantes < duracaoDoModo(state.modo) ? "Continuar" : "Iniciar";
-
-  clear(refs.dots);
-  for (let i = 0; i < state.ciclosAtePausaLonga; i++) {
-    const preenchido = i < state.cicloAtual % state.ciclosAtePausaLonga || (state.cicloAtual > 0 && state.cicloAtual % state.ciclosAtePausaLonga === 0 && i < state.ciclosAtePausaLonga);
-    refs.dots.append(el("span", { class: `pomo-dot${preenchido ? " pomo-dot--cheio" : ""}` }));
-  }
-
-  refs.contador.textContent = `${state.concluidosHoje} pomodoro${state.concluidosHoje === 1 ? "" : "s"} concluído${state.concluidosHoje === 1 ? "" : "s"} hoje`;
-
-  // Reflete o estado "desabilitado durante execução" dos campos de duração.
-  [refs.focoInput, refs.pausaCurtaInput, refs.pausaLongaInput, refs.ciclosInput].forEach((input) => {
-    input.disabled = state.rodando;
-  });
-}
-
-function atualizarDisplay() {
-  refs.digitos.textContent = formatMMSS(state.segundosRestantes);
-  refs.digitos.className = `pomo-timer__digits pomo-timer__digits--${state.modo}`;
 }
 
 onReady(() => {

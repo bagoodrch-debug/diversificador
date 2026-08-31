@@ -1,5 +1,5 @@
 /* ==========================================================================
-   Timer Pomodoro — layout específico
+   Técnica Pomodoro — layout específico
    ========================================================================== */
 
 .brand span {
@@ -24,75 +24,134 @@
   font-size: 0.95rem;
 }
 
-.panel {
-  margin-bottom: 1.5rem;
-  padding: 1.75rem;
-}
-.panel h2 {
-  font-family: var(--font-heading);
-  font-size: 1.15rem;
-  font-weight: 700;
-  letter-spacing: -0.01em;
-}
+/* ---------- Palco colorido (muda de cor conforme o modo) ---------- */
 
-.pomo-card {
+.pomo-stage {
+  position: relative;
+  border-radius: var(--radius-2xl);
+  padding: 3.5rem 1.5rem 2.75rem;
+  margin-bottom: 1.25rem;
   text-align: center;
-  padding-block: 2.25rem 1.75rem;
+  color: #fff;
+  background: #c1584f;
+  transition: background-color 0.4s ease;
+  box-shadow: var(--shadow-md);
 }
 
-.pomo-modo {
-  margin-bottom: 0.5rem;
-}
-.pomo-modo__label {
-  display: inline-block;
-  font-size: 0.75rem;
-  font-weight: 700;
-  text-transform: uppercase;
-  letter-spacing: 0.06em;
-  padding: 0.3rem 0.75rem;
+.pomo-config-btn {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  background: rgba(255, 255, 255, 0.14);
+  border: 1px solid rgba(255, 255, 255, 0.28);
+  color: #fff;
+  padding: 0.4rem 0.75rem;
   border-radius: 999px;
-  background: var(--color-secondary);
-  color: var(--color-muted-foreground);
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  transition: background-color 0.15s ease;
 }
-.pomo-modo__label--foco {
-  color: var(--color-primary);
-  background: color-mix(in oklch, var(--color-primary) 16%, var(--color-secondary));
+.pomo-config-btn:hover {
+  background: rgba(255, 255, 255, 0.24);
 }
-.pomo-modo__label--pausaCurta {
-  color: var(--asset-fii);
-  background: color-mix(in oklch, var(--asset-fii) 16%, var(--color-secondary));
+.pomo-config-btn__icon {
+  display: inline-flex;
+  align-items: center;
 }
-.pomo-modo__label--pausaLonga {
-  color: var(--asset-exterior);
-  background: color-mix(in oklch, var(--asset-exterior) 16%, var(--color-secondary));
+@media (max-width: 480px) {
+  .pomo-config-btn__texto {
+    display: none;
+  }
+  .pomo-config-btn {
+    padding: 0.5rem;
+  }
 }
 
-.pomo-timer__digits {
-  font-family: var(--font-heading);
+.pomo-tabs {
+  display: inline-flex;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin-bottom: 1.75rem;
+}
+.pomo-tab {
+  background: rgba(255, 255, 255, 0.14);
+  border: 1px solid rgba(255, 255, 255, 0.22);
+  color: rgba(255, 255, 255, 0.85);
+  padding: 0.5rem 0.9rem;
+  border-radius: var(--radius-md);
+  font-size: 0.72rem;
   font-weight: 700;
-  font-size: clamp(3.4rem, 14vw, 5.5rem);
+  letter-spacing: 0.04em;
+  transition: background-color 0.15s ease, border-color 0.15s ease;
+}
+.pomo-tab:hover {
+  background: rgba(255, 255, 255, 0.22);
+}
+.pomo-tab--ativa {
+  background: rgba(255, 255, 255, 0.95);
+  border-color: rgba(255, 255, 255, 0.95);
+  color: #1a1a1a;
+}
+
+.pomo-digits {
+  font-family: var(--font-heading);
+  font-weight: 800;
+  font-size: clamp(3.6rem, 15vw, 6.5rem);
   letter-spacing: -0.02em;
   line-height: 1;
-  margin-block: 0.75rem 1.1rem;
+  margin-bottom: 1.75rem;
   font-variant-numeric: tabular-nums;
-  color: var(--color-foreground);
-  transition: color 0.25s ease;
-}
-.pomo-timer__digits--foco {
-  color: var(--color-primary);
-}
-.pomo-timer__digits--pausaCurta {
-  color: var(--asset-fii);
-}
-.pomo-timer__digits--pausaLonga {
-  color: var(--asset-exterior);
 }
 
+.pomo-btn-principal {
+  display: inline-block;
+  background: #fff;
+  color: #c1584f;
+  border: none;
+  font-weight: 800;
+  font-size: 0.9rem;
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
+  padding: 0.85rem 2.5rem;
+  border-radius: var(--radius-md);
+  box-shadow: 0 2px 0 rgba(0, 0, 0, 0.12);
+  transition: transform 0.1s ease;
+}
+.pomo-btn-principal:hover {
+  transform: translateY(-1px);
+}
+.pomo-btn-principal:active {
+  transform: translateY(1px);
+}
+
+.pomo-reset-link {
+  display: block;
+  margin: 0.9rem auto 0;
+  color: rgba(255, 255, 255, 0.8);
+  font-size: 0.78rem;
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+.pomo-reset-link:hover {
+  color: #fff;
+}
+
+/* ---------- Info abaixo do palco: pontos + contador do dia ---------- */
+
+.pomo-info {
+  text-align: center;
+  margin-bottom: 1.75rem;
+}
 .pomo-dots {
   display: flex;
   justify-content: center;
   gap: 0.5rem;
-  margin-bottom: 1.5rem;
+  margin-bottom: 0.6rem;
 }
 .pomo-dot {
   width: 0.55rem;
@@ -105,52 +164,143 @@
   background: var(--color-primary);
   border-color: var(--color-primary);
 }
-
-.pomo-acoes {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  gap: 0.6rem;
-  flex-wrap: wrap;
-  margin-bottom: 1rem;
-}
-.pomo-btn-principal {
-  min-width: 10rem;
-  font-size: 1rem;
-  padding-block: 0.75rem;
-}
-
 .pomo-contador {
   font-size: 0.85rem;
   color: var(--color-muted-foreground);
 }
 
-.pomo-som-toggle {
-  width: 100%;
-  text-align: left;
-  padding: 0.55rem 0.75rem;
+/* ---------- Modal de configurações ---------- */
+
+.pomo-scroll-lock {
+  overflow: hidden;
 }
 
-.field-group {
-  margin-bottom: 1.1rem;
+.pomo-modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(10, 10, 10, 0.6);
+  display: none;
+  align-items: center;
+  justify-content: center;
+  padding: 1.25rem;
+  z-index: 60;
 }
-.field-label {
-  display: block;
-  font-size: 0.7rem;
-  font-weight: 600;
+.pomo-modal-overlay--aberto {
+  display: flex;
+}
+
+.pomo-modal {
+  background: #fdfdfc;
+  color: #1f1f1f;
+  width: min(420px, 100%);
+  max-height: 88vh;
+  overflow-y: auto;
+  border-radius: var(--radius-xl);
+  padding: 1.5rem 1.5rem 1.75rem;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.45);
+}
+
+.pomo-modal__header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 1rem;
+}
+.pomo-modal__header h2 {
+  font-family: var(--font-heading);
+  font-size: 1.1rem;
+  font-weight: 700;
+}
+.pomo-modal__fechar {
+  font-size: 1.4rem;
+  line-height: 1;
+  color: #888;
+  padding: 0.2rem 0.4rem;
+}
+.pomo-modal__fechar:hover {
+  color: #1f1f1f;
+}
+
+.pomo-modal__subtitulo {
+  font-size: 0.72rem;
+  font-weight: 700;
   text-transform: uppercase;
   letter-spacing: 0.04em;
-  color: var(--color-muted-foreground);
-  margin-bottom: 0.35rem;
+  color: #8a8a8a;
+  margin-bottom: 0.6rem;
 }
-.field-row {
+
+.pomo-modal__campos3 {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 0.6rem;
+  margin-bottom: 1.35rem;
+}
+.pomo-modal__campo label {
+  display: block;
+  font-size: 0.68rem;
+  font-weight: 600;
+  color: #7a7a7a;
+  margin-bottom: 0.3rem;
+}
+.pomo-modal__input {
+  width: 100%;
+  border: 1px solid #dcdcdc;
+  border-radius: var(--radius-md);
+  padding: 0.5rem 0.6rem;
+  font-size: 0.95rem;
+  color: #1f1f1f;
+  background: #fff;
+}
+.pomo-modal__input:focus {
+  outline: 2px solid var(--color-primary);
+  outline-offset: 1px;
+}
+
+.pomo-modal__linha {
   display: flex;
-  gap: 1.25rem;
-  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding-block: 0.7rem;
+  border-top: 1px solid #ececec;
+  font-size: 0.85rem;
 }
-.field:disabled {
-  opacity: 0.5;
-  cursor: not-allowed;
+.pomo-modal__linha span {
+  max-width: 24ch;
+}
+.pomo-modal__campo:last-child {
+  margin-top: 0.9rem;
+}
+
+.pomo-switch {
+  flex-shrink: 0;
+}
+.pomo-switch__track {
+  display: block;
+  position: relative;
+  width: 2.6rem;
+  height: 1.5rem;
+  border-radius: 999px;
+  background: #d6d6d6;
+  transition: background-color 0.18s ease;
+}
+.pomo-switch__track[data-on="true"] {
+  background: var(--color-primary);
+}
+.pomo-switch__thumb {
+  position: absolute;
+  top: 2px;
+  left: 2px;
+  width: 1.2rem;
+  height: 1.2rem;
+  border-radius: 50%;
+  background: #fff;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
+  transition: transform 0.18s ease;
+}
+.pomo-switch__track[data-on="true"] .pomo-switch__thumb {
+  transform: translateX(1.1rem);
 }
 
 /* ==========================================================================
