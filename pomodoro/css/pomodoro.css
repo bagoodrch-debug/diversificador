@@ -273,6 +273,17 @@
   margin-top: 0.9rem;
 }
 
+.pomo-testar-som {
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: var(--color-primary, #c1584f);
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+.pomo-testar-som:hover {
+  opacity: 0.75;
+}
+
 .pomo-switch {
   flex-shrink: 0;
 }

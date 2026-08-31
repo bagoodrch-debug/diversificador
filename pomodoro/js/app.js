@@ -72,33 +72,57 @@ function formatMMSS(totalSegundos) {
   return `${String(m).padStart(2, "0")}:${String(r).padStart(2, "0")}`;
 }
 
+function ensureAudioContext() {
+  if (!audioCtx) {
+    try {
+      audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+    } catch {
+      return null;
+    }
+  }
+  if (audioCtx.state === "suspended") {
+    audioCtx.resume().catch(() => {});
+  }
+  return audioCtx;
+}
+
+function tocarTom(ctx, freq, inicioMs, duracaoMs, volume = 0.22) {
+  const osc = ctx.createOscillator();
+  const gain = ctx.createGain();
+  osc.type = "sine";
+  osc.frequency.value = freq;
+  gain.gain.value = 0.0001;
+  osc.connect(gain).connect(ctx.destination);
+  const t0 = ctx.currentTime + inicioMs / 1000;
+  const t1 = t0 + duracaoMs / 1000;
+  gain.gain.exponentialRampToValueAtTime(volume, t0 + 0.015);
+  gain.gain.exponentialRampToValueAtTime(0.0001, t1);
+  osc.start(t0);
+  osc.stop(t1 + 0.03);
+}
+
+/** Toca o alarme, independente do toggle — usado pelo botão "Testar som". */
+function tocarAlarme() {
+  const ctx = ensureAudioContext();
+  if (!ctx) return;
+  const freqs = [988, 1319]; // Si5 / Mi6, intervalo de terça — soa como alarme, não irritante
+  const totalPulsos = 11;
+  const duracaoPulso = 200;
+  const intervaloPulso = 340;
+  for (let i = 0; i < totalPulsos; i++) {
+    tocarTom(ctx, freqs[i % 2], i * intervaloPulso, duracaoPulso);
+  }
+}
+
+/** Alarme de ~4 segundos ao fim de um ciclo — respeita o toggle de som. */
 function playBeep() {
   if (!state.somAtivo) return;
-  try {
-    if (!audioCtx) audioCtx = new (window.AudioContext || window.webkitAudioContext)();
-    const tocarTom = (freq, inicioMs, duracaoMs) => {
-      const osc = audioCtx.createOscillator();
-      const gain = audioCtx.createGain();
-      osc.type = "sine";
-      osc.frequency.value = freq;
-      gain.gain.value = 0.0001;
-      osc.connect(gain).connect(audioCtx.destination);
-      const t0 = audioCtx.currentTime + inicioMs / 1000;
-      const t1 = t0 + duracaoMs / 1000;
-      gain.gain.exponentialRampToValueAtTime(0.15, t0 + 0.01);
-      gain.gain.exponentialRampToValueAtTime(0.0001, t1);
-      osc.start(t0);
-      osc.stop(t1 + 0.02);
-    };
-    tocarTom(880, 0, 160);
-    tocarTom(1174, 200, 220);
-  } catch {
-    // Web Audio indisponível — segue sem som, sem quebrar a página.
-  }
+  tocarAlarme();
 }
 
 function iniciar() {
   if (state.rodando) return;
+  ensureAudioContext();
   if (!state.segundosRestantes) state.segundosRestantes = duracaoDoModo(state.modo);
   state.fimEm = Date.now() + state.segundosRestantes * 1000;
   state.rodando = true;
@@ -306,6 +330,18 @@ function renderModal(root) {
     state.somAtivo = v;
     persist();
   });
+  refs.btnTestarSom = el(
+    "button",
+    {
+      type: "button",
+      class: "pomo-testar-som",
+      onClick: () => {
+        ensureAudioContext();
+        tocarAlarme();
+      },
+    },
+    "Testar som ▸",
+  );
 
   const campo = (labelTexto, inputEl) => el("div", { class: "pomo-modal__campo" }, [el("label", {}, labelTexto), inputEl]);
   const linha = (labelTexto, toggleEl) => el("div", { class: "pomo-modal__linha" }, [el("span", {}, labelTexto), toggleEl]);
@@ -325,6 +361,7 @@ function renderModal(root) {
       linha("Iniciar automaticamente as pausas?", refs.toggleAutoPausas),
       linha("Iniciar automaticamente o pomodoro?", refs.toggleAutoPomodoro),
       linha("Notificação sonora?", refs.toggleSom),
+      el("div", { class: "pomo-modal__linha", style: "border-top:none;padding-top:0;justify-content:flex-end" }, [refs.btnTestarSom]),
       campo("Intervalo para pausa longa (ciclos)", refs.ciclosInput),
     ]),
   ]);
