@@ -86,35 +86,62 @@ function ensureAudioContext() {
   return audioCtx;
 }
 
-function tocarTom(ctx, freq, inicioMs, duracaoMs, volume = 0.22) {
-  const osc = ctx.createOscillator();
-  const gain = ctx.createGain();
-  osc.type = "sine";
-  osc.frequency.value = freq;
-  gain.gain.value = 0.0001;
-  osc.connect(gain).connect(ctx.destination);
+/** Uma nota quente: triângulo + sub-oitava (dá "corpo"), passando por um
+ *  filtro passa-baixa pra tirar o brilho áspero do triângulo puro, com
+ *  ataque suave e soltura longa (fluido, sem parecer alarme de forno). */
+function tocarNota(ctx, freq, inicioMs, duracaoMs, volume = 0.2) {
   const t0 = ctx.currentTime + inicioMs / 1000;
   const t1 = t0 + duracaoMs / 1000;
-  gain.gain.exponentialRampToValueAtTime(volume, t0 + 0.015);
-  gain.gain.exponentialRampToValueAtTime(0.0001, t1);
+
+  const osc = ctx.createOscillator();
+  osc.type = "triangle";
+  osc.frequency.value = freq;
+
+  const sub = ctx.createOscillator();
+  sub.type = "sine";
+  sub.frequency.value = freq / 2; // uma oitava abaixo — engorda o timbre
+
+  const filtro = ctx.createBiquadFilter();
+  filtro.type = "lowpass";
+  filtro.frequency.value = 2400;
+  filtro.Q.value = 0.3;
+
+  const gain = ctx.createGain();
+  gain.gain.value = 0.0001;
+
+  osc.connect(filtro);
+  sub.connect(filtro);
+  filtro.connect(gain).connect(ctx.destination);
+
+  gain.gain.exponentialRampToValueAtTime(volume, t0 + 0.09); // ataque suave
+  gain.gain.exponentialRampToValueAtTime(0.0001, t1); // soltura longa
+
   osc.start(t0);
-  osc.stop(t1 + 0.03);
+  osc.stop(t1 + 0.05);
+  sub.start(t0);
+  sub.stop(t1 + 0.05);
 }
 
 /** Toca o alarme, independente do toggle — usado pelo botão "Testar som". */
 function tocarAlarme() {
   const ctx = ensureAudioContext();
   if (!ctx) return;
-  const freqs = [988, 1319]; // Si5 / Mi6, intervalo de terça — soa como alarme, não irritante
-  const totalPulsos = 11;
-  const duracaoPulso = 200;
-  const intervaloPulso = 340;
-  for (let i = 0; i < totalPulsos; i++) {
-    tocarTom(ctx, freqs[i % 2], i * intervaloPulso, duracaoPulso);
-  }
+
+  // Pad grave sustentado por baixo, dando corpo à frase inteira.
+  tocarNota(ctx, 130.81, 0, 2600, 0.09); // C3
+
+  // Frase curta tipo sininho, subindo e resolvendo — quente, sem pressa.
+  const frase = [
+    { freq: 523.25, inicio: 0, duracao: 620 }, // C5
+    { freq: 659.25, inicio: 320, duracao: 620 }, // E5
+    { freq: 783.99, inicio: 640, duracao: 780 }, // G5
+    { freq: 1046.5, inicio: 1080, duracao: 950 }, // C6
+    { freq: 783.99, inicio: 1750, duracao: 1100 }, // G5 — fecha resolvendo
+  ];
+  frase.forEach((n) => tocarNota(ctx, n.freq, n.inicio, n.duracao, 0.16));
 }
 
-/** Alarme de ~4 segundos ao fim de um ciclo — respeita o toggle de som. */
+/** Alarme de ~3,5 segundos ao fim de um ciclo — respeita o toggle de som. */
 function playBeep() {
   if (!state.somAtivo) return;
   tocarAlarme();
