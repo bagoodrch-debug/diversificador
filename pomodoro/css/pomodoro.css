@@ -1,0 +1,217 @@
+/* ==========================================================================
+   Timer Pomodoro — layout específico
+   ========================================================================== */
+
+.brand span {
+  font-family: var(--font-heading);
+}
+
+.pomodoro-hero {
+  padding-block: 2.25rem 1.25rem;
+  text-align: center;
+}
+.pomodoro-hero h1 {
+  font-family: var(--font-heading);
+  font-weight: 700;
+  font-size: clamp(1.6rem, 3.5vw, 2.2rem);
+  letter-spacing: -0.01em;
+}
+.pomodoro-hero p {
+  margin-top: 0.5rem;
+  color: var(--color-muted-foreground);
+  max-width: 52ch;
+  margin-inline: auto;
+  font-size: 0.95rem;
+}
+
+.panel {
+  margin-bottom: 1.5rem;
+  padding: 1.75rem;
+}
+.panel h2 {
+  font-family: var(--font-heading);
+  font-size: 1.15rem;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+}
+
+.pomo-card {
+  text-align: center;
+  padding-block: 2.25rem 1.75rem;
+}
+
+.pomo-modo {
+  margin-bottom: 0.5rem;
+}
+.pomo-modo__label {
+  display: inline-block;
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  padding: 0.3rem 0.75rem;
+  border-radius: 999px;
+  background: var(--color-secondary);
+  color: var(--color-muted-foreground);
+}
+.pomo-modo__label--foco {
+  color: var(--color-primary);
+  background: color-mix(in oklch, var(--color-primary) 16%, var(--color-secondary));
+}
+.pomo-modo__label--pausaCurta {
+  color: var(--asset-fii);
+  background: color-mix(in oklch, var(--asset-fii) 16%, var(--color-secondary));
+}
+.pomo-modo__label--pausaLonga {
+  color: var(--asset-exterior);
+  background: color-mix(in oklch, var(--asset-exterior) 16%, var(--color-secondary));
+}
+
+.pomo-timer__digits {
+  font-family: var(--font-heading);
+  font-weight: 700;
+  font-size: clamp(3.4rem, 14vw, 5.5rem);
+  letter-spacing: -0.02em;
+  line-height: 1;
+  margin-block: 0.75rem 1.1rem;
+  font-variant-numeric: tabular-nums;
+  color: var(--color-foreground);
+  transition: color 0.25s ease;
+}
+.pomo-timer__digits--foco {
+  color: var(--color-primary);
+}
+.pomo-timer__digits--pausaCurta {
+  color: var(--asset-fii);
+}
+.pomo-timer__digits--pausaLonga {
+  color: var(--asset-exterior);
+}
+
+.pomo-dots {
+  display: flex;
+  justify-content: center;
+  gap: 0.5rem;
+  margin-bottom: 1.5rem;
+}
+.pomo-dot {
+  width: 0.55rem;
+  height: 0.55rem;
+  border-radius: 999px;
+  background: var(--color-secondary);
+  border: 1px solid var(--color-border);
+}
+.pomo-dot--cheio {
+  background: var(--color-primary);
+  border-color: var(--color-primary);
+}
+
+.pomo-acoes {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 0.6rem;
+  flex-wrap: wrap;
+  margin-bottom: 1rem;
+}
+.pomo-btn-principal {
+  min-width: 10rem;
+  font-size: 1rem;
+  padding-block: 0.75rem;
+}
+
+.pomo-contador {
+  font-size: 0.85rem;
+  color: var(--color-muted-foreground);
+}
+
+.pomo-som-toggle {
+  width: 100%;
+  text-align: left;
+  padding: 0.55rem 0.75rem;
+}
+
+.field-group {
+  margin-bottom: 1.1rem;
+}
+.field-label {
+  display: block;
+  font-size: 0.7rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: var(--color-muted-foreground);
+  margin-bottom: 0.35rem;
+}
+.field-row {
+  display: flex;
+  gap: 1.25rem;
+  flex-wrap: wrap;
+}
+.field:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+/* ==========================================================================
+   Seção de metodologia (texto explicativo, dentro da própria ferramenta)
+   ========================================================================== */
+
+.content {
+  padding-block: 2rem 1rem;
+  max-width: 72ch;
+  border-top: 1px solid var(--color-border);
+  margin-top: 1rem;
+}
+
+.content h2 {
+  font-family: var(--font-heading);
+  font-size: 1.15rem;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+  margin-top: 2rem;
+  margin-bottom: 0.6rem;
+}
+.content h2:first-child {
+  margin-top: 0;
+}
+
+.content h3 {
+  font-size: 0.95rem;
+  font-weight: 600;
+  margin-top: 1.25rem;
+  margin-bottom: 0.4rem;
+  color: var(--color-primary);
+}
+
+.content p {
+  color: color-mix(in oklch, var(--color-foreground) 88%, transparent);
+  margin-bottom: 0.85rem;
+  line-height: 1.6;
+}
+
+.content ul,
+.content ol {
+  padding-left: 1.25rem;
+  margin-bottom: 0.85rem;
+}
+.content ul {
+  list-style: disc;
+}
+.content ul li,
+.content ol li {
+  margin-bottom: 0.35rem;
+  color: color-mix(in oklch, var(--color-foreground) 88%, transparent);
+}
+
+.content .callout {
+  border: 1px solid var(--color-border);
+  background: var(--color-card);
+  border-radius: var(--radius-lg);
+  padding: 1rem;
+  margin-block: 1.25rem;
+  font-size: 0.85rem;
+}
+.content .callout strong {
+  color: var(--color-primary);
+}
