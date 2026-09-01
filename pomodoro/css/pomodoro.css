@@ -234,9 +234,12 @@
 
 .pomo-modal__campos3 {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: 0.6rem;
   margin-bottom: 1.35rem;
+}
+.pomo-modal__campo {
+  min-width: 0;
 }
 .pomo-modal__campo label {
   display: block;
@@ -244,8 +247,12 @@
   font-weight: 600;
   color: #7a7a7a;
   margin-bottom: 0.3rem;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 .pomo-modal__input {
+  min-width: 0;
   width: 100%;
   border: 1px solid #dcdcdc;
   border-radius: var(--radius-md);
