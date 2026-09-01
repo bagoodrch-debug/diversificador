@@ -1,0 +1,43 @@
+name: Atualizar cotações
+
+on:
+  schedule:
+    # A cada 30 minutos. O GitHub Actions não garante o minuto exato em
+    # horário de baixo tráfego, mas roda perto disso.
+    - cron: "*/30 * * * *"
+  workflow_dispatch: {} # permite rodar manualmente pelo botão "Run workflow"
+
+# Precisa de permissão de escrita pra poder commitar o cotacoes.json de volta.
+permissions:
+  contents: write
+
+jobs:
+  atualizar:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: carteira
+    steps:
+      - name: Baixar o repositório
+        uses: actions/checkout@v4
+
+      - name: Configurar Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+
+      - name: Rodar o script de atualização
+        run: node scripts/atualizar-cotacoes.mjs
+
+      - name: Commitar dados/cotacoes.json (se mudou)
+        run: |
+          cd "$GITHUB_WORKSPACE"
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add carteira/dados/cotacoes.json
+          if git diff --cached --quiet; then
+            echo "Nada mudou nas cotações — sem commit."
+          else
+            git commit -m "chore: atualizar cotações [skip ci]"
+            git push
+          fi

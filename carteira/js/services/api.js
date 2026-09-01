@@ -1,11 +1,14 @@
 // Camada de acesso a dados do site.
 //
-// Duas fontes de cotação:
+// Duas fontes de cotação, as duas vindas do Yahoo Finance (grátis, sem
+// token nenhum):
 // 1. dados/cotacoes.json — gerado periodicamente pelo GitHub Actions, usado
-//    nas sugestões padrão de cada categoria (rápido, sem gastar cota extra).
+//    nas sugestões padrão de cada categoria.
 // 2. Cloudflare Worker (WORKER_URL) — usado só na busca manual por ticker,
-//    pra achar ativos que não estão na lista pré-carregada. O token da
-//    Brapi fica só no Worker, nunca aparece aqui.
+//    pra achar ativos que não estão na lista pré-carregada. Existe só pra
+//    evitar bloqueio de CORS (o Yahoo não libera chamada direta do
+//    navegador) — não guarda nenhuma credencial, porque não precisa de
+//    nenhuma.
 
 const DATA_URL = "dados/cotacoes.json";
 const WORKER_URL = "https://brapi-proxy.manymens777.workers.dev";
@@ -32,8 +35,8 @@ export async function getQuotes({ force = false } = {}) {
 }
 
 /**
- * Busca um ticker. Primeiro tenta na base já carregada (rápido, sem gastar
- * cota); se não achar, tenta ao vivo via Cloudflare Worker.
+ * Busca um ticker. Primeiro tenta na base já carregada (instantâneo); se
+ * não achar, busca ao vivo no Yahoo Finance via Cloudflare Worker.
  */
 export async function lookupTicker(rawTicker) {
   const ticker = String(rawTicker || "").trim().toUpperCase();

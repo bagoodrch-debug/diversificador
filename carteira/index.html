@@ -85,29 +85,30 @@
 
       <h2>De onde vêm os dados</h2>
       <ul>
-        <li><strong>Ações, BDRs, FIIs e ETF de ouro:</strong> API da <strong>Brapi</strong> (brapi.dev).</li>
+        <li><strong>Ações, BDRs, FIIs e ETF de ouro:</strong> Yahoo Finance.</li>
         <li><strong>Ouro spot (XAU/BRL):</strong> AwesomeAPI.</li>
-        <li><strong>Títulos públicos:</strong> API pública do Tesouro Direto.</li>
+        <li><strong>Títulos públicos (Tesouro Direto):</strong> API pública da Brapi (endpoint gratuito, sem token).</li>
       </ul>
 
-      <h2>Por que o site não chama a Brapi diretamente do navegador</h2>
+      <h2>Por que a busca de ativos passa por um servidor intermediário</h2>
       <p>
         Este é um site estático hospedado no GitHub Pages — ele não tem um servidor
-        próprio rodando o tempo todo. Se o token da Brapi fosse colocado no
-        JavaScript do site, qualquer visitante poderia abrir as ferramentas de
-        desenvolvedor do navegador e copiar a chave em segundos. Por isso a chave
-        <strong>nunca</strong> entra em nenhum arquivo público do repositório.
+        próprio rodando o tempo todo. O Yahoo Finance não libera chamadas
+        diretas de qualquer site (bloqueio de CORS), então a busca manual por
+        ticker passa por um Cloudflare Worker, que só repassa a consulta e
+        devolve a resposta. Não existe token nem chave secreta em nenhuma
+        parte dessa arquitetura — os dois endpoints usados (Yahoo e a Brapi
+        pra Tesouro Direto) são públicos e gratuitos.
       </p>
       <ol style="padding-left:1.25rem;list-style:decimal;margin-bottom:.85rem">
-        <li style="margin-bottom:.35rem">O token da Brapi fica guardado apenas em <em>GitHub Actions Secrets</em>, um cofre do próprio GitHub, associado ao repositório.</li>
-        <li style="margin-bottom:.35rem">Um workflow (<code>.github/workflows/atualizar-cotacoes.yml</code>) roda automaticamente nos servidores do GitHub.</li>
-        <li style="margin-bottom:.35rem">Esse workflow executa <code>scripts/atualizar-cotacoes.mjs</code>, que busca as cotações usando o token e grava o resultado em <code>dados/cotacoes.json</code>.</li>
-        <li style="margin-bottom:.35rem">O site (rodando no navegador de cada visitante) só lê esse arquivo <code>dados/cotacoes.json</code> — que é público, mas não contém nenhuma credencial.</li>
+        <li style="margin-bottom:.35rem">Um workflow (<code>.github/workflows/atualizar-cotacoes.yml</code>) roda automaticamente nos servidores do GitHub a cada 30 minutos.</li>
+        <li style="margin-bottom:.35rem">Esse workflow executa <code>scripts/atualizar-cotacoes.mjs</code>, que busca as cotações no Yahoo e no Tesouro Direto (via Brapi) e grava o resultado em <code>dados/cotacoes.json</code>.</li>
+        <li style="margin-bottom:.35rem">O site (rodando no navegador de cada visitante) lê esse arquivo pra montar a lista padrão de sugestões.</li>
+        <li style="margin-bottom:.35rem">Quando alguém busca um ticker que não está nessa lista, o navegador chama o Cloudflare Worker, que consulta o Yahoo na hora e devolve o preço atualizado.</li>
       </ol>
       <div class="callout">
-        <strong>Resultado:</strong> o token nunca trafega para o navegador do
-        visitante e nunca aparece no histórico do Git, mesmo o repositório sendo
-        público.
+        <strong>Resultado:</strong> nenhuma credencial trafega em lugar
+        nenhum — porque nenhuma das fontes usadas hoje exige uma.
       </div>
 
       <h2>Como o cálculo das sugestões funciona</h2>

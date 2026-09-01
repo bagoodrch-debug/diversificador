@@ -15,11 +15,13 @@ carteira/
 ├── README.md
 │
 ├── .github/workflows/
-│   └── atualizar-cotacoes.yml # Busca cotações periodicamente (com o token seguro)
+│   └── atualizar-cotacoes.yml # Busca cotações periodicamente (Yahoo + Tesouro Direto via Brapi, sem token)
 ├── scripts/
 │   └── atualizar-cotacoes.mjs # Script Node executado pelo workflow acima
 ├── dados/
 │   └── cotacoes.json          # Gerado automaticamente — sem nenhuma credencial
+├── cloudflare-worker/
+│   └── cotacao-proxy.js       # Proxy de busca manual de ticker (Yahoo, sem token)
 │
 ├── css/
 │   ├── tokens.css
@@ -43,27 +45,23 @@ carteira/
     └── og/distribui-rico-og.png
 ```
 
-## ⚠️ Sobre a chave da Brapi — leia antes de publicar
+## Sobre as fontes de dados — sem chave nem token
 
-Você me enviou sua chave da Brapi. **Ela não está em nenhum arquivo deste
-projeto** — de propósito. Um site publicado no GitHub Pages é 100% estático:
-tudo que existe no repositório é público e baixável por qualquer visitante,
-mesmo repositórios "privados no código, públicos no Pages". Se a chave
-estivesse em qualquer `.js` ou `.json` versionado, ela ficaria exposta.
+O site usa duas fontes gratuitas, nenhuma delas exige token ou chave secreta:
 
-Em vez disso, o site usa esta arquitetura:
+- **Ações, BDRs, FIIs, ETF de ouro e busca manual de ticker** — endpoint
+  público (não-oficial) do Yahoo Finance.
+- **Tesouro Direto** — endpoint sandbox público da Brapi, também sem token.
 
-1. A chave fica guardada **apenas** em *GitHub Actions Secrets* — um cofre do
-   próprio GitHub, ligado ao repositório, que nunca aparece no código nem no
-   histórico do Git.
-2. Um workflow agendado (`.github/workflows/atualizar-cotacoes.yml`) roda a
-   cada 30 minutos nos servidores do GitHub, usa a chave para consultar a
-   Brapi e grava o resultado em `dados/cotacoes.json`.
-3. O site, no navegador de cada visitante, só lê esse `cotacoes.json` — que é
-   público, mas não tem nenhuma credencial dentro.
+Isso significa que não existe nenhuma credencial pra guardar como Secret no
+GitHub nem no Cloudflare. O workflow (`.github/workflows/atualizar-cotacoes.yml`)
+e o Cloudflare Worker (`cloudflare-worker/cotacao-proxy.js`) funcionam com o
+código como está, sem configuração extra de chave.
 
-Isso é o equivalente ao que qualquer site estático precisa fazer para usar uma
-API com chave secreta sem servidor próprio.
+A única ressalva: o endpoint do Yahoo é não-oficial (o mesmo que o site deles
+usa por trás dos panos) — não tem contrato nem SLA, e o Yahoo pode
+mudar ou bloquear isso sem aviso. Por isso a atualização automática roda a
+cada 30 minutos, não mais frequente, pra não parecer abuso de uso.
 
 ## Passo a passo para publicar
 
@@ -72,29 +70,21 @@ API com chave secreta sem servidor próprio.
    (GitHub Pages funciona nos dois, mas privado exige plano pago para Pages).
 2. Envie todos os arquivos desta pasta para a raiz do repositório.
 
-### 2. Cadastrar a chave da Brapi como Secret
-1. No repositório, vá em **Settings → Secrets and variables → Actions**.
-2. Clique em **New repository secret**.
-3. Nome: `BRAPI_TOKEN`
-4. Valor: sua chave da Brapi (a que você me passou — cole ela aqui, e só
-   aqui).
-5. Salve.
-
-### 3. Dar permissão de escrita para o workflow
+### 2. Dar permissão de escrita para o workflow
 1. Em **Settings → Actions → General → Workflow permissions**.
 2. Selecione **Read and write permissions**.
 3. Salve.
    (Isso permite que o workflow grave `dados/cotacoes.json` de volta no
    repositório.)
 
-### 4. Ativar o GitHub Pages
+### 3. Ativar o GitHub Pages
 1. Em **Settings → Pages**.
 2. Em "Build and deployment", escolha **Deploy from a branch**.
 3. Branch: `main` (ou `master`), pasta `/ (root)`.
 4. Salve. O GitHub mostrará a URL pública (algo como
    `https://SEU-USUARIO.github.io/carteira/`).
 
-### 5. Rodar o workflow pela primeira vez
+### 4. Rodar o workflow pela primeira vez
 1. Vá na aba **Actions** do repositório.
 2. Clique no workflow **Atualizar cotações**.
 3. Clique em **Run workflow** para rodar manualmente uma vez (não precisa
@@ -102,7 +92,7 @@ API com chave secreta sem servidor próprio.
 4. Confira se ele terminou com sucesso (✔️) e se `dados/cotacoes.json` foi
    atualizado no repositório.
 
-### 6. Ajustar URLs
+### 5. Ajustar URLs
 Troque `SEU-USUARIO` pelo seu usuário/organização do GitHub nos arquivos:
 - `index.html`, `sobre.html`, `metodologia.html` (tags `<link rel="canonical">` e `og:url`)
 - `sitemap.xml`
