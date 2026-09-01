@@ -199,28 +199,33 @@
         estágio final desse processo.
       </p>
 
-      <div class="grafico-barras">
-        <div class="grafico-barras__titulo">Nível de ativação cognitiva por atividade</div>
-        <div class="grafico-barras__linha">
-          <span class="grafico-barras__rotulo">Rolagem de feed</span>
-          <div class="grafico-barras__trilha"><div class="grafico-barras__valor grafico-barras__valor--2" style="width:10%"></div></div>
-          <span class="grafico-barras__numero">10%</span>
-        </div>
-        <div class="grafico-barras__linha">
-          <span class="grafico-barras__rotulo">Uso de IA sem pensar</span>
-          <div class="grafico-barras__trilha"><div class="grafico-barras__valor grafico-barras__valor--2" style="width:30%"></div></div>
-          <span class="grafico-barras__numero">30%</span>
-        </div>
-        <div class="grafico-barras__linha">
-          <span class="grafico-barras__rotulo">Trabalho focado sem celular</span>
-          <div class="grafico-barras__trilha"><div class="grafico-barras__valor" style="width:85%"></div></div>
-          <span class="grafico-barras__numero">85%</span>
-        </div>
-        <div class="grafico-barras__linha">
-          <span class="grafico-barras__rotulo">Estudo ativo com livro/texto</span>
-          <div class="grafico-barras__trilha"><div class="grafico-barras__valor" style="width:95%"></div></div>
-          <span class="grafico-barras__numero">95%</span>
-        </div>
+      <div class="grafico-svg-wrap">
+        <div class="grafico-svg-wrap__titulo">Nível de ativação cognitiva e esforço cerebral por atividade</div>
+        <svg viewBox="0 0 600 220" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Gráfico de barras horizontal com o nível de ativação cognitiva por atividade">
+          <line x1="180" y1="10" x2="180" y2="205" stroke="#ddd" stroke-width="1"/>
+          <line x1="180" y1="205" x2="570" y2="205" stroke="#ccc" stroke-width="1.5"/>
+
+          <text x="172" y="26" text-anchor="end" font-size="11" fill="#555">Rolagem de feed</text>
+          <text x="172" y="38" text-anchor="end" font-size="9" fill="#999">(Estado dissociativo)</text>
+          <rect x="180" y="17" width="38" height="26" fill="#c1584f"/>
+          <text x="226" y="34" font-size="11" font-weight="700" fill="#c1584f">10%</text>
+
+          <text x="172" y="76" text-anchor="end" font-size="11" fill="#555">Uso de IA</text>
+          <text x="172" y="88" text-anchor="end" font-size="9" fill="#999">(sem pensar)</text>
+          <rect x="180" y="67" width="114" height="26" fill="#c1584f"/>
+          <text x="302" y="84" font-size="11" font-weight="700" fill="#c1584f">30%</text>
+
+          <text x="172" y="126" text-anchor="end" font-size="11" fill="#555">Trabalho focado</text>
+          <text x="172" y="138" text-anchor="end" font-size="9" fill="#999">(sem celular)</text>
+          <rect x="180" y="117" width="323" height="26" fill="#2c4a6b"/>
+          <text x="511" y="134" font-size="11" font-weight="700" fill="#2c4a6b">85%</text>
+
+          <text x="172" y="176" text-anchor="end" font-size="11" fill="#555">Estudo ativo</text>
+          <text x="172" y="188" text-anchor="end" font-size="9" fill="#999">(livro/texto)</text>
+          <rect x="180" y="167" width="361" height="26" fill="#1a3350"/>
+          <text x="549" y="184" font-size="11" font-weight="700" fill="#1a3350">95%</text>
+        </svg>
+        <div class="grafico-svg-wrap__caption">O nível de ativação de áreas de raciocínio profundo desaba quando migramos do esforço ativo para a rolagem passiva e automática de telas.</div>
       </div>
       <p>
         A diferença entre esforço ativo e consumo passivo é gigante — e é

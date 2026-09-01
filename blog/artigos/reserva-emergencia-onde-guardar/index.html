@@ -233,28 +233,33 @@
         a taxa bruta de um com a isenção do outro — o que importa é
         quanto cai líquido no bolso no final.
       </p>
-      <div class="grafico-barras">
-        <div class="grafico-barras__titulo">Rendimento líquido estimado (Selic a 10,5% a.a.)</div>
-        <div class="grafico-barras__linha">
-          <span class="grafico-barras__rotulo">CDB 100% CDI (IR 17,5%)</span>
-          <div class="grafico-barras__trilha"><div class="grafico-barras__valor" style="width:100%"></div></div>
-          <span class="grafico-barras__numero">8,66% a.a.</span>
-        </div>
-        <div class="grafico-barras__linha">
-          <span class="grafico-barras__rotulo">Tesouro Selic</span>
-          <div class="grafico-barras__trilha"><div class="grafico-barras__valor" style="width:98%"></div></div>
-          <span class="grafico-barras__numero">8,46% a.a.</span>
-        </div>
-        <div class="grafico-barras__linha">
-          <span class="grafico-barras__rotulo">CDB 100% CDI (IR 22,5%)</span>
-          <div class="grafico-barras__trilha"><div class="grafico-barras__valor" style="width:94%"></div></div>
-          <span class="grafico-barras__numero">8,14% a.a.</span>
-        </div>
-        <div class="grafico-barras__linha">
-          <span class="grafico-barras__rotulo">Poupança</span>
-          <div class="grafico-barras__trilha"><div class="grafico-barras__valor grafico-barras__valor--2" style="width:83%"></div></div>
-          <span class="grafico-barras__numero">7,15% a.a.</span>
-        </div>
+      <div class="grafico-svg-wrap">
+        <div class="grafico-svg-wrap__titulo">Comparativo de rendimento líquido estimado (Selic a 10,5% a.a.)</div>
+        <svg viewBox="0 0 600 210" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Gráfico de barras horizontal comparando o rendimento líquido de CDB, Tesouro Selic e poupança">
+          <line x1="180" y1="10" x2="180" y2="195" stroke="#ddd" stroke-width="1"/>
+          <line x1="180" y1="195" x2="570" y2="195" stroke="#ccc" stroke-width="1.5"/>
+
+          <text x="172" y="30" text-anchor="end" font-size="11" fill="#555">CDB 100% CDI</text>
+          <text x="172" y="42" text-anchor="end" font-size="9" fill="#999">(líquido, IR 17,5%)</text>
+          <rect x="180" y="21" width="337.7" height="22" fill="#1f4a45"/>
+          <text x="524.7" y="36" font-size="11" font-weight="700" fill="#1f4a45">8,66% a.a.</text>
+
+          <text x="172" y="72" text-anchor="end" font-size="11" fill="#555">Tesouro Selic</text>
+          <text x="172" y="84" text-anchor="end" font-size="9" fill="#999">(líquido, IR 17,5%)</text>
+          <rect x="180" y="63" width="330" height="22" fill="#2f6b62"/>
+          <text x="517" y="78" font-size="11" font-weight="700" fill="#2f6b62">8,46% a.a.</text>
+
+          <text x="172" y="114" text-anchor="end" font-size="11" fill="#555">CDB 100% CDI</text>
+          <text x="172" y="126" text-anchor="end" font-size="9" fill="#999">(líquido, IR 22,5%)</text>
+          <rect x="180" y="105" width="317.5" height="22" fill="#3f8a7c"/>
+          <text x="504.5" y="120" font-size="11" font-weight="700" fill="#3f8a7c">8,14% a.a.</text>
+
+          <text x="172" y="156" text-anchor="end" font-size="11" fill="#555">Poupança</text>
+          <text x="172" y="168" text-anchor="end" font-size="9" fill="#999">(líquido)</text>
+          <rect x="180" y="147" width="278.9" height="22" fill="#9a9a9a"/>
+          <text x="465.9" y="162" font-size="11" font-weight="700" fill="#777">7,15% a.a.</text>
+        </svg>
+        <div class="grafico-svg-wrap__caption">Projeção de rentabilidade líquida (já descontado o Imposto de Renda) para cada produto.</div>
       </div>
       <p>
         A diferença entre a melhor e a pior opção parece pequena em

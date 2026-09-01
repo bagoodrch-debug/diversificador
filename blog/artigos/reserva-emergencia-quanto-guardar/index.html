@@ -167,23 +167,29 @@
         <li><strong>6 meses</strong> — a referência intermediária, ideal pra maioria de quem trabalha CLT em empresa consolidada, com folga confortável pra lidar com demissão súbita.</li>
         <li><strong>12 meses ou mais</strong> — essencial pra autônomo, empresário, profissional liberal de renda variável, ou família que depende de uma única renda ativa ou tem filhos.</li>
       </ul>
-      <div class="grafico-barras">
-        <div class="grafico-barras__titulo">Reserva necessária por perfil (gasto mensal fixo de R$ 5.000)</div>
-        <div class="grafico-barras__linha">
-          <span class="grafico-barras__rotulo">CLT renda estável (3 meses)</span>
-          <div class="grafico-barras__trilha"><div class="grafico-barras__valor" style="width:25%"></div></div>
-          <span class="grafico-barras__numero">R$ 15.000</span>
-        </div>
-        <div class="grafico-barras__linha">
-          <span class="grafico-barras__rotulo">CLT intermediário (6 meses)</span>
-          <div class="grafico-barras__trilha"><div class="grafico-barras__valor" style="width:50%"></div></div>
-          <span class="grafico-barras__numero">R$ 30.000</span>
-        </div>
-        <div class="grafico-barras__linha">
-          <span class="grafico-barras__rotulo">Autônomo / empresário (12 meses)</span>
-          <div class="grafico-barras__trilha"><div class="grafico-barras__valor" style="width:100%"></div></div>
-          <span class="grafico-barras__numero">R$ 60.000</span>
-        </div>
+      <div class="grafico-svg-wrap">
+        <div class="grafico-svg-wrap__titulo">Comparativo de reserva por perfil (gasto mensal fixo de R$ 5.000)</div>
+        <svg viewBox="0 0 600 190" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Gráfico de barras horizontal com a reserva necessária por perfil de renda">
+          <line x1="220" y1="10" x2="220" y2="165" stroke="#ddd" stroke-width="1"/>
+          <line x1="220" y1="165" x2="570" y2="165" stroke="#ccc" stroke-width="1.5"/>
+          <text x="395" y="182" text-anchor="middle" font-size="10" fill="#999">Patrimônio necessário para a reserva (R$)</text>
+
+          <text x="212" y="38" text-anchor="end" font-size="11" fill="#555">CLT renda estável</text>
+          <text x="212" y="50" text-anchor="end" font-size="9" fill="#999">(3 meses de reserva)</text>
+          <rect x="220" y="27" width="75" height="24" fill="#3f8a7c"/>
+          <text x="303" y="43" font-size="11" font-weight="700" fill="#3f8a7c">R$ 15.000</text>
+
+          <text x="212" y="88" text-anchor="end" font-size="11" fill="#555">CLT intermediário</text>
+          <text x="212" y="100" text-anchor="end" font-size="9" fill="#999">(6 meses de reserva)</text>
+          <rect x="220" y="77" width="150" height="24" fill="#2f6b62"/>
+          <text x="378" y="93" font-size="11" font-weight="700" fill="#2f6b62">R$ 30.000</text>
+
+          <text x="212" y="138" text-anchor="end" font-size="11" fill="#555">Autônomo / empresário</text>
+          <text x="212" y="150" text-anchor="end" font-size="9" fill="#999">(12 meses de reserva)</text>
+          <rect x="220" y="127" width="300" height="24" fill="#1f4a45"/>
+          <text x="528" y="143" font-size="11" font-weight="700" fill="#1f4a45">R$ 60.000</text>
+        </svg>
+        <div class="grafico-svg-wrap__caption">Projeção de necessidade financeira real sob o mesmo patamar de gastos essenciais.</div>
       </div>
 
       <h2>CLT vs. autônomo: por que a reserva não pode ser igual</h2>

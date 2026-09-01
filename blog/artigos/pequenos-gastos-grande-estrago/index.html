@@ -175,42 +175,49 @@
         mês, comparando guardar embaixo do colchão sem juro nenhum contra
         investir a um retorno médio conservador de 10% ao ano:
       </p>
-      <div class="grafico-barras">
-        <div class="grafico-barras__titulo">R$ 15/dia (R$ 450/mês): acumulado x investido a 10% a.a.</div>
-        <div class="grafico-barras__linha">
-          <span class="grafico-barras__rotulo">1 ano — acumulado</span>
-          <div class="grafico-barras__trilha"><div class="grafico-barras__valor grafico-barras__valor--2" style="width:6%"></div></div>
-          <span class="grafico-barras__numero">R$ 5.400</span>
+      <div class="grafico-svg-wrap">
+        <div class="grafico-svg-wrap__titulo">R$ 15/dia (R$ 450/mês): acumulado x investido a 10% a.a.</div>
+        <svg viewBox="0 0 600 300" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Gráfico de barras comparando valor acumulado sem juros e investido a 10% ao ano, em 1, 5 e 10 anos">
+          <!-- linhas de grade -->
+          <line x1="50" y1="20" x2="580" y2="20" stroke="#eee" stroke-width="1"/>
+          <line x1="50" y1="77.5" x2="580" y2="77.5" stroke="#eee" stroke-width="1"/>
+          <line x1="50" y1="135" x2="580" y2="135" stroke="#eee" stroke-width="1"/>
+          <line x1="50" y1="192.5" x2="580" y2="192.5" stroke="#eee" stroke-width="1"/>
+          <!-- eixo -->
+          <line x1="50" y1="250" x2="580" y2="250" stroke="#ccc" stroke-width="1.5"/>
+          <!-- rótulos do eixo Y -->
+          <text x="45" y="253" text-anchor="end" font-size="10" fill="#999">R$ 0</text>
+          <text x="45" y="196" text-anchor="end" font-size="10" fill="#999">R$ 25 mil</text>
+          <text x="45" y="139" text-anchor="end" font-size="10" fill="#999">R$ 50 mil</text>
+          <text x="45" y="81.5" text-anchor="end" font-size="10" fill="#999">R$ 75 mil</text>
+          <text x="45" y="24" text-anchor="end" font-size="10" fill="#999">R$ 100 mil</text>
+
+          <!-- grupo 1 ano -->
+          <rect x="88.3" y="237.6" width="45" height="12.4" fill="#6c8f8a"/>
+          <rect x="143.3" y="236.9" width="45" height="13.1" fill="#e8b04b"/>
+          <text x="110.8" y="230" text-anchor="middle" font-size="10" font-weight="700" fill="#6c8f8a">R$ 5.400</text>
+          <text x="165.8" y="230" text-anchor="middle" font-size="10" font-weight="700" fill="#c98f1f">R$ 5.688</text>
+          <text x="138.3" y="270" text-anchor="middle" font-size="11" fill="#555">1 ano</text>
+
+          <!-- grupo 5 anos -->
+          <rect x="265" y="187.9" width="45" height="62.1" fill="#6c8f8a"/>
+          <rect x="320" y="170.1" width="45" height="79.9" fill="#e8b04b"/>
+          <text x="287.5" y="180" text-anchor="middle" font-size="10" font-weight="700" fill="#6c8f8a">R$ 27.000</text>
+          <text x="342.5" y="162" text-anchor="middle" font-size="10" font-weight="700" fill="#c98f1f">R$ 34.727</text>
+          <text x="315" y="270" text-anchor="middle" font-size="11" fill="#555">5 anos</text>
+
+          <!-- grupo 10 anos -->
+          <rect x="441.7" y="125.8" width="45" height="124.2" fill="#6c8f8a"/>
+          <rect x="496.7" y="41.5" width="45" height="208.5" fill="#e8b04b"/>
+          <text x="464.2" y="118" text-anchor="middle" font-size="10" font-weight="700" fill="#6c8f8a">R$ 54.000</text>
+          <text x="519.2" y="33.5" text-anchor="middle" font-size="10" font-weight="700" fill="#c98f1f">R$ 90.656</text>
+          <text x="491.7" y="270" text-anchor="middle" font-size="11" fill="#555">10 anos</text>
+        </svg>
+        <div class="grafico-svg-wrap__legenda">
+          <span><i style="background:#6c8f8a"></i> Apenas acumulado (sem juros)</span>
+          <span><i style="background:#e8b04b"></i> Investido (retorno de 10% a.a.)</span>
         </div>
-        <div class="grafico-barras__linha">
-          <span class="grafico-barras__rotulo">1 ano — investido</span>
-          <div class="grafico-barras__trilha"><div class="grafico-barras__valor" style="width:6%"></div></div>
-          <span class="grafico-barras__numero">R$ 5.688</span>
-        </div>
-        <div class="grafico-barras__linha">
-          <span class="grafico-barras__rotulo">5 anos — acumulado</span>
-          <div class="grafico-barras__trilha"><div class="grafico-barras__valor grafico-barras__valor--2" style="width:30%"></div></div>
-          <span class="grafico-barras__numero">R$ 27.000</span>
-        </div>
-        <div class="grafico-barras__linha">
-          <span class="grafico-barras__rotulo">5 anos — investido</span>
-          <div class="grafico-barras__trilha"><div class="grafico-barras__valor" style="width:38%"></div></div>
-          <span class="grafico-barras__numero">R$ 34.727</span>
-        </div>
-        <div class="grafico-barras__linha">
-          <span class="grafico-barras__rotulo">10 anos — acumulado</span>
-          <div class="grafico-barras__trilha"><div class="grafico-barras__valor grafico-barras__valor--2" style="width:60%"></div></div>
-          <span class="grafico-barras__numero">R$ 54.000</span>
-        </div>
-        <div class="grafico-barras__linha">
-          <span class="grafico-barras__rotulo">10 anos — investido</span>
-          <div class="grafico-barras__trilha"><div class="grafico-barras__valor" style="width:100%"></div></div>
-          <span class="grafico-barras__numero">R$ 90.656</span>
-        </div>
-        <div class="grafico-barras__legenda">
-          <span><i class="cor-2"></i> Acumulado sem juros</span>
-          <span><i></i> Investido a 10% a.a.</span>
-        </div>
+        <div class="grafico-svg-wrap__caption">Comparativo entre poupar por conta própria e investir a 10% a.a.</div>
       </div>
       <p>
         Em 10 anos, a diferença entre guardar parado e investir passa de

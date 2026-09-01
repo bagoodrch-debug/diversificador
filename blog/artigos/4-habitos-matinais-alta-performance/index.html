@@ -143,28 +143,67 @@
         repertório bem acima da média.
       </p>
 
-      <div class="grafico-barras">
-        <div class="grafico-barras__titulo">Livros completados — 15 min de leitura por dia, acumulado</div>
-        <div class="grafico-barras__linha">
-          <span class="grafico-barras__rotulo">Março (1º trimestre)</span>
-          <div class="grafico-barras__trilha"><div class="grafico-barras__valor" style="width:25%"></div></div>
-          <span class="grafico-barras__numero">1,8 livros</span>
+      <div class="grafico-svg-wrap">
+        <div class="grafico-svg-wrap__titulo">O efeito acumulado das escolhas matinais (12 meses)</div>
+        <svg viewBox="0 0 600 300" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Gráfico combinando linha de livros completados e barras de dias jogados fora em redes sociais, ao longo de 12 meses">
+          <line x1="50" y1="20" x2="580" y2="20" stroke="#eee" stroke-width="1"/>
+          <line x1="50" y1="80" x2="580" y2="80" stroke="#eee" stroke-width="1"/>
+          <line x1="50" y1="140" x2="580" y2="140" stroke="#eee" stroke-width="1"/>
+          <line x1="50" y1="200" x2="580" y2="200" stroke="#eee" stroke-width="1"/>
+          <line x1="50" y1="20" x2="50" y2="260" stroke="#ccc" stroke-width="1.5"/>
+          <line x1="50" y1="260" x2="580" y2="260" stroke="#ccc" stroke-width="1.5"/>
+          <text x="45" y="264" text-anchor="end" font-size="10" fill="#999">0</text>
+          <text x="45" y="204" text-anchor="end" font-size="10" fill="#999">2</text>
+          <text x="45" y="144" text-anchor="end" font-size="10" fill="#999">4</text>
+          <text x="45" y="84" text-anchor="end" font-size="10" fill="#999">6</text>
+          <text x="45" y="24" text-anchor="end" font-size="10" fill="#999">8</text>
+          <text x="20" y="140" text-anchor="middle" font-size="10" fill="#999" transform="rotate(-90 20 140)">Quantidade acumulada</text>
+
+          <rect x="41.0" y="257.0" width="18" height="3.0" fill="#f3c9c4"/>
+          <rect x="89.2" y="254.0" width="18" height="6.0" fill="#f3c9c4"/>
+          <rect x="137.4" y="251.0" width="18" height="9.0" fill="#f3c9c4"/>
+          <rect x="185.5" y="248.0" width="18" height="12.0" fill="#f3c9c4"/>
+          <rect x="233.7" y="243.5" width="18" height="16.5" fill="#f3c9c4"/>
+          <rect x="281.9" y="240.5" width="18" height="19.5" fill="#f3c9c4"/>
+          <rect x="330.1" y="233.0" width="18" height="27.0" fill="#f3c9c4"/>
+          <rect x="378.3" y="231.5" width="18" height="28.5" fill="#f3c9c4"/>
+          <rect x="426.5" y="228.5" width="18" height="31.5" fill="#f3c9c4"/>
+          <rect x="474.6" y="224.0" width="18" height="36.0" fill="#f3c9c4"/>
+          <rect x="522.8" y="221.0" width="18" height="39.0" fill="#f3c9c4"/>
+          <rect x="571.0" y="215.0" width="18" height="45.0" fill="#f3c9c4"/>
+
+          <polyline points="50.0,242.0 98.2,224.0 146.4,206.0 194.5,188.0 242.7,170.0 290.9,152.0 339.1,134.0 387.3,116.0 435.5,98.0 483.6,80.0 531.8,62.0 580.0,44.0" fill="none" stroke="#2f8f6b" stroke-width="2.5"/>
+          <circle cx="50.0" cy="242.0" r="2.5" fill="#2f8f6b"/>
+          <circle cx="98.2" cy="224.0" r="2.5" fill="#2f8f6b"/>
+          <circle cx="146.4" cy="206.0" r="2.5" fill="#2f8f6b"/>
+          <circle cx="194.5" cy="188.0" r="2.5" fill="#2f8f6b"/>
+          <circle cx="242.7" cy="170.0" r="2.5" fill="#2f8f6b"/>
+          <circle cx="290.9" cy="152.0" r="2.5" fill="#2f8f6b"/>
+          <circle cx="339.1" cy="134.0" r="2.5" fill="#2f8f6b"/>
+          <circle cx="387.3" cy="116.0" r="2.5" fill="#2f8f6b"/>
+          <circle cx="435.5" cy="98.0" r="2.5" fill="#2f8f6b"/>
+          <circle cx="483.6" cy="80.0" r="2.5" fill="#2f8f6b"/>
+          <circle cx="531.8" cy="62.0" r="2.5" fill="#2f8f6b"/>
+          <circle cx="580.0" cy="44.0" r="2.5" fill="#2f8f6b"/>
+
+          <text x="50.0" y="278" text-anchor="middle" font-size="9" fill="#999">Jan</text>
+          <text x="98.2" y="278" text-anchor="middle" font-size="9" fill="#999">Fev</text>
+          <text x="146.4" y="278" text-anchor="middle" font-size="9" fill="#999">Mar</text>
+          <text x="194.5" y="278" text-anchor="middle" font-size="9" fill="#999">Abr</text>
+          <text x="242.7" y="278" text-anchor="middle" font-size="9" fill="#999">Mai</text>
+          <text x="290.9" y="278" text-anchor="middle" font-size="9" fill="#999">Jun</text>
+          <text x="339.1" y="278" text-anchor="middle" font-size="9" fill="#999">Jul</text>
+          <text x="387.3" y="278" text-anchor="middle" font-size="9" fill="#999">Ago</text>
+          <text x="435.5" y="278" text-anchor="middle" font-size="9" fill="#999">Set</text>
+          <text x="483.6" y="278" text-anchor="middle" font-size="9" fill="#999">Out</text>
+          <text x="531.8" y="278" text-anchor="middle" font-size="9" fill="#999">Nov</text>
+          <text x="580.0" y="278" text-anchor="middle" font-size="9" fill="#999">Dez</text>
+        </svg>
+        <div class="grafico-svg-wrap__legenda">
+          <span><i style="background:#2f8f6b"></i> Livros completados (leitura 15 min/dia)</span>
+          <span><i style="background:#f3c9c4"></i> Dias de vida "jogados fora" em redes sociais</span>
         </div>
-        <div class="grafico-barras__linha">
-          <span class="grafico-barras__rotulo">Junho (2º trimestre)</span>
-          <div class="grafico-barras__trilha"><div class="grafico-barras__valor" style="width:50%"></div></div>
-          <span class="grafico-barras__numero">3,6 livros</span>
-        </div>
-        <div class="grafico-barras__linha">
-          <span class="grafico-barras__rotulo">Setembro (3º trimestre)</span>
-          <div class="grafico-barras__trilha"><div class="grafico-barras__valor" style="width:75%"></div></div>
-          <span class="grafico-barras__numero">5,4 livros</span>
-        </div>
-        <div class="grafico-barras__linha">
-          <span class="grafico-barras__rotulo">Dezembro (4º trimestre)</span>
-          <div class="grafico-barras__trilha"><div class="grafico-barras__valor" style="width:100%"></div></div>
-          <span class="grafico-barras__numero">7,2 livros</span>
-        </div>
+        <div class="grafico-svg-wrap__caption">Impacto cumulativo de 15 minutos diários de leitura em comparação com o equivalente jogado fora em redes sociais.</div>
       </div>
       <p>
         No mesmo período, o tempo que seria gasto em rolagem de feed

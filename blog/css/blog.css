@@ -456,6 +456,54 @@ body.pagina-artigo {
   background: #4f6fd6;
 }
 
+/* Gráfico SVG "de verdade" — eixo, grid, barras e legenda desenhados à
+   mão em SVG. Usa as mesmas cores da paleta (dourado / verde-azulado). */
+.grafico-svg-wrap {
+  margin: 1.6rem 0;
+  padding: 1.1rem 1.1rem 0.75rem;
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  background: #ffffff;
+}
+.grafico-svg-wrap__titulo {
+  font-size: 0.8rem;
+  font-weight: 700;
+  color: var(--fg);
+  text-align: center;
+  margin-bottom: 0.6rem;
+}
+.grafico-svg-wrap svg {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+.grafico-svg-wrap__legenda {
+  display: flex;
+  justify-content: center;
+  gap: 1.25rem;
+  flex-wrap: wrap;
+  padding: 0.6rem 0 0.9rem;
+  font-size: 0.72rem;
+  color: var(--muted);
+}
+.grafico-svg-wrap__legenda span {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+}
+.grafico-svg-wrap__legenda i {
+  width: 0.65rem;
+  height: 0.65rem;
+  border-radius: 2px;
+  display: inline-block;
+}
+.grafico-svg-wrap__caption {
+  text-align: center;
+  font-size: 0.72rem;
+  color: var(--muted);
+  padding-bottom: 0.85rem;
+}
+
 /* Caixa de recomendação de produto, dentro do artigo */
 /* "O que a gente usa" — solto, sem caixa ao redor, só espaçamento. */
 .artigo__recomendacao {

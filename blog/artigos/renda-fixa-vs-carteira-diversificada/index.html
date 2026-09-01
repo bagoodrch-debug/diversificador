@@ -222,61 +222,43 @@
         mundo — o que muda de um perfil pro outro é o quanto cada motor
         de rentabilidade pesa dentro do total:
       </p>
-      <div class="grafico-barras">
-        <div class="grafico-barras__titulo">Carteira conservadora — foco em renda fixa</div>
-        <div class="grafico-barras__linha">
-          <span class="grafico-barras__rotulo">Renda fixa</span>
-          <div class="grafico-barras__trilha"><div class="grafico-barras__valor" style="width:70%"></div></div>
-          <span class="grafico-barras__numero">70%</span>
+      <div class="grafico-svg-wrap">
+        <div class="grafico-svg-wrap__titulo">Comparativo de alocação de ativos (%)</div>
+        <svg viewBox="0 0 600 160" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Gráfico de barras horizontais empilhadas comparando carteira conservadora e diversificada">
+          <text x="45" y="30" text-anchor="end" font-size="11" fill="#555">Conservadora</text>
+          <text x="45" y="42" text-anchor="end" font-size="9" fill="#999">(foco renda fixa)</text>
+          <rect x="50" y="16" width="364" height="36" fill="#1f3a5f"/>
+          <rect x="414" y="16" width="52" height="36" fill="#3f6fa8"/>
+          <rect x="466" y="16" width="52" height="36" fill="#7ba7d6"/>
+          <rect x="518" y="16" width="26" height="36" fill="#3f8a7c"/>
+          <rect x="544" y="16" width="26" height="36" fill="#e0a94a"/>
+          <text x="232" y="38" text-anchor="middle" font-size="11" font-weight="700" fill="#fff">70%</text>
+          <text x="440" y="38" text-anchor="middle" font-size="9" font-weight="700" fill="#fff">10%</text>
+          <text x="492" y="38" text-anchor="middle" font-size="9" font-weight="700" fill="#fff">10%</text>
+          <text x="531" y="38" text-anchor="middle" font-size="8" font-weight="700" fill="#fff">5%</text>
+          <text x="557" y="38" text-anchor="middle" font-size="8" font-weight="700" fill="#5c4210">5%</text>
+
+          <text x="45" y="110" text-anchor="end" font-size="11" fill="#555">Diversificada</text>
+          <text x="45" y="122" text-anchor="end" font-size="9" fill="#999">(equilibrada)</text>
+          <rect x="50" y="96" width="208" height="36" fill="#1f3a5f"/>
+          <rect x="258" y="96" width="104" height="36" fill="#3f6fa8"/>
+          <rect x="362" y="96" width="104" height="36" fill="#7ba7d6"/>
+          <rect x="466" y="96" width="52" height="36" fill="#3f8a7c"/>
+          <rect x="518" y="96" width="52" height="36" fill="#e0a94a"/>
+          <text x="154" y="118" text-anchor="middle" font-size="11" font-weight="700" fill="#fff">40%</text>
+          <text x="310" y="118" text-anchor="middle" font-size="11" font-weight="700" fill="#fff">20%</text>
+          <text x="414" y="118" text-anchor="middle" font-size="11" font-weight="700" fill="#fff">20%</text>
+          <text x="492" y="118" text-anchor="middle" font-size="9" font-weight="700" fill="#fff">10%</text>
+          <text x="544" y="118" text-anchor="middle" font-size="9" font-weight="700" fill="#5c4210">10%</text>
+        </svg>
+        <div class="grafico-svg-wrap__legenda">
+          <span><i style="background:#1f3a5f"></i> Renda fixa</span>
+          <span><i style="background:#3f6fa8"></i> Ações Brasil</span>
+          <span><i style="background:#7ba7d6"></i> Ações exterior</span>
+          <span><i style="background:#3f8a7c"></i> Fundos imobiliários</span>
+          <span><i style="background:#e0a94a"></i> Ouro</span>
         </div>
-        <div class="grafico-barras__linha">
-          <span class="grafico-barras__rotulo">Ações Brasil</span>
-          <div class="grafico-barras__trilha"><div class="grafico-barras__valor" style="width:10%"></div></div>
-          <span class="grafico-barras__numero">10%</span>
-        </div>
-        <div class="grafico-barras__linha">
-          <span class="grafico-barras__rotulo">Ações exterior</span>
-          <div class="grafico-barras__trilha"><div class="grafico-barras__valor" style="width:10%"></div></div>
-          <span class="grafico-barras__numero">10%</span>
-        </div>
-        <div class="grafico-barras__linha">
-          <span class="grafico-barras__rotulo">Fundos imobiliários</span>
-          <div class="grafico-barras__trilha"><div class="grafico-barras__valor" style="width:5%"></div></div>
-          <span class="grafico-barras__numero">5%</span>
-        </div>
-        <div class="grafico-barras__linha">
-          <span class="grafico-barras__rotulo">Ouro</span>
-          <div class="grafico-barras__trilha"><div class="grafico-barras__valor" style="width:5%"></div></div>
-          <span class="grafico-barras__numero">5%</span>
-        </div>
-      </div>
-      <div class="grafico-barras">
-        <div class="grafico-barras__titulo">Carteira diversificada — foco equilibrado</div>
-        <div class="grafico-barras__linha">
-          <span class="grafico-barras__rotulo">Renda fixa</span>
-          <div class="grafico-barras__trilha"><div class="grafico-barras__valor" style="width:40%"></div></div>
-          <span class="grafico-barras__numero">40%</span>
-        </div>
-        <div class="grafico-barras__linha">
-          <span class="grafico-barras__rotulo">Ações Brasil</span>
-          <div class="grafico-barras__trilha"><div class="grafico-barras__valor" style="width:20%"></div></div>
-          <span class="grafico-barras__numero">20%</span>
-        </div>
-        <div class="grafico-barras__linha">
-          <span class="grafico-barras__rotulo">Ações exterior</span>
-          <div class="grafico-barras__trilha"><div class="grafico-barras__valor" style="width:20%"></div></div>
-          <span class="grafico-barras__numero">20%</span>
-        </div>
-        <div class="grafico-barras__linha">
-          <span class="grafico-barras__rotulo">Fundos imobiliários</span>
-          <div class="grafico-barras__trilha"><div class="grafico-barras__valor" style="width:10%"></div></div>
-          <span class="grafico-barras__numero">10%</span>
-        </div>
-        <div class="grafico-barras__linha">
-          <span class="grafico-barras__rotulo">Ouro</span>
-          <div class="grafico-barras__trilha"><div class="grafico-barras__valor" style="width:10%"></div></div>
-          <span class="grafico-barras__numero">10%</span>
-        </div>
+        <div class="grafico-svg-wrap__caption">Simulação com R$ 50 mil — carteira conservadora (foco em mitigar oscilação nominal) x diversificada (foco em espalhar fatores de risco).</div>
       </div>
 
       <h2>Diversificar demais também é erro</h2>
