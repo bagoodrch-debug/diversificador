@@ -199,5 +199,19 @@
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
-  
+
+  <url>
+    <loc>https://manymens.com.br/blog/artigos/juros-compostos-poder-do-tempo/</loc>
+    <lastmod>2026-09-04</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+
+  <url>
+    <loc>https://manymens.com.br/blog/artigos/juros-compostos-nas-dividas/</loc>
+    <lastmod>2026-09-04</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+
 </urlset>

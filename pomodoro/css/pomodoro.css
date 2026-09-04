@@ -278,7 +278,7 @@
 .pomo-modal__linha span {
   max-width: 24ch;
 }
-.pomo-modal__campo:last-child {
+.pomo-modal > .pomo-modal__campo {
   margin-top: 0.9rem;
 }
 
