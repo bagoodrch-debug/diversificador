@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-09-15T12:30:36.635Z",
+  "updatedAt": "2026-09-15T13:01:15.038Z",
   "stocks": [
     {
       "symbol": "PETR4",
@@ -66,7 +66,7 @@
     {
       "symbol": "GOGL34",
       "price": 149.76,
-      "changePct": 3.396851698425841,
+      "changePct": 0,
       "name": "Alphabet Inc."
     },
     {
@@ -80,7 +80,7 @@
     {
       "symbol": "HGLG11",
       "price": 147.87,
-      "changePct": 1.2808219178082223,
+      "changePct": 0,
       "name": "Cshg Logistica - Fundo De Investimento Imobiliario"
     },
     {
@@ -112,7 +112,7 @@
     {
       "symbol": "GOLD11",
       "price": 22.95,
-      "changePct": -0.9067357512953406,
+      "changePct": 0,
       "name": "TREND ETF LBMA OURO CLASSE DE ÍNDICE INVESTIMENTO NO EXTERIOR - RESPONSABILIDADE LIMITADA"
     }
   ],
