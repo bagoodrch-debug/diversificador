@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-09-16T20:30:34.235Z",
+  "updatedAt": "2026-09-16T21:00:41.228Z",
   "stocks": [
     {
       "symbol": "PETR4",
@@ -47,8 +47,8 @@
   "bdrs": [
     {
       "symbol": "IVVB11",
-      "price": 439.26,
-      "changePct": -0.4103657015893174,
+      "price": 438.8,
+      "changePct": -0.5146575373523435,
       "name": "ISHARES S&P 500 CLASSE DE ÍNDICE EM COTAS DE CLASSES DE ÍNDICE IE - RESPONSABILIDADE LIMITADA"
     },
     {
