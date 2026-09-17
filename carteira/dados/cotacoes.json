@@ -1,118 +1,118 @@
 {
-  "updatedAt": "2026-09-17T13:00:42.105Z",
+  "updatedAt": "2026-09-17T13:30:35.472Z",
   "stocks": [
     {
       "symbol": "PETR4",
-      "price": 48.65,
-      "changePct": -3.529645052548089,
+      "price": 48.29,
+      "changePct": -0.7399794450154151,
       "name": "Petróleo Brasileiro S.A. - Petrobras"
     },
     {
       "symbol": "ITUB4",
-      "price": 42.62,
-      "changePct": -0.11717834544177236,
+      "price": 42.73,
+      "changePct": 0.25809479117784945,
       "name": "Itaú Unibanco Holding S.A."
     },
     {
       "symbol": "VALE3",
-      "price": 73,
-      "changePct": -2.144772117962459,
+      "price": 73.34,
+      "changePct": 0.4657534246575389,
       "name": "Vale S.A."
     },
     {
       "symbol": "WEGE3",
-      "price": 51.28,
-      "changePct": 0.7861635220125759,
+      "price": 51.58,
+      "changePct": 0.5850234009360319,
       "name": "WEG S.A."
     },
     {
       "symbol": "BBAS3",
-      "price": 22.71,
-      "changePct": 3.0399274047187013,
+      "price": 22.77,
+      "changePct": 0.26420079260237217,
       "name": "Banco do Brasil S.A."
     },
     {
       "symbol": "BBDC4",
-      "price": 18.21,
-      "changePct": 0,
+      "price": 18.16,
+      "changePct": -0.2745744096650231,
       "name": "Banco Bradesco S.A."
     },
     {
       "symbol": "ABEV3",
-      "price": 15.63,
-      "changePct": -0.6357279084551789,
+      "price": 15.7,
+      "changePct": 0.447856685860515,
       "name": "Ambev S.A."
     }
   ],
   "bdrs": [
     {
       "symbol": "IVVB11",
-      "price": 438.8,
-      "changePct": -0.5146575373523435,
+      "price": 443.19,
+      "changePct": 1.0004557885141263,
       "name": "ISHARES S&P 500 CLASSE DE ÍNDICE EM COTAS DE CLASSES DE ÍNDICE IE - RESPONSABILIDADE LIMITADA"
     },
     {
       "symbol": "AAPL34",
-      "price": 85.31,
-      "changePct": 0.34109621265585305,
+      "price": 85.74,
+      "changePct": 0.5040440745516265,
       "name": "Apple Inc."
     },
     {
       "symbol": "MSFT34",
-      "price": 105.01,
-      "changePct": -1.5562013687072247,
+      "price": 105.9,
+      "changePct": 0.8475383296828879,
       "name": "Microsoft Corporation"
     },
     {
       "symbol": "GOGL34",
-      "price": 147.64,
-      "changePct": -0.276933468422847,
+      "price": 148.85,
+      "changePct": 0.8195610945543268,
       "name": "Alphabet Inc."
     },
     {
       "symbol": "AMZO34",
-      "price": 63.6,
-      "changePct": -0.48505711156312814,
+      "price": 64.56,
+      "changePct": 1.5094339622641522,
       "name": "Amazon.com, Inc."
     }
   ],
   "fiis": [
     {
       "symbol": "HGLG11",
-      "price": 147.59,
-      "changePct": -0.34436191762322144,
+      "price": 147.98,
+      "changePct": 0.2642455450911216,
       "name": "Cshg Logistica - Fundo De Investimento Imobiliario"
     },
     {
       "symbol": "KNRI11",
-      "price": 157.16,
-      "changePct": -0.8266548873603851,
+      "price": 158.08,
+      "changePct": 0.5853906846525935,
       "name": "Kinea Renda Imobiliária Fundo de Investimento Imobiliário"
     },
     {
       "symbol": "MXRF11",
       "price": 9.1,
-      "changePct": -0.3285870755750398,
+      "changePct": 0,
       "name": "Maxi Renda Fundo De Investimento Imobiliaro - FII"
     },
     {
       "symbol": "XPML11",
-      "price": 101.48,
-      "changePct": 0.2766798418972343,
+      "price": 101.85,
+      "changePct": 0.36460386283010476,
       "name": "Xp Malls Fundo Investimentos Imobiliarios"
     },
     {
       "symbol": "VISC11",
-      "price": 103.47,
-      "changePct": -0.317919075144507,
+      "price": 104.17,
+      "changePct": 0.6765245965014042,
       "name": "Vinci Shopping Centers Fundo Investimento Imobiliario - Fii"
     }
   ],
   "goldEtf": [
     {
       "symbol": "GOLD11",
-      "price": 22.85,
-      "changePct": -0.3923278116826498,
+      "price": 23.24,
+      "changePct": 1.7067833698030503,
       "name": "TREND ETF LBMA OURO CLASSE DE ÍNDICE INVESTIMENTO NO EXTERIOR - RESPONSABILIDADE LIMITADA"
     }
   ],
