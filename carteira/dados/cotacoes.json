@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-09-21T12:30:39.572Z",
+  "updatedAt": "2026-09-21T13:00:40.638Z",
   "stocks": [
     {
       "symbol": "PETR4",
@@ -60,7 +60,7 @@
     {
       "symbol": "MSFT34",
       "price": 105.93,
-      "changePct": -0.7681498829039748,
+      "changePct": 0,
       "name": "Microsoft Corporation"
     },
     {
@@ -92,7 +92,7 @@
     {
       "symbol": "MXRF11",
       "price": 9.1,
-      "changePct": 0.330760749724359,
+      "changePct": 0,
       "name": "Maxi Renda Fundo De Investimento Imobiliaro - FII"
     },
     {
