@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-09-23T20:30:39.369Z",
+  "updatedAt": "2026-09-23T20:33:28.039Z",
   "stocks": [
     {
       "symbol": "PETR4",
@@ -111,8 +111,8 @@
   "goldEtf": [
     {
       "symbol": "GOLD11",
-      "price": 22.96,
-      "changePct": -0.6060606060606085,
+      "price": 22.91,
+      "changePct": -0.822510822510828,
       "name": "TREND ETF LBMA OURO CLASSE DE ÍNDICE INVESTIMENTO NO EXTERIOR - RESPONSABILIDADE LIMITADA"
     }
   ],
