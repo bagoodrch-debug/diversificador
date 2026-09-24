@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-09-24T12:30:37.107Z",
+  "updatedAt": "2026-09-24T13:00:44.558Z",
   "stocks": [
     {
       "symbol": "PETR4",
@@ -34,7 +34,7 @@
     {
       "symbol": "BBDC4",
       "price": 18.03,
-      "changePct": -2.170374389582195,
+      "changePct": 0,
       "name": "Banco Bradesco S.A."
     },
     {
