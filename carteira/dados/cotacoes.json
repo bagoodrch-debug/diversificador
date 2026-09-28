@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-09-28T04:00:41.690Z",
+  "updatedAt": "2026-09-28T04:30:42.207Z",
   "stocks": [
     {
       "symbol": "PETR4",
@@ -50,6 +50,12 @@
       "price": 453,
       "changePct": 0.4100631718940536,
       "name": "ISHARES S&P 500 CLASSE DE ÍNDICE EM COTAS DE CLASSES DE ÍNDICE IE - RESPONSABILIDADE LIMITADA"
+    },
+    {
+      "symbol": "AAPL34",
+      "price": 88.55,
+      "changePct": 1.7465241870619281,
+      "name": "Apple Inc."
     },
     {
       "symbol": "MSFT34",
@@ -138,7 +144,6 @@
     }
   ],
   "errors": [
-    "gold: gold 429",
-    "AAPL34: yahoo AAPL34 503"
+    "gold: gold 429"
   ]
 }
