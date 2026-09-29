@@ -185,5 +185,29 @@
     white-space: nowrap;
     min-width: 0;
   }
+  
+  
 }
+}
+/* Trilhos de anúncio nas laterais (só aparecem em tela larga) */
+.ad-rail {
+  display: none;
+}
+
+@media (min-width: 1760px) {
+  .ad-rail {
+    display: block;
+    position: fixed;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 5;
+    max-width: 300px;
+  }
+  .ad-rail--left  { left: 16px; }
+  .ad-rail--right { right: 16px; }
+
+  .ad-slot {
+    width: 300px;
+    min-height: 250px;
+  }
 }
