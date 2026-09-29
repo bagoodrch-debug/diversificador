@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-09-29T12:30:38.124Z",
+  "updatedAt": "2026-09-29T13:00:41.638Z",
   "stocks": [
     {
       "symbol": "PETR4",
@@ -28,13 +28,13 @@
     {
       "symbol": "BBAS3",
       "price": 21.49,
-      "changePct": -0.4631773969430358,
+      "changePct": 0,
       "name": "Banco do Brasil S.A."
     },
     {
       "symbol": "BBDC4",
       "price": 17.66,
-      "changePct": -1.2304250559284053,
+      "changePct": 0,
       "name": "Banco Bradesco S.A."
     },
     {
