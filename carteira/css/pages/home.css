@@ -46,15 +46,16 @@
   margin-top: 1.5rem;
   display: grid;
   gap: 1.5rem;
-  grid-template-columns: 1fr;
+  grid-template-columns: minmax(0, 1fr);   /* era: 1fr */
 }
 @media (min-width: 1024px) {
   .sim__grid {
-    grid-template-columns: 1fr 360px;
+    grid-template-columns: minmax(0, 1fr) 360px;   /* era: 1fr 360px */
   }
 }
 
 .sim__assets {
+  min-width: 0;          /* linha nova */
   display: flex;
   flex-direction: column;
   gap: 0.75rem;

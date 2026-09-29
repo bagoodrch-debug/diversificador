@@ -188,14 +188,29 @@
 
 @media (max-width: 640px) {
   .projecao-grid {
-    grid-template-columns: 1fr;
+    grid-template-columns: minmax(0, 1fr);
   }
+  /* Em vez de 5 itens numa linha só (que estouravam a tela), vira um grid:
+     [período] [barra] [valor / investido / rendimento empilhados] */
   .projecao-card {
-    flex-direction: row;
-    justify-content: space-between;
+    display: grid;
+    grid-template-columns: 3.2rem 24px minmax(0, 1fr);
+    grid-template-areas:
+      "periodo barra valor"
+      "periodo barra detalhe"
+      "periodo barra ganho";
+    column-gap: 0.85rem;
+    row-gap: 0.15rem;
+    align-items: center;
+    justify-items: start;
     text-align: left;
     padding: 0.85rem 1rem;
   }
+  .projecao-card__periodo { grid-area: periodo; }
+  .projecao-bar-track     { grid-area: barra; }
+  .projecao-card__valor   { grid-area: valor; margin-top: 0; }
+  .projecao-card__detalhe { grid-area: detalhe; }
+  .projecao-card__ganho   { grid-area: ganho; }
   .projecao-bar-track {
     width: 24px;
     height: 60px;
