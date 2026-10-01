@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-10-01T12:30:35.414Z",
+  "updatedAt": "2026-10-01T13:00:42.221Z",
   "stocks": [
     {
       "symbol": "PETR4",
@@ -16,7 +16,7 @@
     {
       "symbol": "VALE3",
       "price": 69.91,
-      "changePct": 0.43097256141358586,
+      "changePct": 0,
       "name": "Vale S.A."
     },
     {
@@ -104,7 +104,7 @@
     {
       "symbol": "VISC11",
       "price": 103,
-      "changePct": -0.18412636883418718,
+      "changePct": 0.8222396241190323,
       "name": "Vinci Shopping Centers Fundo Investimento Imobiliario - Fii"
     }
   ],
