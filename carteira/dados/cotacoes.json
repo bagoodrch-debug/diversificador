@@ -1,118 +1,118 @@
 {
-  "updatedAt": "2026-10-01T19:07:13.741Z",
+  "updatedAt": "2026-10-01T19:30:39.418Z",
   "stocks": [
     {
       "symbol": "PETR4",
-      "price": 49.78,
-      "changePct": 1.3436482084690629,
+      "price": 49.96,
+      "changePct": 1.7100977198697138,
       "name": "Petróleo Brasileiro S.A. - Petrobras"
     },
     {
       "symbol": "ITUB4",
-      "price": 43.94,
-      "changePct": -0.7339901366545493,
+      "price": 44.06,
+      "changePct": -0.4628949799954252,
       "name": "Itaú Unibanco Holding S.A."
     },
     {
       "symbol": "VALE3",
-      "price": 69.97,
-      "changePct": 0.08582463166929234,
+      "price": 70.18,
+      "changePct": 0.38621084251181553,
       "name": "Vale S.A."
     },
     {
       "symbol": "WEGE3",
-      "price": 49.64,
-      "changePct": 0.363930448847553,
+      "price": 49.7,
+      "changePct": 0.4852405984634088,
       "name": "WEG S.A."
     },
     {
       "symbol": "BBAS3",
-      "price": 22.95,
-      "changePct": -0.5201560468140486,
+      "price": 23.04,
+      "changePct": -0.13003901170351598,
       "name": "Banco do Brasil S.A."
     },
     {
       "symbol": "BBDC4",
-      "price": 18.4,
-      "changePct": -0.5942733657482603,
+      "price": 18.46,
+      "changePct": -0.27012425715829663,
       "name": "Banco Bradesco S.A."
     },
     {
       "symbol": "ABEV3",
-      "price": 15.3,
-      "changePct": -0.3906249999999917,
+      "price": 15.36,
+      "changePct": 0,
       "name": "Ambev S.A."
     }
   ],
   "bdrs": [
     {
       "symbol": "IVVB11",
-      "price": 452.51,
-      "changePct": 1.148937121398392,
+      "price": 452.49,
+      "changePct": 1.1444665489415928,
       "name": "ISHARES S&P 500 CLASSE DE ÍNDICE EM COTAS DE CLASSES DE ÍNDICE IE - RESPONSABILIDADE LIMITADA"
     },
     {
       "symbol": "AAPL34",
-      "price": 86.1,
-      "changePct": -0.7263922518159918,
+      "price": 86.01,
+      "changePct": -0.8301625735039765,
       "name": "Apple Inc."
     },
     {
       "symbol": "MSFT34",
-      "price": 112.32,
-      "changePct": 1.877551020408157,
+      "price": 112.2,
+      "changePct": 1.7687074829932,
       "name": "Microsoft Corporation"
     },
     {
       "symbol": "GOGL34",
-      "price": 147.28,
-      "changePct": -2.5087707685179006,
+      "price": 147.48,
+      "changePct": -2.376381809757069,
       "name": "Alphabet Inc."
     },
     {
       "symbol": "AMZO34",
-      "price": 65.12,
-      "changePct": 0.6647086102952648,
+      "price": 65.04,
+      "changePct": 0.5410418921008016,
       "name": "Amazon.com, Inc."
     }
   ],
   "fiis": [
     {
       "symbol": "HGLG11",
-      "price": 146.7,
-      "changePct": -0.054503338329481205,
+      "price": 146.59,
+      "changePct": -0.12944542853249608,
       "name": "Cshg Logistica - Fundo De Investimento Imobiliario"
     },
     {
       "symbol": "KNRI11",
-      "price": 155.56,
-      "changePct": -0.22448848694759435,
+      "price": 155.55,
+      "changePct": -0.23090244371751986,
       "name": "Kinea Renda Imobiliária Fundo de Investimento Imobiliário"
     },
     {
       "symbol": "MXRF11",
-      "price": 9.08,
-      "changePct": 0.11025358324145298,
+      "price": 9.07,
+      "changePct": 0,
       "name": "Maxi Renda Fundo De Investimento Imobiliaro - FII"
     },
     {
       "symbol": "XPML11",
-      "price": 101.01,
-      "changePct": 1.3749498193496632,
+      "price": 100.97,
+      "changePct": 1.3348052990766743,
       "name": "Xp Malls Fundo Investimentos Imobiliarios"
     },
     {
       "symbol": "VISC11",
-      "price": 103.81,
-      "changePct": 1.6151135473766696,
+      "price": 103.79,
+      "changePct": 1.5955364134690775,
       "name": "Vinci Shopping Centers Fundo Investimento Imobiliario - Fii"
     }
   ],
   "goldEtf": [
     {
       "symbol": "GOLD11",
-      "price": 22.61,
-      "changePct": 1.4811490125673172,
+      "price": 22.6,
+      "changePct": 1.4362657091561952,
       "name": "TREND ETF LBMA OURO CLASSE DE ÍNDICE INVESTIMENTO NO EXTERIOR - RESPONSABILIDADE LIMITADA"
     }
   ],
