@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-10-02T12:30:37.458Z",
+  "updatedAt": "2026-10-02T13:00:43.598Z",
   "stocks": [
     {
       "symbol": "PETR4",
@@ -72,7 +72,7 @@
     {
       "symbol": "AMZO34",
       "price": 65.3,
-      "changePct": 0.9429587262328019,
+      "changePct": 0,
       "name": "Amazon.com, Inc."
     }
   ],
