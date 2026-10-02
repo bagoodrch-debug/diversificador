@@ -187,25 +187,41 @@
   }
 }
 }
-/* Trilhos de anúncio nas laterais (só aparecem em tela larga) */
+/* Anúncios fixos na borda real da tela (não dividem espaço com o conteúdo).
+   Só aparecem em telas bem largas, onde sobra espaço nas laterais do
+   container central (1180px) sem encostar nele. */
 .ad-rail {
+  position: fixed;
+  top: 50%;
+  transform: translateY(-50%);
   display: none;
+  z-index: 10;
+  width: 300px;
 }
-
-@media (min-width: 1760px) {
+.ad-rail--left {
+  left: 24px;
+}
+.ad-rail--right {
+  right: 24px;
+}
+@media (min-width: 1840px) {
   .ad-rail {
-    display: block;
-    position: fixed;
-    top: 50%;
-    transform: translateY(-50%);
-    z-index: 5;
-    max-width: 300px;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
   }
-  .ad-rail--left  { left: 16px; }
-  .ad-rail--right { right: 16px; }
-
-  .ad-slot {
-    width: 300px;
-    min-height: 250px;
-  }
+}
+.ad-rail .ad-slot {
+  width: 300px;
+  min-height: 250px;
+  border: none;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.4rem;
+}
+.ad-rail .ad-slot__label {
+  margin-bottom: 0;
 }
