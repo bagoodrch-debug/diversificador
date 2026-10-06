@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-10-06T12:30:38.022Z",
+  "updatedAt": "2026-10-06T13:00:42.757Z",
   "stocks": [
     {
       "symbol": "PETR4",
@@ -40,7 +40,7 @@
     {
       "symbol": "ABEV3",
       "price": 16.5,
-      "changePct": 4.166666666666668,
+      "changePct": 0,
       "name": "Ambev S.A."
     }
   ],
@@ -54,7 +54,7 @@
     {
       "symbol": "AAPL34",
       "price": 83.44,
-      "changePct": -4.158051918217327,
+      "changePct": 0,
       "name": "Apple Inc."
     },
     {
@@ -72,7 +72,7 @@
     {
       "symbol": "AMZO34",
       "price": 63.36,
-      "changePct": -3.2228501603787985,
+      "changePct": 0,
       "name": "Amazon.com, Inc."
     }
   ],
