@@ -1,118 +1,118 @@
 {
-  "updatedAt": "2026-10-08T18:00:35.749Z",
+  "updatedAt": "2026-10-08T18:30:36.055Z",
   "stocks": [
     {
       "symbol": "PETR4",
-      "price": 55.64,
-      "changePct": 2.4111908706055627,
+      "price": 55.58,
+      "changePct": 2.300754647524388,
       "name": "Petróleo Brasileiro S.A. - Petrobras"
     },
     {
       "symbol": "ITUB4",
-      "price": 49.66,
-      "changePct": 1.1199348401547489,
+      "price": 49.56,
+      "changePct": 0.9163103237629869,
       "name": "Itaú Unibanco Holding S.A."
     },
     {
       "symbol": "VALE3",
-      "price": 68.15,
-      "changePct": -0.8727272727272645,
+      "price": 67.89,
+      "changePct": -1.25090909090909,
       "name": "Vale S.A."
     },
     {
       "symbol": "WEGE3",
-      "price": 51.67,
-      "changePct": 0.7801833430856223,
+      "price": 51.88,
+      "changePct": 1.189779598205577,
       "name": "WEG S.A."
     },
     {
       "symbol": "BBAS3",
-      "price": 24.53,
-      "changePct": 1.4474772539288727,
+      "price": 24.46,
+      "changePct": 1.1579818031430982,
       "name": "Banco do Brasil S.A."
     },
     {
       "symbol": "BBDC4",
-      "price": 21.77,
-      "changePct": -0.8652094717668547,
+      "price": 21.61,
+      "changePct": -1.5938069216757804,
       "name": "Banco Bradesco S.A."
     },
     {
       "symbol": "ABEV3",
-      "price": 16.06,
-      "changePct": 0.5635566687539015,
+      "price": 16.07,
+      "changePct": 0.6261740763932351,
       "name": "Ambev S.A."
     }
   ],
   "bdrs": [
     {
       "symbol": "IVVB11",
-      "price": 438.25,
-      "changePct": -0.6573727756998702,
+      "price": 438.51,
+      "changePct": -0.5984359061543663,
       "name": "ISHARES S&P 500 CLASSE DE ÍNDICE EM COTAS DE CLASSES DE ÍNDICE IE - RESPONSABILIDADE LIMITADA"
     },
     {
       "symbol": "AAPL34",
-      "price": 84.8,
-      "changePct": 0.49774828158331563,
+      "price": 84.93,
+      "changePct": 0.6518132258829241,
       "name": "Apple Inc."
     },
     {
       "symbol": "MSFT34",
-      "price": 108.92,
-      "changePct": -1.2690355329949161,
+      "price": 108.45,
+      "changePct": -1.695068890500354,
       "name": "Microsoft Corporation"
     },
     {
       "symbol": "GOGL34",
-      "price": 145.08,
-      "changePct": -0.9895584521940821,
+      "price": 144.82,
+      "changePct": -1.1669965194840701,
       "name": "Alphabet Inc."
     },
     {
       "symbol": "AMZO34",
-      "price": 63.88,
-      "changePct": -2.1745788667687513,
+      "price": 63.77,
+      "changePct": -2.343032159264922,
       "name": "Amazon.com, Inc."
     }
   ],
   "fiis": [
     {
       "symbol": "HGLG11",
-      "price": 155.23,
-      "changePct": -0.8051632692184927,
+      "price": 155.3,
+      "changePct": -0.7604319764841189,
       "name": "Cshg Logistica - Fundo De Investimento Imobiliario"
     },
     {
       "symbol": "KNRI11",
-      "price": 163.39,
-      "changePct": -1.39408569704285,
+      "price": 163.17,
+      "changePct": -1.5268557634278823,
       "name": "Kinea Renda Imobiliária Fundo de Investimento Imobiliário"
     },
     {
       "symbol": "MXRF11",
-      "price": 9.37,
-      "changePct": -0.8465608465608473,
+      "price": 9.35,
+      "changePct": -1.0582010582010546,
       "name": "Maxi Renda Fundo De Investimento Imobiliaro - FII"
     },
     {
       "symbol": "XPML11",
-      "price": 106.18,
-      "changePct": -1.493645050561276,
+      "price": 106.07,
+      "changePct": -1.5956953335188915,
       "name": "Xp Malls Fundo Investimentos Imobiliarios"
     },
     {
       "symbol": "VISC11",
-      "price": 112.19,
-      "changePct": 0.22333392889047704,
+      "price": 112.22,
+      "changePct": 0.2501340003573353,
       "name": "Vinci Shopping Centers Fundo Investimento Imobiliario - Fii"
     }
   ],
   "goldEtf": [
     {
       "symbol": "GOLD11",
-      "price": 21.45,
-      "changePct": 0.37435657463733407,
+      "price": 21.44,
+      "changePct": 0.3275620028076756,
       "name": "TREND ETF LBMA OURO CLASSE DE ÍNDICE INVESTIMENTO NO EXTERIOR - RESPONSABILIDADE LIMITADA"
     }
   ],
@@ -121,24 +121,24 @@
     {
       "name": "Tesouro Selic 2031",
       "rate": 0.09,
-      "unitPrice": 19962.22,
-      "minAmount": 199.62220000000002,
+      "unitPrice": 19972.34,
+      "minAmount": 199.7234,
       "maturity": "2031-03-01",
       "type": "Pós-fixado (Selic + spread)"
     },
     {
       "name": "Tesouro Prefixado com Juros Semestrais 2037",
-      "rate": 12.79,
-      "unitPrice": 879.29,
-      "minAmount": 8.7929,
+      "rate": 12.9,
+      "unitPrice": 874.46,
+      "minAmount": 8.7446,
       "maturity": "2037-01-01",
       "type": "Prefixado (taxa nominal)"
     },
     {
       "name": "Tesouro IPCA+ com Juros Semestrais 2060",
-      "rate": 6.54,
-      "unitPrice": 4476.84,
-      "minAmount": 44.7684,
+      "rate": 6.62,
+      "unitPrice": 4431.75,
+      "minAmount": 44.3175,
       "maturity": "2060-08-15",
       "type": "Híbrido (IPCA + taxa real)"
     }
