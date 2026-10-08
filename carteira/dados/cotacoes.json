@@ -1,118 +1,118 @@
 {
-  "updatedAt": "2026-10-08T13:30:35.002Z",
+  "updatedAt": "2026-10-08T14:00:38.704Z",
   "stocks": [
     {
       "symbol": "PETR4",
-      "price": 55.23,
-      "changePct": 1.656543346217557,
+      "price": 55.57,
+      "changePct": 2.282348610344197,
       "name": "Petróleo Brasileiro S.A. - Petrobras"
     },
     {
       "symbol": "ITUB4",
-      "price": 48.98,
-      "changePct": -0.26471187130931084,
+      "price": 49.08,
+      "changePct": -0.061087354917534385,
       "name": "Itaú Unibanco Holding S.A."
     },
     {
       "symbol": "VALE3",
-      "price": 68.19,
-      "changePct": -0.8145454545454579,
+      "price": 69.05,
+      "changePct": 0.43636363636363223,
       "name": "Vale S.A."
     },
     {
       "symbol": "WEGE3",
-      "price": 50.91,
-      "changePct": -0.7021650087770753,
+      "price": 51.03,
+      "changePct": -0.4681100058513789,
       "name": "WEG S.A."
     },
     {
       "symbol": "BBAS3",
-      "price": 24.23,
-      "changePct": 0.20678246484698393,
+      "price": 24.07,
+      "changePct": -0.4549214226633558,
       "name": "Banco do Brasil S.A."
     },
     {
       "symbol": "BBDC4",
-      "price": 21.9,
-      "changePct": -0.27322404371585735,
+      "price": 21.71,
+      "changePct": -1.1384335154826957,
       "name": "Banco Bradesco S.A."
     },
     {
       "symbol": "ABEV3",
-      "price": 16,
-      "changePct": 0.1878522229179672,
+      "price": 16.13,
+      "changePct": 1.0018785222291695,
       "name": "Ambev S.A."
     }
   ],
   "bdrs": [
     {
       "symbol": "IVVB11",
-      "price": 440.45,
-      "changePct": -0.15867618723789836,
+      "price": 440.78,
+      "changePct": -0.08387169896860582,
       "name": "ISHARES S&P 500 CLASSE DE ÍNDICE EM COTAS DE CLASSES DE ÍNDICE IE - RESPONSABILIDADE LIMITADA"
     },
     {
       "symbol": "AAPL34",
-      "price": 84.62,
-      "changePct": 0.28442758947618996,
+      "price": 84.45,
+      "changePct": 0.08295804693056102,
       "name": "Apple Inc."
     },
     {
       "symbol": "MSFT34",
-      "price": 110.62,
-      "changePct": 0.27193618564177974,
+      "price": 111,
+      "changePct": 0.6163886874546836,
       "name": "Microsoft Corporation"
     },
     {
       "symbol": "GOGL34",
-      "price": 147.25,
-      "changePct": 0.491366955572237,
+      "price": 147.79,
+      "changePct": 0.8598921722514099,
       "name": "Alphabet Inc."
     },
     {
       "symbol": "AMZO34",
-      "price": 64.95,
-      "changePct": -0.5359877488514462,
+      "price": 64.88,
+      "changePct": -0.6431852986217484,
       "name": "Amazon.com, Inc."
     }
   ],
   "fiis": [
     {
       "symbol": "HGLG11",
-      "price": 157.09,
-      "changePct": 0.3834110805802251,
+      "price": 157.36,
+      "changePct": 0.5559460668413346,
       "name": "Cshg Logistica - Fundo De Investimento Imobiliario"
     },
     {
       "symbol": "KNRI11",
-      "price": 165.53,
-      "changePct": -0.10259505129751811,
+      "price": 165.1,
+      "changePct": -0.3621001810500871,
       "name": "Kinea Renda Imobiliária Fundo de Investimento Imobiliário"
     },
     {
       "symbol": "MXRF11",
-      "price": 9.44,
-      "changePct": -0.10582010582010357,
+      "price": 9.46,
+      "changePct": 0.10582010582012237,
       "name": "Maxi Renda Fundo De Investimento Imobiliaro - FII"
     },
     {
       "symbol": "XPML11",
-      "price": 107.85,
-      "changePct": 0.05566379070413587,
+      "price": 107.73,
+      "changePct": -0.055663790704149056,
       "name": "Xp Malls Fundo Investimentos Imobiliarios"
     },
     {
       "symbol": "VISC11",
-      "price": 112.65,
-      "changePct": 0.6342683580489619,
+      "price": 112.7,
+      "changePct": 0.6789351438270548,
       "name": "Vinci Shopping Centers Fundo Investimento Imobiliario - Fii"
     }
   ],
   "goldEtf": [
     {
       "symbol": "GOLD11",
-      "price": 21.43,
-      "changePct": 0.28076743097800055,
+      "price": 21.47,
+      "changePct": 0.46794571829666765,
       "name": "TREND ETF LBMA OURO CLASSE DE ÍNDICE INVESTIMENTO NO EXTERIOR - RESPONSABILIDADE LIMITADA"
     }
   ],
