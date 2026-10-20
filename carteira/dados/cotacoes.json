@@ -1,78 +1,78 @@
 {
-  "updatedAt": "2026-10-20T13:00:38.459Z",
+  "updatedAt": "2026-10-20T13:30:32.956Z",
   "stocks": [
     {
       "symbol": "PETR4",
-      "price": 58,
-      "changePct": -2.815013404825737,
+      "price": 58.92,
+      "changePct": 1.586206896551727,
       "name": "Petróleo Brasileiro S.A. - Petrobras"
     },
     {
       "symbol": "ITUB4",
-      "price": 47.9,
-      "changePct": -0.39509253483053614,
+      "price": 48.72,
+      "changePct": 1.7118997912317333,
       "name": "Itaú Unibanco Holding S.A."
     },
     {
       "symbol": "VALE3",
-      "price": 66.36,
-      "changePct": 0.22655188038061577,
+      "price": 65.86,
+      "changePct": -0.7534659433393611,
       "name": "Vale S.A."
     },
     {
       "symbol": "WEGE3",
-      "price": 47.67,
-      "changePct": -0.6668055844967707,
+      "price": 47.6,
+      "changePct": -0.14684287812041175,
       "name": "WEG S.A."
     },
     {
       "symbol": "BBAS3",
-      "price": 23.95,
-      "changePct": 1.354210749047822,
+      "price": 24.3,
+      "changePct": 1.4613778705636804,
       "name": "Banco do Brasil S.A."
     },
     {
       "symbol": "BBDC4",
-      "price": 20.1,
-      "changePct": -1.277013752455786,
+      "price": 20.55,
+      "changePct": 2.23880597014925,
       "name": "Banco Bradesco S.A."
     },
     {
       "symbol": "ABEV3",
-      "price": 16.56,
-      "changePct": -1.6627078384798168,
+      "price": 16.67,
+      "changePct": 0.6642512077294866,
       "name": "Ambev S.A."
     }
   ],
   "bdrs": [
     {
       "symbol": "IVVB11",
-      "price": 438.55,
-      "changePct": 0,
+      "price": 435.92,
+      "changePct": -0.5997035685782682,
       "name": "ISHARES S&P 500 CLASSE DE ÍNDICE EM COTAS DE CLASSES DE ÍNDICE IE - RESPONSABILIDADE LIMITADA"
     },
     {
       "symbol": "AAPL34",
-      "price": 86.83,
-      "changePct": -0.30998851894373824,
+      "price": 85.17,
+      "changePct": -1.9117816422895273,
       "name": "Apple Inc."
     },
     {
       "symbol": "MSFT34",
-      "price": 112,
-      "changePct": 0.7737988123087992,
+      "price": 111.54,
+      "changePct": -0.41071428571428015,
       "name": "Microsoft Corporation"
     },
     {
       "symbol": "GOGL34",
-      "price": 144.86,
-      "changePct": 0.06216757615528314,
+      "price": 143.4,
+      "changePct": -1.007869667264951,
       "name": "Alphabet Inc."
     },
     {
       "symbol": "AMZO34",
-      "price": 66.1,
-      "changePct": 0,
+      "price": 66.04,
+      "changePct": -0.09077155824506515,
       "name": "Amazon.com, Inc."
     }
   ],
@@ -80,39 +80,39 @@
     {
       "symbol": "HGLG11",
       "price": 156.12,
-      "changePct": -0.1917913310318265,
+      "changePct": 0,
       "name": "Cshg Logistica - Fundo De Investimento Imobiliario"
     },
     {
       "symbol": "KNRI11",
-      "price": 163.7,
-      "changePct": 1.0805804260574252,
+      "price": 164.81,
+      "changePct": 0.6780696395846143,
       "name": "Kinea Renda Imobiliária Fundo de Investimento Imobiliário"
     },
     {
       "symbol": "MXRF11",
-      "price": 9.38,
-      "changePct": 0.42826552462527756,
+      "price": 9.42,
+      "changePct": 0.42643923240937254,
       "name": "Maxi Renda Fundo De Investimento Imobiliaro - FII"
     },
     {
       "symbol": "XPML11",
-      "price": 105.8,
-      "changePct": 0.6947749119634568,
+      "price": 106.44,
+      "changePct": 0.6049149338374297,
       "name": "Xp Malls Fundo Investimentos Imobiliarios"
     },
     {
       "symbol": "VISC11",
-      "price": 113.9,
-      "changePct": 0.26408450704226355,
+      "price": 113.55,
+      "changePct": -0.3072870939420619,
       "name": "Vinci Shopping Centers Fundo Investimento Imobiliario - Fii"
     }
   ],
   "goldEtf": [
     {
       "symbol": "GOLD11",
-      "price": 21.66,
-      "changePct": -1.1410314924691922,
+      "price": 21.41,
+      "changePct": -1.1542012927054477,
       "name": "TREND ETF LBMA OURO CLASSE DE ÍNDICE INVESTIMENTO NO EXTERIOR - RESPONSABILIDADE LIMITADA"
     }
   ],
