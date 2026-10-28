@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-10-28T12:30:37.763Z",
+  "updatedAt": "2026-10-28T13:00:39.413Z",
   "stocks": [
     {
       "symbol": "PETR4",
@@ -80,7 +80,7 @@
     {
       "symbol": "HGLG11",
       "price": 149.72,
-      "changePct": -1.3052076466710547,
+      "changePct": 0,
       "name": "Cshg Logistica - Fundo De Investimento Imobiliario"
     },
     {
