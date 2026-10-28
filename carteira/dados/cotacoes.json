@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-10-28T10:30:34.589Z",
+  "updatedAt": "2026-10-28T11:00:40.728Z",
   "stocks": [
     {
       "symbol": "PETR4",
@@ -121,24 +121,24 @@
     {
       "name": "Tesouro Selic 2031",
       "rate": 0.1,
-      "unitPrice": 20084.44,
-      "minAmount": 200.84439999999998,
+      "unitPrice": 20094.02,
+      "minAmount": 200.9402,
       "maturity": "2031-03-01",
       "type": "Pós-fixado (Selic + spread)"
     },
     {
       "name": "Tesouro Prefixado com Juros Semestrais 2037",
-      "rate": 15.42,
-      "unitPrice": 771.54,
-      "minAmount": 7.7154,
+      "rate": 14.93,
+      "unitPrice": 791.29,
+      "minAmount": 7.9129,
       "maturity": "2037-01-01",
       "type": "Prefixado (taxa nominal)"
     },
     {
       "name": "Tesouro IPCA+ com Juros Semestrais 2060",
-      "rate": 7.66,
-      "unitPrice": 3914,
-      "minAmount": 39.14,
+      "rate": 7.34,
+      "unitPrice": 4070.81,
+      "minAmount": 40.7081,
       "maturity": "2060-08-15",
       "type": "Híbrido (IPCA + taxa real)"
     }
