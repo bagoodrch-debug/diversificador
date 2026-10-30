@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-10-30T12:30:33.680Z",
+  "updatedAt": "2026-10-30T13:00:37.629Z",
   "stocks": [
     {
       "symbol": "PETR4",
@@ -54,7 +54,7 @@
     {
       "symbol": "AAPL34",
       "price": 94.29,
-      "changePct": 2.4891304347826155,
+      "changePct": 0,
       "name": "Apple Inc."
     },
     {
