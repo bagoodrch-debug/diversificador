@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-11-04T00:16:02.631Z",
+  "updatedAt": "2026-11-04T00:30:35.558Z",
   "stocks": [
     {
       "symbol": "PETR4",
@@ -56,12 +56,6 @@
       "price": 90.95,
       "changePct": -3.1003622416364762,
       "name": "Apple Inc."
-    },
-    {
-      "symbol": "MSFT34",
-      "price": 119.2,
-      "changePct": 0.786336349031882,
-      "name": "Microsoft Corporation"
     },
     {
       "symbol": "GOGL34",
@@ -144,6 +138,7 @@
     }
   ],
   "errors": [
-    "gold: gold 429"
+    "gold: gold 429",
+    "MSFT34: yahoo MSFT34 502"
   ]
 }
