@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-11-04T12:30:33.723Z",
+  "updatedAt": "2026-11-04T13:00:51.594Z",
   "stocks": [
     {
       "symbol": "PETR4",
@@ -86,7 +86,7 @@
     {
       "symbol": "KNRI11",
       "price": 145.67,
-      "changePct": -2.496653279785822,
+      "changePct": 0,
       "name": "Kinea Renda Imobiliária Fundo de Investimento Imobiliário"
     },
     {
