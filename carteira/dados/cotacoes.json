@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-11-05T21:30:34.654Z",
+  "updatedAt": "2026-11-05T22:00:37.380Z",
   "stocks": [
     {
       "symbol": "PETR4",
@@ -47,8 +47,8 @@
   "bdrs": [
     {
       "symbol": "IVVB11",
-      "price": 456.55,
-      "changePct": -3.659077000991786,
+      "price": 455.7,
+      "changePct": -3.8384435206482515,
       "name": "ISHARES S&P 500 CLASSE DE ÍNDICE EM COTAS DE CLASSES DE ÍNDICE IE - RESPONSABILIDADE LIMITADA"
     },
     {
@@ -111,8 +111,8 @@
   "goldEtf": [
     {
       "symbol": "GOLD11",
-      "price": 23.41,
-      "changePct": 1.65002171081198,
+      "price": 23.37,
+      "changePct": 1.476335214937038,
       "name": "TREND ETF LBMA OURO CLASSE DE ÍNDICE INVESTIMENTO NO EXTERIOR - RESPONSABILIDADE LIMITADA"
     }
   ],
