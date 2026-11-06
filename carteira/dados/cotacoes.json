@@ -1,10 +1,10 @@
 {
-  "updatedAt": "2026-11-06T21:30:30.996Z",
+  "updatedAt": "2026-11-06T22:00:36.556Z",
   "stocks": [
     {
       "symbol": "PETR4",
-      "price": 45.36,
-      "changePct": -1.2840043525571345,
+      "price": 45.3,
+      "changePct": -1.4145810663765084,
       "name": "Petróleo Brasileiro S.A. - Petrobras"
     },
     {
@@ -47,8 +47,8 @@
   "bdrs": [
     {
       "symbol": "IVVB11",
-      "price": 460.82,
-      "changePct": 1.1235461926706176,
+      "price": 459,
+      "changePct": 0.7241606319947359,
       "name": "ISHARES S&P 500 CLASSE DE ÍNDICE EM COTAS DE CLASSES DE ÍNDICE IE - RESPONSABILIDADE LIMITADA"
     },
     {
