@@ -1,10 +1,10 @@
 {
-  "updatedAt": "2026-11-17T12:30:34.309Z",
+  "updatedAt": "2026-11-17T13:00:38.315Z",
   "stocks": [
     {
       "symbol": "PETR4",
       "price": 44.02,
-      "changePct": -2.8256070640176474,
+      "changePct": 0,
       "name": "Petróleo Brasileiro S.A. - Petrobras"
     },
     {
