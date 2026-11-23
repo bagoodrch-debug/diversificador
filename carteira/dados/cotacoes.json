@@ -1,16 +1,16 @@
 {
-  "updatedAt": "2026-11-23T20:30:38.014Z",
+  "updatedAt": "2026-11-23T21:00:37.369Z",
   "stocks": [
     {
       "symbol": "PETR4",
-      "price": 41.52,
-      "changePct": -2.695101945160531,
+      "price": 41.31,
+      "changePct": -3.1872509960159348,
       "name": "Petróleo Brasileiro S.A. - Petrobras"
     },
     {
       "symbol": "ITUB4",
-      "price": 39.71,
-      "changePct": -0.8984277514349874,
+      "price": 39.69,
+      "changePct": -0.9483404042924946,
       "name": "Itaú Unibanco Holding S.A."
     },
     {
@@ -21,84 +21,84 @@
     },
     {
       "symbol": "WEGE3",
-      "price": 50.13,
-      "changePct": -1.9557989438685703,
+      "price": 50.04,
+      "changePct": -2.131820848816748,
       "name": "WEG S.A."
     },
     {
       "symbol": "BBAS3",
-      "price": 14.3,
-      "changePct": 0,
+      "price": 14.25,
+      "changePct": -0.3496503496503546,
       "name": "Banco do Brasil S.A."
     },
     {
       "symbol": "BBDC4",
-      "price": 13.7,
-      "changePct": -0.9399855386840258,
+      "price": 13.72,
+      "changePct": -0.7953723788864745,
       "name": "Banco Bradesco S.A."
     },
     {
       "symbol": "ABEV3",
-      "price": 15.95,
-      "changePct": -0.80845771144278,
+      "price": 15.91,
+      "changePct": -1.0572139303482473,
       "name": "Ambev S.A."
     }
   ],
   "bdrs": [
     {
       "symbol": "IVVB11",
-      "price": 486.25,
-      "changePct": 1.0557599185319084,
+      "price": 486.44,
+      "changePct": 1.0952470020990464,
       "name": "ISHARES S&P 500 CLASSE DE ÍNDICE EM COTAS DE CLASSES DE ÍNDICE IE - RESPONSABILIDADE LIMITADA"
     },
     {
       "symbol": "AAPL34",
-      "price": 103.85,
-      "changePct": 0.6200949520395316,
+      "price": 104.06,
+      "changePct": 0.8235636081775105,
       "name": "Apple Inc."
     },
     {
       "symbol": "MSFT34",
-      "price": 123.04,
-      "changePct": -0.27557140541415887,
+      "price": 122.64,
+      "changePct": -0.5997730588425959,
       "name": "Microsoft Corporation"
     },
     {
       "symbol": "GOGL34",
-      "price": 139.92,
-      "changePct": 2.5881662878510165,
+      "price": 140.08,
+      "changePct": 2.7054769411247355,
       "name": "Alphabet Inc."
     },
     {
       "symbol": "AMZO34",
-      "price": 75.95,
-      "changePct": -1.4020511489030225,
+      "price": 76.15,
+      "changePct": -1.1424120472543107,
       "name": "Amazon.com, Inc."
     }
   ],
   "fiis": [
     {
       "symbol": "HGLG11",
-      "price": 140.54,
-      "changePct": -0.8885754583921152,
+      "price": 140.38,
+      "changePct": -1.0014104372355541,
       "name": "Cshg Logistica - Fundo De Investimento Imobiliario"
     },
     {
       "symbol": "KNRI11",
-      "price": 140.2,
-      "changePct": -2.033400880441636,
+      "price": 140.39,
+      "changePct": -1.90063587450215,
       "name": "Kinea Renda Imobiliária Fundo de Investimento Imobiliário"
     },
     {
       "symbol": "MXRF11",
-      "price": 8.31,
-      "changePct": -2.235294117647053,
+      "price": 8.3,
+      "changePct": -2.35294117647058,
       "name": "Maxi Renda Fundo De Investimento Imobiliaro - FII"
     },
     {
       "symbol": "XPML11",
-      "price": 82.76,
-      "changePct": 0.9391389193804248,
+      "price": 82.92,
+      "changePct": 1.1342846688620647,
       "name": "Xp Malls Fundo Investimentos Imobiliarios"
     },
     {
@@ -111,8 +111,8 @@
   "goldEtf": [
     {
       "symbol": "GOLD11",
-      "price": 22.36,
-      "changePct": -0.5780346820809205,
+      "price": 22.32,
+      "changePct": -0.7558915073365858,
       "name": "TREND ETF LBMA OURO CLASSE DE ÍNDICE INVESTIMENTO NO EXTERIOR - RESPONSABILIDADE LIMITADA"
     }
   ],
