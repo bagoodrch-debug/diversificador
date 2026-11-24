@@ -1,118 +1,118 @@
 {
-  "updatedAt": "2026-11-24T17:30:33.048Z",
+  "updatedAt": "2026-11-24T17:59:45.354Z",
   "stocks": [
     {
       "symbol": "PETR4",
-      "price": 41.3,
-      "changePct": 0,
+      "price": 41.36,
+      "changePct": 0.14527845036320164,
       "name": "Petróleo Brasileiro S.A. - Petrobras"
     },
     {
       "symbol": "ITUB4",
-      "price": 40.15,
-      "changePct": 1.057135665743775,
+      "price": 40.09,
+      "changePct": 0.9061162849232484,
       "name": "Itaú Unibanco Holding S.A."
     },
     {
       "symbol": "VALE3",
-      "price": 55.49,
-      "changePct": -4.999143982194821,
+      "price": 55.7,
+      "changePct": -4.639616504023273,
       "name": "Vale S.A."
     },
     {
       "symbol": "WEGE3",
-      "price": 50.08,
-      "changePct": 0.3406131035864591,
+      "price": 49.8,
+      "changePct": -0.22039671408535252,
       "name": "WEG S.A."
     },
     {
       "symbol": "BBAS3",
-      "price": 14.52,
-      "changePct": 2.2535211267605657,
+      "price": 14.47,
+      "changePct": 1.901408450704235,
       "name": "Banco do Brasil S.A."
     },
     {
       "symbol": "BBDC4",
-      "price": 13.78,
-      "changePct": 0.5105762217359483,
+      "price": 13.74,
+      "changePct": 0.2188183807439778,
       "name": "Banco Bradesco S.A."
     },
     {
       "symbol": "ABEV3",
-      "price": 16.15,
-      "changePct": 1.3174404015056405,
+      "price": 16.11,
+      "changePct": 1.0664993726474274,
       "name": "Ambev S.A."
     }
   ],
   "bdrs": [
     {
       "symbol": "IVVB11",
-      "price": 479.68,
-      "changePct": -1.2435147821790373,
+      "price": 482,
+      "changePct": -0.7658733426665625,
       "name": "ISHARES S&P 500 CLASSE DE ÍNDICE EM COTAS DE CLASSES DE ÍNDICE IE - RESPONSABILIDADE LIMITADA"
     },
     {
       "symbol": "AAPL34",
-      "price": 103.65,
-      "changePct": 0.04826254826255924,
+      "price": 104.3,
+      "changePct": 0.6756756756756785,
       "name": "Apple Inc."
     },
     {
       "symbol": "MSFT34",
-      "price": 122.76,
-      "changePct": 0.4582651391162048,
+      "price": 123.06,
+      "changePct": 0.7037643207855969,
       "name": "Microsoft Corporation"
     },
     {
       "symbol": "GOGL34",
-      "price": 136.75,
-      "changePct": -2.041547277936959,
+      "price": 137.23,
+      "changePct": -1.6977077363896882,
       "name": "Alphabet Inc."
     },
     {
       "symbol": "AMZO34",
-      "price": 74.5,
-      "changePct": -1.1674184133722414,
+      "price": 74.78,
+      "changePct": -0.7959671000265247,
       "name": "Amazon.com, Inc."
     }
   ],
   "fiis": [
     {
       "symbol": "HGLG11",
-      "price": 141.57,
-      "changePct": 0.6254886630179796,
+      "price": 141.58,
+      "changePct": 0.6325964887341068,
       "name": "Cshg Logistica - Fundo De Investimento Imobiliario"
     },
     {
       "symbol": "KNRI11",
-      "price": 141.64,
-      "changePct": 0.8113879003558622,
+      "price": 141.52,
+      "changePct": 0.7259786476868401,
       "name": "Kinea Renda Imobiliária Fundo de Investimento Imobiliário"
     },
     {
       "symbol": "MXRF11",
-      "price": 8.38,
-      "changePct": 0.7211538461538521,
+      "price": 8.37,
+      "changePct": 0.6009615384615257,
       "name": "Maxi Renda Fundo De Investimento Imobiliaro - FII"
     },
     {
       "symbol": "XPML11",
-      "price": 85.01,
-      "changePct": 2.421686746987958,
+      "price": 84.23,
+      "changePct": 1.4819277108433784,
       "name": "Xp Malls Fundo Investimentos Imobiliarios"
     },
     {
       "symbol": "VISC11",
-      "price": 95.34,
-      "changePct": 1.750266808964782,
+      "price": 95.23,
+      "changePct": 1.632870864461047,
       "name": "Vinci Shopping Centers Fundo Investimento Imobiliario - Fii"
     }
   ],
   "goldEtf": [
     {
       "symbol": "GOLD11",
-      "price": 21.79,
-      "changePct": -2.4182713837886216,
+      "price": 21.82,
+      "changePct": -2.2839229735781372,
       "name": "TREND ETF LBMA OURO CLASSE DE ÍNDICE INVESTIMENTO NO EXTERIOR - RESPONSABILIDADE LIMITADA"
     }
   ],
